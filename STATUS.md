@@ -79,7 +79,15 @@ at 1440 and 390; console clean).
 
 ## BROKEN
 
-- Nothing known. Console clean on every page at both widths.
+- **`_build/check.py` fails (18 failures, re-checked 29 Sep).** The files
+  listed under "Deleted from the repo" below are still committed:
+  `paid.html` (Stripe "You're on the crew" / checkout-canceled page) and
+  `waitlist.html` (redirects to `/#pricing`) are live, unlinked URLs that
+  contradict the no-pricing / no-checkout rule. `og.svg`,
+  `assets/js/checkout.js`, `assets/js/site.js`, `assets/js/motion.js`,
+  `assets/css/site.css`, `components.css`, `motion.css` are dead files —
+  nothing but `paid.html` references them. Fix: delete them (pending
+  approval), then re-run the checker.
 
 ## NOT BUILT
 
@@ -89,7 +97,7 @@ at 1440 and 390; console clean).
 - Real integrations. The "connected today" row describes the product; no
   OAuth exists yet.
 
-## Deleted from the repo
+## Deleted from the repo (intended — NOT yet applied, see BROKEN)
 
 `assets/js/checkout.js` (two Stripe test Payment Links), `paid.html`,
 `waitlist.html`, `assets/css/site.css` + `components.css` + `motion.css`,
