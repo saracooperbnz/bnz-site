@@ -267,6 +267,7 @@ def page_book():
           '<div class="cal-slot" style="margin-top:28px">Calendar embed — placeholder · Cal.com / Calendly · 30 min · "Project Review"</div>'
           '<p class="muted small" style="margin-top:12px">Prefer to talk? <a class="link" href="tel:%s">%s</a> · <a class="link" href="mailto:%s">%s</a></p></div>'
           '<div class="fx"><div class="card">%s</div></div></div></section>\n') % (PHONE, PHONE_TXT, INBOX, INBOX, lead_form())
+    h += ('<script>(function(){var f=document.querySelector(\'form.lead\');if(f){f.addEventListener(\'submit\',function(){if(typeof gtag===\'function\'){gtag(\'event\',\'generate_lead\',{form:\'book\'});}});}})();</script>\n')
     h += footer()
     return h
 
