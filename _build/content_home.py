@@ -92,7 +92,7 @@ def proof():
             '</div>')
 
 def page_home():
-    desc = "BuildWithBNZ is an AI operating system for construction companies. Sara runs operations, Taylor reads the drawings and builds the estimate, Emma builds and manages the subcontractor network — inside one construction workspace, scoped and priced in writing before we start."
+    desc = "AI operating system for construction companies: Sara runs operations, Taylor builds estimates from drawings, Emma manages your subcontractors."
     ld = ('{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"BuildWithBNZ","url":"%s","email":"%s","telephone":"%s","areaServed":"New York","description":"AI operating system for construction companies."},'
           '{"@type":"WebSite","name":"BuildWithBNZ","url":"%s"}]}') % (SITE, INBOX, PHONE, SITE)
     h = head("AI Operating System for Construction Companies | BuildWithBNZ", desc, "/", jsonld=ld)
