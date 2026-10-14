@@ -105,6 +105,7 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="uTyl7df14_U_o3kpXSZRk6JfZPx5DJSW35nNlX7l0Zs" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-883K8FQX0B"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-883K8FQX0B');</script>
