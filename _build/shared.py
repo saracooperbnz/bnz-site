@@ -105,6 +105,7 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-site-verification" content="uTyl7df14_U_o3kpXSZRk6JfZPx5DJSW35nNlX7l0Zs" />
 <title>%(title)s</title>
 <meta name="description" content="%(desc)s">
 <link rel="canonical" href="%(canon)s">
