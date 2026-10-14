@@ -66,7 +66,7 @@ def diagram():
             '<div class="three"><div>%s Estimating</div><div>%s Sara</div><div>%s Subcontractors</div></div></div>') % (av("t", 72, anim=True), av("s", 112, anim=True), av("e", 72, anim=True))
 
 def page_solutions():
-    desc = "Four solutions, one crew: estimating & takeoff, subcontractor bidding & buyout, operations & approvals, public work & prevailing wage. Pick the problem that hurts; the rest of the crew comes with it."
+    desc = "Four solutions, one crew: estimating & takeoff, subcontractor bidding & buyout, operations & approvals, and public work & prevailing wage."
     h = head("Solutions — AI for Construction Estimating, Subcontractor Bidding and Operations | BuildWithBNZ", desc, "/solutions/")
     h += nav()
     h += hero("Solutions", "The job, not the software.",
@@ -92,7 +92,7 @@ def page_solutions():
 # ------------------------------------------------------------------ A2 crew
 
 def page_crew():
-    desc = "Meet the crew: Sara (construction COO), Taylor (estimating, drawings, specs) and Emma (subcontractor and project coordination). Three agents, one team, your rules."
+    desc = "Meet the crew: Sara (construction COO), Taylor (estimating, drawings, specs) and Emma (subcontractor coordination). Three agents, one team."
     h = head("The Crew — Sara, Taylor and Emma | BuildWithBNZ", desc, "/crew/")
     h += nav("/crew/")
     h += section("dark", sec_head("The crew", "Three agents. One team. Your rules.", PITCH) + crew_cards(), extra_cls="first")
@@ -122,7 +122,7 @@ AGENTS = {
                  states=[("verified", "Verified"), ("reported", "Reported — not verified")],
                  states_note="Verified means checked against the document. Reported means someone said so. Sara never lets one look like the other.",
                  mock_label="Today — her board", mock=lambda: today_mock(False),
-                 desc="Sara is the construction COO in the BuildWithBNZ crew: Today board, approvals queue, Monday report. Never claims done unless verified; never makes the owner's decision."),
+                 desc="Sara is the construction COO in the BuildWithBNZ crew: Today board, approvals queue, Monday report. Never claims done unless verified."),
     "taylor": dict(who="t", n="Taylor", idx="2 of 3", h1="Taylor reads every sheet.",
                    lede="Estimating, drawings, specs and design intelligence. She takes the full bid package and produces an estimate with every assumption and source shown — and says UNKNOWN rather than guessing.",
                    checks=["Reads the drawings, specs, addenda, wage schedule and bid form",
@@ -135,7 +135,7 @@ AGENTS = {
                    states=[("unknown", "Unknown"), ("showing", "Showing the work"), ("working", "Revising")],
                    states_note="UNKNOWN is deliberate: it names what's missing and who has it. It is never a blank.",
                    mock_label="Her part of the workspace — estimate, division 26", mock=lambda: est_mock(False),
-                   desc="Taylor is the estimating agent in the BuildWithBNZ crew: takeoffs, conflicts, labour/material/sub pricing, every assumption shown. Never invents a price — says UNKNOWN."),
+                   desc="Taylor is the BuildWithBNZ estimating agent: takeoffs, conflicts, labour/material/sub pricing, every assumption shown. Never invents a price."),
     "emma": dict(who="e", n="Emma", idx="3 of 3", h1="Emma works the phones.",
                  lede="Subcontractor and project coordination. She knows your niche, geography and buyout target — finds the subs, sends the invitations, chases the paperwork, levels the scope, and remembers who performs.",
                  checks=["Builds the sub list to your niche, geography and job size",
@@ -148,7 +148,7 @@ AGENTS = {
                  states=[("waiting", "Waiting on — named"), ("chasing", "Chasing"), ("collecting", "Collecting")],
                  states_note="\"Waiting\" always has a name attached — a person, a document, a date.",
                  mock_label="Her part of the workspace — electrical bids", mock=lambda: bids_mock(False),
-                 desc="Emma is the subcontractor coordination agent in the BuildWithBNZ crew: sub list, bid invitations, follow-ups, COIs, W-9s, scope levelling. Never lets a dependency go unnamed."),
+                 desc="Emma is the BuildWithBNZ subcontractor coordination agent: sub list, bid invitations, follow-ups, COIs, W-9s and scope levelling."),
 }
 
 def page_agent(slug):
@@ -187,7 +187,7 @@ def step_mocks():
     ]
 
 def page_how():
-    desc = "Six steps to a project that runs itself: Project Review, scope and one set price in writing, connect your files, Taylor reads the package, Emma builds the sub list, Sara runs it. Then ongoing operations with a Monday report."
+    desc = "Six steps: Project Review, one set price in writing, connect your files, Taylor reads the package, Emma builds the sub list, Sara runs it."
     h = head("How It Works — Six Steps to a Project That Runs Itself | BuildWithBNZ", desc, "/how-it-works/")
     h += nav("/how-it-works/")
     mocks = step_mocks()
@@ -206,7 +206,7 @@ def page_how():
 # ------------------------------------------------------------------ what we connect to
 
 def page_connect():
-    desc = "The systems the BuildWithBNZ crew works inside today — Google Drive, Gmail, Google Calendar, Google Workspace, Notion — and what is next: Procore, Buildertrend, QuickBooks, Sage, Bluebeam. Keep your tools."
+    desc = "The BuildWithBNZ crew works inside Google Drive, Gmail, Google Calendar and Notion today; Procore, QuickBooks and Bluebeam are next. Keep your tools."
     h = head("What We Connect To — Google Drive, Gmail, Calendar, Workspace, Notion | BuildWithBNZ", desc, "/what-we-connect-to/")
     h += nav()
     h += section("dark", sec_head("What we connect to", "The systems the crew works inside.",
@@ -225,7 +225,7 @@ def page_connect():
 # ------------------------------------------------------------------ FAQ
 
 def page_faq():
-    desc = "Answers to the questions every contractor asks on the call: what it costs, how long until the crew is live, who sees your drawings, whether the AI sends anything without you, what happens when Taylor doesn't have enough information."
+    desc = "Answers to what contractors ask on the call: what it costs, how long until the crew is live, who sees your drawings, and whether the AI sends anything."
     ld = '{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[%s]}' % ','.join(
         '{"@type":"Question","name":"%s","acceptedAnswer":{"@type":"Answer","text":"%s"}}' % (q.replace('"', '\\"'), a.replace('"', '\\"')) for q, a in FAQ)
     h = head("FAQ — Asked on Every Call | BuildWithBNZ", desc, "/faq/", jsonld=ld)
@@ -255,7 +255,7 @@ def lead_form():
             '</form>') % (INBOX, SITE)
 
 def page_book():
-    desc = "Book a Project Review with BuildWithBNZ. Bring one project — drawings or the bid package and who's on it — and we'll show you what the crew would do with it. A real person takes this call."
+    desc = "Book a Project Review with BuildWithBNZ. Bring one project and we'll show you what the crew would do with it. A real person takes this call."
     h = head("Book a Project Review | BuildWithBNZ", desc, "/book/")
     h += nav()
     h += ('<section class="light book hero"><div class="wrap"><div class="fx"><span class="eyebrow">Start here</span><h1 style="margin:16px 0 14px;font-size:clamp(40px,6vw,76px)">Book a project review.</h1>'
