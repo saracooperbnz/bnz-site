@@ -11,7 +11,7 @@ WHO = [
     ("General contractors", "Bid more work without adding estimating headcount."),
     ("Remodelers &amp; custom builders", "Estimates and subs that keep pace with change orders."),
     ("Specialty contractors", "Your niche, your units, your production rates — learned once."),
-    ("GCs bidding public work", "Prevailing wage, addenda and bid forms handled by the book."),
+    ("GCs bidding public work", "New York State prevailing wage, addenda and bid forms handled by the book."),
 ]
 
 CREW = [

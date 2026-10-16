@@ -57,8 +57,8 @@ SOLUTIONS = [
     ("s", "Sara · solution 3 of 4", "Operations &amp; approvals",
      "Sara runs Today, the approvals queue and the Monday report. She watches Taylor and Emma, catches what falls between them, and marks every claim Verified or Reported — never blending the two. What reaches you is a short queue of real decisions.",
      "a Monday report and an approvals queue.", "she brings you only the decisions that need you. You sign. She doesn't.", today_mock, "/construction-project-management-ai/"),
-    ("t", "Taylor + Emma · solution 4 of 4", "Public work &amp; prevailing wage",
-     "Wage schedules, addenda, bid forms and certified payroll documents handled by the book. Taylor matches the wage schedule to the county and prices to it line by line; Emma keeps sub compliance paperwork current. Anything the crew was told but hasn't confirmed stays marked Reported until it's checked against the document itself.",
+    ("t", "Taylor + Emma · solution 4 of 4", "New York public work &amp; prevailing wage",
+     "New York State public work: wage schedules, addenda, bid forms and certified payroll documents handled by the book. Taylor matches the wage schedule to the county and prices to it line by line; Emma keeps sub compliance paperwork current. Anything the crew was told but hasn't confirmed stays marked Reported until it's checked against the document itself.",
      "bid forms and payroll docs that pass review.", "every claim is checked against the document itself.", public_mock, "/prevailing-wage-project-management/"),
 ]
 
@@ -119,7 +119,7 @@ AGENTS = {
                        ("One approvals queue, and you make the call", "Emma drafts bid invitations and follow-ups. Taylor drafts requests to the architect. Sara drafts the Monday report. All of it sits in one queue until you approve it, edit it or send it back. Sara never makes the owner's decision."),
                        ("The Monday report", "After the first project, the crew stays on under a separate monthly arrangement. Each week Sara reports what's active, what's been issued, which quotes are in, what's waiting on you, and what's waiting on subs, with each waiting item tied to a named sub and document. If part of the setup isn't earning its place, that shows up in the report too, and we change it."),
                        ("How the crew catches its own mistakes", "When two sources disagree, like a spec section against a drawing sheet or a quote against a leveled scope, the item is flagged CONFLICT and held, not smoothed over.")],
-                 links=[("/construction-project-management-ai/", "construction project management AI"), ("/how-it-works/", "how it works, step by step"), ("/faq/", "questions contractors ask")],
+                 links=[("/construction-project-management-ai/", "construction project management AI"), ("/how-it-works/", "how it works, step by step"), ("/faq/", "questions contractors ask"), ("/integrations/google-calendar/", "bid due dates and COI expirations in Google Calendar"), ("/integrations/notion/", "project notes and the sub network in Notion")],
                  checks=["Runs the Today board — what needs you, what's in progress, what's done",
                          "Routes the bid package to Taylor and the sub list to Emma",
                          "Keeps one approvals queue — every send waits on you",
@@ -139,7 +139,7 @@ AGENTS = {
                          ("UNKNOWN on purpose", "If something isn't in the set, the line reads UNKNOWN, with the reason and who has the missing item, e.g. \"fixture schedule not in the set, request from architect.\" The estimate total is withheld until every UNKNOWN is resolved. Taylor never fills a gap with a guess, and she drafts the request to the architect for your approval."),
                          ("Revisions with a reason", "When scope moves or an addendum lands, the estimate is revised and the reason is recorded in the revision history."),
                          ("What Taylor doesn't do", "Taylor doesn't stamp drawings or act as your architect. She reads drawings and specs, does takeoffs, flags conflicts and, later, will help with markups and constructability review. Licensed, stamped design responsibility stays with your architect or engineer of record.")],
-                   links=[("/construction-estimating-ai/", "AI construction estimating"), ("/commercial-construction-estimating/", "estimating for remodelers and fit-outs"), ("/prevailing-wage-project-management/", "prevailing wage and public bids"), ("/emma/", "how Emma levels sub quotes against Taylor's estimate")],
+                   links=[("/construction-estimating-ai/", "AI construction estimating"), ("/commercial-construction-estimating/", "estimating for remodelers and fit-outs"), ("/prevailing-wage-project-management/", "New York prevailing wage and public bids"), ("/emma/", "how Emma levels sub quotes against Taylor's estimate"), ("/integrations/google-drive/", "estimating from your Google Drive project folder")],
                    checks=["Reads the drawings, specs, addenda, wage schedule and bid form",
                            "Performs takeoffs and flags conflicts between sheets and specs",
                            "Builds labour, material and sub pricing line by line",
@@ -159,7 +159,7 @@ AGENTS = {
                        ("Nothing goes to a sub without you", "Emma drafts bid invitations and follow-ups. Each one sits in your approvals queue until you approve, edit or send it back."),
                        ("Scope leveling against the estimate", "Quotes are leveled against Taylor's estimate so gaps show before buyout. A sub missing two items shows as \"Gap: 2 items\", not as a low number. Quote amounts live in the leveling sheet."),
                        ("Works in the tools you already use", "Emma works inside your Gmail, Google Drive and Calendar with read access first. Nothing is migrated.")],
-                 links=[("/subcontractor-procurement/", "subcontractor procurement"), ("/construction-bid-management/", "construction bid management"), ("/what-we-connect-to/", "what the crew connects to")],
+                 links=[("/subcontractor-procurement/", "subcontractor procurement"), ("/construction-bid-management/", "construction bid management"), ("/what-we-connect-to/", "what the crew connects to"), ("/integrations/gmail/", "bid invitations from your own Gmail"), ("/guides/subcontractor-bid-invitations/", "how to write a sub invitation to bid"), ("/guides/bid-leveling/", "bid leveling in construction"), ("/guides/subcontractor-coi-tracking/", "how to track subcontractor insurance")],
                  checks=["Builds the sub list to your niche, geography and job size",
                          "Sends bid invitations with the right files — after your approval",
                          "Follows up until a quote, a no-bid, or a named reason comes back",
@@ -223,6 +223,7 @@ def page_how():
     h += section("light", sec_head_h1("How BuildWithBNZ works: six steps from project review to a running job", "Six steps to a project that runs itself.") + '<div class="steps rows stagger">%s</div>' % ''.join(rows), extra_cls="first")
     h += section("dark", '<div class="split"><div class="fx"><span class="eyebrow">Then the crew stays on</span><h2 style="margin:14px 0 14px">Reported every Monday.</h2>'
                  '<p class="lede">Ongoing operations: a separate monthly arrangement — hosting, monitoring, new projects, and a report every Monday. We stay responsible for it working.</p>'
+                 '<p style="margin-top:14px"><a class="link" href="/pricing/">How pricing works: one set price per project →</a></p>'
                  '<div style="margin-top:22px">%s</div></div><div class="fx">%s</div></div>' % (btn_book(), monday_mock()), id_="ongoing")
     h += book_strip()
     h += footer()
@@ -242,6 +243,13 @@ def page_connect():
                  '<div class="card"><h3>Scoped per project</h3><p class="muted" style="margin-top:10px">Access follows the scope document: Company → Project → Purchased services → Assigned agents → Allowed workflows. One project does not open your whole Drive.</p></div>'
                  '<div class="card"><h3>Sends wait for you</h3><p class="muted" style="margin-top:10px">Bid invitations, follow-ups and requests to the architect are drafted into the approvals queue. Nothing leaves under your name unseen.</p></div>'
                  '</div>')
+    h += section("light", sec_head("Connected today, in detail", "What the crew does in each one.") +
+                 '<div class="grid g2 stagger">'
+                 '<a class="card" href="/integrations/google-drive/"><h3>Google Drive</h3><p class="muted" style="margin:10px 0 12px">Taylor reads the drawings, specs and addenda from your project folder and saves the estimate back.</p><span class="link">Google Drive for construction estimating →</span></a>'
+                 '<a class="card" href="/integrations/gmail/"><h3>Gmail</h3><p class="muted" style="margin:10px 0 12px">Emma drafts sub bid invitations and follow-ups in your own inbox. Nothing sends until you approve.</p><span class="link">Gmail for bid invitations →</span></a>'
+                 '<a class="card" href="/integrations/google-calendar/"><h3>Google Calendar</h3><p class="muted" style="margin:10px 0 12px">Sara holds bid due dates, quote promises and COI expirations against your week.</p><span class="link">Bid due dates in Google Calendar →</span></a>'
+                 '<a class="card" href="/integrations/notion/"><h3>Notion</h3><p class="muted" style="margin:10px 0 12px">Project notes and the subcontractor network, read and updated in place.</p><span class="link">Notion for construction companies →</span></a>'
+                 '</div>')
     h += section("dark", '<div class="faq-grid"><div class="fx"><span class="eyebrow">FAQ</span><h2 style="margin-top:14px">On connecting.</h2></div><div class="fx">%s</div></div>' % faq_items([FAQ[7], FAQ[2], FAQ[3]], 3))
     h += book_strip()
     h += footer()
@@ -256,7 +264,7 @@ def page_faq():
         ensure_ascii=False, separators=(",", ":"))
     h = head("Construction AI FAQ: Cost, Setup, Your Data | BuildWithBNZ", desc, "/faq/", jsonld=ld)
     h += nav("/faq/")
-    h += section("dark", '<div class="faq-grid"><div class="fx"><h1 class="eyebrow">Construction AI questions contractors ask on every call</h1><h2 style="margin-top:14px">Asked on every call.</h2><p class="muted" style="margin-top:14px">Direct answers, the way a GC actually asks. If yours isn\'t here, bring it to the Project Review.</p></div><div class="fx">%s</div></div>' % faq_items(FAQ, 8), extra_cls="first")
+    h += section("dark", '<div class="faq-grid"><div class="fx"><h1 class="eyebrow">Construction AI questions contractors ask on every call</h1><h2 style="margin-top:14px">Asked on every call.</h2><p class="muted" style="margin-top:14px">Direct answers, the way a GC actually asks. If yours isn\'t here, bring it to the Project Review. On cost, see <a class="link" href="/pricing/">how pricing works</a>.</p></div><div class="fx">%s</div></div>' % faq_items(FAQ, 8), extra_cls="first")
     h += book_strip()
     h += footer()
     return h

@@ -27,7 +27,7 @@ MENU_PROBLEM = [
      ("waiting", "Waiting on — named"), "/subcontractor-procurement/"),
     ("s", "Operations &amp; approvals", "Sara runs Today, the queue and the Monday report.",
      ("verified", "Verified vs reported"), "/construction-project-management-ai/"),
-    ("t", "Public work &amp; prevailing wage", "Wage schedules, addenda, bid forms, certified payroll docs handled by the book.",
+    ("t", "NY public work &amp; prevailing wage", "New York State wage schedules, addenda, bid forms, certified payroll docs handled by the book.",
      ("cross", "Cross-checked"), "/prevailing-wage-project-management/"),
 ]
 MENU_CONTRACTOR = [

@@ -3,7 +3,7 @@
 > BuildWithBNZ is an AI operating system for US construction companies. Three AI agents — Sara (operations), Taylor (estimating from drawings and specs) and Emma (subcontractor bidding and compliance) — work inside the contractor's existing Google Drive, Gmail, Calendar and Notion. Nothing is sent, signed, awarded or paid without the owner's approval. Operated by BNZ Builders Inc., New York.
 
 Key facts:
-- Built for: general contractors, remodelers and custom builders, specialty contractors, and GCs bidding public / prevailing-wage work.
+- Built for: general contractors, remodelers and custom builders, specialty contractors, and GCs bidding New York State public / prevailing-wage work.
 - Taylor: reads full bid packages (drawings, specs, addenda, wage schedules, bid forms), performs takeoffs, flags conflicts, prices labor, material and subs, and shows every assumption and source. Marks missing information UNKNOWN instead of guessing.
 - Emma: builds sub lists, sends bid invitations, follows up, collects quotes, COIs, W-9s and compliance documents, and levels sub scopes against the estimate.
 - Sara: runs the approvals queue and a weekly Monday report; marks claims Verified or Reported — not verified.
@@ -13,7 +13,7 @@ Key facts:
 
 ## Product
 - [Home](https://buildwithbnz.com/): overview of the crew and how it works
-- [Solutions](https://buildwithbnz.com/solutions/): estimating & takeoff, subcontractor bidding & buyout, operations & approvals, public work & prevailing wage
+- [Solutions](https://buildwithbnz.com/solutions/): estimating & takeoff, subcontractor bidding & buyout, operations & approvals, public work & prevailing wage (New York State)
 - [How it works](https://buildwithbnz.com/how-it-works/): six steps from Project Review to a running project
 - [The crew](https://buildwithbnz.com/crew/): Sara, Taylor and Emma
 - [Taylor — estimating](https://buildwithbnz.com/taylor/)
@@ -28,10 +28,20 @@ Key facts:
 - [Subcontractor procurement](https://buildwithbnz.com/subcontractor-procurement/)
 - [Construction bid management](https://buildwithbnz.com/construction-bid-management/)
 - [Construction project management AI](https://buildwithbnz.com/construction-project-management-ai/)
-- [Prevailing wage project management](https://buildwithbnz.com/prevailing-wage-project-management/)
+- [New York prevailing wage project management](https://buildwithbnz.com/prevailing-wage-project-management/)
 
 ## Answers
 - [FAQ](https://buildwithbnz.com/faq/): cost, timing, data access, approvals, design limits
+- [How pricing works](https://buildwithbnz.com/pricing/): one set price per project, in writing
+- [How to track subcontractor insurance](https://buildwithbnz.com/guides/subcontractor-coi-tracking/)
+- [Bid leveling in construction](https://buildwithbnz.com/guides/bid-leveling/)
+- [How to write a subcontractor invitation to bid](https://buildwithbnz.com/guides/subcontractor-bid-invitations/)
+
+## Integrations (connected today)
+- [Google Drive](https://buildwithbnz.com/integrations/google-drive/)
+- [Gmail](https://buildwithbnz.com/integrations/gmail/)
+- [Google Calendar](https://buildwithbnz.com/integrations/google-calendar/)
+- [Notion](https://buildwithbnz.com/integrations/notion/)
 
 ## Company
 - [Book a Project Review](https://buildwithbnz.com/book/)
