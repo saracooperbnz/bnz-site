@@ -1,5 +1,5 @@
 ---
-title_tag: "Construction Estimating Software for Small Contractors (2026 Prices)"
+title_tag: "Construction Estimating Software for Small Business (2026)"
 meta_description: "Estimating software for small construction businesses: free and low-cost options, published 2026 prices with sources, what to check before you buy, and when to get help instead."
 url_slug: /blog/construction-estimating-software-for-small-business/
 primary_keyword: construction estimating software for small business

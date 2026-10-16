@@ -1,5 +1,5 @@
 ---
-title_tag: "Best AI Estimating Software for General Contractors (2026, Prices Sourced)"
+title_tag: "Best AI Estimating Software for General Contractors (2026)"
 meta_description: "A fair roundup of AI estimating and takeoff software for US general contractors: what each tool does, published prices with sources, who it fits and its limits."
 url_slug: /blog/best-ai-estimating-software-for-general-contractors/
 primary_keyword: best ai estimating software for general contractors

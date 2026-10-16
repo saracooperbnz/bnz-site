@@ -1,5 +1,5 @@
 ---
-title_tag: "BuildingConnected Pricing (2026): What It Costs and Cheaper Options"
+title_tag: "BuildingConnected Pricing (2026): Costs and Cheaper Options"
 meta_description: "BuildingConnected doesn't publish prices. Here's what Autodesk says, what third-party listings report, what you get in Pro and Bid Board Pro, and other options for US contractors."
 url_slug: /blog/buildingconnected-pricing/
 primary_keyword: buildingconnected pricing

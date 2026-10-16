@@ -1,5 +1,5 @@
 ---
-title_tag: "PlanHub vs ConstructConnect for Finding Bids (2026 Prices Compared)"
+title_tag: "PlanHub vs ConstructConnect for Finding Bids (2026)"
 meta_description: "PlanHub vs ConstructConnect: who pays, published 2026 prices, how coverage works, and which fits a GC or sub looking for bid leads. Sources linked."
 url_slug: /blog/planhub-vs-constructconnect/
 primary_keyword: planhub vs constructconnect
