@@ -52,9 +52,9 @@ Other points from the same page:
 - To cancel, you contact Togal before your next renewal period.
 - People outside your company can collaborate on takeoffs without a Togal license.
 
-**What that means in a year:** "billed yearly" at $299/month/user works out to $3,588 per user per year if the monthly figure is the annualized rate. [VERIFY: confirm with Togal whether $299 is the monthly equivalent of an annual charge, and whether a month-to-month option exists]
+**Billing:** the page shows the Growth price per month, per user, "billed yearly." It doesn't say whether a month-to-month option exists, so ask Togal how the annual charge works before you budget.
 
-Is there a free trial? The page says to book a demo. [VERIFY: whether Togal offers a free trial in 2026]
+Is there a free trial? As of Oct 16, 2026 the pricing page points you to booking a demo and doesn't mention a free trial. Ask Togal.
 
 ## Who Togal fits
 
@@ -92,7 +92,7 @@ Togal's pricing page lists takeoff, chat and search features ([Togal pricing](ht
 - collecting COIs and W-9s
 - leveling sub quotes
 
-[VERIFY: check whether Togal has added estimating/pricing or bid features since Oct 16, 2026; check togal.ai product pages before publishing]
+That's as of Oct 16, 2026. Check Togal's product pages for anything added since.
 
 If takeoff is your only bottleneck, that's fine. If your bottleneck is getting the whole bid out, takeoff is one piece of it.
 
@@ -108,9 +108,7 @@ BuildWithBNZ isn't a takeoff tool you run. It's [three AI workers that do the ta
 
 **Look at [BuildWithBNZ](/) if** you want the takeoff, the estimate and the sub chasing done, in the tools you already use, with you approving what goes out.
 
-How BNZ is priced: one set price per project, in writing, after a Project Review, then an optional monthly arrangement. See [how pricing works](/pricing/). [OWNER DATA NEEDED: confirm Taylor's takeoff handles structural, sitework and elevations before making any comparison on those trades; until then don't claim BNZ does better where Togal is weak]
-
-[OWNER DATA NEEDED: any real BNZ accuracy or turnaround result, if the owner approves publishing one. Do not compare accuracy without it]
+How BNZ is priced: one set price per project, in writing, after a Project Review, then an optional monthly arrangement. See [how pricing works](/pricing/).
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 

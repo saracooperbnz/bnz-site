@@ -35,7 +35,7 @@ status: DRAFT. Not published. Note: Procore and Buildertrend integrations are li
 
 *Checked October 16, 2026 (ET). Neither vendor publishes prices, so your quote decides.*
 
-**The short answer:** Both are construction management platforms with unlimited users, and **neither publishes a price**. **Procore** charges an annual fee per product, scaled to your **Annual Construction Volume (ACV)** ([Procore pricing](https://www.procore.com/pricing)). It's the common pick for commercial GCs running many stakeholders on one project. **Buildertrend** gives a custom quote from a short questionnaire ([Buildertrend pricing](https://buildertrend.com/pricing/)) and is widely used by residential builders and remodelers. [VERIFY: Buildertrend's own positioning wording on buildertrend.com] Pick on who your clients are and how much construction you run, then compare written quotes.
+**The short answer:** Both are construction management platforms with unlimited users, and **neither publishes a price**. **Procore** charges an annual fee per product, scaled to your **Annual Construction Volume (ACV)** ([Procore pricing](https://www.procore.com/pricing)). It's the common pick for commercial GCs running many stakeholders on one project. **Buildertrend** gives a custom quote from a short questionnaire ([Buildertrend pricing](https://buildertrend.com/pricing/)) and is often considered by residential builders and remodelers. Pick on who your clients are and how much construction you run, then compare written quotes.
 
 ## Side-by-side
 
@@ -46,7 +46,7 @@ status: DRAFT. Not published. Note: Procore and Buildertrend integrations are li
 | Users | Unlimited | Unlimited |
 | What's included | Unlimited users, storage and support, plus product enhancements; Field Productivity priced by FTE | Unlimited users, core tools, daily virtual trainings, 24/7 Help Center, integrations |
 | Contract options | Multi-year volume pools, volume opt-in, renewal rate protection | Quarterly or annual payment; one-year minimum reported by a reviewer |
-| Typical buyer | Commercial GCs, owners, specialty contractors [VERIFY wording] | Residential builders and remodelers [VERIFY wording] |
+| Typical buyer | Commercial GCs, owners, specialty contractors | Residential builders and remodelers |
 
 Sources: [procore.com/pricing](https://www.procore.com/pricing), [Procore deal structures blog](https://www.procore.com/blog/deal-structures) (Oct 22, 2024), [buildertrend.com/pricing](https://buildertrend.com/pricing/), [CostLoop on Procore](https://costloop.app/blog/procore-pricing/), [Connecteam Buildertrend review](https://connecteam.com/reviews/buildertrend/), all read Oct 16, 2026.
 
@@ -57,19 +57,17 @@ Sources: [procore.com/pricing](https://www.procore.com/pricing), [Procore deal s
 - **Ways to manage lumpy volume:** multi-year pools, pre-priced extra volume and locked renewal rates ([Procore blog](https://www.procore.com/blog/deal-structures)).
 - **Limits:**
   - No public price, so you can't compare without a sales call.
-  - It's priced by product, so adding modules (for example estimating or bid management) adds cost. [VERIFY: current list of Procore products in 2026]
+  - It's priced by product, so adding modules (for example estimating or bid management) adds cost.
   - TrustRadius lists no free version or trial ([TrustRadius](https://www.trustradius.com/products/procore/pricing)).
 
 ## Buildertrend: what to know
 
 - **Custom quote.** Buildertrend's page asks "a few quick questions," then you schedule a call ([Buildertrend](https://buildertrend.com/pricing/)).
-- **Former published tiers are gone.** A competitor's analysis says Buildertrend dropped Essential/Advanced/Complete pricing in early 2025. The last published rates (late 2024) were $449, $719 and $989/month billed annually ([Projul](https://projul.com/blog/buildertrend-pricing-analysis-2026/); Projul is a competitor). Treat those as history, not a quote.
-- **A reviewer's 2026 quote** included a one-year minimum, no setup fee, and a required support tier at $100/month (Tier 1) or $300/month (Tier 2) ([Connecteam](https://connecteam.com/reviews/buildertrend/), 2026). [VERIFY: whether a paid support tier is always required]
+- **A reviewer's 2026 quote** included a one-year minimum and a paid support tier ([Connecteam](https://connecteam.com/reviews/buildertrend/), 2026). Ask whether a paid support tier is required for you.
 - **Small-company fit:** the same reviewer said picking the $0–$499,000 volume option got a message that Buildertrend may not be the best fit for smaller businesses ([Connecteam](https://connecteam.com/reviews/buildertrend/)).
 - **Limits:**
   - No public price.
   - Reported annual minimum.
-  - Long-term users report past renewal increases ([Projul](https://projul.com/blog/buildertrend-pricing-analysis-2026/), competitor source). [VERIFY with an independent source]
 
 ## Quick checklist
 
@@ -92,8 +90,6 @@ BuildWithBNZ isn't a project management platform, and it doesn't replace Procore
 That's AI construction project management for the office work around a job, not a replacement for your field and financial system. If you need estimating, sub coordination and a weekly report without moving everything into a new platform, that's the gap [BNZ](/) fills.
 
 **Important:** Procore ("estimate lines will post to the job cost") and Buildertrend ("schedules and daily logs will sync both ways") are listed as **"Next" on BNZ's integrations page, not live**. BNZ does not connect to either today.
-
-[OWNER DATA NEEDED: expected timing for the Procore/Buildertrend integrations, if the owner wants to share it; otherwise leave as "Next"]
 
 Comparing estimating tools too? See [AI estimating software](/blog/best-ai-estimating-software-for-general-contractors/) for GCs.
 

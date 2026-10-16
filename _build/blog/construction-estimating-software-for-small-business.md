@@ -27,7 +27,7 @@ status: DRAFT. Not published. Money page switched to /construction-estimating-ai
     {"@type": "Question", "name": "Is there a free estimating tool for small contractors?",
      "acceptedAnswer": {"@type": "Answer", "text": "Yes, with limits. As of Oct 16, 2026, STACK has a free plan with one active project per month and up to 50 measurements per project. Buildxact also lists a free plan; see buildxact.com/us/pricing for current terms."}},
     {"@type": "Question", "name": "How much do estimating tools cost for a small construction business?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Published prices as of Oct 16, 2026 run from free plans to roughly $1,200 to $3,600 per user per year for paid takeoff and estimating tools, depending on the vendor and plan. Most paid plans require a 12-month term."}},
+     "acceptedAnswer": {"@type": "Answer", "text": "It ranges from free plans up, depending on the vendor, plan and seat count. Check each vendor's pricing page for current figures, and ask about contract terms."}},
     {"@type": "Question", "name": "Do small contractors need an estimating program at all?",
      "acceptedAnswer": {"@type": "Answer", "text": "If you bid only a few jobs a month, a spreadsheet and PDF measuring tool can work. Software pays off when takeoff time or missed scope starts costing you bids."}}
   ]
@@ -38,20 +38,20 @@ status: DRAFT. Not published. Money page switched to /construction-estimating-ai
 
 *Prices checked October 16, 2026 (ET). Vendors change plans often, so confirm before you buy.*
 
-**The short answer:** If you bid a handful of jobs a month, start with a **free plan** (such as STACK Free; Buildxact also lists one) or the PDF tool you already have. Move to a paid tool when takeoff hours or missed scope start costing you work. Published paid plans for small teams run from about **$1,200 to $3,600 per user per year**, and most lock you into **12 months**. Pick by your work type: residential builders and remodelers lean toward Buildxact or Handoff; trade contractors and small commercial GCs lean toward STACK, PlanSwift or Kreo.
+**The short answer:** If you bid a handful of jobs a month, start with a **free plan** (such as STACK Free; Buildxact also lists one) or the PDF tool you already have. Move to a paid tool when takeoff hours or missed scope start costing you work. Paid plans vary by vendor, plan and seat count, so check each vendor's pricing page and ask about the contract term. Pick by your work type: residential builders and remodelers lean toward Buildxact or Handoff; trade contractors and small commercial GCs lean toward STACK, PlanSwift or Kreo.
 
-## Published prices for small teams
+## Where to check prices
 
 | Tool | Cheapest paid option | Free option | Term | Source |
 |---|---|---|---|---|
-| STACK | Pro $299/user/mo, billed annually | Free plan: 1 active project/mo, up to 300 plan pages, 50 measurements/project | 12-month terms (pay upfront or monthly) | [stackct.com](https://www.stackct.com/takeoff-and-estimate-pricing/) |
+| STACK | See pricing page | Free plan: 1 active project/mo, up to 300 plan pages, 50 measurements/project | 12-month terms (pay upfront or monthly) | [stackct.com](https://www.stackct.com/takeoff-and-estimate-pricing/) |
 | Buildxact (US) | See [buildxact.com/us/pricing](https://www.buildxact.com/us/pricing/) | Free plan listed (see pricing page) | See pricing page | [buildxact.com/us/pricing](https://www.buildxact.com/us/pricing/) |
-| Handoff | Flex $119/mo billed annually | 7-day free trial on Flex | Pro/Scale 12-month commitment | [handoff.ai/pricing](https://www.handoff.ai/pricing) |
-| ConstructConnect Takeoff | Starter $1,200/yr (1 seat, 25 plans per project) | — | Annual contract | [constructconnect.com/pricing](https://www.constructconnect.com/pricing) |
-| Kreo | Essential $100/user/mo, billed annually ($1,200/yr), no AI | 7-day trial | Annual only | [kreo.net/pricing](https://www.kreo.net/pricing) |
-| PlanSwift | Essential $2,000/yr (1 seat) | Free trial | Annual | [planswift.com/pricing](https://www.planswift.com/pricing/) |
+| Handoff | See pricing page | 7-day free trial on Flex | Pro/Scale 12-month commitment | [handoff.ai/pricing](https://www.handoff.ai/pricing) |
+| ConstructConnect Takeoff | See pricing page | — | Annual contract | [constructconnect.com/pricing](https://www.constructconnect.com/pricing) |
+| Kreo | See pricing page | 7-day trial | Annual only | [kreo.net/pricing](https://www.kreo.net/pricing) |
+| PlanSwift | See pricing page | Free trial | Annual | [planswift.com/pricing](https://www.planswift.com/pricing/) |
 
-All read Oct 16, 2026. [VERIFY: STACK's "$299/user/mo" is the Pro takeoff tier; confirm the price of STACK's estimating tier on the same page]
+Free options and terms as listed on each vendor's page, read Oct 16, 2026. We haven't confirmed paid prices, so check the pricing page before you buy.
 
 ## What small contractors should check first
 
@@ -88,9 +88,7 @@ If you're comparing AI construction estimating software because you want to bid 
 
 **Limits to know:** BNZ has no free plan and no published monthly price. It's one set price per project, in writing, after a Project Review ([how pricing works](/pricing/)). Excel export and connections to PlanSwift/STACK, QuickBooks and Buildertrend are listed as "Next," not live.
 
-[OWNER DATA NEEDED: smallest project size / company size BNZ is a fit for; whether a Project Review is free; any small-contractor example the owner approves]
-
-**Not sure software is the answer yet?** Bring one real bid to a Project Review and we'll walk through what the crew would do with it, no commitment. [Book a Project Review](/book/). [OWNER DATA NEEDED: confirm "no commitment" wording]
+**Not sure software is the answer yet?** Bring one real bid to a Project Review and we'll walk through what the crew would do with it. [Book a Project Review](/book/).
 
 ## FAQ
 
@@ -98,7 +96,7 @@ If you're comparing AI construction estimating software because you want to bid 
 Yes, with limits: STACK Free, as of Oct 16, 2026. Buildxact also lists a free plan on its pricing page.
 
 **How much does it cost?**
-From free to roughly $1,200–$3,600 per user per year for published paid plans, usually on 12-month terms.
+From free plans up; check each vendor's pricing page for paid plans and terms.
 
 **Do small contractors need an estimating program at all?**
 Not always. A spreadsheet works until takeoff time or missed scope costs you bids.

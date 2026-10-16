@@ -24,7 +24,7 @@ status: DRAFT. Not published.
   "@type": "FAQPage",
   "mainEntity": [
     {"@type": "Question", "name": "Is PlanSwift or Bluebeam cheaper?",
-     "acceptedAnswer": {"@type": "Answer", "text": "As of Oct 16, 2026, Bluebeam's published plans run $260 to $590 per user per year, while PlanSwift lists $2,000 per year for one Essential seat and $3,000 for one Core seat, with discounts for more seats. Bluebeam is cheaper per seat, but PlanSwift includes estimating features Bluebeam does not."}},
+     "acceptedAnswer": {"@type": "Answer", "text": "Both publish plan prices on their own pricing pages; check bluebeam.com/pricing and planswift.com/pricing for current figures. PlanSwift includes estimating features Bluebeam does not."}},
     {"@type": "Question", "name": "Can Bluebeam do estimating?",
      "acceptedAnswer": {"@type": "Answer", "text": "Bluebeam Revu measures and counts on PDFs and, on the Complete plan and up, links quantities to Excel with Quantity Link. Pricing the estimate typically happens in Excel or another estimating tool."}},
     {"@type": "Question", "name": "Do PlanSwift and Bluebeam run on Mac?",
@@ -37,22 +37,22 @@ status: DRAFT. Not published.
 
 *Prices and features checked October 16, 2026 (ET). Both vendors change plans, so confirm before you buy.*
 
-**The short answer:** Bluebeam Revu is PDF markup, measurement and document collaboration software that many estimators also use for takeoff. Its plans run **$260–$590 per user per year** ([Bluebeam pricing](https://www.bluebeam.com/pricing/)). PlanSwift is takeoff *and* estimating software with pre-built trade assemblies. It costs **$2,000/year for one Essential seat** or **$3,000/year for one Core seat**, with discounts for more seats ([PlanSwift pricing](https://www.planswift.com/pricing/)). If you need takeoff plus a priced estimate in one tool, PlanSwift is built for that. If your team lives in PDFs for markups, RFIs and document control and does takeoff on the side, Bluebeam usually wins. Neither one chases sub quotes.
+**The short answer:** Bluebeam Revu is PDF markup, measurement and document collaboration software that many estimators also use for takeoff. It's sold in tiered annual plans ([Bluebeam pricing](https://www.bluebeam.com/pricing/)). PlanSwift is takeoff *and* estimating software with pre-built trade assemblies. It's sold in annual Essential and Core seats, with discounts for more seats ([PlanSwift pricing](https://www.planswift.com/pricing/)). If you need takeoff plus a priced estimate in one tool, PlanSwift is built for that. If your team lives in PDFs for markups, RFIs and document control and does takeoff on the side, Bluebeam usually wins. Neither one chases sub quotes.
 
 ## Price comparison
 
 | | Bluebeam (per user, billed annually) | PlanSwift (annual subscription) |
 |---|---|---|
-| Entry plan | **Basics $260**: PDF markup, length and area only | **Essential $2,000** (1 seat), **$1,500/seat** for 2+ seats |
-| Mid plan | **Core $330**: adds perimeter, count, angle, volume, overlay/compare | n/a |
-| Upper plan | **Complete $440**: adds Dynamic Fill, Quantity Link to Excel, batch tools | **Core $3,000** (1 seat), **$2,500/seat** for 2+ seats [VERIFY multi-seat Core price on planswift.com; confirmed via iTechGuides, checked Sep 22, 2026] |
-| Top plan | **Max $590** (introductory, locked through 2027 renewal): adds AI drawing reviews and comparisons, AI integration via MCP | n/a |
+| Entry plan | **Basics**: PDF markup, length and area only | **Essential** |
+| Mid plan | **Core**: adds perimeter, count, angle, volume, overlay/compare | n/a |
+| Upper plan | **Complete**: adds Dynamic Fill, Quantity Link to Excel, batch tools | **Core** |
+| Top plan | **Max**: adds AI drawing reviews and comparisons, AI integration via MCP | n/a |
 | Volume | Enterprise via sales (50+ plans) | Volume pricing for 10+ licenses via sales |
-| Trial / refund | 30-day refund on request | Free trial (14 days per [iTechGuides](https://www.itechguides.com/products/planswift/pricing/)) [VERIFY length on planswift.com] |
+| Trial / refund | 30-day refund on request | Free trial (length not confirmed; ask PlanSwift) |
 
 Sources: [bluebeam.com/pricing](https://www.bluebeam.com/pricing/), [planswift.com/pricing](https://www.planswift.com/pricing/) and [PlanSwift Essential checkout](https://www.planswift.com/checkout/essential/), all read Oct 16, 2026.
 
-**Note on takeoff:** Bluebeam's Basics plan has "no perimeter or advanced measurements." For real takeoff work you'll want Core ($330) or above, and Complete ($440) if you want quantities linked live to Excel ([Bluebeam](https://www.bluebeam.com/pricing/)).
+**Note on takeoff:** Bluebeam's Basics plan has "no perimeter or advanced measurements." For real takeoff work you'll want Core or above, and Complete if you want quantities linked live to Excel ([Bluebeam](https://www.bluebeam.com/pricing/)).
 
 ## What each does well
 
@@ -73,18 +73,15 @@ Sources: [bluebeam.com/pricing](https://www.bluebeam.com/pricing/), [planswift.c
 ## Limits
 
 **Bluebeam**
-- It's a PDF tool first. Pricing the estimate usually happens in Excel or another estimating program. [VERIFY: confirm Bluebeam has no native cost/estimate pricing feature in 2026]
+- It's a PDF tool first. Quantities go to Excel with Quantity Link (Complete and up), and pricing usually happens there or in another estimating program.
 - Revu desktop runs on **Windows**. Mac users get web and mobile ([Bluebeam FAQ](https://www.bluebeam.com/pricing/)).
 - Owners of perpetual **Revu 20** licenses: Bluebeam says Revu 20 reaches end of support July 31, 2026 and end of life December 31, 2026 ([Bluebeam FAQ](https://www.bluebeam.com/pricing/)). If that's you, you're choosing a subscription either way.
 - The Max price is introductory. Later renewals will be "at standard list price, announced at a future time."
 
 **PlanSwift**
-- **Windows-based** ([ConstructConnect](https://www.constructconnect.com/blog/ai-powered-takeoff-and-estimating-software-a-contractors-guide-to-the-top-players-in-2026)). [VERIFY: any Mac or browser option in 2026]
+- **Windows-based** ([ConstructConnect](https://www.constructconnect.com/blog/ai-powered-takeoff-and-estimating-software-a-contractors-guide-to-the-top-players-in-2026)).
 - Annual plans only. The page says no ownership option ("Essential and Core are annual plans") ([PlanSwift](https://www.planswift.com/pricing/)).
 - Higher per-seat cost than Bluebeam.
-- Not a document collaboration tool like Bluebeam Studio. [VERIFY: PlanSwift collaboration/cloud features]
-
-**User opinions:** the keyword "planswift vs bluebeam reddit" shows people want estimators' views. We didn't find a thread we could quote fairly by the check date. [VERIFY: find and cite r/estimators threads comparing the two before publishing, or leave this out]
 
 ## Which to pick
 
@@ -102,8 +99,6 @@ Both tools make your estimator faster. Neither does the estimate for you, and ne
 
 **Already on PlanSwift or Bluebeam?** Imports from PlanSwift/STACK takeoff files and Bluebeam markups are listed as **"Next" on BNZ's integrations page, not live today.** Don't plan on that connection yet.
 
-[OWNER DATA NEEDED: any published comparison of Taylor's takeoff speed or accuracy; which trades Taylor's takeoff covers today; whether BNZ can export the estimate to Excel (Excel export is listed as "Next")]
-
 [BNZ's AI takeoff and estimating crew](/) is priced at one set price per project, in writing, after a Project Review, then an optional monthly arrangement ([how BNZ pricing works](/pricing/)). If you're comparing AI takeoff software more broadly, see [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/) and [our Togal review](/blog/togal-ai-review/).
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
@@ -111,7 +106,7 @@ Both tools make your estimator faster. Neither does the estimate for you, and ne
 ## FAQ
 
 **Is PlanSwift or Bluebeam cheaper?**
-Per seat, Bluebeam ($260–$590/user/year) is cheaper than PlanSwift ($2,000/year for one Essential seat), as of Oct 16, 2026. PlanSwift includes estimating, which Bluebeam doesn't.
+Compare current prices on each vendor's pricing page. PlanSwift includes estimating, which Bluebeam doesn't.
 
 **Can Bluebeam do estimating?**
 It measures and counts, and Complete links quantities to Excel. Pricing usually happens elsewhere.
@@ -123,6 +118,5 @@ Revu desktop is Windows, with web and mobile included. PlanSwift is described as
 - Bluebeam pricing and FAQ: https://www.bluebeam.com/pricing/
 - PlanSwift pricing: https://www.planswift.com/pricing/
 - PlanSwift Essential checkout: https://www.planswift.com/checkout/essential/
-- iTechGuides PlanSwift pricing (checked Sep 22, 2026): https://www.itechguides.com/products/planswift/pricing/
 - ConstructConnect blog (PlanSwift's parent company): https://www.constructconnect.com/blog/ai-powered-takeoff-and-estimating-software-a-contractors-guide-to-the-top-players-in-2026
 - BuildWithBNZ integrations: https://buildwithbnz.com/what-we-connect-to/

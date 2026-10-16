@@ -47,7 +47,7 @@ status: DRAFT. Not published.
 
 Source: Downtobid homepage FAQ ([downtobid.com](https://www.downtobid.com/)), as of Oct 16, 2026 (browser-checked). The same figures appear on [ConstructionIndustry.ai](https://www.constructionindustry.ai/tools/preconstruction/downtobid/) and [StatWharf](https://statwharf.com/best/bid-management-software/). Downtobid has no pricing page (/pricing returned 404 on Oct 16, 2026). Some older Downtobid blog posts still show earlier plan prices; those are outdated.
 
-These are starting prices. [VERIFY: annual vs. monthly billing, contract term, and what's added above the starting price]
+These are starting prices. The FAQ doesn't say how contract terms or add-ons work, so ask.
 
 ## What you get
 
@@ -65,12 +65,10 @@ From Downtobid's site and third-party summaries (Oct 2026):
 
 ## Reviews and limits
 
-We didn't find enough independent reviews to summarize fairly. [VERIFY: check G2 (https://ai.g2.com/marketplace/tools/downtobid), Capterra and r/estimators for Downtobid reviews before publishing; quote only what's there]
+As of Oct 16, 2026 we didn't find enough independent reviews to summarize fairly, so we won't.
 
 What we can say from Downtobid's own descriptions:
-- **It's a bidding tool, not an estimator.** It drafts scope notes and invitations. It doesn't list building a priced estimate. [VERIFY on downtobid.com that no estimating/takeoff pricing feature has been added]
-- **Bid leveling:** an r/estimators thread mentions Downtobid for scope and bid leveling ([keyword map evidence, thread 1v60ouf](https://www.reddit.com/r/estimators/comments/1v60ouf/)) [VERIFY: thread URL and exact wording]
-- **Review before send:** Downtobid says AI drafts are reviewed before anything goes out [VERIFY on downtobid.com]
+- **It's a bidding tool, not an estimator.** It drafts scope notes and invitations. The descriptions we found don't list building a priced estimate.
 
 ## Where BuildWithBNZ fits instead
 
@@ -84,7 +82,7 @@ Downtobid and [BuildWithBNZ, an AI estimating and bidding crew,](/) overlap on s
 
 **Look at BuildWithBNZ if** you need the estimate built too, and want the work done in Google Workspace and Notion rather than one more tool your team has to run.
 
-BNZ doesn't publish a monthly price. You get one set price per project, in writing, after a Project Review, then an optional monthly arrangement. See [how pricing works](/pricing/). That makes a direct price comparison hard, and we won't pretend otherwise. [OWNER DATA NEEDED: any approved price range or "typical project" framing the owner is willing to publish for buyers comparing against $149/month]
+BNZ doesn't publish a monthly price. You get one set price per project, in writing, after a Project Review, then an optional monthly arrangement. See [how pricing works](/pricing/). That makes a direct price comparison hard, and we won't pretend otherwise.
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 
