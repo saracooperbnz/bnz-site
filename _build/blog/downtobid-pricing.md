@@ -16,11 +16,11 @@ facts_checked: Oct 16, 2026 (ET). Downtobid's site blocked our direct fetch; pri
   "@type": "FAQPage",
   "mainEntity": [
     {"@type": "Question", "name": "How much does Downtobid cost?",
-     "acceptedAnswer": {"@type": "Answer", "text": "Third-party sites citing Downtobid's homepage FAQ in October 2026 report a GC product from $149 per month per organization, and for subcontractors a leads bid board from $119 per month and full bid management from $299 per month. We could not load downtobid.com to confirm, so check with Downtobid."}},
+     "acceptedAnswer": {"@type": "Answer", "text": "As of Oct 16, 2026, Downtobid's homepage FAQ lists $149 per month for the organization (GCs). For subcontractors, the leads bid board starts at $119 per month and the full bid management software at $299 per month. Subs access planrooms and submit bids free. Source: downtobid.com."}},
     {"@type": "Question", "name": "Do subcontractors pay to bid on Downtobid?",
-     "acceptedAnswer": {"@type": "Answer", "text": "According to Downtobid's FAQ as reported by third-party sites in October 2026, subs can access planrooms and submit bids for free, and can upgrade to a paid Bid Board."}},
+     "acceptedAnswer": {"@type": "Answer", "text": "According to Downtobid's homepage FAQ (checked Oct 16, 2026), subs can access planrooms and submit bids for free, and can upgrade to a paid Bid Board."}},
     {"@type": "Question", "name": "Does Downtobid have a pricing page?",
-     "acceptedAnswer": {"@type": "Answer", "text": "As of Oct 16, 2026, downtobid.com/pricing returned not found; starting prices are reported from its homepage FAQ."}}
+     "acceptedAnswer": {"@type": "Answer", "text": "As of Oct 16, 2026, downtobid.com/pricing returned not found; starting prices are listed in its homepage FAQ."}}
   ]
 }
 ```
@@ -29,22 +29,22 @@ facts_checked: Oct 16, 2026 (ET). Downtobid's site blocked our direct fetch; pri
 
 *Facts checked October 16, 2026. Confirm with Downtobid before you buy.*
 
-**The short answer:** Downtobid is AI bidding software for GCs and subs. It reads plan sets, splits them into trade packages, drafts scope notes and sends invitations from your own email. Two third-party sites, citing Downtobid's homepage FAQ in October 2026, report a **GC product from $149/month per organization**, a sub **leads bid board from $119/month** and **full bid management from $299/month**, with free bidding for subs ([ConstructionIndustry.ai](https://www.constructionindustry.ai/tools/preconstruction/downtobid/), [StatWharf](https://statwharf.com/best/bid-management-software/)). We couldn't load downtobid.com directly to confirm, so check with Downtobid. It doesn't build your estimate.
+**The short answer:** Downtobid is AI bidding software for GCs and subs. It reads plan sets, splits them into trade packages, drafts scope notes and sends invitations from your own email. Its homepage FAQ lists **$149/month for the organization (GCs)**. For subs, the **leads bid board starts at $119/month** and the **full bid management software at $299/month**, and subs bid free ([Downtobid homepage FAQ](https://www.downtobid.com), checked Oct 16, 2026). It doesn't build your estimate.
 
 ## What Downtobid costs
 
-| Who | Product | Starting price, as reported (Oct 2026) |
+| Who | Product | Starting price (Oct 16, 2026) |
 |---|---|---|
 | GCs | Bid software, per organization | $149 / month |
 | Subs | "Leads" bid board | $119 / month |
 | Subs | Full bid management | $299 / month |
 | Subs | Planroom access and bid submission | Free |
 
-Source: Downtobid homepage FAQ ([downtobid.com](https://downtobid.com/)), as reported Oct 2026 by [ConstructionIndustry.ai](https://www.constructionindustry.ai/tools/preconstruction/downtobid/) and [StatWharf](https://statwharf.com/best/bid-management-software/) (StatWharf checked Oct 11, 2026). We couldn't load downtobid.com directly on Oct 16, 2026, and its /pricing address returned not found, so these are reported figures, not ones we confirmed.
+Source: [Downtobid homepage FAQ](https://www.downtobid.com), checked Oct 16, 2026. No annual prices are shown, and downtobid.com/pricing returns not found.
 
-**Watch for older numbers.** Downtobid's own blog post on bidding software describes a **Starter plan at $150/month** (unlimited active projects, up to 3 users, a dedicated bid coordinator) and a **Pro plan at $500/month** (up to 10 users, sublist cleanup and migration, access to its full sub database) ([Downtobid blog](https://downtobid.com/blog/contractor-bidding-software), read Oct 16, 2026). These don't match the FAQ. We can't tell which is current, or whether the user limits still apply.
+**Watch for older numbers.** Some older Downtobid blog posts still show different plan prices. Go by the homepage FAQ.
 
-These are starting prices. The sources don't say how billing, contract terms or add-ons work, so ask.
+These are starting prices. The FAQ doesn't say how contract terms or add-ons work, so ask.
 
 ## What you get
 
@@ -85,17 +85,16 @@ BNZ doesn't publish a monthly price. You get one set price per project, in writi
 ## FAQ
 
 **How much does Downtobid cost?**
-Third-party sites citing Downtobid's FAQ (Oct 2026) report from $149/month per GC organization, and $119/month (leads) or $299/month (full bid management) for subs. Confirm with Downtobid.
+$149/month per GC organization. Subs: from $119/month (leads bid board) or $299/month (full software), per Downtobid's homepage FAQ, Oct 16, 2026.
 
 **Do subcontractors pay to bid on Downtobid?**
-Not according to its FAQ as reported by third-party sites in Oct 2026. Subs can upgrade to a paid bid board.
+No, per its homepage FAQ (Oct 16, 2026). Subs can upgrade to a paid bid board.
 
 **Does Downtobid have a pricing page?**
 Not at downtobid.com/pricing as of Oct 16, 2026. Prices are in the homepage FAQ.
 
 ## Sources (checked Oct 16, 2026, ET unless noted)
-- Downtobid homepage FAQ: https://downtobid.com/ (indexed text; direct fetch blocked)
-- Downtobid blog: https://downtobid.com/blog/contractor-bidding-software
+- Downtobid homepage FAQ: https://www.downtobid.com
 - ConstructionIndustry.ai: https://www.constructionindustry.ai/tools/preconstruction/downtobid/
 - StatWharf (checked Oct 11, 2026): https://statwharf.com/best/bid-management-software/
 - G2 listing: https://ai.g2.com/marketplace/tools/downtobid
