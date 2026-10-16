@@ -22,8 +22,8 @@ ARTICLES = [
 # links in the drafts that point at pages that don't exist (yet) -> where they go instead
 LINK_FIX = {"/integrations/": "/what-we-connect-to/"}
 
-def load(name):
-    raw = open(os.path.join(ART, name + ".md"), encoding="utf-8").read()
+def load(name, art_dir=None):
+    raw = open(os.path.join(art_dir or ART, name + ".md"), encoding="utf-8").read()
     m = re.match(r"---\n(.*?)\n---\n", raw, re.S)
     meta = {}
     for line in m.group(1).splitlines():
@@ -88,8 +88,8 @@ def md(body):
             i += 1
     return "\n".join(out)
 
-def page_article(name, eyebrow, who):
-    meta, ld, body = load(name)
+def page_article(name, eyebrow, who, art_dir=None, extra_ld=None):
+    meta, ld, body = load(name, art_dir)
     path = meta["url_slug"]
     h1 = re.search(r"^# (.+)$", body, re.M).group(1)
     body = body.replace("# %s\n" % h1, "", 1)
@@ -107,6 +107,8 @@ def page_article(name, eyebrow, who):
     if parts and re.search(r"\(/book/\)", parts[-1]) and len(parts[-1]) < 600:
         parts = parts[:-1]
     prose = md("".join(parts))
+    if extra_ld:
+        ld = [x for x in (extra_ld(meta, h1), ld) if x]
     jsonld = json.dumps(ld, ensure_ascii=False, separators=(",", ":")) if ld else None
     h = head(meta["title_tag"], meta["meta_description"], path, jsonld=jsonld)
     h += nav()

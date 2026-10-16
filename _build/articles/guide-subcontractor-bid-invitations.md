@@ -47,7 +47,7 @@ The best ITB in the world doesn't help if it goes to the wrong list.
 - **Track record.** They've quoted on time and their paperwork was clean on past jobs.
 - **Requirements.** On public work: prevailing wage experience, bonding capacity, any required certifications.
 
-Invite enough subs per trade that you still have comparable bids if some drop. Keep a note of who no-bids and why. That note is what makes your next list better.
+Invite enough subs per trade that you still have comparable bids if some drop. Keep a note of who no-bids and why. That note is what makes your next list better. [Subcontractor management software](/subcontractor-procurement/) keeps that history for you.
 
 ## What to put in the invitation
 
@@ -96,7 +96,7 @@ Log every answer: quoting, declined, or a named reason ("too busy," "outside our
 
 ## Send clarifications to everyone
 
-If one sub asks a question that changes the scope, answer it in writing to every bidder in that trade. Otherwise you'll get bids priced on different scopes, and [leveling](/guides/bid-leveling/) gets harder.
+If one sub asks a question that changes the scope, answer it in writing to every bidder in that trade. Otherwise you'll get bids priced on different scopes, and [leveling](/guides/bid-leveling/) gets harder. [Bid management software for general contractors](/construction-bid-management/) keeps every clarification with the bid, and [AI subcontractor coordination](/emma/) can send it to each bidder once you approve.
 
 ## Common mistakes
 

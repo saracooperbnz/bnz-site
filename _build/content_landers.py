@@ -2,6 +2,7 @@
 """Seven problem-based SEO landing pages. Each is one door into the same crew."""
 from shared import *
 from content_home import hero
+from links import related_html
 from content_pages import est_mock, bids_mock, today_mock, public_mock
 
 LANDERS = [
@@ -87,7 +88,7 @@ def page_lander(L):
     h += section("dark", sec_head("How it works", "Scoped and priced in writing before we start.",
                                   "Every engagement starts with a Project Review about one real project. We return scope and one set price, in writing. Price moves only if scope moves. After the first project the crew stays on under a separate monthly arrangement — hosting, monitoring, new projects, a Monday report.")
                  + '<p><a class="link" href="/how-it-works/">The six steps, with what you see at each →</a></p>'
-                 + ('<p style="margin-top:12px">Related: %s</p>' % ' · '.join('<a class="link" href="%s">%s</a>' % (u, t) for u, t in L["related"]) if L.get("related") else ''))
+                 + '<p style="margin-top:12px">%s</p>' % related_html(path))
     h += section("light", '<div class="faq-grid"><div class="fx"><span class="eyebrow">FAQ</span><h2 style="margin-top:14px">Asked on every call.</h2></div><div class="fx">%s</div></div>' % faq_items([FAQ[i] for i in L["faq"]], 1))
     h += book_strip(dark=True)
     h += footer()

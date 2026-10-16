@@ -41,7 +41,7 @@ status: DRAFT. General guidance only, not legal or insurance advice. Have the ow
 
 ## Why GCs track sub insurance at all
 
-If an uninsured or underinsured sub causes damage or someone gets hurt, the claim can land on you. Owner contracts often require you to flow insurance requirements down to every sub. Tracking COIs is how you prove you did.
+If an uninsured or underinsured sub causes damage or someone gets hurt, the claim can land on you. Owner contracts often require you to flow insurance requirements down to every sub. Tracking COIs is how you prove you did. It's a core job of [subcontractor management software](/subcontractor-procurement/).
 
 ## What a COI is, and what it isn't
 
@@ -86,7 +86,7 @@ The column that matters most is the earliest expiration date. Sort by it.
 
 ## Put expirations on a calendar
 
-A tracker only works if someone looks at it. Put each expiration on a shared calendar with a reminder far enough ahead to request the renewal from the broker. Pick a lead time your team can actually work with and stick to it.
+A tracker only works if someone looks at it. Put each expiration on a shared calendar with a reminder far enough ahead to request the renewal from the broker. Pick a lead time your team can actually work with and stick to it. [AI subcontractor coordination](/emma/) can request renewals for you, with every request waiting for your approval, and an [AI operations manager for construction](/sara/) can hold the dates on your calendar.
 
 ## The routine that keeps it current
 

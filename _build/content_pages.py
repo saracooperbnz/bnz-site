@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import json
 from shared import *
+from links import related_html
 from content_home import hero, crew_cards, steps_grid, STEPS, CREW
 
 # ------------------------------------------------------------------ A8 solutions
@@ -186,7 +187,7 @@ def page_agent(slug):
     h += section("dark", '<div class="grid g2 stagger">%s</div>' % ''.join(
         '<div class="card"><h2 style="font-size:clamp(22px,2.6vw,30px)">%s</h2><p class="muted" style="margin-top:12px">%s</p></div>' % (t, p) for t, p in a["more"]))
     h += section("light", '<div class="sec-head fx"><span class="eyebrow">%s</span></div><div class="fx">%s</div>' % (a["mock_label"], a["mock"]())
-                 + '<p class="fx" style="margin-top:22px">Related: %s</p>' % ' · '.join('<a class="link" href="%s">%s</a>' % (u, t) for u, t in a["links"]))
+                 + '<p class="fx" style="margin-top:22px">%s</p>' % related_html("/%s/" % slug))
     h += section("dark", sec_head("The rest of the crew", "Three agents. One team.") +
                  '<div class="grid g3 stagger">%s</div>' % ''.join(
                      '<a class="card" href="/%s/">%s<h3 style="margin-top:14px">%s</h3><p class="muted" style="margin:8px 0 12px">%s</p><span class="link">Meet %s →</span></a>' % (

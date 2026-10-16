@@ -9,6 +9,9 @@ LEGACY = {"about", "services", "public-works", "credentials", "careers", "subcon
 
 BAD = [r"\$\s?\d", r"/\s?mo(nth)?\b", r"\bper month\b", r"cancel any ?time", r"\bGet Started\b", r"\bStart free\b", r"\bSign up\b",
        r"\bsubscription\b", r"\bpricing (page|plans?|nav)\b", r"plans? (&amp;|and) pricing", r"#pricing", r"/pricing", r"\btier\b", r"Stripe", r"checkout", r"buy\.stripe", r"\bGPT\b", r"\bClaude\b", r"\bGrok\b", r"\bOpenAI\b", r"powered by"]
+# /blog/ posts review COMPETITOR prices (sourced and dated in the text), so the BNZ no-price rules
+# below don't apply there. Model names, "Get started", Stripe, checkout etc. still fail on /blog/.
+COMPETITOR_PRICE_OK = {r"\$\s?\d", r"/\s?mo(nth)?\b", r"\bper month\b", r"\bsubscription\b", r"\bpricing (page|plans?|nav)\b", r"/pricing", r"\btier\b"}
 ALLOW = {"Not a plan, not a tier", "no price list", "One set price", "set price", "price in writing", "prices published", "No prices on this site", "price moves", "Price moves"}
 
 def pages():
@@ -43,6 +46,7 @@ for p in pages():
     text = re.sub(r"<script.*?</script>", "", html, flags=re.S)
     text = re.sub(r"<[^>]+>", " ", text)
     for pat in BAD:
+        if top == "blog" and pat in COMPETITOR_PRICE_OK: continue
         for m in re.finditer(pat, text, flags=re.I):
             ctx = text[max(0, m.start() - 40):m.end() + 40].replace("\n", " ")
             if any(a.lower() in ctx.lower() for a in ALLOW): continue
