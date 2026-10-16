@@ -35,14 +35,14 @@ status: DRAFT. Clean, ready for PR. Not published; needs owner approval.
     {"@type": "Question", "name": "What does paid AI estimating software cost?",
      "acceptedAnswer": {"@type": "Answer", "text": "As of Oct 16, 2026, on its own pricing page, Togal.AI Growth is $299/month per user, billed yearly. For other tools, check each vendor's pricing page or ask sales."}},
     {"@type": "Question", "name": "Is BuildWithBNZ free?",
-     "acceptedAnswer": {"@type": "Answer", "text": "No. BuildWithBNZ has no free plan. You get one set price per project, in writing, after a Project Review, then a separate monthly arrangement."}}
+     "acceptedAnswer": {"@type": "Answer", "text": "BuildWithBNZ is priced per project; see the FAQ at buildwithbnz.com/faq/ for details. You get one set price per project, in writing, after a Project Review, then a separate monthly arrangement."}}
   ]
 }
 ```
 
 # Free AI construction estimating software: what you actually get
 
-*Checked October 16, 2026 (ET). BuildWithBNZ publishes this page. It has no free plan, and we say so below. Every competitor fact links to its source.*
+*Checked October 16, 2026 (ET). BuildWithBNZ publishes this page. It's priced per project, and we say so below. Every competitor fact links to its source.*
 
 **The short answer:** If you search for AI construction estimating software free of charge, you'll mostly find free trials, not free plans. The one free plan we found (STACK) has usage limits. And free options don't always include the AI features. So "free" usually means "free to test," not "free to bid with."
 
@@ -96,11 +96,11 @@ A free plan or trial is a good way to test a tool. But it's rarely enough to run
 - **Check the export.** Can you get the quantities into the tool or spreadsheet your team already uses?
 - **Read the renewal terms.** Most paid plans above are billed annually.
 
-## Where BuildWithBNZ fits (and why it isn't free)
+## Where BuildWithBNZ fits (and how it's priced)
 
-[BuildWithBNZ](/) isn't a free tool, and it isn't a tool you run. It's three AI workers inside your own Google Drive, Gmail, Google Calendar and Notion. [Taylor](/taylor/) reads the drawings, specs, addenda (changes issued after the plans go out) and the bid form. Taylor does the takeoff, flags conflicts and prices the job line by line. Every line shows its source. Where information is missing, Taylor writes UNKNOWN instead of guessing. Emma handles sub invitations and quotes, and Sara keeps one approvals queue. Nothing goes out until you approve it.
+[BuildWithBNZ](/) isn't a tool you run. It's three AI workers inside your own Google Drive, Gmail, Google Calendar and Notion. [Taylor](/taylor/) reads the drawings, specs, addenda (changes issued after the plans go out) and the bid form. Taylor does the takeoff, flags conflicts and prices the job line by line. Every line shows its source. Where information is missing, Taylor writes UNKNOWN instead of guessing. Emma handles sub invitations and quotes, and Sara keeps one approvals queue. Nothing goes out until you approve it.
 
-**How it's priced:** one set price per project, in writing, after a Project Review. Then there's a separate monthly arrangement. There's no free plan.
+**How it's priced:** one set price per project, in writing, after a Project Review. Then there's a separate monthly arrangement. BuildWithBNZ is priced per project; see the [FAQ](/faq/) for details.
 
 **Limits to know:** Live today: Google Drive, Gmail, Google Calendar, Google Workspace and Notion. Excel, PlanSwift/STACK, Bluebeam, QuickBooks and others are listed as "Next," not live, on our [What we connect to](/what-we-connect-to/) page.
 
@@ -122,7 +122,7 @@ We found free trials, not free AI takeoff plans. Kreo puts AI takeoff on its Pro
 Togal.AI Growth is $299/month per user, billed yearly (Togal's pricing page, Oct 16, 2026). For others, check each vendor's pricing page.
 
 **Is BuildWithBNZ free?**
-No. It's one set price per project, in writing, after a Project Review.
+BuildWithBNZ is priced per project; see the [FAQ](/faq/) for details. It's one set price per project, in writing, after a Project Review.
 
 ## Sources (checked Oct 16, 2026, ET)
 
