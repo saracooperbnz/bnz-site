@@ -15,9 +15,9 @@ ALLOWED_PREFIX = ("/book/", "/sara/", "/taylor/", "/emma/", "/faq/", "/crew/", "
 META = {  # descriptions trimmed to <=155 chars
  "best-ai-estimating-software-for-general-contractors": "A fair roundup of AI estimating and takeoff software for US general contractors: what each tool does, published prices with sources, and who it fits.",
  "buildingconnected-pricing": "BuildingConnected doesn't publish prices. What Autodesk says, what third-party listings report, what Pro and Bid Board Pro include, and other options.",
- "construction-estimating-software-for-small-business": "Estimating software for small construction businesses: free and low-cost options, 2026 prices with sources, and what to check before you buy.",
+ "construction-estimating-software-for-small-business": "Estimating software for small construction businesses: free options, what to check before you buy, and when to get help instead of another tool.",
  "downtobid-pricing": "Downtobid pricing for GCs and subs (Oct 2026), what it does well, its limits, and when a different setup fits better. Sources linked.",
- "planswift-vs-bluebeam": "PlanSwift vs Bluebeam Revu for construction takeoff: published 2026 prices, what each does well, their limits, and which fits. Sources linked.",
+ "planswift-vs-bluebeam": "PlanSwift vs Bluebeam Revu for construction takeoff: what each does well, their limits, and which fits your team. Sources linked.",
  "togal-ai-review": "A Togal.AI review for US contractors: the published price, where the AI takeoff works well, where it falls short, and when another tool fits better.",
 }
 STYLE = ('<style>.post table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}.post th,.post td{border:1px solid rgba(255,255,255,.15);'
