@@ -93,7 +93,7 @@ def av(who, size=32, note=False, anim=False):
 def btn_book(cls="btn primary", label="Book a project review"):
     return '<a class="%s" href="/book/">%s <span class="g">↗</span></a>' % (cls, label)
 
-def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
+def head(title, desc, path, og_title=None, jsonld=None, noindex=False, canonical=True):
     canon = SITE + path
     og_title = og_title or title
     ld = ''
@@ -111,8 +111,7 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-883K8FQX0B');</script>
 <title>%(title)s</title>
 <meta name="description" content="%(desc)s">
-<link rel="canonical" href="%(canon)s">
-%(robots)s<meta name="theme-color" content="#0A0A0A">
+%(canon_tag)s%(robots)s<meta name="theme-color" content="#0A0A0A">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BuildWithBNZ">
 <meta property="og:title" content="%(og)s">
@@ -131,7 +130,7 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
 %(ld)s</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-%(sprite)s''' % dict(sprite=crew_sprite(), title=esc(title), desc=esc(desc), canon=canon, og=esc(og_title), site=SITE, fonts=FONTS, ld=ld, robots=robots)
+%(sprite)s''' % dict(sprite=crew_sprite(), title=esc(title), desc=esc(desc), canon=canon, canon_tag=('<link rel="canonical" href="%s">\n' % canon) if canonical else '', og=esc(og_title), site=SITE, fonts=FONTS, ld=ld, robots=robots)
 
 def esc(s):
     return s.replace('&', '&amp;').replace('"', '&quot;').replace('&amp;amp;', '&amp;')
@@ -195,8 +194,9 @@ def book_strip(dark=False):
              '<h2 style="margin:14px 0 12px">Book a project review.</h2>'
              '<p class="lede">Bring one project. We\'ll show you what the crew would do with it.</p>'
              '<div style="margin-top:22px">%s</div></div>'
-             '<div class="fx"><div class="cal-slot">Calendar embed — placeholder · Cal.com / Calendly · 30 min · "Project Review"<br>'
-             '<span style="text-transform:none;letter-spacing:0;font-size:14px;display:block;margin-top:8px">Until the calendar is live, the form on the book page reaches a real person the same day.</span></div></div></div>') % btn_book()
+             '<div class="fx"><div class="card"><h3>30-minute Project Review with a real person.</h3>'
+             '<p class="muted" style="margin-top:10px">Fill in the short form on the <a class="link" href="/book/">booking page</a> and we\'ll reply the same business day to set a time. '
+             'Prefer to talk? Call <a class="link" href="tel:%s">%s</a>.</p></div></div></div>') % (btn_book(), PHONE, PHONE_TXT)
     return section('light' if not dark else 'dark', inner, id_="book")
 
 def faq_items(items, first_open=2):
@@ -325,7 +325,7 @@ def sample_project_mock(strip=True):
              '["SUB QUOTES 3 OF 7 IN · 1 LEVELLED",["levelled","Levelled"]],'
              '["MONDAY REPORT DRAFTED · VERIFIED FIRST",["verified","Verified"]]]')
     s = ('<div class="strip" data-lines=\'%s\'><span class="txt">ADDENDUM 02 RECEIVED · TAYLOR READING</span>%s</div>' % (lines, chip("working", "Working"))) if strip else ''
-    return ('<div class="mock rows"><span class="sd">Sample data</span><div class="dots"><i></i><i></i><i></i></div>%s'
+    return ('<div class="mock rows"><span class="sd">Example · made-up project</span><div class="dots"><i></i><i></i><i></i></div>%s'
             '<div class="title">Rockland Mixed-Use · 38 Units</div><div class="sub">Public work · prevailing wage · bid due in 11 days</div>'
             '<div class="crew">%s%s%s</div>'
             '<div class="tabs"><b>Overview</b><span>Files</span><span>Estimate</span><span>Subcontractors</span><span>Activity</span></div>'
@@ -335,13 +335,19 @@ def sample_project_mock(strip=True):
             '</div>') % (s, av("s", 24), av("t", 24), av("e", 24), chip("working", "Working", True), chip("verified", "Verified"), chip("needs", "Needs you"))
 
 def monday_mock():
-    return ('<div class="mock rows"><span class="sd">Sample data</span><div class="title">Monday report — week of Mar 9</div>'
+    return ('<div class="mock rows"><span class="sd">Example · made-up project</span><div class="title">Example Monday report (made-up project, for illustration)</div>'
             '<div class="kpis">'
-            '<div class="kpi"><b class="count" data-count="2">0</b><span>Projects active</span></div>'
-            '<div class="kpi"><b class="count" data-count="1">0</b><span>Estimate issued</span></div>'
-            '<div class="kpi"><b class="count" data-count="3">0</b><span>Quotes collected</span></div>'
-            '<div class="kpi needs"><b class="count" data-count="2">0</b><span>Waiting on you</span></div>'
-            '<div class="kpi"><b class="count" data-count="4">0</b><span>Waiting on subs</span></div></div>'
+            '<div class="kpi"><b>—</b><span>Projects active</span></div>'
+            '<div class="kpi"><b style="font-size:15px">Rev 2 in progress</b><span>Estimate issued</span></div>'
+            '<div class="kpi"><b style="font-size:15px">See sub list</b><span>Quotes collected</span></div>'
+            '<div class="kpi needs"><b style="font-size:15px">Approvals queue</b><span>Waiting on you</span></div>'
+            '<div class="kpi"><b style="font-size:15px">Named below</b><span>Waiting on subs</span></div></div>'
             '<div class="line"><b>Waiting on subs:</b> Hudson Feeder Co. (quote), Valley Air &amp; Pipe (COI), Ramapo Rebar (W-9), Orangetown Pour (quote)</div>'
             '<div class="line"><b>Reported, not verified:</b> Addendum 03 rumoured per architect\'s office — unconfirmed.</div>'
             '</div>')
+
+def sec_head_h1(h1, h2, p=None):
+    """Like sec_head, but the small eyebrow line is the page's single <h1> (keyword-led);
+    the big display line stays as the h2 subhead so the design is unchanged."""
+    return '<div class="sec-head fx"><h1 class="eyebrow">%s</h1><h2>%s</h2>%s</div>' % (
+        h1, h2, '<p>%s</p>' % p if p else '')

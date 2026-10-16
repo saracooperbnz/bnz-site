@@ -1,0 +1,40 @@
+# BuildWithBNZ
+
+> BuildWithBNZ is an AI operating system for US construction companies. Three AI agents — Sara (operations), Taylor (estimating from drawings and specs) and Emma (subcontractor bidding and compliance) — work inside the contractor's existing Google Drive, Gmail, Calendar and Notion. Nothing is sent, signed, awarded or paid without the owner's approval. Operated by BNZ Builders Inc., New York.
+
+Key facts:
+- Built for: general contractors, remodelers and custom builders, specialty contractors, and GCs bidding public / prevailing-wage work.
+- Taylor: reads full bid packages (drawings, specs, addenda, wage schedules, bid forms), performs takeoffs, flags conflicts, prices labor, material and subs, and shows every assumption and source. Marks missing information UNKNOWN instead of guessing.
+- Emma: builds sub lists, sends bid invitations, follows up, collects quotes, COIs, W-9s and compliance documents, and levels sub scopes against the estimate.
+- Sara: runs the approvals queue and a weekly Monday report; marks claims Verified or Reported — not verified.
+- Pricing: a free Project Review on one real project, then a written scope with one set price for that project (price moves only if scope moves), then a separate monthly arrangement. No public price list.
+- Integrations live today: Google Drive, Gmail, Google Calendar, Google Workspace, Notion. Planned (not live): Procore, Buildertrend, QuickBooks, Sage, Bluebeam, PlanSwift/STACK, DocuSign, Microsoft 365, Dropbox, Excel.
+- Limits: not licensed design; does not stamp drawings. Estimates are not bids, quotes or cost guarantees.
+
+## Product
+- [Home](https://buildwithbnz.com/): overview of the crew and how it works
+- [Solutions](https://buildwithbnz.com/solutions/): estimating & takeoff, subcontractor bidding & buyout, operations & approvals, public work & prevailing wage
+- [How it works](https://buildwithbnz.com/how-it-works/): six steps from Project Review to a running project
+- [The crew](https://buildwithbnz.com/crew/): Sara, Taylor and Emma
+- [Taylor — estimating](https://buildwithbnz.com/taylor/)
+- [Emma — subcontractor coordination](https://buildwithbnz.com/emma/)
+- [Sara — operations](https://buildwithbnz.com/sara/)
+- [What we connect to](https://buildwithbnz.com/what-we-connect-to/): live and planned integrations
+
+## By audience and topic
+- [AI for general contractors](https://buildwithbnz.com/ai-for-general-contractors/)
+- [Construction estimating AI](https://buildwithbnz.com/construction-estimating-ai/)
+- [Estimating for remodelers, custom builders and fit-outs](https://buildwithbnz.com/commercial-construction-estimating/)
+- [Subcontractor procurement](https://buildwithbnz.com/subcontractor-procurement/)
+- [Construction bid management](https://buildwithbnz.com/construction-bid-management/)
+- [Construction project management AI](https://buildwithbnz.com/construction-project-management-ai/)
+- [Prevailing wage project management](https://buildwithbnz.com/prevailing-wage-project-management/)
+
+## Answers
+- [FAQ](https://buildwithbnz.com/faq/): cost, timing, data access, approvals, design limits
+
+## Company
+- [Book a Project Review](https://buildwithbnz.com/book/)
+- [Contact](https://buildwithbnz.com/contact/): New York · saracooper@bnzbuildersinc.com · +1-332-258-1401
+- [Terms](https://buildwithbnz.com/terms/)
+- [Privacy](https://buildwithbnz.com/privacy/)
