@@ -401,15 +401,3 @@ footer .addr{font-size:12px;letter-spacing:.06em}
 @media (max-width:620px){.mock table{display:block;overflow-x:auto;white-space:nowrap}.mock .strip{font-size:9.5px}}
 .wrap{min-width:0}
 .first{padding-top:clamp(56px,8vw,110px)}
-/* article pages (pricing, integrations, guides) */
-.prose h2{margin-top:40px}
-.prose h2:first-child{margin-top:0}
-.prose ol{padding-left:22px}
-.prose a.link{color:inherit}
-.prose .tbl{overflow-x:auto;margin:16px 0 20px}
-.prose table{width:100%;border-collapse:collapse;font-size:14.5px}
-.prose th,.prose td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--hair-2,rgba(0,0,0,.12))}
-.prose th{font-weight:700;color:var(--ink)}
-.prose td{color:var(--muted)}
-.prose blockquote{border-left:2px solid var(--hair-2,rgba(0,0,0,.18));padding:4px 0 4px 16px;margin:16px 0}
-.prose blockquote p{color:var(--ink)}

@@ -5,13 +5,13 @@ Usage (from the repo root):  python3 _build/build.py
 Then:                        python3 _build/check.py
 The legacy BNZ Builders contractor pages (/about /services /public-works /credentials
 /careers /subcontract /work /capability-statement) are NOT generated here and are left as they are."""
-import os, sys, datetime, subprocess
+import os, sys, datetime
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
 from shared import SITE, UPDATED
-import content_home, content_pages, content_landers, content_articles, content_blog
+import content_home, content_pages, content_landers
 
 def write(path, html):
     full = os.path.join(ROOT, path.lstrip('/'))
@@ -42,44 +42,25 @@ PAGES = {
 for L in content_landers.LANDERS:
     PAGES["/%s/index.html" % L["slug"]] = (lambda L=L: content_landers.page_lander(L))
 
-for _n, _e, _w in content_articles.ARTICLES:
-    PAGES[content_articles.load(_n)[0]["url_slug"] + "index.html"] = (lambda n=_n, e=_e, w=_w: content_articles.page_article(n, e, w)[1])
-
-PAGES["/blog/index.html"] = lambda: content_blog.page_index()[1]
-for _n, _e, _w in content_blog.POSTS:
-    PAGES["/blog/%s/index.html" % _n] = (lambda n=_n, e=_e, w=_w: content_blog.post(n, e, w)[1])
-
 # URLs that go in the sitemap: generated public pages + the untouched legacy pages
 SITEMAP_EXTRA = ["/about/", "/services/", "/public-works/", "/credentials/", "/careers/", "/subcontract/", "/work/", "/capability-statement/"]
 NOINDEX = {"/thanks/index.html", "/login/index.html", "/404.html", "/architecture/index.html"}
-
-def lastmod(path):
-    """Date the built file last changed: its last commit date, or today if it differs from HEAD."""
-    rel = path.lstrip('/')
-    try:
-        dirty = subprocess.run(["git", "status", "--porcelain", "--", rel], cwd=ROOT, capture_output=True, text=True).stdout.strip()
-        if not dirty:
-            d = subprocess.run(["git", "log", "-1", "--format=%cs", "--", rel], cwd=ROOT, capture_output=True, text=True).stdout.strip()
-            if d: return d
-    except OSError:
-        pass
-    return datetime.date.today().isoformat() if dirty else UPDATED
 
 def main():
     written = []
     for path, fn in PAGES.items():
         written.append(write(path, fn()))
-    gen = []
+    urls = []
     for path in PAGES:
         if path in NOINDEX: continue
-        gen.append((path.replace("index.html", ""), lastmod(path)))
-    sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
-    # software pages: no <priority> (Google ignores it), lastmod = when the page last really changed
-    for u, lm in gen:
-        sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod></url>' % (SITE, u, lm))
-    # legacy BNZ Builders INC pages: left exactly as before (owner decision pending)
+        url = path.replace("index.html", "")
+        pri = "1.0" if url == "/" else ("0.9" if url in ("/solutions/", "/book/", "/how-it-works/", "/crew/") else "0.7")
+        urls.append((url, pri))
     for u in SITEMAP_EXTRA:
-        sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>0.4</priority></url>' % (SITE, u, UPDATED))
+        urls.append((u, "0.4"))
+    sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for u, pri in urls:
+        sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>' % (SITE, u, UPDATED, pri))
     sm.append('</urlset>\n')
     write("/sitemap.xml", '\n'.join(sm))
     write("/robots.txt", "User-agent: *\nAllow: /\nDisallow: /thanks/\n\nSitemap: %s/sitemap.xml\n" % SITE)
