@@ -117,7 +117,7 @@ HOME_LD = {"@context": "https://schema.org", "@graph": [
 def page_home():
     desc = "AI for US contractors: Sara runs operations, Taylor builds estimates from your drawings, Emma handles subs. You approve every send. Book a review."
     ld = json.dumps(HOME_LD, ensure_ascii=False, separators=(",", ":"))
-    h = head("AI Operating System for Construction Companies | BNZ", desc, "/", jsonld=ld)
+    h = head("AI Operating System for Construction Companies | BuildWithBNZ", desc, "/", jsonld=ld)
     h += nav("/")
     h += hero("AI operating system for construction companies", "Run the company. Keep every decision.",
               "Sara runs operations, Taylor reads the drawings and builds the estimate, Emma builds and manages your subcontractor network. They connect to the files and systems you already use — Drive, Gmail, Calendar, Notion, your project folders — and work together inside one construction workspace. Every project is scoped and priced in writing before we start. You approve anything that leaves the building.",
