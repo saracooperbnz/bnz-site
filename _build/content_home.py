@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import json
 from shared import *
 
 def hero(eyebrow, h1, para, mock, cta=True):
@@ -10,7 +11,7 @@ WHO = [
     ("General contractors", "Bid more work without adding estimating headcount."),
     ("Remodelers &amp; custom builders", "Estimates and subs that keep pace with change orders."),
     ("Specialty contractors", "Your niche, your units, your production rates — learned once."),
-    ("GCs bidding public work", "Prevailing wage, addenda and bid forms handled by the book."),
+    ("GCs bidding public work", "New York State prevailing wage, addenda and bid forms handled by the book."),
 ]
 
 CREW = [
@@ -55,18 +56,18 @@ def steps_grid(rows=False):
     return '<div class="steps stagger%s">%s</div>' % (' rows' if rows else '', ''.join(out))
 
 def work_cards():
-    c1 = ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Intake summary</div>'
+    c1 = ('<div class="mock rows"><span class="sd">Example · made-up project</span><div class="eyebrow mute" style="margin-bottom:8px">Intake summary</div>'
           '<div class="row"><div><b>Rockland Mixed-Use · 38 Units</b><span>Public work, prevailing wage · bid due in 11 days</span></div></div>'
           '<div class="row"><div><b>Package</b><span>Drawing set (142 sheets), specs, Addendum 01–02, wage schedule, bid form</span></div></div>'
           '<div class="row"><div><b>On it today</b><span>Owner + one PM</span></div></div>'
           '<div class="row"><div><b>Pain named on the call</b><span>Estimating bottleneck, sub follow-up</span></div></div>'
           '<div class="line"><b>What the crew would do with it</b> → walked through live</div></div>')
-    c2 = ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Scope document · in writing</div>'
+    c2 = ('<div class="mock rows"><span class="sd">Example · made-up project</span><div class="eyebrow mute" style="margin-bottom:8px">Scope document · in writing</div>'
           '<div class="row"><div><b>What Taylor does</b><span>Takeoffs, estimate Rev 1, conflict log</span></div></div>'
           '<div class="row"><div><b>What Emma does</b><span>Sub list, invitations, quote collection</span></div></div>'
           '<div class="row"><div><b>What stays with you</b><span>Every approval, every send, the signature</span></div></div>'
           '<div class="row needs"><div><b>One set price</b><span>Agreed before work starts</span></div></div></div>')
-    c3 = ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Project page</div>'
+    c3 = ('<div class="mock rows"><span class="sd">Example · made-up project</span><div class="eyebrow mute" style="margin-bottom:8px">Project page</div>'
           '<div class="row"><div><b>Estimate Rev 2</b></div>%s</div>'
           '<div class="row"><div><b>Sub quotes · electrical</b></div>%s</div>'
           '<div class="row"><div><b>Bid form draft</b></div>%s</div>'
@@ -81,9 +82,7 @@ def work_cards():
         '<div class="card"><h3>%s</h3>%s<p>%s</p></div>' % (t, m, p) for t, m, p in cards)
 
 def proof():
-    return ('<div class="grid g3 stagger proof">'
-            '<div class="card"><h3>One real project, walked through</h3><p class="muted" style="margin:10px 0">A public-work bid, name withheld. Every number below comes from the record.</p>'
-            '<div class="slot">Metric slot — sheets read, from the record</div><div class="slot">Metric slot — conflicts flagged, from the record</div><div class="slot">Metric slot — days from package to estimate</div></div>'
+    return ('<div class="grid g2 stagger proof">'
             '<div class="card"><h3>The rules, stated as guarantees</h3>'
             '<blockquote>"Sara never claims something was completed unless verified. Never makes the owner\'s decision."</blockquote>'
             '<blockquote>"Taylor never invents a price. Says UNKNOWN when information is missing and always shows the logic."</blockquote>'
@@ -91,11 +90,34 @@ def proof():
             '<div class="card"><h3>How the crew catches its own mistakes</h3><p class="muted" style="margin-top:10px">Every estimate line, sub quote and claim is cross-checked before it reaches you. When two sources disagree — a spec section against a drawing sheet, a quote against a levelled scope — the item is flagged CONFLICT and held, not smoothed over. Anything the crew was told but hasn\'t confirmed stays marked REPORTED — NOT VERIFIED until it\'s checked against the document itself.</p></div>'
             '</div>')
 
+ORG_ID = SITE + "/#organization"
+# Organization + WebSite + SoftwareApplication. No logo / sameAs / parentOrganization / price / rating:
+# those need real owner data (see PR notes).
+HOME_LD = {"@context": "https://schema.org", "@graph": [
+    {"@type": "Organization", "@id": ORG_ID, "name": "BuildWithBNZ", "url": SITE + "/",
+     "description": "AI operating system for construction companies.", "email": INBOX, "telephone": PHONE,
+     "areaServed": {"@type": "Country", "name": "United States"}},
+    {"@type": "WebSite", "@id": SITE + "/#website", "name": "BuildWithBNZ", "url": SITE + "/",
+     "publisher": {"@id": ORG_ID}},
+    {"@type": "SoftwareApplication", "@id": SITE + "/#software", "name": "BuildWithBNZ", "url": SITE + "/",
+     "applicationCategory": "BusinessApplication", "applicationSubCategory": "Construction management",
+     "operatingSystem": "Web",
+     "description": "AI operating system for US construction companies. Sara runs operations, Taylor builds estimates from drawings and specs, and Emma coordinates subcontractors. Every outgoing message waits for the owner's approval.",
+     "featureList": ["AI construction estimating and takeoff from drawings and specs",
+                     "Sheet and spec conflict flagging",
+                     "Subcontractor bid invitations, follow-ups, COI and W-9 collection",
+                     "Scope leveling of sub quotes against the estimate",
+                     "Approvals queue and weekly Monday report",
+                     "Prevailing-wage and public-work bid requirements",
+                     "Works inside Google Drive, Gmail, Google Calendar and Notion"],
+     "audience": {"@type": "BusinessAudience", "audienceType": "General contractors, remodelers, specialty contractors and public-work bidders in the United States"},
+     "provider": {"@id": ORG_ID}},
+]}
+
 def page_home():
-    desc = "AI operating system for construction companies: Sara runs operations, Taylor builds estimates from drawings, Emma manages your subcontractors."
-    ld = ('{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"BuildWithBNZ","url":"%s","email":"%s","telephone":"%s","areaServed":"New York","description":"AI operating system for construction companies."},'
-          '{"@type":"WebSite","name":"BuildWithBNZ","url":"%s"}]}') % (SITE, INBOX, PHONE, SITE)
-    h = head("AI Operating System for Construction Companies | BuildWithBNZ", desc, "/", jsonld=ld)
+    desc = "AI for US contractors: Sara runs operations, Taylor builds estimates from your drawings, Emma handles subs. You approve every send. Book a review."
+    ld = json.dumps(HOME_LD, ensure_ascii=False, separators=(",", ":"))
+    h = head("AI Operating System for Construction Companies | BNZ", desc, "/", jsonld=ld)
     h += nav("/")
     h += hero("AI operating system for construction companies", "Run the company. Keep every decision.",
               "Sara runs operations, Taylor reads the drawings and builds the estimate, Emma builds and manages your subcontractor network. They connect to the files and systems you already use — Drive, Gmail, Calendar, Notion, your project folders — and work together inside one construction workspace. Every project is scoped and priced in writing before we start. You approve anything that leaves the building.",
