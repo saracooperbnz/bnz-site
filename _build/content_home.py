@@ -123,7 +123,9 @@ def page_home():
               "Sara runs operations, Taylor reads the drawings and builds the estimate, Emma builds and manages your subcontractor network. They connect to the files and systems you already use — Drive, Gmail, Calendar, Notion, your project folders — and work together inside one construction workspace. Every project is scoped and priced in writing before we start. You approve anything that leaves the building.",
               sample_project_mock())
     h += section("light strip", '<div class="cells stagger">%s</div>' % ''.join('<div><h3>%s</h3><p>%s</p></div>' % w for w in WHO))
+    import links
     h += section("dark", sec_head("The crew", "Three agents. One team.") + crew_cards(), id_="crew")
+    h += section("light", sec_head("Find your starting point", "Where the crew fits your work.") + '<div class="grid g3 stagger find">%s</div>' % links.home_html(), id_="solutions-by-need")
     h += section("light", sec_head("How it works", "Six steps to a project that runs itself.") + steps_grid(), id_="how-it-works")
     h += section("dark", sec_head("The work", "What you actually get.") + work_cards())
     h += section("light", '<div class="split"><div class="fx"><span class="eyebrow">Ongoing operations</span><h2 style="margin:14px 0 14px">Reported every Monday.</h2>'

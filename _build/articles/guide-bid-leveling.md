@@ -43,7 +43,7 @@ People use the words loosely, so be clear inside your team:
 - **Bid tab (bid tabulation):** bids as submitted, side by side. On public work the owner often publishes one after bid opening. It tells you who said what.
 - **Leveling sheet:** the GC's internal sheet that adjusts each sub's bid to one scope before you choose who carries the trade. It tells you what each bid really costs.
 
-You usually need both. The bid tab is the record. The leveling sheet is the decision.
+You usually need both. The bid tab is the record. The leveling sheet is the decision. Good [bid management software for general contractors](/construction-bid-management/) keeps both in one place for each bid.
 
 ## The layout
 
@@ -88,7 +88,7 @@ One tab per trade package. Freeze the top rows and the first two columns.
 
 ## Where the rows come from
 
-Build rows from the documents, not from the most detailed bid. Use the drawings, the specs, your trade scope sheet, Division 01 and the latest addendum. If a bidder raises an item you missed, add a row and note who raised it. Organize rows the way your estimate is organized (many estimators use CSI MasterFormat) so each sub's line sits next to your number.
+Build rows from the documents, not from the most detailed bid. Use the drawings, the specs, your trade scope sheet, Division 01 and the latest addendum. If a bidder raises an item you missed, add a row and note who raised it. Organize rows the way your estimate is organized (many estimators use CSI MasterFormat) so each sub's line sits next to your number. If your estimate comes from [AI construction estimating software](/construction-estimating-ai/), use its line items as the rows, and have [AI subcontractor coordination](/emma/) level each quote against them.
 
 ## Plug values that hold up
 

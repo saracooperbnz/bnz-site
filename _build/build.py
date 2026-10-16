@@ -11,7 +11,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
 from shared import SITE, UPDATED
-import content_home, content_pages, content_landers, content_articles
+import content_home, content_pages, content_landers, content_articles, content_blog
 
 def write(path, html):
     full = os.path.join(ROOT, path.lstrip('/'))
@@ -44,6 +44,10 @@ for L in content_landers.LANDERS:
 
 for _n, _e, _w in content_articles.ARTICLES:
     PAGES[content_articles.load(_n)[0]["url_slug"] + "index.html"] = (lambda n=_n, e=_e, w=_w: content_articles.page_article(n, e, w)[1])
+
+PAGES["/blog/index.html"] = lambda: content_blog.page_index()[1]
+for _n, _e, _w in content_blog.POSTS:
+    PAGES["/blog/%s/index.html" % _n] = (lambda n=_n, e=_e, w=_w: content_blog.post(n, e, w)[1])
 
 # URLs that go in the sitemap: generated public pages + the untouched legacy pages
 SITEMAP_EXTRA = ["/about/", "/services/", "/public-works/", "/credentials/", "/careers/", "/subcontract/", "/work/", "/capability-statement/"]

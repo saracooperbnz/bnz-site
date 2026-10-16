@@ -173,7 +173,7 @@ def footer():
 <footer>
 <div class="wrap">
 <div><a class="brand" href="/"><span class="mark">B</span>BuildWithBNZ</a><p class="addr" style="margin-top:10px">New York · <a href="mailto:%(inbox)s">%(inbox)s</a> · <a href="tel:%(phone)s">%(phone_txt)s</a></p></div>
-<nav aria-label="Footer"><a href="/solutions/">Solutions</a><a href="/what-we-connect-to/">What we connect to</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
+<nav aria-label="Footer"><a href="/solutions/">Solutions</a><a href="/what-we-connect-to/">What we connect to</a><a href="/blog/">Blog</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
 </div>
 </footer>
 <script src="/assets/js/bnz.js" defer></script>
