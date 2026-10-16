@@ -108,7 +108,7 @@ BuildWithBNZ isn't a takeoff tool you run. It's [three AI workers that do the ta
 
 **Look at [BuildWithBNZ](/) if** you want the takeoff, the estimate and the sub chasing done, in the tools you already use, with you approving what goes out.
 
-How BNZ is priced: one set price per project, in writing, after a Project Review, then an optional monthly arrangement. See [how pricing works](/pricing/).
+How BNZ is priced: one set price per project, in writing, after a Project Review, then a separate monthly arrangement. See [how pricing works](/pricing/).
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 

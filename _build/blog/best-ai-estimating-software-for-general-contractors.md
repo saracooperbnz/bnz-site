@@ -101,7 +101,7 @@ Most tools sold as AI estimating are really **AI takeoff**: they measure areas, 
 - **Emma** drafts sub invitations in your Gmail, follows up, collects quotes, COIs and W-9s (see [subcontractor COI tracking](/guides/subcontractor-coi-tracking/)), and levels each scope against Taylor's estimate.
 - **Sara** keeps one approvals queue. Nothing goes out until you approve it.
 
-**Price:** no price list. One set price per project, in writing, after a Project Review, then an optional monthly arrangement ([how BNZ pricing works](/pricing/)).
+**Price:** no price list. One set price per project, in writing, after a Project Review, then a separate monthly arrangement ([how BNZ pricing works](/pricing/)).
 **Fits:** GCs who want to bid more work without hiring estimators, already run on Google Workspace, and bid public or prevailing-wage work.
 **Limits:**
 - Procore, QuickBooks, Bluebeam, PlanSwift/STACK, Excel, Microsoft 365 and others are listed as "Next," not live.

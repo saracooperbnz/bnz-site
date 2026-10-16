@@ -99,7 +99,7 @@ It fits firms that bid steady volume and would rather hand off takeoff than run 
 BuildWithBNZ isn't a tool you run. It's three AI workers inside your own Google Drive, Gmail, Google Calendar and Notion:
 
 - **Taylor** reads drawings, specs, addenda (changes issued after the plans go out) and the bid form. Taylor does the takeoff, flags conflicts and prices the job line by line. Every line shows its source. Where information is missing, Taylor writes UNKNOWN instead of guessing.
-- **Emma** drafts sub invitations in your Gmail, follows up, and collects quotes, COIs and W-9s. Then she levels each quote against Taylor's estimate.
+- **Emma** drafts sub invitations in your Gmail, follows up, and collects quotes, COIs and W-9s. Then she levels each scope against Taylor's estimate.
 - **Sara** keeps one approvals queue. Nothing goes out until you approve it.
 
 If you want an [AI assistant for contractors](/) that does the bid work, not just speeds it up, this is the option to look at.

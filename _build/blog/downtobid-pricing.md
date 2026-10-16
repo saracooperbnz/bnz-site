@@ -82,7 +82,7 @@ Downtobid and [BuildWithBNZ, an AI estimating and bidding crew,](/) overlap on s
 
 **Look at BuildWithBNZ if** you need the estimate built too, and want the work done in Google Workspace and Notion rather than one more tool your team has to run.
 
-BNZ doesn't publish a monthly price. You get one set price per project, in writing, after a Project Review, then an optional monthly arrangement. See [how pricing works](/pricing/). That makes a direct price comparison hard, and we won't pretend otherwise.
+BNZ doesn't publish a monthly price. You get one set price per project, in writing, after a Project Review, then a separate monthly arrangement. See [how pricing works](/pricing/). That makes a direct price comparison hard, and we won't pretend otherwise.
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 

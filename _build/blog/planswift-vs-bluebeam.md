@@ -93,13 +93,13 @@ Sources: [bluebeam.com/pricing](https://www.bluebeam.com/pricing/), [planswift.c
 
 Both tools make your estimator faster. Neither does the estimate for you, and neither touches subs. [BuildWithBNZ](/) is three AI workers that do that work inside your own Google Drive, Gmail, Google Calendar and Notion:
 
-- **Taylor** reads the drawings, specs, addenda and bid form from your Drive folder, does AI takeoff from PDF plans, flags conflicts between sheets and specs, and prices labor, material and subs line by line. It's takeoff software that prices the estimate, with every source shown and UNKNOWN instead of guesses.
+- **Taylor** reads the drawings, specs, addenda and bid form from your Drive folder, does the takeoff, flags conflicts between sheets and specs, and prices labor, material and subs line by line. It's takeoff software that prices the estimate, with every source shown and UNKNOWN instead of guesses.
 - **Emma** drafts sub invitations in your Gmail, follows up, collects quotes, COIs and W-9s, and levels each scope against Taylor's estimate. See our [bid leveling sheet](/guides/bid-leveling/) guide for the method.
 - **Sara** keeps one approvals queue. Nothing goes out without your approval.
 
 **Already on PlanSwift or Bluebeam?** Imports from PlanSwift/STACK takeoff files and Bluebeam markups are listed as **"Next" on BNZ's integrations page, not live today.** Don't plan on that connection yet.
 
-[BNZ's AI takeoff and estimating crew](/) is priced at one set price per project, in writing, after a Project Review, then an optional monthly arrangement ([how BNZ pricing works](/pricing/)). If you're comparing AI takeoff software more broadly, see [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/) and [our Togal review](/blog/togal-ai-review/).
+[BNZ's AI takeoff and estimating crew](/) is priced at one set price per project, in writing, after a Project Review, then a separate monthly arrangement ([how BNZ pricing works](/pricing/)). If you're comparing AI takeoff software more broadly, see [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/) and [our Togal review](/blog/togal-ai-review/).
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 

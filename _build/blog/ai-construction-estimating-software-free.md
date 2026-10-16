@@ -35,7 +35,7 @@ status: DRAFT. Clean, ready for PR. Not published; needs owner approval.
     {"@type": "Question", "name": "What does paid AI estimating software cost?",
      "acceptedAnswer": {"@type": "Answer", "text": "As of Oct 16, 2026, on its own pricing page, Togal.AI Growth is $299/month per user, billed yearly. For other tools, check each vendor's pricing page or ask sales."}},
     {"@type": "Question", "name": "Is BuildWithBNZ free?",
-     "acceptedAnswer": {"@type": "Answer", "text": "No. BuildWithBNZ has no free plan. You get one set price per project, in writing, after a Project Review, then an optional monthly arrangement."}}
+     "acceptedAnswer": {"@type": "Answer", "text": "No. BuildWithBNZ has no free plan. You get one set price per project, in writing, after a Project Review, then a separate monthly arrangement."}}
   ]
 }
 ```
@@ -100,7 +100,7 @@ A free plan or trial is a good way to test a tool. But it's rarely enough to run
 
 [BuildWithBNZ](/) isn't a free tool, and it isn't a tool you run. It's three AI workers inside your own Google Drive, Gmail, Google Calendar and Notion. [Taylor](/taylor/) reads the drawings, specs, addenda (changes issued after the plans go out) and the bid form. Taylor does the takeoff, flags conflicts and prices the job line by line. Every line shows its source. Where information is missing, Taylor writes UNKNOWN instead of guessing. Emma handles sub invitations and quotes, and Sara keeps one approvals queue. Nothing goes out until you approve it.
 
-**How it's priced:** one set price per project, in writing, after a Project Review. Then there's an optional monthly arrangement. There's no free plan.
+**How it's priced:** one set price per project, in writing, after a Project Review. Then there's a separate monthly arrangement. There's no free plan.
 
 **Limits to know:** Live today: Google Drive, Gmail, Google Calendar, Google Workspace and Notion. Excel, PlanSwift/STACK, Bluebeam, QuickBooks and others are listed as "Next," not live, on our [What we connect to](/what-we-connect-to/) page.
 
