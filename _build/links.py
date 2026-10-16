@@ -26,6 +26,8 @@ A = {
     "/how-it-works/": "how AI estimating works for contractors",
     "/faq/": "questions contractors ask",
     "/what-we-connect-to/": "construction AI integrations",
+    "/blog/best-ai-estimating-software-for-general-contractors/": "best AI estimating software for general contractors",
+    "/blog/planswift-vs-bluebeam/": "PlanSwift vs Bluebeam",
     "/blog/togal-ai-review/": "Togal AI review",
     "/blog/buildingconnected-pricing/": "BuildingConnected pricing",
     "/blog/downtobid-pricing/": "Downtobid pricing",
@@ -38,9 +40,9 @@ MONEY = ["/construction-estimating-ai/", "/taylor/", "/construction-bid-manageme
 # money page -> sister pages, then related guides / integrations / blog posts
 RELATED = {
     "/construction-estimating-ai/": ["/taylor/", "/commercial-construction-estimating/", "/prevailing-wage-project-management/",
-                                     "/construction-bid-management/", "/pricing/", "/integrations/google-drive/", "/blog/togal-ai-review/"],
+                                     "/construction-bid-management/", "/pricing/", "/integrations/google-drive/", "/blog/togal-ai-review/", "/blog/best-ai-estimating-software-for-general-contractors/"],
     "/taylor/": ["/construction-estimating-ai/", "/commercial-construction-estimating/", "/prevailing-wage-project-management/",
-                 "/emma/", "/pricing/", "/integrations/google-drive/", "/blog/togal-ai-review/"],
+                 "/emma/", "/pricing/", "/integrations/google-drive/", "/blog/togal-ai-review/", "/blog/planswift-vs-bluebeam/"],
     "/construction-bid-management/": ["/subcontractor-procurement/", "/emma/", "/construction-estimating-ai/",
                                       "/guides/bid-leveling/", "/guides/subcontractor-bid-invitations/", "/integrations/google-calendar/",
                                       "/blog/buildingconnected-pricing/", "/blog/downtobid-pricing/"],
@@ -60,7 +62,7 @@ RELATED = {
     "/construction-project-management-ai/": ["/sara/", "/ai-for-general-contractors/", "/construction-bid-management/",
                                              "/integrations/google-calendar/", "/integrations/notion/"],
     "/commercial-construction-estimating/": ["/construction-estimating-ai/", "/taylor/", "/emma/",
-                                             "/subcontractor-procurement/", "/pricing/", "/guides/bid-leveling/"],
+                                             "/subcontractor-procurement/", "/pricing/", "/guides/bid-leveling/", "/blog/best-ai-estimating-software-for-general-contractors/"],
 }
 
 def pairs(page):
