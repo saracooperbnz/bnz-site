@@ -85,7 +85,7 @@ Sources: [bluebeam.com/pricing](https://www.bluebeam.com/pricing/), [planswift.c
 
 Both tools make your estimator faster. Neither does the estimate for you, and neither touches subs. BuildWithBNZ is three AI workers that do that work inside your own Google Drive, Gmail, Google Calendar and Notion:
 
-- **Taylor** reads the drawings, specs, addenda and bid form from your Drive folder, does [AI takeoff from PDF plans](/taylor/), flags conflicts between sheets and specs, and prices labor, material and subs line by line. It's [takeoff software that prices the estimate](/taylor/), with every source shown and UNKNOWN instead of guesses.
+- **Taylor** reads the drawings, specs, addenda and bid form from your Drive folder, does [AI takeoff from PDF plans](/taylor/), flags conflicts between sheets and specs, and prices labor, material and subs line by line. It's takeoff software that prices the estimate, with every source shown and UNKNOWN instead of guesses.
 - **Emma** drafts sub invitations in your Gmail, follows up, collects quotes, COIs and W-9s, and levels each scope against Taylor's estimate. See our [bid leveling sheet](/guides/bid-leveling/) guide for the method, or [AI construction estimating software](/construction-estimating-ai/) for the whole workflow.
 - **Sara** keeps one approvals queue. Nothing goes out without your approval.
 

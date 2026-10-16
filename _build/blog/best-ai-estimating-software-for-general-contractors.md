@@ -94,7 +94,7 @@ Most tools sold as AI estimating are really **AI takeoff**: they measure areas, 
 - **Sara** keeps one approvals queue. Nothing goes out until you approve it.
 
 **Price:** no price list. One set price per project, in writing, after a Project Review, then an optional monthly arrangement ([how BNZ pricing works](/pricing/)).
-**Fits:** GCs who want to [bid more work without hiring estimators](/commercial-construction-estimating/), already run on Google Workspace, and bid public or prevailing-wage work.
+**Fits:** GCs who want to bid more work without hiring estimators, already run on Google Workspace, and bid public or prevailing-wage work.
 **Limits:**
 - Procore, QuickBooks, Bluebeam, PlanSwift/STACK, Excel, Microsoft 365 and others are listed as "Next," not live.
 - No published monthly price to compare.

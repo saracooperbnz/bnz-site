@@ -14,6 +14,9 @@ POSTS = [
     ("downtobid-pricing", "Blog · Downtobid pricing", "e"),
     ("best-ai-estimating-software-for-general-contractors", "Blog · AI estimating software roundup", "t"),
     ("planswift-vs-bluebeam", "Blog · PlanSwift vs Bluebeam", "t"),
+    ("planhub-vs-constructconnect", "Blog · PlanHub vs ConstructConnect", "e"),
+    ("procore-vs-buildertrend", "Blog · Procore vs Buildertrend", "s"),
+    ("construction-estimating-software-for-small-business", "Blog · Estimating software for small contractors", "t"),
 ]
 
 def article_ld(meta, h1):
