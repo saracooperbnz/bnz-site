@@ -51,6 +51,7 @@ for p in pages():
         for tag in ('property="og:title"', 'property="og:description"', 'property="og:image"', 'rel="canonical"'):
             if tag not in html: fail("%s → missing %s" % (r, tag))
     if html.count("<h1") > 1: fail("%s → more than one h1" % r)
+    if html.count("<h1") == 0 and 'name="robots" content="noindex' not in html: fail("%s → indexable page has no h1" % r)
 
 # orphans: generated pages nobody links to
 for p in pages():

@@ -186,9 +186,11 @@ def section(cls, inner, id_=None, extra_cls=""):
     idattr = ' id="%s"' % id_ if id_ else ''
     return '<section class="%s %s"%s><div class="wrap">%s</div></section>\n' % (cls, extra_cls, idattr, inner)
 
-def sec_head(eyebrow, h2, p=None, dark=True):
-    return '<div class="sec-head fx"><span class="eyebrow%s">%s</span><h2>%s</h2>%s</div>' % (
-        '' if dark else '', eyebrow, h2, '<p>%s</p>' % p if p else '')
+def sec_head(eyebrow, h2, p=None, dark=True, h1=False):
+    # h1=True: page's lead heading becomes the single <h1>, styled like an h2 (class "h2")
+    tag = ('<h1 class="h2">%s</h1>' if h1 else '<h2>%s</h2>') % h2
+    return '<div class="sec-head fx"><span class="eyebrow%s">%s</span>%s%s</div>' % (
+        '' if dark else '', eyebrow, tag, '<p>%s</p>' % p if p else '')
 
 def book_strip(dark=False):
     inner = ('<div class="split"><div class="fx"><span class="eyebrow">Start here</span>'
