@@ -45,6 +45,7 @@ for L in content_landers.LANDERS:
 for _n, _e, _w in content_articles.ARTICLES:
     PAGES[content_articles.load(_n)[0]["url_slug"] + "index.html"] = (lambda n=_n, e=_e, w=_w: content_articles.page_article(n, e, w)[1])
 
+PAGES["/guides/prevailing-wage-bidding/index.html"] = lambda: content_articles.page_article("guide-prevailing-wage-bidding", "Guide · Prevailing wage bidding (NY)", "t", extra_ld=content_blog.article_ld)[1]
 PAGES["/blog/index.html"] = lambda: content_blog.page_index()[1]
 for _n, _e, _w in content_blog.POSTS:
     PAGES["/blog/%s/index.html" % _n] = (lambda n=_n, e=_e, w=_w: content_blog.post(n, e, w)[1])

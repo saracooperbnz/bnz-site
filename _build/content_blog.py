@@ -12,6 +12,8 @@ POSTS = [
     ("togal-ai-review", "Blog · Togal AI review", "t"),
     ("buildingconnected-pricing", "Blog · BuildingConnected pricing", "e"),
     ("downtobid-pricing", "Blog · Downtobid pricing", "e"),
+    ("best-ai-estimating-software-for-general-contractors", "Blog · AI estimating software roundup", "t"),
+    ("planswift-vs-bluebeam", "Blog · PlanSwift vs Bluebeam", "t"),
 ]
 
 def article_ld(meta, h1):
@@ -36,11 +38,11 @@ def page_index():
     ld = json.dumps({"@context": "https://schema.org", "@type": "Blog", "name": "BuildWithBNZ Blog", "url": SITE + path,
                      "publisher": {"@id": SITE + "/#organization"}}, ensure_ascii=False, separators=(",", ":"))
     h = head("Construction Software Pricing & Reviews Blog | BuildWithBNZ",
-             "Sourced, dated reviews and pricing breakdowns of construction bidding and takeoff software for US contractors: Togal, BuildingConnected, Downtobid.", path, jsonld=ld)
+             "Sourced, dated reviews and price breakdowns of construction takeoff, estimating and bidding software for US contractors.", path, jsonld=ld)
     h += nav()
     h += ('<section class="dark hero"><div class="wrap"><div class="fx"><span class="eyebrow">Blog</span><h1>Construction software, priced and reviewed.</h1>'
           '<p class="lede">What bidding and takeoff tools cost and what they actually do, with every figure sourced and dated. Prices change, so confirm with the vendor.</p></div></div></section>\n')
-    guides = ' · '.join('<a class="link" href="%s">%s</a>' % (u, A[u]) for u in ("/guides/bid-leveling/", "/guides/subcontractor-bid-invitations/", "/guides/subcontractor-coi-tracking/"))
+    guides = ' · '.join('<a class="link" href="%s">%s</a>' % (u, A[u]) for u in ("/guides/bid-leveling/", "/guides/subcontractor-bid-invitations/", "/guides/subcontractor-coi-tracking/", "/guides/prevailing-wage-bidding/"))
     money = ' · '.join('<a class="link" href="%s">%s</a>' % (u, A[u]) for u in ("/construction-estimating-ai/", "/construction-bid-management/", "/taylor/", "/emma/"))
     h += section("light", '<div class="grid g3 stagger">%s</div><p class="fx" style="margin-top:22px">Guides: %s</p><p class="fx" style="margin-top:10px">What BuildWithBNZ does: %s</p>' % (''.join(cards), guides, money))
     h += book_strip()

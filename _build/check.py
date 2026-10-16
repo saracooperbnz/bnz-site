@@ -12,7 +12,7 @@ BAD = [r"\$\s?\d", r"/\s?mo(nth)?\b", r"\bper month\b", r"cancel any ?time", r"\
 # /blog/ posts review COMPETITOR prices (sourced and dated in the text), so the BNZ no-price rules
 # below don't apply there. Model names, "Get started", Stripe, checkout etc. still fail on /blog/.
 COMPETITOR_PRICE_OK = {r"\$\s?\d", r"/\s?mo(nth)?\b", r"\bper month\b", r"\bsubscription\b", r"\bpricing (page|plans?|nav)\b", r"/pricing", r"\btier\b"}
-ALLOW = {"Not a plan, not a tier", "no price list", "One set price", "set price", "price in writing", "prices published", "No prices on this site", "price moves", "Price moves"}
+ALLOW = {"grace period", "Not a plan, not a tier", "no price list", "One set price", "set price", "price in writing", "prices published", "No prices on this site", "price moves", "Price moves"}
 
 def pages():
     for dp, dn, fn in os.walk(ROOT):
