@@ -18,7 +18,7 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..900'
          '&family=Space+Grotesk:wght@400;500;600;700&display=swap">')
 
-NAV_ITEMS = [("/crew/", "The crew"), ("/how-it-works/", "How it works"), ("/faq/", "FAQ")]
+NAV_ITEMS = [("/crew/", "The crew"), ("/how-it-works/", "How it works"), ("/faq/", "FAQ"), ("/blog/", "Blog")]
 
 MENU_PROBLEM = [
     ("t", "Estimating &amp; takeoff", "Taylor reads the package and builds the estimate with every assumption shown.",
