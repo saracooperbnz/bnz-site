@@ -31,6 +31,7 @@ PAGES = {
     "/what-we-connect-to/index.html": content_pages.page_connect,
     "/faq/index.html": content_pages.page_faq,
     "/book/index.html": content_pages.page_book,
+    "/start/index.html": content_pages.page_start,
     "/thanks/index.html": content_pages.page_thanks,
     "/login/index.html": lambda: content_pages.page_redirect("/", "Moved — BuildWithBNZ"),
     "/privacy/index.html": content_pages.page_privacy,

@@ -6,7 +6,7 @@
   'use strict';
   var d = document, w = window;
   var RM = w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (RM) { d.documentElement.classList.add('no-motion'); d.querySelectorAll('use[data-static]').forEach(function (u) { u.setAttribute('href', u.getAttribute('data-static')); }); }
+  if (RM) d.documentElement.classList.add('no-motion');
 
   /* ---------- Lead form endpoint — the one constant the plumbing changes ----------
      Today: FormSubmit relay to the inquiries inbox (no key in the browser).
@@ -142,6 +142,63 @@
     if (slide) { slide.style.opacity = 0; slide.style.transform = 'translateY(-14px)'; setTimeout(function () { slide.style.transition = 'opacity 480ms cubic-bezier(.2,.7,.2,1),transform 480ms cubic-bezier(.2,.7,.2,1)'; slide.style.opacity = 1; slide.style.transform = 'none'; }, 900); }
   }
 
+  /* ---------- /start/ — three short steps (mmc-app #65): big answers, one main button, answers saved on this device ---------- */
+  var START_KEY = 'bnz-start';   // answer codes only (e.g. "gc", "bid"), never a name, email or phone
+  function readStart() { try { var s = JSON.parse(w.localStorage.getItem(START_KEY) || 'null'); return s && (Date.now() - (s.at || 0) < 2592e6) ? s : null; } catch (e) { return null; } }
+  function saveStart(s) { try { s.at = Date.now(); w.localStorage.setItem(START_KEY, JSON.stringify(s)); } catch (e) {} }
+  var sf = d.querySelector('form.start');
+  if (sf) {
+    var steps = Array.prototype.slice.call(sf.querySelectorAll('fieldset[data-step]'));
+    var bar = sf.querySelector('progress');
+    var st = readStart() || {};
+    sf.classList.add('js');
+    ['type', 'bring'].forEach(function (k) {
+      var r = st[k] && /^[a-z]+$/.test(st[k]) && sf.querySelector('input[name="' + k + '"][value="' + st[k] + '"]');
+      if (r) r.checked = true;
+    });
+    var cur = function () { var m = /^#step-(\d)$/.exec(w.location.hash); return m ? +m[1] : 1; };
+    var show = function (n, focus) {
+      n = Math.max(1, Math.min(steps.length, n));
+      steps.forEach(function (f, i) { f.classList.toggle('on', i === n - 1); });
+      if (bar) bar.value = n;
+      if (focus) {
+        var lg = steps[n - 1].querySelector('legend');
+        sf.scrollIntoView({ block: 'start' });
+        if (lg) { lg.setAttribute('tabindex', '-1'); try { lg.focus({ preventScroll: true }); } catch (e) { lg.focus(); } }
+      }
+    };
+    sf.addEventListener('change', function (e) { if (e.target.type === 'radio') { st[e.target.name] = e.target.value; saveStart(st); } });
+    var went = 0;   // steps moved forward on this page, so Back never leaves the site
+    Array.prototype.forEach.call(sf.querySelectorAll('[data-next]'), function (b) { b.addEventListener('click', function () { went++; w.location.hash = 'step-' + (cur() + 1); }); });
+    Array.prototype.forEach.call(sf.querySelectorAll('[data-back]'), function (b) { b.addEventListener('click', function () {
+      if (went > 0) { went--; w.history.back(); } else { w.location.replace('#step-' + Math.max(1, cur() - 1)); }
+    }); });
+    w.addEventListener('hashchange', function () { show(cur(), true); });   // the phone's own back swipe steps back too
+    show(cur(), false);
+    sf.addEventListener('submit', function () { saveStart(st); });   // a plain GET to /book/?from=start&type=…&bring=…#lead does the rest
+  }
+
+  /* ---------- /book/ — step 3 of 3 when the visitor came through /start/ ---------- */
+  var lf = d.querySelector('form.lead');
+  if (lf) {
+    var q = {}; (w.location.search || '').replace(/^\?/, '').split('&').forEach(function (kv) { var p = kv.split('='); if (p[0]) q[p[0]] = p[1] || ''; });
+    var ss = readStart() || {};
+    var TYPES = { gc: 'General contractor', remodel: 'Remodeler / custom builder', specialty: 'Specialty contractor', 'public': 'GC bidding public work', other: 'Other' };
+    var BRING = { bid: "A bid we're pricing now", job: "A job we're building now", unsure: 'Not sure yet' };
+    var has = function (o, k) { return !!k && Object.prototype.hasOwnProperty.call(o, k); };
+    var t = has(TYPES, q.type) ? q.type : ss.type, b = has(BRING, q.bring) ? q.bring : ss.bring;
+    if (has(TYPES, t)) { var sel = lf.querySelector('[name="contractor_type"]'); if (sel) sel.value = TYPES[t]; }
+    if (has(TYPES, t) || has(BRING, b) || q.from === 'start') {
+      if (has(BRING, b)) { var hb = d.createElement('input'); hb.type = 'hidden'; hb.name = 'what_they_will_show'; hb.value = BRING[b]; lf.appendChild(hb); }
+      var hs = d.createElement('input'); hs.type = 'hidden'; hs.name = 'came_from'; hs.value = 'Show us how your company works (/start/)'; lf.appendChild(hs);
+      // labels come from the two constants above, never from the URL
+      var note = d.createElement('div'); note.className = 'from-start';
+      var picked = [has(TYPES, t) ? TYPES[t] : '', has(BRING, b) ? BRING[b] : ''].filter(Boolean).join(' · ');
+      note.innerHTML = '<p class="st-n">Step 3 of 3 · Your details</p><p>' + (picked ? 'You picked: ' + picked + '. ' : '') + '<a class="link" href="/start/#step-1">Change</a></p>';
+      lf.insertBefore(note, lf.firstChild);
+    }
+  }
+
   /* ---------- lead form ---------- */
   var form = d.querySelector('form.lead');
   if (form) {
@@ -161,7 +218,7 @@
       data.source = location.pathname;
       fetch(LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-        .then(function () { location.href = '/thanks/'; })
+        .then(function () { try { w.localStorage.removeItem(START_KEY); } catch (e) {} location.href = '/thanks/'; })
         .catch(function () {
           // relay unreachable: fall back to the visitor's own mail client so no request is lost
           var body = Object.keys(data).filter(function (k) { return k[0] !== '_'; }).map(function (k) { return k + ': ' + data[k]; }).join('\n');

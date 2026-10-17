@@ -84,6 +84,9 @@ def thumb(slug):
 def btn_book(cls="btn primary", label="Book a project review"):
     return '<a class="%s" href="/book/">%s <span class="g">↗</span></a>' % (cls, label)
 
+# The onboarding path (/start/): brand-kit CTA wording (Brand Kit p6).
+START_BTN = '<a class="btn ghost" href="/start/">Show us how your company works <span class="g">↗</span></a>'
+
 def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
     canon = SITE + path
     og_title = og_title or title
@@ -119,6 +122,7 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 %(fonts)s
 <link rel="stylesheet" href="/assets/css/bnz.css">
+<noscript><style>.fx,.stagger>*,.mock.rows>.row,.mock.rows tbody>tr,.mock.rows .line,.mock.rows .kpi{opacity:1;transform:none}</style></noscript>
 %(ld)s</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -185,7 +189,8 @@ def book_strip(dark=False):
     inner = ('<div class="split"><div class="fx"><span class="eyebrow">Start here</span>'
              '<h2 style="margin:14px 0 12px">Book a project review.</h2>'
              '<p class="lede">Bring one project. We\'ll show you what the crew would do with it.</p>'
-             '<div style="margin-top:22px">%s</div></div>'
+             '<div style="margin-top:22px">%s</div>'
+             '<p class="small" style="margin-top:16px"><a class="link" href="/start/">Not sure where to start? Two quick questions →</a></p></div>'
              '<div class="fx"><div class="cal-slot">Calendar embed — placeholder · Cal.com / Calendly · 30 min · "Project Review"<br>'
              '<span style="text-transform:none;letter-spacing:0;font-size:14px;display:block;margin-top:8px">Until the calendar is live, the form on the book page reaches a real person the same day.</span></div></div></div>') % btn_book()
     return section('light' if not dark else 'dark', inner, id_="book")

@@ -151,8 +151,8 @@ def page_crew():
              '<p class="lede">Seven AI agents for the office side of construction: bids, paperwork, deadlines and records. Sara Cooper leads them. '
              'Every agent works with a human partner. %s</p>'
              '<div class="report-box"><span class="eyebrow mute">Reporting line</span><p>All six agents report to Sara Cooper. Sara reports to Bilal Mohammed.</p></div>'
-             '<div class="cta">%s</div></div>'
-             '<div class="fx">%s</div></div>') % (PRINCIPLE, btn_book(), org_chart())
+             '<div class="cta">%s%s</div></div>'
+             '<div class="fx">%s</div></div>') % (PRINCIPLE, btn_book(), START_BTN, org_chart())
     h += section("dark", intro, extra_cls="first team-top")
     cards = agent_card(BY["sara"], lead=True) + '<div class="agent-grid">%s</div>' % ''.join(agent_card(a) for a in SIX)
     h += section("light", sec_head("The team", "Seven agents. One team.", "Each card shows the agent's title, human partner, who they report to, their role and their approval limits. %s" % PRINCIPLE, dark=False) + cards
@@ -310,10 +310,10 @@ def lead_form():
             '<input type="hidden" name="_next" value="%s/thanks/">'
             '<input type="hidden" name="_captcha" value="false">'
             '<label class="hp" aria-hidden="true">Leave empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>'
-            '<div class="two"><label>Your name<input name="name" required autocomplete="name"></label><label>Company<input name="company" required autocomplete="organization"></label></div>'
-            '<div class="two"><label>Email<input name="email" type="email" required autocomplete="email"></label><label>Phone<input name="phone" type="tel" autocomplete="tel"></label></div>'
+            '<div class="two"><label>Your name<input name="name" required autocomplete="name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="next"></label><label>Company<input name="company" required autocomplete="organization" autocapitalize="words" enterkeyhint="next"></label></div>'
+            '<div class="two"><label>Email<input name="email" type="email" required autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next"></label><label>Phone<input name="phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next"></label></div>'
             '<label>Contractor type<select name="contractor_type"><option>General contractor</option><option>Remodeler / custom builder</option><option>Specialty contractor</option><option>GC bidding public work</option><option>Other</option></select></label>'
-            '<label>The project — what is it, where is it, what hurts<textarea name="project" required placeholder="e.g. 4-story mixed-use in Rockland County, public work, bid due in 11 days. Estimating is the bottleneck."></textarea></label>'
+            '<label>The project — what is it, where is it, what hurts<textarea name="project" required enterkeyhint="done" placeholder="e.g. 4-story mixed-use in Rockland County, public work, bid due in 11 days. Estimating is the bottleneck."></textarea></label>'
             '<div class="two"><label>Bid due (if any)<input name="bid_due" type="date"></label><label>Link to drawings or the bid package (optional)<input name="files_link" type="url" placeholder="Drive folder, Dropbox, or leave blank"></label></div>'
             '<div class="err">Please fill in your name, company, email and the project.</div>'
             '<button class="btn primary" type="submit">Book a project review <span class="g">↗</span></button>'
@@ -332,8 +332,49 @@ def page_book():
           '<div><i>3</i><div><b>Who\'s on it</b><span>Who estimates, who chases subs, who signs.</span></div></div></div>'
           '<div class="cal-slot" style="margin-top:28px">Calendar embed — placeholder · Cal.com / Calendly · 30 min · "Project Review"</div>'
           '<p class="muted small" style="margin-top:12px">Prefer to talk? <a class="link" href="tel:%s">%s</a> · <a class="link" href="mailto:%s">%s</a></p></div>'
-          '<div class="fx"><div class="card">%s</div></div></div></section>\n') % (PHONE, PHONE_TXT, INBOX, INBOX, lead_form())
+          '<div class="fx"><div class="card" id="lead">%s</div></div></div></section>\n') % (PHONE, PHONE_TXT, INBOX, INBOX, lead_form())
     h += ('<script>(function(){var f=document.querySelector(\'form.lead\');if(f){f.addEventListener(\'submit\',function(){if(typeof gtag===\'function\'){gtag(\'event\',\'generate_lead\',{form:\'book\'});}});}})();</script>\n')
+    h += footer()
+    return h
+
+# ------------------------------------------------------------------ /start/ — onboarding (mmc-app #65 pattern)
+# Three short steps: two big-button questions here, then the existing /book/ form (step 3, the only conversion).
+# A real GET form, so it works without JavaScript. Only answer codes ever reach a URL (GA records page URLs).
+
+START_TYPES = [("gc", "General contractor"), ("remodel", "Remodeler / custom builder"), ("specialty", "Specialty contractor"),
+               ("public", "GC bidding public work"), ("other", "Other")]   # labels = the /book/ contractor_type options
+START_BRING = [("bid", "A bid we're pricing now"), ("job", "A job we're building now"), ("unsure", "Not sure yet")]
+
+def _choices(name, opts):
+    return '<div class="choices">%s</div>' % ''.join(
+        '<input class="sr" type="radio" name="%s" id="%s-%s" value="%s"><label for="%s-%s">%s</label>' % (name, name, v, v, name, v, t) for v, t in opts)
+
+def page_start():
+    desc = "Two quick questions, then your details on the booking form. A person from our team gets back to you to set up a demo."
+    h = head("Show Us How Your Company Works | BuildWithBNZ", desc, "/start/")
+    h += nav()
+    call = '<p class="st-call">Rather talk? <a href="tel:%s">Call %s</a></p>' % (PHONE, PHONE_TXT)
+    h += ('<section class="dark first start-page"><div class="wrap">'
+          '<span class="eyebrow">Book a demo · 3 short steps</span>'
+          '<h1>Show us how your company works.</h1>'
+          '<p class="lede">Two quick questions, then your details. A person from our team gets back to you to set up the demo.</p>'
+          '<form class="start" method="get" action="/book/#lead">'
+          '<input type="hidden" name="from" value="start">'
+          '<div class="st-progress" aria-hidden="true"><progress max="3" value="1"></progress></div>'
+          '<fieldset data-step="1"><legend><span class="st-n">Step 1 of 3</span>What kind of work do you do?</legend>%s'
+          '<div class="st-actions"><button type="button" class="btn primary xl" data-next>Continue</button></div></fieldset>'
+          '<fieldset data-step="2"><legend><span class="st-n">Step 2 of 3</span>What will you show us?</legend>'
+          '<p class="hint">Bring one bid or one job. Drawings, specs, whatever you have.</p>%s'
+          '<div class="st-actions"><button type="submit" class="btn primary xl">Next: your details</button>'
+          '<button type="button" class="btn quiet" data-back>Back</button></div></fieldset>'
+          '</form>%s'
+          '<div class="st-next"><span class="eyebrow mute">What happens next</span><ol>'
+          '<li>You send your details on the booking form. That\'s step 3.</li>'
+          '<li>A person from our team gets back to you to set a time.</li>'
+          '<li>We walk through one bid or job with you, and what Sara and the team would do with it.</li>'
+          '<li>If it\'s a fit, you get a written proposal. Nothing is connected until you say yes, one system at a time.</li>'
+          '</ol></div>'
+          '</div></section>\n') % (_choices("type", START_TYPES), _choices("bring", START_BRING), call)
     h += footer()
     return h
 

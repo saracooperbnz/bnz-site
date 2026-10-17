@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from shared import *
 
-def hero(eyebrow, h1, para, mock, cta=True):
-    ctas = ('<div class="cta">%s<a class="link" href="/how-it-works/">See how it works</a></div>' % btn_book()) if cta else ''
+def hero(eyebrow, h1, para, mock, cta=True, second=None):
+    ctas = ('<div class="cta">%s%s</div>' % (btn_book(), second or '<a class="link" href="/how-it-works/">See how it works</a>')) if cta else ''
     return ('<section class="dark hero"><div class="wrap"><div class="fx"><span class="eyebrow">%s</span><h1>%s</h1>'
             '<p class="lede">%s</p>%s</div><div class="fx">%s</div></div></section>\n') % (eyebrow, h1, para, ctas, mock)
 
@@ -99,7 +99,7 @@ def page_home():
     h += nav("/")
     h += hero("AI operating system for construction companies", "Run the company. Keep every decision.",
               TEAM_LEDE,
-              sample_project_mock())
+              sample_project_mock(), second=START_BTN)
     h += section("light strip", '<div class="cells stagger">%s</div>' % ''.join('<div><h3>%s</h3><p>%s</p></div>' % w for w in WHO))
     h += section("dark", sec_head("The crew", "Three agents. One team.") + crew_cards(), id_="crew")
     h += section("light", sec_head("How it works", "Six steps to a project that runs itself.") + steps_grid(), id_="how-it-works")
