@@ -11,7 +11,7 @@ PITCH = ("Sara runs operations, Taylor reads the drawings and builds the estimat
 INBOX = "saracooper@bnzbuildersinc.com"
 PHONE = "+1-332-258-1401"
 PHONE_TXT = "1-332-258-1401"
-UPDATED = "2026-09-17"
+UPDATED = "2026-10-15"
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
@@ -223,6 +223,10 @@ FAQ = [
      "Most of it asked you to move your work into a new tool and then left you to run it. We do the opposite: the crew works inside the folders, inbox and calendar you already use, and we stay responsible for it working under the ongoing arrangement. If a piece isn't earning its place after the first project, that comes out in the Monday report and we change it."),
     ("Do I have to move off Drive / Gmail / my folders?",
      "No. Keep your tools. The crew connects to Drive, Gmail, Calendar, Workspace and Notion with read access first, and works inside them. Nothing is migrated."),
+    ("Is BuildWithBNZ a construction chatbot?",
+     "No. A construction chatbot answers questions; BuildWithBNZ is a contractor operating system. It is AI for construction companies that does the work inside your own Drive, Gmail, Calendar and Notion: Sara runs operations, Taylor builds the estimate from the drawings, Emma manages your subcontractors. You can ask any of them a question, but what comes back is a finished draft waiting for your approval, not a chat reply."),
+    ("Does it work with QuickBooks?",
+     "QuickBooks is on the next list, not live today. When it lands, the crew works as a construction QuickBooks assistant: approved sub invoices flow to the books, coded to the job, and nothing posts without your approval. Today the crew works inside Drive, Gmail, Calendar, Workspace and Notion. If QuickBooks matters for your first project, say so on the Project Review."),
 ]
 
 INTEGRATIONS_TODAY = [
