@@ -44,7 +44,7 @@ status: DRAFT. Not published. Money page switched to /construction-estimating-ai
 
 | Tool | Cheapest paid option | Free option | Term | Source |
 |---|---|---|---|---|
-| STACK | See pricing page | Free plan: 1 active project/mo, up to 300 plan pages, 50 measurements/project | 12-month terms (pay upfront or monthly) | [stackct.com](https://www.stackct.com/takeoff-and-estimate-pricing/) |
+| STACK | Premium $299, Pro $349 per user/month, billed annually (checked Oct 17, 2026) | Free plan: 1 active project/mo, up to 300 plan pages, 50 measurements/project | 12-month terms (pay upfront or monthly) | [stackct.com](https://www.stackct.com/takeoff-and-estimate-pricing/) |
 | Buildxact (US) | See [buildxact.com/us/pricing](https://www.buildxact.com/us/pricing/) | Free plan listed (see pricing page) | See pricing page | [buildxact.com/us/pricing](https://www.buildxact.com/us/pricing/) |
 | Handoff | See pricing page | 7-day free trial on Flex | Pro/Scale 12-month commitment | [handoff.ai/pricing](https://www.handoff.ai/pricing) |
 | ConstructConnect Takeoff | See pricing page | — | Annual contract | [constructconnect.com/pricing](https://www.constructconnect.com/pricing) |

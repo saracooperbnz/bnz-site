@@ -57,7 +57,7 @@ Most AI tools speed up takeoff. Fewer price the estimate. Free options usually g
 
 | Tool | Free option (as listed Oct 16, 2026) | Paid price | Source |
 |---|---|---|---|
-| STACK | Free plan, with usage limits | See vendor's pricing page | [stackct.com](https://www.stackct.com/takeoff-and-estimate-pricing/) |
+| STACK | Free plan, with usage limits | Premium $299, Pro $349 per user/month, billed annually (checked Oct 17, 2026) | [stackct.com](https://www.stackct.com/takeoff-and-estimate-pricing/) |
 | Kreo | Free trial | See vendor's pricing page | [kreo.net/pricing](https://www.kreo.net/pricing) |
 | Handoff | Free trial on its Flex plan | See vendor's pricing page | [handoff.ai/pricing](https://www.handoff.ai/pricing) |
 | Togal.AI | Check vendor's site for trial or demo terms | Growth $299/mo per user, billed yearly | [togal.ai/pricing](https://www.togal.ai/pricing) |
