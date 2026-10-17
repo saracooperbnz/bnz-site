@@ -171,7 +171,7 @@ body.no-scroll{overflow:hidden}
 .mock .row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 10px;border:1px solid var(--hair);border-radius:9px;margin-top:8px;background:rgba(255,255,255,.015)}
 .mock .row.needs{border-color:rgba(234,88,12,.7)}
 .mock .row b{display:block;font-size:13.5px;font-weight:600}
-.mock .row span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.mock .row span:not(.chip){display:block;font-size:12px;color:var(--muted);margin-top:2px}
 .mock .crew{display:flex;gap:6px;position:absolute;right:112px;top:8px}
 .mock .strip{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:#0A0A0A;border:1px solid var(--hair-2);border-radius:8px;padding:9px 12px;margin-bottom:12px;min-height:38px}
 .mock .strip .txt{white-space:nowrap;overflow:hidden;text-overflow:clip}
@@ -204,20 +204,8 @@ body.no-scroll{overflow:hidden}
 @media (max-width:900px){.cells{grid-template-columns:repeat(2,1fr)}.cells>div{border-left:0;padding-left:0;border-top:1px solid var(--hair-l)}.cells>div:nth-child(-n+2){border-top:0}}
 @media (max-width:620px){.cells{grid-template-columns:1fr}.cells>div:nth-child(2){border-top:1px solid var(--hair-l)}}
 
-/* crew cards (M2) */
-.crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
-.crew-card{position:relative}
-.crew-card.sara{border-color:rgba(234,88,12,.5);transform:translateY(-8px)}
-.crew-card .role{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin:6px 0 12px}
-.crew-card.sara .role{color:var(--ember)} .crew-card.taylor .role{color:var(--taylor)} .crew-card.emma .role{color:var(--emma)}
-.crew-card h3{margin-top:14px}
-.crew-card p{font-size:15px;color:var(--muted);margin-bottom:14px}
-.crew-card .rule{font-size:14px;font-weight:700;color:var(--ink);border-top:1px solid var(--hair);padding-top:12px;position:relative}
-.crew-card .rule::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:0;background:currentColor;transition:width var(--t-card) var(--ease) 200ms}
-.in .crew-card .rule::before,.no-motion .crew-card .rule::before{width:100%}
-.crew-card.sara .rule::before{background:var(--ember)} .crew-card.taylor .rule::before{background:var(--taylor)} .crew-card.emma .rule::before{background:var(--emma)}
+/* footnotes */
 .footnote{margin-top:22px;font-size:14px;color:var(--muted)}
-@media (max-width:900px){.crew-grid{grid-template-columns:1fr}.crew-card.sara{transform:none}}
 
 /* six steps (M3) */
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -482,6 +470,39 @@ footer .ai-note{margin-top:6px;color:var(--muted)}
 form.lead input,form.lead select,form.lead textarea{font-size:18px}
 @media (max-width:620px){form.lead input,form.lead select{min-height:54px}form.lead button[type="submit"]{width:100%;justify-content:center;min-height:60px;font-size:16px}}
 
+/* home — Sara section (what BuildWithBNZ is, sample conversations, her team) */
+.sara-intro{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}
+.sara-intro .portrait{max-width:440px;border-color:var(--ember)}
+.sara-h{margin:14px 0 16px}
+.asks{margin-top:22px;font-size:16.5px}
+.asks b{color:var(--ink)}
+.pills{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.pills li{border:1px solid var(--hair-2);border-radius:var(--r-pill);padding:7px 13px;font-size:14px;font-weight:600}
+.sara-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.sara-note{margin-top:12px}
+.sara-ex{margin-top:clamp(48px,7vw,88px)}
+.ex-h{margin:12px 0 6px;font-size:clamp(26px,3vw,36px)}
+.convos{margin-top:22px;align-items:start}
+.convo .ct{margin:0 90px 10px 0}
+.mock .row.you{background:transparent;border-style:dashed;border-color:var(--hair-2)}
+.mock .row.you b{color:var(--muted)}
+.mock .msg{display:flex;gap:10px;align-items:flex-start;min-width:0}
+.mock .msg .av{margin-top:1px}
+.mock .row span:not(.chip){line-height:1.45}
+.convo .row b,.convo .row span:not(.chip){font-size:14px}
+.team-strip{margin-top:clamp(48px,7vw,88px);padding-top:28px;border-top:1px solid var(--hair)}
+.team-strip ul{list-style:none;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px;margin-top:16px}
+.team-strip li a{display:grid;justify-items:center;text-align:center;gap:6px;padding:6px 2px;border-radius:10px}
+.team-strip li a:hover b{color:var(--ember)}
+.team-strip b{font-size:15px}
+.team-strip span{font-size:12.5px;color:var(--muted);line-height:1.35}
+@media (max-width:900px){.sara-intro{grid-template-columns:1fr}.sara-intro .portrait{max-width:280px}}
+.convo .row{flex-wrap:wrap}
+.convo .msg{flex:1 1 230px}
+.convo .msg+.chip{margin-left:38px}
+@media (max-width:760px){.team-strip ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:420px){.team-strip ul{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 /* lander */
 .lander-hero{padding:clamp(56px,8vw,100px) 0}
 .lander-hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
@@ -499,7 +520,6 @@ form.lead input,form.lead select,form.lead textarea{font-size:18px}
 .stagger.in>*:nth-child(1){transition-delay:0ms}.stagger.in>*:nth-child(2){transition-delay:60ms}.stagger.in>*:nth-child(3){transition-delay:120ms}
 .stagger.in>*:nth-child(4){transition-delay:180ms}.stagger.in>*:nth-child(5){transition-delay:240ms}.stagger.in>*:nth-child(6){transition-delay:300ms}
 .stagger.in>*:nth-child(n+7){transition-delay:300ms}
-.crew-grid.stagger.in .crew-card.taylor{transition-delay:0ms}.crew-grid.stagger.in .crew-card.emma{transition-delay:60ms}.crew-grid.stagger.in .crew-card.sara{transition-delay:120ms}
 .mock.rows>.row,.mock.rows tbody>tr,.mock.rows .line,.mock.rows .kpi{opacity:0;transform:translateY(10px);transition:opacity var(--t-card) var(--ease),transform var(--t-card) var(--ease)}
 .mock.rows.in>.row,.mock.rows.in tbody>tr,.mock.rows.in .line,.mock.rows.in .kpi{opacity:1;transform:none}
 .mock.rows.in>*:nth-child(2),.mock.rows.in tbody>tr:nth-child(1){transition-delay:0ms}
@@ -514,7 +534,6 @@ form.lead input,form.lead select,form.lead textarea{font-size:18px}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .fx,.stagger>*,.mock.rows>.row,.mock.rows tbody>tr,.mock.rows .line,.mock.rows .kpi{opacity:1!important;transform:none!important;transition:none!important}
-  .crew-card .rule::before{width:100%;transition:none}
   .conveyor{display:none}
   .conv-static{display:block}
   .mock .strip .txt::after{content:"";animation:none}
