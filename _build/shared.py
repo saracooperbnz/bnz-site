@@ -214,7 +214,7 @@ FAQ = [
     ("Does the AI send anything without me?",
      "No. Taylor drafts requests for sub pricing and questions to the architect; Sara drafts the Monday report. Every send sits in your approvals queue until you approve, edit or send it back. The crew drafts. You decide."),
     ("Can it stamp drawings or act as my architect?",
-     "No. Taylor reads drawings and specs, performs takeoffs, flags conflicts and, later, helps with markups and constructability review. Licensed, stamped design responsibility stays with your architect or engineer of record. Design-assist is not licensed design, and we keep that line visible."),
+     "No. Taylor reads drawings and specs, performs takeoffs and flags conflicts. Kyle prepares design concepts only: he is not a licensed architect, and his work is never presented as signed or sealed drawings. Licensed, stamped design responsibility stays with your architect or engineer of record. Design concepts are not licensed design, and we keep that line visible."),
     ("What happens when Taylor doesn't have enough information?",
      "The line reads UNKNOWN, with the reason and who has the missing item — \"fixture schedule not in the set, request from architect.\" The estimate total is withheld until every UNKNOWN is resolved. Taylor never fills a gap with a guess."),
     ("What if I already tried AI or software and it didn't stick?",
