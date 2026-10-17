@@ -6,9 +6,9 @@ at 1440 and 390; console clean).
 
 ## WORKING
 
-- **Marketing site, 24 generated pages** on the project-based model: home,
+- **Marketing site, 25 generated pages** on the project-based model: home,
   /solutions, /crew, /sara /taylor /emma, /how-it-works,
-  /what-we-connect-to, /faq, /book, /thanks, /privacy, /terms, /contact, 404, and seven problem-based SEO landers
+  /what-we-connect-to, /faq, /start (onboarding, Oct 2026), /book, /thanks, /privacy, /terms, /contact, 404, and seven problem-based SEO landers
   (/construction-estimating-ai, /subcontractor-procurement,
   /construction-bid-management, /construction-project-management-ai,
   /ai-for-general-contractors, /commercial-construction-estimating,
@@ -20,12 +20,11 @@ at 1440 and 390; console clean).
   end, footer. No login anywhere — the crew is installed into the
   contractor's own systems, so there is no customer portal to log into
   (Jose, 17 Sep). /login redirects home.
-- **Crew characters from the character sheet** (18 Sep): Sara plate-with-window,
-  Taylor set square, Emma bracket, as one inline SVG sprite per page. Static
-  at avatar sizes (nav menu, mocks, tiles, 64 px cards); animated (float,
-  glint, facet pulse + each one's own motion — Sara's bar seating, Taylor's
-  trace, Emma's dock) on the crew cards, the agent-page heroes and the
-  how-they-work-together diagram. Reduced motion swaps to the static marks.
+- **The AI team (Oct 2026):** seven agents from BNZ_AI_Team_Identity_FINAL
+  (Sara Cooper leads Amanda, Kyle, Taylor, Emma, Richard and Adam; Sara reports
+  to Bilal). One data file, `_build/team.py`. Faces are the approved images
+  only, resized and compressed into `assets/team/*.webp`, framed by CSS, and
+  labelled AI-generated. The old drawn SVG characters are retired.
 - **Solutions ▾ mega-menu** (M9): by problem → the four solutions, by
   contractor → the four landers; keyboard reachable, Esc closes. Mobile
   drawer with a Solutions accordion.
@@ -100,6 +99,6 @@ redirect to /how-it-works/.
 
 1. Brand split — legacy BNZ Builders pages stay on the domain or move.
 2. Booking tool — Cal.com, Calendly, or form-only.
-3. The one real proof project — Bilal confirms the numbers.
-4. Taylor's pronoun — site uses "she" throughout (matches the mockup;
-   01-crew-character-prompt.md says "he").
+3. The one real proof project — Bilal confirms the numbers (the home page
+   card with empty metric slots was taken down in Oct 2026 until then).
+4. Taylor's pronoun — settled: she/her (FINAL team identity, Oct 2026).
