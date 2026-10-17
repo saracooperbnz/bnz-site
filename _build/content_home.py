@@ -22,7 +22,7 @@ STEPS = [
      "a connected workspace, nothing moved.", "nothing is moved or replaced. Read access first."),
     ("Taylor reads the package", "Drawings, specs, addenda, wage schedules, bid forms. Takeoffs, conflicts, pricing — every assumption and source shown.",
      "an estimate with its logic attached.", "Taylor says UNKNOWN rather than guessing."),
-    ("Taylor lines up the subs", "Sub and vendor pricing requested with the right files, follow-ups, quotes — levelled against her estimate. Sara tracks the COIs and W-9s.",
+    ("Taylor compares sub pricing", "Taylor requests and compares sub and vendor pricing and levels each quote against her estimate, line by line.",
      "a levelled bid table per trade.", "nothing goes to a sub without your approval."),
     ("Sara runs it", "She supervises the team, catches what falls between them, and brings you a short queue of the decisions that need you.",
      "a Monday report and an approvals queue.", "she brings you only the decisions that need you. You sign. She doesn't."),
@@ -74,7 +74,7 @@ def sara_section():
                                 btn_book(label="Book a demo"), START_BTN)
     ex = ('<div class="sara-ex"><div class="fx"><span class="eyebrow">How she works</span><h3 class="ex-h">Four sample conversations</h3>'
           '<p class="small muted">Samples only. No real names, jobs or numbers.</p></div>%s</div>') % sara_examples()
-    team = ('<div class="team-strip fx"><span class="eyebrow mute">Her team · all six report to Sara</span><ul>%s</ul>'
+    team = ('<div class="team-strip fx"><span class="eyebrow mute">Her team · all six report to Sara · AI-generated characters</span><ul>%s</ul>'
             '<p style="margin-top:20px"><a class="link" href="/crew/">Meet the AI crew →</a></p></div>') % ''.join(
         '<li><a href="/crew/#%s">%s<b>%s</b><span>%s</span></a></li>' % (a["slug"], av(a["slug"], 56), tx(a["name"]), tx(a["title"])) for a in SIX)
     return intro + ex + team
@@ -113,9 +113,9 @@ def work_cards():
         '<div class="card"><h3>%s</h3>%s<p>%s</p></div>' % (t, m, p) for t, m, p in cards)
 
 def proof():
-    return ('<div class="grid g3 stagger proof">'
-            '<div class="card"><h3>One real project, walked through</h3><p class="muted" style="margin:10px 0">A public-work bid, name withheld. Every number below comes from the record.</p>'
-            '<div class="slot">Metric slot — sheets read, from the record</div><div class="slot">Metric slot — conflicts flagged, from the record</div><div class="slot">Metric slot — days from package to estimate</div></div>'
+    # The "one real project" card with empty metric slots is gone until Bilal approves a real, sourced example
+    # (FINAL rule 4/5: no results in an agent's name, and BNZ Builders jobs are not BuildWithBNZ proof).
+    return ('<div class="grid g2 stagger proof">'
             '<div class="card"><h3>The rules, stated as guarantees</h3>'
             '<blockquote>"Sara never claims something was completed unless verified. Never makes the owner\'s decision."</blockquote>'
             '<blockquote>"Taylor never invents a price. Says UNKNOWN when information is missing and always shows the logic."</blockquote>'

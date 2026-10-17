@@ -8,17 +8,20 @@ from team import AGENTS, BY, SIX, PRINCIPLE, PRINCIPLE_LONG, agent_href
 
 SITE = "https://buildwithbnz.com"
 BRAND = "BuildWithBNZ"
-# Hero lede for the home page and the GC lander: the seven-agent team (FINAL), in plain words.
-TEAM_LEDE = ("Sara runs operations and leads six specialist AI agents. Taylor reads the drawings and builds the estimate, "
-             "Emma checks job costs and invoices, and the others cover design concepts, contracts, marketing and software. "
-             "They work inside the files and systems you already use — Drive, Gmail, Calendar, Notion, your project folders. "
-             "Every project is scoped and priced in writing before we start. You approve anything that leaves the building.")
+# Hero lede for the home page and the GC lander: the seven-agent team (FINAL), in plain words, naming only what a
+# customer gets (Amanda's and Adam's work is BuildWithBNZ's own). On phones the .ph-hide parts drop out so both hero
+# buttons show on the first screen; the short version still reads as whole sentences.
+TEAM_LEDE = ('Sara runs operations and leads six specialist AI agents.<span class="ph-hide"> Taylor reads the drawings and builds the estimate, '
+             'Emma checks job costs and invoices, and Kyle and Richard cover design concepts and contract review.</span> '
+             'They work inside the files and systems you already use<span class="ph-hide"> — Drive, Gmail, Calendar, Notion, your project folders. '
+             'Every project is scoped and priced in writing before we start</span>. You approve anything that leaves the building.')
 INBOX = "saracooper@bnzbuildersinc.com"
 # BuildWithBNZ (software) number per the FINAL team identity, rule 5. The legacy BNZ Builders pages keep their own.
 PHONE = "+16462818368"        # tel: links
 PHONE_TXT = "646-281-8368"    # what people read
 PHONE_LD = "+1-646-281-8368"  # schema.org telephone
-UPDATED = "2026-09-17"
+UPDATED = "2026-10-17"          # sitemap lastmod for the generated pages (build.py keeps the legacy pages' date)
+LEGACY_UPDATED = "2026-09-17"
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
          '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
@@ -55,16 +58,15 @@ def tx(s):
 
 def av(who, size=32, note=False, anim=False):
     """An agent's approved face in a circle. Old one-letter keys ('s', 't', 'e') still work.
-    anim is ignored: photos never float or glint. Framing is CSS only (object-position + a small zoom)."""
+    anim is ignored: photos never float or glint. Framing is CSS only (object-position + a small zoom).
+    The alt text always says the face is an AI-generated character (REVIEW Face Lock box)."""
     a = BY[who]; i = a["img"]
     if size > 64:                                     # mid sizes: the 480w portrait, no zoom
         f, fp, z = "sm", i["fp"], 1
-    elif a["slug"] in ("sara", "amanda", "kyle"):     # no approved avatar tile: small copy of the master, framed on the face
-        f, fp, z = "avatar", i["fp"], i["z"]
-    else:                                             # approved square avatar tile; 1.04 hides the white rim
-        f, fp, z = "avatar", "50% 50%", 1.04
+    else:                                             # small: the framing in team.py (approved tile, or a CSS crop of the portrait)
+        f, fp, z = i["av"]
     return ('<span class="av av-%s" style="--s:%dpx;--fp:%s;--z:%s"><img src="/assets/team/%s-%s.webp" width="%d" height="%d" '
-            'alt="%s" loading="lazy" decoding="async"></span>') % (a["slug"], size, fp, z, a["slug"], f, size, size, tx(a["short"]))
+            'alt="%s, AI-generated character" loading="lazy" decoding="async"></span>') % (a["slug"], size, fp, z, a["slug"], f, size, size, tx(a["short"]))
 
 def portrait(slug, cls="", eager=False, sizes="(max-width:620px) 40vw, (max-width:960px) 44vw, 360px", tag=True):
     """A FINAL portrait, framed by CSS, with the visible AI-generated label."""
@@ -160,11 +162,13 @@ def nav(current=""):
 <div class="drawer" id="drawer">
 <details><summary>Solutions</summary><a href="/solutions/">All solutions</a>%(dprob)s%(dcontr)s<a href="/what-we-connect-to/">What we connect to</a></details>
 %(dlinks)s
+<a href="/start/">Show us how your company works</a>
+<a href="tel:%(phone)s">Call %(phone_txt)s</a>
 %(book)s
 </div>
 </header>
 <main id="main">
-''' % dict(mega=mega, links=links, dprob=drawer_prob, dcontr=drawer_contr, dlinks=drawer_links, book=btn_book())
+''' % dict(mega=mega, links=links, dprob=drawer_prob, dcontr=drawer_contr, dlinks=drawer_links, book=btn_book(), phone=PHONE, phone_txt=PHONE_TXT)
 
 def footer():
     return '''</main>
@@ -191,10 +195,10 @@ def book_strip(dark=False):
     inner = ('<div class="split"><div class="fx"><span class="eyebrow">Start here</span>'
              '<h2 style="margin:14px 0 12px">Book a project review.</h2>'
              '<p class="lede">Bring one project. We\'ll show you what the crew would do with it.</p>'
-             '<div style="margin-top:22px">%s</div>'
-             '<p class="small" style="margin-top:16px"><a class="link" href="/start/">Not sure where to start? Two quick questions →</a></p></div>'
+             '<div class="strip-cta">%s%s</div>'
+             '<p class="small muted" style="margin-top:12px">Not sure where to start? Two quick questions, then your details.</p></div>'
              '<div class="fx"><div class="cal-slot">Calendar embed — placeholder · Cal.com / Calendly · 30 min · "Project Review"<br>'
-             '<span style="text-transform:none;letter-spacing:0;font-size:14px;display:block;margin-top:8px">Until the calendar is live, the form on the book page reaches a real person the same day.</span></div></div></div>') % btn_book()
+             '<span style="text-transform:none;letter-spacing:0;font-size:14px;display:block;margin-top:8px">Until the calendar is live, the form on the book page reaches a real person the same day.</span></div></div></div>') % (btn_book(), START_BTN)
     return section('light' if not dark else 'dark', inner, id_="book")
 
 def faq_items(items, first_open=2):
@@ -208,7 +212,7 @@ FAQ = [
     ("What does it cost?",
      "Every engagement starts with a Project Review — a real call about one real project. We return scope and one set price, in writing, for that project. Price moves only if scope moves. After the first project the crew stays on under a separate monthly arrangement covering hosting, monitoring and new projects. There is no price list because there is no standard project."),
     ("How long until the crew is live on my project?",
-     "The Project Review happens this week. Scope and price come back in writing within days. Once you approve, the crew is reading your package the same week. One real project sets the pace — nothing is connected until you pick it."),
+     "It starts with a Project Review about one real project. Scope and one set price come back in writing. Once you approve, the crew starts reading your package. One real project sets the pace — nothing is connected until you pick it."),
     ("Who sees my drawings and my numbers?",
      "You, the people you name, and the crew working your project. Access is scoped per project — a company that engages us for one job does not open its whole Drive. We start with read access, and anything that leaves the workspace waits on your approval. Your files stay in your systems; nothing is moved or copied out to be trained on."),
     ("Does the AI send anything without me?",
@@ -226,9 +230,9 @@ FAQ = [
 INTEGRATIONS_TODAY = [
     ("drive", "Google Drive", "Taylor reads the drawing set, specs and addenda from your project folder. Read access first.", "t"),
     ("gmail", "Gmail", "Taylor drafts requests for sub pricing and follow-ups; nothing sends until you approve.", "t"),
-    ("cal", "Google Calendar", "Sara holds the bid due date, COI expiries and quote promises against the week.", "s"),
+    ("cal", "Google Calendar", "Sara holds bid due dates, deadlines and quote promises against the week.", "s"),
     ("ws", "Google Workspace", "The estimate, scope document and Monday report land as files you own.", "s"),
-    ("notion", "Notion", "Project notes and the sub network read and updated in place.", "s"),
+    ("notion", "Notion", "Project notes and records read and updated in place.", "s"),
 ]
 INTEGRATIONS_NEXT = [
     ("procore", "Procore", "Estimate lines will post to the job cost."),
@@ -298,7 +302,7 @@ def sample_project_mock(strip=True):
             '<div class="crew">%s%s%s</div>'
             '<div class="tabs"><b>Overview</b><span>Files</span><span>Estimate</span><span>Subcontractors</span><span>Activity</span></div>'
             '<div class="row"><div><b>Addendum 02 — new</b><span>Taylor: "Changed the electrical scope — reissuing as Rev 2."</span></div>%s</div>'
-            '<div class="row"><div><b>Subcontractors</b><span>Taylor: 7 invited · 3 quotes in · 2 chasing · 1 COI outstanding</span></div>%s</div>'
+            '<div class="row"><div><b>Subcontractors</b><span>Taylor: 7 invited · 3 quotes in · 2 chasing</span></div>%s</div>'
             '<div class="row needs"><div><b>Approve bid invitation to 4 electrical subs</b><span>Sara: "Drafted. Nothing sends without you."</span></div>%s</div>'
             '</div>') % (s, av("s", 24), av("t", 24), av("e", 24), chip("working", "Working", True), chip("verified", "Verified"), chip("needs", "Needs you"))
 

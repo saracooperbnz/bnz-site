@@ -33,7 +33,9 @@
       burger.setAttribute('aria-expanded', o ? 'true' : 'false');
       d.body.classList.toggle('no-scroll', o);
     });
-    drawer.addEventListener('click', function (e) { if (e.target.tagName === 'A') { drawer.classList.remove('open'); d.body.classList.remove('no-scroll'); } });
+    function shut() { drawer.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); d.body.classList.remove('no-scroll'); }
+    drawer.addEventListener('click', function (e) { if (e.target.tagName === 'A') shut(); });
+    d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer.classList.contains('open')) { shut(); burger.focus(); } });
   }
 
   /* ---------- entrances ---------- */
@@ -175,7 +177,11 @@
     }); });
     w.addEventListener('hashchange', function () { show(cur(), true); });   // the phone's own back swipe steps back too
     show(cur(), false);
-    sf.addEventListener('submit', function () { saveStart(st); });   // a plain GET to /book/?from=start&type=…&bring=…#lead does the rest
+    sf.addEventListener('submit', function (e) {
+      // Enter on an earlier step (e.g. on a step-1 answer) moves on one step; only the last step really submits
+      if (cur() < steps.length) { e.preventDefault(); went++; w.location.hash = 'step-' + (cur() + 1); return; }
+      saveStart(st);   // a plain GET to /book/?from=start&type=…&bring=…#lead does the rest
+    });
   }
 
   /* ---------- /book/ — step 3 of 3 when the visitor came through /start/ ---------- */
@@ -187,15 +193,17 @@
     var BRING = { bid: "A bid we're pricing now", job: "A job we're building now", unsure: 'Not sure yet' };
     var has = function (o, k) { return !!k && Object.prototype.hasOwnProperty.call(o, k); };
     var t = has(TYPES, q.type) ? q.type : ss.type, b = has(BRING, q.bring) ? q.bring : ss.bring;
-    if (has(TYPES, t)) { var sel = lf.querySelector('[name="contractor_type"]'); if (sel) sel.value = TYPES[t]; }
-    if (has(TYPES, t) || has(BRING, b) || q.from === 'start') {
+    // answers saved on this device may quietly prefill the type; nothing else happens unless this visit came from /start/
+    if (has(TYPES, t)) { var sel = lf.querySelector('[name="contractor_type"]'); if (sel && !sel.value) sel.value = TYPES[t]; }
+    if (q.from === 'start') {
       if (has(BRING, b)) { var hb = d.createElement('input'); hb.type = 'hidden'; hb.name = 'what_they_will_show'; hb.value = BRING[b]; lf.appendChild(hb); }
       var hs = d.createElement('input'); hs.type = 'hidden'; hs.name = 'came_from'; hs.value = 'Show us how your company works (/start/)'; lf.appendChild(hs);
       // labels come from the two constants above, never from the URL
       var note = d.createElement('div'); note.className = 'from-start';
       var picked = [has(TYPES, t) ? TYPES[t] : '', has(BRING, b) ? BRING[b] : ''].filter(Boolean).join(' · ');
-      note.innerHTML = '<p class="st-n">Step 3 of 3 · Your details</p><p>' + (picked ? 'You picked: ' + picked + '. ' : '') + '<a class="link" href="/start/#step-1">Change</a></p>';
+      note.innerHTML = '<p class="st-n">Step 3 of 3 · Your details for the demo</p><p>' + (picked ? 'You picked: ' + picked + '. ' : '') + '<a class="link" href="/start/#step-1">Change</a></p>';
       lf.insertBefore(note, lf.firstChild);
+      var sb = lf.querySelector('button[type="submit"]'); if (sb) { sb.setAttribute('data-label', sb.innerHTML); sb.innerHTML = 'Send my demo request <span class="g">↗</span>'; }
     }
   }
 
@@ -210,7 +218,7 @@
       var bad = req.some(function (n) { var f = form.querySelector('[name="' + n + '"]'); return !f || !f.value.trim(); });
       var em = form.querySelector('[name="email"]');
       if (bad || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em.value)) { form.classList.add('invalid'); return; }
-      var sub = form.querySelector('button[type="submit"]'); sub.disabled = true; sub.textContent = 'Sending…';
+      var sub = form.querySelector('button[type="submit"]'), label = sub.innerHTML; sub.disabled = true; sub.textContent = 'Sending…';
       var data = {};
       new FormData(form).forEach(function (v, k) { if (k !== '_honey') data[k] = v; });
       data._subject = 'New inquiry — Project Review: ' + (data.company || data.name);
@@ -222,8 +230,9 @@
         .catch(function () {
           // relay unreachable: fall back to the visitor's own mail client so no request is lost
           var body = Object.keys(data).filter(function (k) { return k[0] !== '_'; }).map(function (k) { return k + ': ' + data[k]; }).join('\n');
+          try { w.localStorage.removeItem(START_KEY); } catch (e) {}
           location.href = 'mailto:saracooper@bnzbuildersinc.com?subject=' + encodeURIComponent(data._subject) + '&body=' + encodeURIComponent(body);
-          sub.disabled = false; sub.textContent = 'Book a project review ↗';
+          sub.disabled = false; sub.innerHTML = label;
         });
     });
   }

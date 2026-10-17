@@ -10,7 +10,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
-from shared import SITE, UPDATED
+from shared import SITE, UPDATED, LEGACY_UPDATED
 import content_home, content_pages, content_landers
 
 def write(path, html):
@@ -61,7 +61,7 @@ def main():
         urls.append((u, "0.4"))
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u, pri in urls:
-        sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>' % (SITE, u, UPDATED, pri))
+        sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>' % (SITE, u, LEGACY_UPDATED if u in SITEMAP_EXTRA else UPDATED, pri))
     sm.append('</urlset>\n')
     write("/sitemap.xml", '\n'.join(sm))
     write("/robots.txt", "User-agent: *\nAllow: /\nDisallow: /thanks/\n\nSitemap: %s/sitemap.xml\n" % SITE)

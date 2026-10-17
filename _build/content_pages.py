@@ -21,16 +21,16 @@ def bids_mock(moment=False):
             '<table><thead><tr><th>Sub</th><th>Quote</th><th>COI</th><th>W-9</th><th>Scope</th><th>Next action</th></tr></thead><tbody>'
             '<tr><td>Garnerville Line &amp; Load</td><td>Received</td><td>✓</td><td>✓</td><td>%s</td><td class="mute">None — ready for your review</td></tr>'
             '<tr><td>Hudson Feeder Co.</td><td>%s</td><td>✓</td><td>✓</td><td>%s</td><td class="mute">%s</td></tr>'
-            '<tr><td>Spring Valley Power</td><td>Received</td><td class="mute">exp. Fri</td><td>✓</td><td>%s</td><td class="mute">Collecting COI renewal</td></tr>'
+            '<tr><td>Spring Valley Power</td><td>Received</td><td class="mute">exp. Fri</td><td>✓</td><td>%s</td><td class="mute">COI renewal needed</td></tr>'
             '</tbody></table><div class="line">Quote amounts are shown as received / not received. Figures live in the levelling sheet.</div></div>') % (
         chip("levelled", "Levelled"), q2, s2, a2, chip("levelled", "Levelled"))
 
 def finance_mock(moment=False):
     return ('<div class="mock rows"><span class="sd">Sample layout</span><div class="eyebrow mute" style="margin-bottom:8px">Reconciliation review</div>'
             '<div class="row"><div><b>Matched</b><span>Entries that agree with the record</span></div><span class="mval">—</span></div>'
-            '<div class="row"><div><b>Needs class / job</b><span>Entries with no job or class yet</span></div><span class="mval">—</span></div>'
+            '<div class="row"><div><b>Needs a job assigned</b><span>Entries with no job yet</span></div><span class="mval">—</span></div>'
             '<div class="row needs"><div><b>Duplicate risk</b><span>Held for a person to decide</span></div>%s</div>'
-            '<div class="line"><b>Checkpoint:</b> Emma reviews → Emma recommends → Sara logs it → Bilal approves → an approved person posts</div>'
+            '<div class="line"><b>Checkpoint:</b> Emma reviews → Emma recommends → Sara logs it → a person with authority approves → an approved person posts</div>'
             '<div class="line">No figures shown. Emma never posts or edits records without authorization.</div></div>') % chip("needs", "Needs approval")
 
 def today_mock(moment=False):
@@ -59,7 +59,7 @@ SOLUTIONS = [
      "Taylor takes the full bid package — drawings, specs, addenda, wage schedules, bid forms. She performs takeoffs, flags conflicts between sheets and specs, and prices labour, material and sub lines. Every line traces to a sheet or a spec section; missing information reads UNKNOWN, with the reason and who has it.",
      "an estimate with its logic attached.", "Taylor says UNKNOWN rather than guessing.", est_mock, "/construction-estimating-ai/"),
     ("t", "Taylor · solution 2 of 4", "Subcontractor bidding &amp; buyout",
-     "Taylor requests and compares sub and vendor pricing. She builds the sub list to your niche, geography and job size, sends bid invitations with the right files once you approve, and follows up until a quote, a no-bid or a named reason comes back. Every scope is levelled line-by-line against her estimate. Sara tracks the COIs, W-9s and compliance documents.",
+     "Taylor requests and compares sub and vendor pricing and levels each quote against her estimate, line by line. Requests for pricing go out only after you approve them. Sara tracks the deadlines and what is still open on each bid.",
      "a levelled bid table per trade.", "nothing goes to a sub without your approval.", bids_mock, "/subcontractor-procurement/"),
     ("s", "Sara · solution 3 of 4", "Operations &amp; approvals",
      "Sara runs Today, the approvals queue and the Monday report. She supervises the other six agents, catches what falls between them, and marks every claim Verified or Reported — never blending the two. What reaches you is a short queue of real decisions.",
@@ -71,9 +71,11 @@ SOLUTIONS = [
 
 def diagram():
     six = ''.join('<li>%s<b>%s</b><span>%s</span></li>' % (av(a["slug"], 56), tx(a["short"]), tx(a["title"])) for a in SIX)
-    return ('<div class="diagram fx"><div class="owner">You — the owner</div><div class="arrow">↑ approvals only</div>'
+    return ('<div class="diagram fx"><div class="owner">You — the owner</div><div class="arrow">↑ you approve every price, signature and send</div>'
             '<div class="lead">%s<b>Sara Cooper</b><span>%s</span></div>'
-            '<ul class="six" aria-label="The six agents who report to Sara">%s</ul></div>') % (av("sara", 112), tx(BY["sara"]["title"]), six)
+            '<ul class="six" aria-label="The six agents who report to Sara">%s</ul>'
+            '<p class="small muted dia-cap">Inside BuildWithBNZ, Sara reports to Bilal Mohammed. On your project, the decisions are yours.</p></div>') % (
+        av("sara", 112), tx(BY["sara"]["title"]), six)
 
 def page_solutions():
     desc = "Four solutions, one crew: estimating & takeoff, subcontractor bidding & buyout, operations & approvals, and public work & prevailing wage."
@@ -110,7 +112,7 @@ def org_chart():
             '<li><div class="org-boss"><span class="eyebrow">Final authority</span><b>Bilal Mohammed</b></div>'
             '<ul><li class="org-mid"><a class="org-lead" href="#sara" style="--acc:%s">%s<b>%s</b><span>%s</span></a>'
             '<ul class="org-six">%s</ul></li></ul></li></ul>'
-            '<p class="org-cap">All seven agents are AI-generated characters. Bilal Mohammed is a person.</p></div>') % (
+            '<p class="org-cap">All seven agents are AI-generated characters. Bilal Mohammed is a real person.</p></div>') % (
         sara["accent"], thumb("sara"), tx(sara["name"]), tx(sara["title"]), six)
 
 def agent_card(a, lead=False):
@@ -121,8 +123,8 @@ def agent_card(a, lead=False):
         a["partners_label"], tx(a["partners"]), tx(a["reports_to"]))
     badge = '<p class="ac-badge">%s</p>' % tx(a["license"]) if a["license"] else ''
     note = '<p class="ac-note">%s</p>' % tx(a["note"]) if a.get("note") else ''
-    body = ('%s%s<p class="ac-h">Role</p><p class="ac-role">%s</p>%s<p class="ac-h">Approval limits</p><ul class="ac-limits">%s</ul>%s') % (
-        meta, badge, tx(a["role"]), note, ''.join('<li>%s</li>' % tx(l) for l in a["limits"]),
+    body = ('%s%s<p class="ac-h">Role</p><p class="ac-role">%s</p>%s<p class="ac-h">%s</p><ul class="ac-limits">%s</ul>%s') % (
+        meta, badge, tx(a["role"]), note, a.get("limits_label", "Approval limits"), ''.join('<li>%s</li>' % tx(l) for l in a["limits"]),
         '<p class="ac-more"><a class="link" href="%s">Meet %s →</a></p>' % (a["page"], a["short"]) if a["page"] else '')
     if lead:
         pic = portrait(a["slug"], sizes="(max-width:900px) 260px, 360px")
@@ -131,16 +133,17 @@ def agent_card(a, lead=False):
     return '<article class="card agent-card%s" id="%s"%s><div class="ac-head">%s%s</div>%s</article>' % (' acc' if acc else '', a["slug"], acc, pic, ident, body)
 
 def team_flow():
-    """EXEC p19: how the team works together. Platform and model names deliberately left out."""
-    par = [("taylor", "verifies quantities and costs."), ("kyle", "handles designs and concepts."), ("emma", "reviews the financial impact."),
-           ("richard", "checks contractual risk."), ("amanda", "turns approved outcomes into content.")]
+    """EXEC p19: how the team works together, in plain words. Platform and model names deliberately left out.
+    EXEC is BuildWithBNZ's internal handbook (Bilal approves); for a customer the yes is theirs (GUIDE p5, DESK p1)."""
+    par = [("taylor", "checks quantities and costs."), ("kyle", "handles designs and concepts."), ("emma", "reviews the money side."),
+           ("richard", "checks contract risk."), ("amanda", "turns approved results into content.")]
     return ('<ol class="flow stagger">'
-            '<li><b>Bilal gives a goal.</b></li>'
-            '<li><b>Sara assigns the work.</b></li>'
-            '<li><b>The specialists work in parallel</b> and talk to each other directly.<ul>%s</ul></li>'
-            '<li><b>Sara consolidates and verifies.</b></li>'
-            '<li><b>Bilal gives final approval</b> of every controlled action.</li></ol>'
-            '<p class="small muted fx" style="margin-top:18px">Controlled actions: sending outside messages, spending money, publishing, changing financial records, deploying software.</p>') % (
+            '<li><b>A goal comes in.</b></li>'
+            '<li><b>Sara hands out the work.</b></li>'
+            '<li><b>Each specialist does their part</b> and checks with the others.<ul>%s</ul></li>'
+            '<li><b>Sara checks everyone\'s work and pulls it together.</b></li>'
+            '<li><b>A person says yes</b> before anything is sent, spent, published or changed in the books.</li></ol>'
+            '<p class="small muted fx" style="margin-top:18px">Inside BuildWithBNZ, that person is Bilal Mohammed. On your projects, it is your own people.</p>') % (
         ''.join('<li>%s<span><b>%s</b> %s</span></li>' % (av(k, 32), BY[k]["short"], t) for k, t in par))
 
 def page_crew():
@@ -150,7 +153,8 @@ def page_crew():
     intro = ('<div class="team-intro"><div class="fx"><span class="eyebrow">Official AI team</span><h2 class="team-h">Meet the AI team</h2>'
              '<p class="lede">Seven AI agents for the office side of construction: bids, paperwork, deadlines and records. Sara Cooper leads them. '
              'Every agent works with a human partner. %s</p>'
-             '<div class="report-box"><span class="eyebrow mute">Reporting line</span><p>All six agents report to Sara Cooper. Sara reports to Bilal Mohammed.</p></div>'
+             '<div class="report-box"><span class="eyebrow mute">Reporting line</span><p>All six agents report to Sara Cooper. Sara reports to Bilal Mohammed, '
+             'a real person and the final authority over BuildWithBNZ\'s AI team. On your projects, your own people approve every price, signature and send.</p></div>'
              '<div class="cta">%s%s</div></div>'
              '<div class="fx">%s</div></div>') % (PRINCIPLE, btn_book(), START_BTN, org_chart())
     h += section("dark", intro, extra_cls="first team-top")
@@ -159,7 +163,7 @@ def page_crew():
                  + '<p class="footnote">All seven are AI-generated characters, not real people. Every agent works with a human partner.</p>', id_="team")
     h += section("dark", '<div class="split flow-split"><div class="fx"><span class="eyebrow">How they work together</span>'
                  '<h2 style="margin:14px 0 14px">Sara sits at the centre.</h2>'
-                 '<p class="lede">Specialists talk to each other directly. Sara keeps oversight, consolidates and verifies. Bilal approves every controlled action. Nothing is sent, awarded, signed or paid by the agents.</p></div>'
+                 '<p class="lede">The specialists talk to each other directly. Sara checks everyone\'s work and pulls it together. Nothing is sent, awarded, signed or paid without a person\'s yes.</p></div>'
                  '<div>%s</div></div>' % team_flow())
     h += section("light", sec_head("Each one, in depth", "Go deeper on one.", dark=False) +
                  '<div class="grid g3 stagger">%s</div>' % ''.join(
@@ -199,7 +203,7 @@ AGENT_PAGES = {
                    states_note="UNKNOWN is deliberate: it names what's missing and who has it. It is never a blank.",
                    mock_label="Her part of the workspace — estimate, division 26", mock=lambda: est_mock(False),
                    desc="Taylor is the BuildWithBNZ estimating agent: takeoffs, conflicts, labour/material/sub pricing, every assumption shown. Never invents a price."),
-    "emma": dict(title="Emma — Emma works the phones | BuildWithBNZ", h1="Emma works the phones.",
+    "emma": dict(title="Emma — Emma works the phones | BuildWithBNZ", h1="Emma checks the job costs.", checks_h="What she covers",
                  checks=["Keeps job costing for each project",
                          "Reviews reconciliations against the books",
                          "Verifies payroll",
@@ -208,7 +212,7 @@ AGENT_PAGES = {
                          "Recommends — a person with authority approves and posts"],
                  rule="She reviews and recommends. She does not post transactions or change accounting records without authorization.",
                  states=[("working", "Reviewing"), ("needs", "Needs approval"), ("verified", "Verified")],
-                 states_note="Nothing is posted until a person with authority approves it. Payroll and the books are reviewed by an accountant or CPA.",
+                 states_note="Nothing is posted until a person with authority approves it. Your accountant or CPA reviews payroll and the books. QuickBooks is not connected yet; it is on our Next list.",
                  mock_label="Her part of the workspace — reconciliation review", mock=lambda: finance_mock(False),
                  desc="Emma is the BuildWithBNZ subcontractor coordination agent: sub list, bid invitations, follow-ups, COIs, W-9s and scope levelling."),
 }
@@ -224,9 +228,9 @@ def page_agent(slug):
           '<p class="ac-title">%s · %s</p><p class="lede">%s</p>%s<div class="cta" style="margin-top:26px">%s</div></div><div class="fx">%s</div></div></section>\n') % (
         a["accent"], a["n"], p["h1"], name, tx(a["title"]), tx(a["role"]), meta, btn_book(),
         portrait(slug, "big", eager=True, sizes="(max-width:900px) 80vw, 420px"))
-    h += section("light", ('<div class="split"><div class="fx"><h2 style="font-size:clamp(28px,3.4vw,40px);margin-bottom:18px">On your project, she…</h2><ul class="checks">%s</ul></div>'
+    h += section("light", ('<div class="split"><div class="fx"><h2 style="font-size:clamp(28px,3.4vw,40px);margin-bottom:18px">%s</h2><ul class="checks">%s</ul></div>'
                            '<div class="fx"><div class="pull">"%s"</div><div class="eyebrow mute" style="margin-top:24px">Her states</div><div class="states">%s</div><p class="muted small">%s</p></div></div>') % (
-        ''.join('<li>%s</li>' % c for c in p["checks"]), p["rule"], ''.join(chip(k, t) for k, t in p["states"]), p["states_note"]))
+        p.get("checks_h", "On your project, she…"), ''.join('<li>%s</li>' % c for c in p["checks"]), p["rule"], ''.join(chip(k, t) for k, t in p["states"]), p["states_note"]))
     h += section("dark", '<div class="sec-head fx"><span class="eyebrow">%s</span></div><div class="fx">%s</div>' % (p["mock_label"], p["mock"]()))
     h += section("light", sec_head("The rest of the team", "Seven agents. One team.", dark=False) +
                  '<div class="grid g3 stagger mini">%s</div>' % ''.join(
@@ -312,9 +316,9 @@ def lead_form():
             '<label class="hp" aria-hidden="true">Leave empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>'
             '<div class="two"><label>Your name<input name="name" required autocomplete="name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="next"></label><label>Company<input name="company" required autocomplete="organization" autocapitalize="words" enterkeyhint="next"></label></div>'
             '<div class="two"><label>Email<input name="email" type="email" required autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next"></label><label>Phone<input name="phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next"></label></div>'
-            '<label>Contractor type<select name="contractor_type"><option>General contractor</option><option>Remodeler / custom builder</option><option>Specialty contractor</option><option>GC bidding public work</option><option>Other</option></select></label>'
+            '<label>Contractor type<select name="contractor_type"><option value="">Choose one</option><option>General contractor</option><option>Remodeler / custom builder</option><option>Specialty contractor</option><option>GC bidding public work</option><option>Other</option></select></label>'
             '<label>The project — what is it, where is it, what hurts<textarea name="project" required enterkeyhint="done" placeholder="e.g. 4-story mixed-use in Rockland County, public work, bid due in 11 days. Estimating is the bottleneck."></textarea></label>'
-            '<div class="two"><label>Bid due (if any)<input name="bid_due" type="date"></label><label>Link to drawings or the bid package (optional)<input name="files_link" type="url" placeholder="Drive folder, Dropbox, or leave blank"></label></div>'
+            '<div class="two"><label>Bid due (if any)<input name="bid_due" type="date"></label><label>Link to drawings or the bid package (optional)<input name="files_link" type="url" placeholder="Drive or Dropbox link"></label></div>'
             '<div class="err">Please fill in your name, company, email and the project.</div>'
             '<button class="btn primary" type="submit">Book a project review <span class="g">↗</span></button>'
             '<p class="note">A real person takes this call. We reply the same business day to set a time. No prices on this site because there is no standard project — scope and one set price come back in writing after the review.</p>'
@@ -421,9 +425,9 @@ def page_terms():
     h = head("Terms — BuildWithBNZ", "Terms covering the BuildWithBNZ website, Project Review, scope documents and the workspace.", "/terms/")
     h += nav()
     h += section("dark", '''<div class="prose fx"><span class="eyebrow">Terms</span><h2 style="margin-top:14px">Terms of service.</h2>
-<p class="lede">These terms cover your use of the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: September 2026.</p>
+<p class="lede">These terms cover your use of the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: October 2026.</p>
 <h3>The service</h3>
-<p>BuildWithBNZ provides three AI agents — Sara, Taylor and Emma — that work inside a construction project workspace. The agents prepare drafts, estimates, sub lists and reports. Anything that leaves your company is sent only after you review and approve it. The agents do not sign, award, pay or commit on your behalf.</p>
+<p>BuildWithBNZ provides a team of seven AI agents, led by Sara, that work inside a construction project workspace. The agents prepare drafts, estimates, reports and document reviews. Anything that leaves your company is sent only after you review and approve it. The agents do not sign, award, pay or commit on your behalf.</p>
 <h3>Engagement</h3>
 <ul>
 <li>Every engagement starts with a Project Review about one real project. There is no charge for the review.</li>
@@ -435,7 +439,8 @@ def page_terms():
 <ul>
 <li>You are responsible for reviewing drafts, estimates and documents before they are sent, submitted or relied upon.</li>
 <li>Estimates are prepared from the documents you provide. Where information is missing the estimate says UNKNOWN; it is not a bid, a quote or a guarantee of cost.</li>
-<li>Taylor's design-assist work is not licensed design. Stamped drawings and engineering remain the responsibility of your architect or engineer of record.</li>
+<li>Kyle's design concepts are not licensed design, and Kyle is not a licensed architect. Stamped drawings and engineering remain the responsibility of your architect or engineer of record.</li>
+<li>Richard's contract review support is not legal advice, and Richard is not a licensed attorney. Legal interpretations and decisions stay with your own attorney.</li>
 <li>Keep your workspace credentials secure. Each workspace belongs to one company and one or more scoped projects.</li>
 </ul>
 <h3>Liability</h3>
