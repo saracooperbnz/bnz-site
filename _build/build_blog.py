@@ -12,12 +12,12 @@ from shared import SITE, BRAND, head, nav, footer, section, btn_book, esc
 
 ALLOWED_PREFIX = ("/book/", "/sara/", "/taylor/", "/emma/", "/faq/", "/crew/", "/how-it-works/", "/solutions/", "/what-we-connect-to/", "/blog/")
 META = {  # descriptions trimmed to <=155 chars
- "best-ai-estimating-software-for-general-contractors": "A fair roundup of AI estimating and takeoff software for US general contractors: what each tool does, published prices with sources, and who it fits.",
- "buildingconnected-pricing": "BuildingConnected doesn't publish prices. What Autodesk says, what third-party listings report, what Pro and Bid Board Pro include, and other options.",
- "construction-estimating-software-for-small-business": "Estimating software for small construction businesses: free options, what to check before you buy, and when to get help instead of another tool.",
- "downtobid-pricing": "Downtobid pricing for GCs and subs (Oct 2026), what it does well, its limits, and when a different setup fits better. Sources linked.",
- "planswift-vs-bluebeam": "PlanSwift vs Bluebeam Revu for construction takeoff: what each does well, their limits, and which fits your team. Sources linked.",
- "togal-ai-review": "A Togal.AI review for US contractors: the published price, where the AI takeoff works well, where it falls short, and when another tool fits better.",
+ "best-ai-estimating-software-for-general-contractors": "Best AI estimating software for general contractors in 2026: Togal, Kreo, Beam AI, Bobyard, Handoff and BuildWithBNZ: published prices, sources and fit.",
+ "buildingconnected-pricing": "BuildingConnected pricing in 2026: Autodesk quotes it through sales, so here's what drives the price, what Pro and Bid Board Pro include, and alternatives.",
+ "construction-estimating-software-for-small-business": "Construction estimating software for small business: free plans, what to check before you buy, quick picks by work type, and when software isn't the fix.",
+ "downtobid-pricing": "Downtobid pricing for GCs and subs as of Oct 2026, from its own site: what you get, who it fits, its limits, and when a different setup fits better.",
+ "planswift-vs-bluebeam": "PlanSwift vs Bluebeam Revu for construction takeoff in 2026: how each is priced, what each does well, the limits, and which one fits your estimating team.",
+ "togal-ai-review": "Togal AI review for US contractors: the published price, what independent studies found on accuracy, where estimators say it falls short, and other fits.",
 }
 STYLE = ('<style>.post table{width:100%;border-collapse:collapse;margin:18px 0;font-size:15px}.post th,.post td{border:1px solid rgba(255,255,255,.15);'
          'padding:8px 10px;text-align:left;vertical-align:top}.post .tbl{overflow-x:auto}.post ol{padding-left:22px}.post a:not(.btn){text-decoration:underline}'

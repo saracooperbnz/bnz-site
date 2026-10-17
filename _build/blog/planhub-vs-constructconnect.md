@@ -1,6 +1,6 @@
 ---
 title_tag: "PlanHub vs ConstructConnect for Finding Bids (2026)"
-meta_description: "PlanHub vs ConstructConnect: who pays, published 2026 prices, how coverage works, and which fits a GC or sub looking for bid leads. Sources linked."
+meta_description: "PlanHub vs ConstructConnect: who pays, what the 2026 pricing pages say, how coverage works, and which one fits a GC or a sub looking for new bid leads."
 url_slug: /blog/planhub-vs-constructconnect/
 primary_keyword: planhub vs constructconnect
 secondary_keywords:
@@ -36,9 +36,9 @@ status: DRAFT. Not published.
 
 *Prices checked October 16, 2026 (ET). Confirm with each vendor before you buy.*
 
-**The short answer:** **PlanHub** is a bidding network. GCs post projects and collect bids **free**, and subs pay for wider lead search([PlanHub sub pricing](https://planhub.com/pricing-subcontractors/)). **ConstructConnect** sells project intelligence: leads, bid documents and planholder lists, priced **per market and per seat** ([ConstructConnect pricing](https://www.constructconnect.com/pricing)). GCs posting their own bids usually start with PlanHub. Subs and suppliers hunting for projects, including public and planning-stage work, often compare both.
+**PlanHub vs ConstructConnect, the short answer:** **PlanHub** is a bidding network. GCs post projects and collect bids **free**, and subs pay for wider lead search([PlanHub sub pricing](https://planhub.com/pricing-subcontractors/)). **ConstructConnect** sells project intelligence: leads, bid documents and planholder lists, priced **per market and per seat** ([ConstructConnect pricing](https://www.constructconnect.com/pricing)). GCs posting their own bids usually start with PlanHub. Subs and suppliers hunting for projects, including public and planning-stage work, often compare both.
 
-## Side-by-side
+## PlanHub vs ConstructConnect side by side
 
 | | PlanHub | ConstructConnect |
 |---|---|---|

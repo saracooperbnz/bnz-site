@@ -34,7 +34,7 @@ status: DRAFT. Not published.
 
 *Facts checked October 16, 2026. Autodesk quotes by sales, so your price may differ.*
 
-**The short answer:** Autodesk doesn't publish a price for BuildingConnected Pro (for GCs) or Bid Board Pro (for subs). Its pricing page describes "flexible user, project, and account-based pricing" and sends you to sales ([Autodesk pricing page](https://construction.autodesk.com/pricing/buildingconnected/)). BuildingConnected is **quote-only**: no price is published.
+**The short answer:** BuildingConnected pricing isn't public. Autodesk doesn't publish a price for BuildingConnected Pro (for GCs) or Bid Board Pro (for subs). Its pricing page describes "flexible user, project, and account-based pricing" and sends you to sales ([Autodesk pricing page](https://construction.autodesk.com/pricing/buildingconnected/)). BuildingConnected is **quote-only**: no price is published.
 
 ## The products and what each is for
 
@@ -52,7 +52,7 @@ Sources: [Autodesk pricing page](https://construction.autodesk.com/pricing/build
 
 Also on Autodesk's pricing page: a **30-day money-back guarantee**, support 24 hours a day Monday to Friday, and browser support for Chrome, Firefox and Safari.
 
-## Third-party price estimates
+## BuildingConnected pricing: third-party estimates
 
 Software directories and competitors publish price estimates for BuildingConnected, but none of them come from Autodesk, and they don't say which plan they cover. We've left them out. The only reliable number is the one in your written quote.
 

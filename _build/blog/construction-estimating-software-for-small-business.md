@@ -34,11 +34,11 @@ status: DRAFT. Not published. Money page switched to /construction-estimating-ai
 }
 ```
 
-# Construction estimating software for small contractors
+# Construction estimating software for small business: what to use first
 
 *Prices checked October 16, 2026 (ET). Vendors change plans often, so confirm before you buy.*
 
-**The short answer:** If you bid a handful of jobs a month, start with a **free plan** (such as STACK Free; Buildxact also lists one) or the PDF tool you already have. Move to a paid tool when takeoff hours or missed scope start costing you work. Paid plans vary by vendor, plan and seat count, so check each vendor's pricing page and ask about the contract term. Pick by your work type: residential builders and remodelers lean toward Buildxact or Handoff; trade contractors and small commercial GCs lean toward STACK, PlanSwift or Kreo.
+**The short answer:** If you're shopping for construction estimating software for small business and bid a handful of jobs a month, start with a **free plan** (such as STACK Free; Buildxact also lists one) or the PDF tool you already have. Move to a paid tool when takeoff hours or missed scope start costing you work. Paid plans vary by vendor, plan and seat count, so check each vendor's pricing page and ask about the contract term. Pick by your work type: residential builders and remodelers lean toward Buildxact or Handoff; trade contractors and small commercial GCs lean toward STACK, PlanSwift or Kreo.
 
 ## Where to check prices
 
@@ -65,7 +65,7 @@ A checklist before any demo:
 - [ ] **Users.** Per-user pricing (STACK, Kreo, PlanSwift) vs. company-wide plans changes the math once a second person estimates.
 - [ ] **Proposal output.** Can you send a clean proposal to the owner straight from the tool?
 
-## Quick picks by situation
+## Construction estimating software for small business: quick picks
 
 - **Residential builder or remodeler, 1–3 people:** Buildxact or Handoff Flex. Both are built for residential. For Buildxact's current plans, see [buildxact.com/us/pricing](https://www.buildxact.com/us/pricing/). Handoff Scale's AI takeoff covers residential plans up to 7,000 sq ft ([Handoff](https://www.handoff.ai/pricing)).
 - **Trade sub bidding a few jobs a month:** STACK Free to start, then STACK Pro or ConstructConnect Takeoff Starter.

@@ -34,9 +34,9 @@ status: DRAFT. Not published.
 
 *Facts checked October 16, 2026. Confirm with Downtobid before you buy.*
 
-**The short answer:** Downtobid is AI bidding software for GCs and subs. It reads plan sets, splits them into trade packages, drafts scope notes and sends invitations from your own email. As of October 16, 2026, its homepage FAQ says the **GC product starts at $149/month for your organization**. For subs, the **leads bid board starts at $119/month** and **full bid management at $299/month**. Subs can bid for free ([downtobid.com FAQ](https://downtobid.com/); confirmed by [ConstructionIndustry.ai](https://www.constructionindustry.ai/tools/preconstruction/downtobid/) and [StatWharf](https://statwharf.com/best/bid-management-software/), both October 2026). It doesn't build your estimate.
+**Downtobid pricing, the short answer:** Downtobid is AI bidding software for GCs and subs. It reads plan sets, splits them into trade packages, drafts scope notes and sends invitations from your own email. As of October 16, 2026, its homepage FAQ says the **GC product starts at $149/month for your organization**. For subs, the **leads bid board starts at $119/month** and **full bid management at $299/month**. Subs can bid for free ([downtobid.com FAQ](https://downtobid.com/); confirmed by [ConstructionIndustry.ai](https://www.constructionindustry.ai/tools/preconstruction/downtobid/) and [StatWharf](https://statwharf.com/best/bid-management-software/), both October 2026). It doesn't build your estimate.
 
-## What Downtobid costs
+## Downtobid pricing for GCs and subs
 
 | Who | Product | Starting price (Oct 2026) |
 |---|---|---|
