@@ -126,7 +126,7 @@ def proof():
 def page_home():
     desc = "AI operating system for construction companies: Sara runs operations, Taylor builds estimates from drawings, Emma manages your subcontractors."
     ld = ('{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"BuildWithBNZ","url":"%s","email":"%s","telephone":"%s","areaServed":"New York","description":"AI operating system for construction companies."},'
-          '{"@type":"WebSite","name":"BuildWithBNZ","url":"%s"}]}') % (SITE, INBOX, PHONE, SITE)
+          '{"@type":"WebSite","name":"BuildWithBNZ","url":"%s"}]}') % (SITE, INBOX, PHONE_LD, SITE)
     h = head("AI Operating System for Construction Companies | BuildWithBNZ", desc, "/", jsonld=ld)
     h += nav("/")
     h += hero("AI operating system for construction companies", "Run the company. Keep every decision.",

@@ -14,8 +14,10 @@ TEAM_LEDE = ("Sara runs operations and leads six specialist AI agents. Taylor re
              "They work inside the files and systems you already use — Drive, Gmail, Calendar, Notion, your project folders. "
              "Every project is scoped and priced in writing before we start. You approve anything that leaves the building.")
 INBOX = "saracooper@bnzbuildersinc.com"
-PHONE = "+1-332-258-1401"
-PHONE_TXT = "1-332-258-1401"
+# BuildWithBNZ (software) number per the FINAL team identity, rule 5. The legacy BNZ Builders pages keep their own.
+PHONE = "+16462818368"        # tel: links
+PHONE_TXT = "646-281-8368"    # what people read
+PHONE_LD = "+1-646-281-8368"  # schema.org telephone
 UPDATED = "2026-09-17"
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
