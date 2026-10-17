@@ -74,7 +74,7 @@ A checklist before any demo:
 
 ## The part software doesn't do
 
-These tools make the estimator faster. They don't send sub invitations, chase quotes, collect insurance certificates (see our [COI tracking](/guides/subcontractor-coi-tracking/) guide) or level sub numbers (see [leveling sub bids](/guides/bid-leveling/)). In a small company that's often the same person who does the estimate, and it's where nights and weekends go.
+These tools make the estimator faster. They don't send sub invitations, chase quotes, collect insurance certificates or level sub numbers. In a small company that's often the same person who does the estimate, and it's where nights and weekends go.
 
 ## Where BuildWithBNZ fits
 
@@ -86,7 +86,7 @@ These tools make the estimator faster. They don't send sub invitations, chase qu
 
 If you're comparing AI construction estimating software because you want to bid more work without hiring an estimator, [BNZ's AI estimating crew](/) is the option where the work gets done, not just made faster.
 
-**Limits to know:** BNZ has no free plan and no published monthly price. It's one set price per project, in writing, after a Project Review ([how pricing works](/pricing/)). Excel export and connections to PlanSwift/STACK, QuickBooks and Buildertrend are listed as "Next," not live.
+**Limits to know:** BNZ is priced per project, with no published monthly price. It's one set price per project, in writing, after a Project Review ([FAQ](/faq/)). Excel export and connections to PlanSwift/STACK, QuickBooks and Buildertrend are listed as "Next," not live.
 
 **Not sure software is the answer yet?** Bring one real bid to a Project Review and we'll walk through what the crew would do with it. [Book a Project Review](/book/).
 

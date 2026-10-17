@@ -82,7 +82,7 @@ Sources (all read Oct 16, 2026): [PlanHub sub pricing](https://planhub.com/prici
 
 ## Finding bids is half the job
 
-Both tools help you find or post work. The other half still lands on your desk: drafting the [invitation to bid](/guides/subcontractor-bid-invitations/), chasing subs, collecting COIs and W-9s, and making sure you [level the bids](/guides/bid-leveling/) before you choose. That's where most bid-day misses come from, and it's the job subcontractor bid management software is supposed to cover.
+Both tools help you find or post work. The other half still lands on your desk: drafting the invitation to bid, chasing subs, collecting COIs and W-9s, and making sure you level the bids before you choose. That's where most bid-day misses come from, and it's the job subcontractor bid management software is supposed to cover.
 
 ## Where BuildWithBNZ fits
 

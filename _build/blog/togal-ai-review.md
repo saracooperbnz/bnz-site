@@ -58,7 +58,7 @@ Is there a free trial? As of Oct 16, 2026 the pricing page points you to booking
 
 ## Who Togal fits
 
-- **GCs who don't self-perform much** and need quick quantities to check sub numbers or build budgets. One r/estimators commenter described it as "great for GC's that don't do any self perform" ([r/estimators](https://www.reddit.com/r/estimators/comments/1tyzmll/any_of_you_guys_using_togalai_just_switched_from/), read Oct 16, 2026).
+- **GCs who don't self-perform much** and need quick quantities to check sub numbers or build budgets. One r/estimators commenter said it suits GCs that do no self-perform work ([r/estimators](https://www.reddit.com/r/estimators/comments/1tyzmll/any_of_you_guys_using_togalai_just_switched_from/), read Oct 16, 2026).
 - **Interior and finish trades** working off clean architectural sets: flooring, ceilings, paint, drywall areas. Togal's own customer quotes include painting and flooring contractors ([Togal pricing](https://www.togal.ai/pricing)).
 - **Teams that want cloud takeoff** with several people on one plan set. A masonry estimator on Reddit said the cloud setup and fast PDF export/sheet naming were real improvements over On-Screen Takeoff (same thread).
 
@@ -75,8 +75,8 @@ Plain read: on clean floor plans, it's fast and close. You still check every qua
 
 From r/estimators threads read Oct 16, 2026 ([thread 1](https://www.reddit.com/r/estimators/comments/1tyzmll/any_of_you_guys_using_togalai_just_switched_from/), [thread 2](https://www.reddit.com/r/estimators/comments/1ajicqk/experience_with_togalai_estimating_with_ai/)). These are individual users' opinions, not tests:
 
-- Structural drawings: one user called the results "junk."
-- Sitework, surfacing and elevations: a masonry estimator said it "absolutely cannot" do these, though it was sold to them as able to.
+- Structural drawings: one user said the results on structural sheets weren't usable ([thread 1](https://www.reddit.com/r/estimators/comments/1tyzmll/any_of_you_guys_using_togalai_just_switched_from/), [thread 2](https://www.reddit.com/r/estimators/comments/1ajicqk/experience_with_togalai_estimating_with_ai/)).
+- Sitework, surfacing and elevations: a masonry estimator said it can't handle these at all, though it was sold to them as able to ([thread 1](https://www.reddit.com/r/estimators/comments/1tyzmll/any_of_you_guys_using_togalai_just_switched_from/), [thread 2](https://www.reddit.com/r/estimators/comments/1ajicqk/experience_with_togalai_estimating_with_ai/)).
 - Wall and ceiling assemblies and in-depth trade work: some say it doesn't cut takeoff time.
 - Division 08 (doors, frames, hardware): one Div 8 estimator's team decided it wasn't for them after a demo.
 - Rolled goods, shop drawings and wall tile elevations: a flooring estimator said they can't use Togal for these.
@@ -98,7 +98,7 @@ If takeoff is your only bottleneck, that's fine. If your bottleneck is getting t
 
 ## Where BuildWithBNZ fits instead
 
-BuildWithBNZ isn't a takeoff tool you run. It's [three AI workers that do the takeoff and bid work](/) that do the bid work inside your own Google Drive, Gmail, Google Calendar and Notion:
+BuildWithBNZ isn't a takeoff tool you run. It's [three AI workers that do the takeoff and bid work](/) inside your own Google Drive, Gmail, Google Calendar and Notion:
 
 - **Taylor** reads the drawings, specs, addenda, wage schedule and bid form, does the takeoff, flags conflicts, and prices labor, material and subs line by line. Every line shows its source. Where the documents are missing information, Taylor writes UNKNOWN instead of guessing.
 - **Emma** drafts sub invitations in your Gmail, follows up, collects quotes, COIs and W-9s, and levels each scope against Taylor's estimate.
@@ -108,7 +108,7 @@ BuildWithBNZ isn't a takeoff tool you run. It's [three AI workers that do the ta
 
 **Look at [BuildWithBNZ](/) if** you want the takeoff, the estimate and the sub chasing done, in the tools you already use, with you approving what goes out.
 
-How BNZ is priced: one set price per project, in writing, after a Project Review, then a separate monthly arrangement. See [how pricing works](/pricing/).
+How BNZ is priced: one set price per project, in writing, after a Project Review, then a separate monthly arrangement. See the [FAQ](/faq/) for how pricing works.
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 

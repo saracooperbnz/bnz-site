@@ -46,7 +46,7 @@ status: DRAFT. Not published. BuildWithBNZ is the publisher; the post says so.
 
 ## What "AI estimating" means here
 
-Most tools sold as AI estimating are really **AI takeoff**: they measure areas, lengths and counts on plans. A smaller group also **prices** the estimate. Fewer still touch **sub bids**: invitations, follow-up, [bid leveling](/guides/bid-leveling/), and COIs. When you compare estimating software for general contractors, check which of those three jobs each tool actually does.
+Most tools sold as AI estimating are really **AI takeoff**: they measure areas, lengths and counts on plans. A smaller group also **prices** the estimate. Fewer still touch **sub bids**: invitations, follow-up, bid leveling, and COIs. When you compare estimating software for general contractors, check which of those three jobs each tool actually does.
 
 ## Quick comparison
 
@@ -57,7 +57,7 @@ Most tools sold as AI estimating are really **AI takeoff**: they measure areas, 
 | Beam AI (Attentive.ai) | DIY AI takeoff or done-for-you takeoffs | See vendor's pricing page | [ibeam.ai/pricing](https://www.ibeam.ai/pricing) |
 | Bobyard | AI takeoff + estimate table, by trade | Not published (flat per-seat subscription) | [Bobyard blog](https://www.bobyard.com/blogs/bobyard-vs-togal-ai/) |
 | Handoff | AI estimating for residential builders/remodelers | See vendor's pricing page | [handoff.ai/pricing](https://www.handoff.ai/pricing) |
-| BuildWithBNZ | AI crew: estimate + sub outreach + approvals, in Google Workspace/Notion | One set price per project after a Project Review, then monthly; no price list | [/pricing/](/pricing/) |
+| BuildWithBNZ | AI crew: estimate + sub outreach + approvals, in Google Workspace/Notion | One set price per project after a Project Review, then monthly; no price list | [FAQ](/faq/) |
 
 ## Togal.AI
 
@@ -98,10 +98,10 @@ Most tools sold as AI estimating are really **AI takeoff**: they measure areas, 
 
 **What it is:** not a tool you run. It's [three AI workers for construction estimating and sub outreach](/), inside your own Google Drive, Gmail, Google Calendar and Notion:
 - **Taylor** reads drawings, specs, addenda, the wage schedule and the bid form, does the takeoff, flags conflicts, and prices labor, material and subs line by line. Every line shows its source, and Taylor writes UNKNOWN instead of guessing.
-- **Emma** drafts sub invitations in your Gmail, follows up, collects quotes, COIs and W-9s (see [subcontractor COI tracking](/guides/subcontractor-coi-tracking/)), and levels each scope against Taylor's estimate.
+- **Emma** drafts sub invitations in your Gmail, follows up, collects quotes, COIs and W-9s, and levels each scope against Taylor's estimate.
 - **Sara** keeps one approvals queue. Nothing goes out until you approve it.
 
-**Price:** no price list. One set price per project, in writing, after a Project Review, then a separate monthly arrangement ([how BNZ pricing works](/pricing/)).
+**Price:** no price list. One set price per project, in writing, after a Project Review, then a separate monthly arrangement ([FAQ](/faq/)).
 **Fits:** GCs who want to bid more work without hiring estimators, already run on Google Workspace, and bid public or prevailing-wage work.
 **Limits:**
 - Procore, QuickBooks, Bluebeam, PlanSwift/STACK, Excel, Microsoft 365 and others are listed as "Next," not live.
@@ -114,7 +114,7 @@ Most tools sold as AI estimating are really **AI takeoff**: they measure areas, 
 2. **Test on your own drawings,** including a scanned set and your hardest trade.
 3. **Check what it exports to.** Your estimate has to end up somewhere your team trusts.
 4. **Get the price in writing,** per user and per year, with renewal terms.
-5. **Count the whole bid,** not just takeoff. Sub coverage and [bid leveling](/guides/bid-leveling/) decide bid day as much as quantities do.
+5. **Count the whole bid,** not just takeoff. Sub coverage and bid leveling decide bid day as much as quantities do.
 
 When you're weighing an AI construction estimator, a short pilot on one live bid tells you more than any roundup, this one included.
 

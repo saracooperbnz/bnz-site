@@ -100,7 +100,7 @@ A free plan or trial is a good way to test a tool. But it's rarely enough to run
 
 [BuildWithBNZ](/) isn't a tool you run. It's three AI workers inside your own Google Drive, Gmail, Google Calendar and Notion. [Taylor](/taylor/) reads the drawings, specs, addenda (changes issued after the plans go out) and the bid form. Taylor does the takeoff, flags conflicts and prices the job line by line. Every line shows its source. Where information is missing, Taylor writes UNKNOWN instead of guessing. Emma handles sub invitations and quotes, and Sara keeps one approvals queue. Nothing goes out until you approve it.
 
-**How it's priced:** one set price per project, in writing, after a Project Review. Then there's a separate monthly arrangement. BuildWithBNZ is priced per project; see the [FAQ](/faq/) for details.
+**How it's priced:** one set price per project, in writing, after a Project Review, then a separate monthly arrangement. See the [FAQ](/faq/) for details.
 
 **Limits to know:** Live today: Google Drive, Gmail, Google Calendar, Google Workspace and Notion. Excel, PlanSwift/STACK, Bluebeam, QuickBooks and others are listed as "Next," not live, on our [What we connect to](/what-we-connect-to/) page.
 

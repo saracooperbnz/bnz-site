@@ -96,7 +96,7 @@ BuildWithBNZ isn't a bidding network. It's [three AI workers that do the bid wor
 
 **Look at [BuildWithBNZ for bid management](/) if** your bottleneck is the estimate and the chasing, not finding subs, and you'd rather work from your own inbox than another portal.
 
-Pricing is one set price per project, in writing, after a Project Review, then a separate monthly arrangement. See [how pricing works](/pricing/).
+Pricing is one set price per project, in writing, after a Project Review, then a separate monthly arrangement. See the [FAQ](/faq/) for how pricing works.
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 
