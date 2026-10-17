@@ -14,7 +14,7 @@ related_entities: bid/no-bid, invitation to bid (ITB), RFP, bid bond, liquidated
 reading_level: written for about an 8th-grade level
 money_page: / (homepage)
 suggested_internal_links:
-  - / (homepage, main target) (anchor: "BuildWithBNZ"; "an AI crew that reads the package for you")
+  - / (homepage, main target) (anchor: "BuildWithBNZ"; "an AI crew that reads the bid package and builds the estimate")
   - /taylor/ (anchor: "Taylor")
   - /sara/ (anchor: "Sara")
   - /book/ (CTA) (anchor: "Book a Project Review")
@@ -56,6 +56,8 @@ A few terms first:
 ## Why a go/no-go decision matters
 
 Every bid costs time. Someone reads the documents, does takeoff, chases sub quotes and builds the number. If you lose, that time is gone. A quick go/no-go review protects that time. It also makes the decision less about gut feel on a busy day.
+
+If many of your invites come from a bid lead service, see [how PlanHub and ConstructConnect compare](/blog/planhub-vs-constructconnect/).
 
 ## The go/no-go bid decision checklist
 
@@ -125,11 +127,11 @@ Reading a full bid package just to decide whether to bid takes time. Some estima
 
 ## Where BuildWithBNZ fits
 
-[BuildWithBNZ](/) is a crew of three AI workers. [Taylor](/taylor/) reads the drawings, specs, addenda, wage schedule and bid form, and "says UNKNOWN rather than guessing." [Sara](/sara/) "brings you only the decisions that need you" and keeps "one approvals queue — every send waits on you."
+[BuildWithBNZ](/) is a crew of three AI workers for the bid itself. [Taylor](/taylor/) takes the full bid package, reads the drawings, specs, addenda, wage schedule and bid form, and "says UNKNOWN rather than guessing." [Sara](/sara/) keeps "one approvals queue — every send waits on you."
 
-The go/no-go call is still yours. BNZ's homepage puts it this way: "You approve anything that leaves the building."
+The go/no-go call is yours. BNZ's homepage says: "You approve anything that leaves the building."
 
-If reading every package just to decide is eating your week, look at [an AI crew that reads the package for you](/).
+Once you decide to bid, if reading the package and building the estimate is eating your week, look at [an AI crew that reads the bid package and builds the estimate](/).
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 

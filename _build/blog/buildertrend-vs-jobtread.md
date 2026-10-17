@@ -106,6 +106,8 @@ If you answer no to most of these, a lighter tool may fit better.
 
 Some remodelers also compare Buildertrend vs Contractor Foreman. Contractor Foreman's pricing page says its plans start at $49 per month, with a 30-day free period ([Contractor Foreman](https://contractorforeman.com/pricing/), Oct 17, 2026). Compare its feature list against your must-haves before you switch.
 
+If Procore is on your list too, read [how Procore and Buildertrend compare](/blog/procore-vs-buildertrend/).
+
 ## How to choose
 
 1. **List your three biggest headaches.** Change orders? Client calls? Late invoices?

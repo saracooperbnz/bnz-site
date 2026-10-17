@@ -65,7 +65,7 @@ First, two terms:
 
 **2. How you pay.** PlanSwift lists two annual plans. Essential is $2,000 a year and Core is $3,000 a year, each for 1 seat. It says "Essential and Core are annual plans" ([PlanSwift](https://www.planswift.com/pricing/), Oct 17, 2026). STACK lists Premium at $299 and Pro at $349 per user per month, billed annually. It also shows a monthly billing option ([STACK](https://www.stackct.com/takeoff-and-estimate-pricing/), Oct 17, 2026).
 
-**3. Free options.** PlanSwift offers a 14-day free trial with no credit card. STACK has a free plan that includes 7 days of Pro. After that, it allows 1 active project a month, up to 300 plan pages and 50 measurements per project.
+**3. Free options.** PlanSwift offers a 14-day free trial with no credit card. STACK has a free plan that includes 7 days of Pro. After that, it allows 1 active project a month, up to 300 plan pages and 50 measurements per project. For other free plans and trials, see [our look at free AI estimating options](/blog/ai-construction-estimating-software-free/).
 
 **4. AI tools.** PlanSwift Essential includes Auto Count, Auto Scale and Auto Bookmark. Core adds Auto Takeoff, which PlanSwift says "builds a first-pass takeoff for areas, lengths, and counts in minutes." STACK Premium lists AI Takeoffs, symbol search and STACK IQ. STACK says Premium includes "GPT-powered AI chat to quickly understand project details."
 
@@ -94,6 +94,8 @@ If you're choosing between PlanSwift and OST, the question is mostly about your 
 3. **Time the whole thing,** including fixes to the AI's first pass.
 4. **Check where the numbers go.** Does the estimate land where your team works?
 5. **Read the terms.** Ask about seats, renewals and cancellation before you sign.
+
+Weighing Bluebeam too? See [how PlanSwift compares with Bluebeam](/blog/planswift-vs-bluebeam/).
 
 ## Where BuildWithBNZ fits
 

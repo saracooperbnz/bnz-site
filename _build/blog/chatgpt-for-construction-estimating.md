@@ -96,7 +96,7 @@ Use it for jobs where you can check the result fast:
 
 ## ChatGPT vs Claude vs Gemini
 
-People also ask about Claude vs ChatGPT for construction estimating. Both are general-purpose AI chat tools, like Gemini. None of them is estimating software. Any of them can help summarize and draft. None of them knows your prices or production rates unless you give them. Check the output the same way, whichever you use.
+People also ask about Claude vs ChatGPT for construction estimating. Both are general-purpose AI chat tools, like Gemini. None of them is estimating software. If you want tools built for estimating, see [our roundup of AI estimating software for GCs](/blog/best-ai-estimating-software-for-general-contractors/). Any of them can help summarize and draft. None of them knows your prices or production rates unless you give them. Check the output the same way, whichever you use.
 
 ## Where BuildWithBNZ fits
 

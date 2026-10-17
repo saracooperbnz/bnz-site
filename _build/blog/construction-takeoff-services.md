@@ -60,7 +60,7 @@ Most takeoff services follow the same steps:
 
 The service measures. You still price. A takeoff isn't an estimate.
 
-**Example:** Beam AI sells "Done For You" takeoffs. Its pricing page says they are "QA-checked" and delivered in "24-72 hours" ([Beam AI](https://www.ibeam.ai/pricing), Oct 17, 2026). It sells annual licenses. Done For You starts at $25K a year, "based on trade and volume." Those are the vendor's own claims and prices.
+**Example:** Beam AI sells "Done For You" takeoffs. Its pricing page says they are "QA-checked" and delivered in "24-72 hours" ([Beam AI](https://www.ibeam.ai/pricing), Oct 17, 2026). It sells annual licenses. Done For You starts at $25K a year, "based on trade and volume." Those are the vendor's own claims and prices. Beam also appears in [our guide to AI tools for contractors](/blog/best-ai-for-contractors/).
 
 ## How AI takeoff software works
 
@@ -68,7 +68,7 @@ With software, your estimator does the takeoff, and AI speeds up the boring part
 
 **Example:** PlanSwift's Core plan includes Auto Takeoff. PlanSwift says it "builds a first-pass takeoff for areas, lengths, and counts in minutes." Core is $3,000 a year for 1 seat ([PlanSwift](https://www.planswift.com/pricing/), Oct 17, 2026).
 
-"First pass" matters. The AI makes a draft. Your estimator still checks it, fixes it and adds what it missed.
+"First pass" matters. The AI makes a draft. Your estimator still checks it, fixes it and adds what it missed. For a closer look at one AI takeoff tool, see [our Togal AI review](/blog/togal-ai-review/).
 
 ## Construction takeoff services cost vs software cost
 
