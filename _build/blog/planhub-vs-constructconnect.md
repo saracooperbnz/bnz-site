@@ -94,7 +94,7 @@ BuildWithBNZ isn't a lead database or bid network. It's [three AI workers that r
 
 If you're weighing bid management software for general contractors, [BNZ](/) is the option where the work happens in your own inbox instead of a portal. It handles the sub side, not lead finding. Some contractors use a lead source *and* BNZ.
 
-See also: [BuildingConnected pricing](/blog/buildingconnected-pricing/).
+See also: [BuildingConnected pricing](/blog/buildingconnected-pricing/) and [Downtobid pricing](/blog/downtobid-pricing/).
 
 **Want to see it on a real bid?** Bring one project to a Project Review call and we'll show you what the crew would do with it. [Book a Project Review](/book/).
 

@@ -84,6 +84,8 @@ Ask the rep for the price in writing, per user and per year, with renewal terms.
 - **Downtobid** publishes starting prices: GC organization from $149/month (homepage FAQ, Oct 16, 2026). See our [Downtobid pricing](/blog/downtobid-pricing/) post.
 - **A spreadsheet and your own email.** Free, and it works at low volume. It breaks when follow-up slips.
 
+Looking for bid leads rather than a bid platform? See [PlanHub vs ConstructConnect](/blog/planhub-vs-constructconnect/).
+
 ## Where BuildWithBNZ fits instead
 
 BuildWithBNZ isn't a bidding network. It's [three AI workers that do the bid work](/) inside your own Gmail, Google Drive, Google Calendar and Notion:

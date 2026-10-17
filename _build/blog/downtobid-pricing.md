@@ -63,6 +63,8 @@ From Downtobid's site and third-party summaries (Oct 2026):
 - **Buyers who want a published price.** Unlike BuildingConnected, Downtobid lists starting prices (see our [BuildingConnected pricing](/blog/buildingconnected-pricing/) post).
 - **Subs** who want a cheaper bid board, or who just need to bid free when a GC invites them.
 
+Looking for bid leads rather than a bidding tool? See [PlanHub vs ConstructConnect](/blog/planhub-vs-constructconnect/).
+
 ## Reviews and limits
 
 As of Oct 16, 2026 we didn't find enough independent reviews to summarize fairly, so we won't.

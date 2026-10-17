@@ -80,6 +80,8 @@ Most AI tools for contractors do one of these jobs well. A few try to do two. Ve
 
 **Kreo** does takeoff and estimating in one tool. Its Essential plan has no AI. Pro adds AI takeoff and an AI assistant called Caddie. For current plans and terms, see [Kreo's pricing page](https://www.kreo.net/pricing). We found no independent accuracy review to cite as of Oct 16, 2026.
 
+For a deeper look at estimating tools for GCs, see [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/).
+
 ## Takeoff done for you: Beam AI
 
 **Beam AI** (from Attentive.ai) sells takeoff software or takeoffs done by its own team with human review. It's sold as annual licenses by trade and volume. See [Beam AI's pricing page](https://www.ibeam.ai/pricing) for current figures. Beam says its done-for-you takeoffs are "99%+ accurate." That's a vendor claim we couldn't check on our own.
@@ -108,6 +110,8 @@ If you want an [AI assistant for contractors](/) that does the bid work, not jus
 - Live today: Google Drive, Gmail, Google Calendar, Google Workspace and Notion. Procore, Buildertrend, QuickBooks, Sage, Bluebeam, PlanSwift/STACK, DocuSign, Microsoft 365, Dropbox and Excel are listed as "Next," not live, on our [What we connect to](/what-we-connect-to/) page.
 - No published monthly price. You get one set price per project, in writing, after a Project Review.
 - No published accuracy or turnaround results yet.
+
+If sub paperwork is your slowest job, read [subcontractor compliance software vs a spreadsheet](/blog/subcontractor-compliance-software/).
 
 ## How to pick the best AI for contractors like you
 

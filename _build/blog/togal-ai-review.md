@@ -96,6 +96,8 @@ That's as of Oct 16, 2026. Check Togal's product pages for anything added since.
 
 If takeoff is your only bottleneck, that's fine. If your bottleneck is getting the whole bid out, takeoff is one piece of it.
 
+Comparing takeoff tools? See [PlanSwift vs Bluebeam](/blog/planswift-vs-bluebeam/).
+
 ## Where BuildWithBNZ fits instead
 
 BuildWithBNZ isn't a takeoff tool you run. It's [three AI workers that do the takeoff and bid work](/) inside your own Google Drive, Gmail, Google Calendar and Notion:
@@ -107,6 +109,8 @@ BuildWithBNZ isn't a takeoff tool you run. It's [three AI workers that do the ta
 **Pick Togal if** you want a fast takeoff tool your estimators run themselves, your work is mostly clean architectural and finish takeoff, and you already handle pricing and sub outreach.
 
 **Look at [BuildWithBNZ](/) if** you want the takeoff, the estimate and the sub chasing done, in the tools you already use, with you approving what goes out.
+
+For the wider field, see the [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/).
 
 How BNZ is priced: one set price per project, in writing, after a Project Review, then a separate monthly arrangement. See the [FAQ](/faq/) for how pricing works.
 

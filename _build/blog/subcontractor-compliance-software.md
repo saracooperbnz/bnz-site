@@ -120,6 +120,8 @@ Neither lists a price we can quote here. Ask each vendor for a quote, and ask wh
 
 Whichever you pick, give it one owner. A tracker with no owner fails in software just like it fails in a spreadsheet.
 
+Sub paperwork is one job. For takeoff, estimating and bid invites, see the [best AI for contractors](/blog/best-ai-for-contractors/). Already on Procore or Buildertrend? Our [Procore vs Buildertrend](/blog/procore-vs-buildertrend/) comparison notes that sub paperwork may still need its own process.
+
 ## Where BuildWithBNZ fits
 
 [BuildWithBNZ](/) isn't a standalone compliance tool. It's a crew of three AI workers. In its own words, "The crew works inside the tools you already use."

@@ -120,6 +120,8 @@ When you're weighing an AI construction estimator, a short pilot on one live bid
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 
+On a tight budget? Start with our look at [free AI construction estimating software](/blog/ai-construction-estimating-software-free/).
+
 ## FAQ
 
 **What is the best AI estimating software for general contractors?**

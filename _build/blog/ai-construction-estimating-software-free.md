@@ -78,6 +78,8 @@ Handoff is AI estimating for residential builders and remodelers. It lists a fre
 
 Togal.AI's Growth plan is $299 a month per user, billed yearly ([Togal](https://www.togal.ai/pricing), Oct 16, 2026). Check its site for current trial or demo options.
 
+For price and accuracy detail, see our [Togal AI review](/blog/togal-ai-review/).
+
 ## What free AI construction estimating software leaves out
 
 A free plan or trial is a good way to test a tool. But it's rarely enough to run your bids. Here's what tends to be missing:
@@ -87,6 +89,8 @@ A free plan or trial is a good way to test a tool. But it's rarely enough to run
 3. **Your own prices.** Takeoff isn't an estimate. You still need your labor rates and supplier prices.
 4. **The sub side.** None of the free options we found send bid invites, chase sub quotes or collect insurance certificates (COIs).
 5. **Time.** Trials are short. Plan your test before you start the clock.
+
+Comparing paid tools too? See the [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/).
 
 ## How to test a free trial the right way
 

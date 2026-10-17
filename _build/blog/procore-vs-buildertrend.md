@@ -77,7 +77,7 @@ Sources: [procore.com/pricing](https://www.procore.com/pricing), [Procore deal s
 - [ ] **List the modules you actually need.** Procore prices per product.
 - [ ] **Ask about term, renewal increases and required support fees,** in writing.
 - [ ] **Still writing the weekly owner report by hand?** Neither platform writes it for you; see construction weekly report automation.
-- [ ] **Check where estimating and sub paperwork live.** Tracking subs may need its own process either way.
+- [ ] **Check where estimating and sub paperwork live.** Tracking subs (see [subcontractor compliance software](/blog/subcontractor-compliance-software/)) may need its own process either way.
 
 ## Where BuildWithBNZ fits
 

@@ -99,7 +99,7 @@ Both tools make your estimator faster. Neither does the estimate for you, and ne
 
 **Already on PlanSwift or Bluebeam?** Imports from PlanSwift/STACK takeoff files and Bluebeam markups are listed as **"Next" on BNZ's integrations page, not live today.** Don't plan on that connection yet.
 
-[BNZ's AI takeoff and estimating crew](/) is priced at one set price per project, in writing, after a Project Review, then a separate monthly arrangement ([FAQ](/faq/)). If you're comparing AI takeoff software more broadly, see [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/) and [our Togal review](/blog/togal-ai-review/).
+[BNZ's AI takeoff and estimating crew](/) is priced at one set price per project, in writing, after a Project Review, then a separate monthly arrangement ([FAQ](/faq/)). If you're comparing AI takeoff software more broadly, see [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/) and [our Togal AI review](/blog/togal-ai-review/).
 
 **Want to see it on a real bid?** Bring one project to a Project Review call. [Book a Project Review](/book/).
 
