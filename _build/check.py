@@ -47,16 +47,17 @@ for p in pages():
             ctx = text[max(0, m.start() - 40):m.end() + 40].replace("\n", " ")
             if any(a.lower() in ctx.lower() for a in ALLOW): continue
             fail("%s → language '%s' in: …%s…" % (r, m.group(0), ctx.strip()))
-    if "404" not in r and "architecture" not in r and "login" not in r:
+    if "404" not in r and "architecture" not in r and "login" not in r and "waitlist" not in r and "paid" not in r:
         for tag in ('property="og:title"', 'property="og:description"', 'property="og:image"', 'rel="canonical"'):
             if tag not in html: fail("%s → missing %s" % (r, tag))
     if html.count("<h1") > 1: fail("%s → more than one h1" % r)
+    if html.count("<h1") == 0 and 'name="robots" content="noindex' not in html: fail("%s → indexable page has no h1" % r)
 
 # orphans: generated pages nobody links to
 for p in pages():
     r = rel(p); top = r.strip("/").split("/")[0]
     url = r.replace("index.html", "")
-    if top in LEGACY or r in ("/404.html",) or url in ("/thanks/", "/architecture/"): continue
+    if top in LEGACY or r in ("/404.html", "/waitlist.html", "/paid.html") or url in ("/thanks/", "/architecture/"): continue
     if url != "/" and url not in linked and r not in linked: fail("orphan: %s" % r)
 
 # sitemap urls resolve

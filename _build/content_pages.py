@@ -95,7 +95,7 @@ def page_crew():
     desc = "Meet the crew: Sara (construction COO), Taylor (estimating, drawings, specs) and Emma (subcontractor coordination). Three agents, one team."
     h = head("The Crew — Sara, Taylor and Emma | BuildWithBNZ", desc, "/crew/")
     h += nav("/crew/")
-    h += section("dark", sec_head("The crew", "Three agents. One team. Your rules.", PITCH) + crew_cards(), extra_cls="first")
+    h += section("dark", sec_head("The crew", "Three agents. One team. Your rules.", PITCH, h1=True) + crew_cards(), extra_cls="first")
     h += section("light", sec_head("How they work together", "Sara sits at the centre.",
                                    "Taylor and Emma report to her; she cross-checks their work against each other and the documents. You sit above all three — the only arrow pointing at you is labelled approvals. Nothing is sent, awarded, signed or paid by the crew.") + diagram()
                  + '<p class="footnote fx">Behind them, several models check each other\'s work. You only ever deal with three.</p>')
@@ -195,7 +195,7 @@ def page_how():
     for i, (t, p, o, c) in enumerate(STEPS, 1):
         rows.append('<div class="card step"><div><div class="num"><span class="count" data-count="%d" data-dur="240" data-pad="0">00</span></div><h3 style="font-size:clamp(24px,3vw,34px)">%s</h3><p>%s</p>'
                     '<div class="oc"><div><b>Output:</b> %s</div><div><b>Control:</b> %s</div></div></div>%s</div>' % (i, t, p, o, c, mocks[i - 1]))
-    h += section("light", sec_head("How it works", "Six steps to a project that runs itself.") + '<div class="steps rows stagger">%s</div>' % ''.join(rows), extra_cls="first")
+    h += section("light", sec_head("How it works", "Six steps to a project that runs itself.", h1=True) + '<div class="steps rows stagger">%s</div>' % ''.join(rows), extra_cls="first")
     h += section("dark", '<div class="split"><div class="fx"><span class="eyebrow">Then the crew stays on</span><h2 style="margin:14px 0 14px">Reported every Monday.</h2>'
                  '<p class="lede">Ongoing operations: a separate monthly arrangement — hosting, monitoring, new projects, and a report every Monday. We stay responsible for it working.</p>'
                  '<div style="margin-top:22px">%s</div></div><div class="fx">%s</div></div>' % (btn_book(), monday_mock()), id_="ongoing")
@@ -210,7 +210,7 @@ def page_connect():
     h = head("What We Connect To — Google Drive, Gmail, Calendar, Workspace, Notion | BuildWithBNZ", desc, "/what-we-connect-to/")
     h += nav()
     h += section("dark", sec_head("What we connect to", "The systems the crew works inside.",
-                                  "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.") + integrations(rows=3), extra_cls="first")
+                                  "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.", h1=True) + integrations(rows=3), extra_cls="first")
     h += section("light", sec_head("How access works", "Read first. Send only with you.") +
                  '<div class="grid g3 stagger">'
                  '<div class="card"><h3>Read access first</h3><p class="muted" style="margin-top:10px">The crew starts by reading the project folder, the inbox threads you point it at, and the calendar. Nothing is moved, renamed or copied out.</p></div>'
@@ -230,7 +230,7 @@ def page_faq():
         '{"@type":"Question","name":"%s","acceptedAnswer":{"@type":"Answer","text":"%s"}}' % (q.replace('"', '\\"'), a.replace('"', '\\"')) for q, a in FAQ)
     h = head("FAQ — Asked on Every Call | BuildWithBNZ", desc, "/faq/", jsonld=ld)
     h += nav("/faq/")
-    h += section("dark", '<div class="faq-grid"><div class="fx"><span class="eyebrow">FAQ</span><h2 style="margin-top:14px">Asked on every call.</h2><p class="muted" style="margin-top:14px">Direct answers, the way a GC actually asks. If yours isn\'t here, bring it to the Project Review.</p></div><div class="fx">%s</div></div>' % faq_items(FAQ, 8), extra_cls="first")
+    h += section("dark", '<div class="faq-grid"><div class="fx"><span class="eyebrow">FAQ</span><h1 class="h2" style="margin-top:14px">Asked on every call.</h1><p class="muted" style="margin-top:14px">Direct answers, the way a GC actually asks. If yours isn\'t here, bring it to the Project Review.</p></div><div class="fx">%s</div></div>' % faq_items(FAQ, 8), extra_cls="first")
     h += book_strip()
     h += footer()
     return h
@@ -274,7 +274,7 @@ def page_book():
 def page_thanks():
     h = head("Thanks — we'll be in touch | BuildWithBNZ", "Your Project Review request is in. A real person replies the same business day.", "/thanks/", noindex=True)
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h2 style="margin-top:14px">Your project review request is in.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h1 class="h2" style="margin-top:14px">Your project review request is in.</h1>'
                  '<p class="lede">A real person replies the same business day to set a time. Have the drawings or the bid package handy — that\'s what we walk through on the call.</p>'
                  '<p style="margin-top:18px"><a class="btn ghost" href="/how-it-works/">See how it works <span class="g">↗</span></a></p></div>', extra_cls="first")
     h += footer()
@@ -285,7 +285,7 @@ def page_thanks():
 def page_login():
     h = head("Login — Customer Workspace | BuildWithBNZ", "The BuildWithBNZ workspace is opened per project after your Project Review. Access is by invitation.", "/login/", noindex=True)
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">Customer workspace</span><h2 style="margin-top:14px">Access is by invitation.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Customer workspace</span><h1 class="h2" style="margin-top:14px">Access is by invitation.</h1>'
                  '<p class="lede">The workspace is opened per project once scope and price are agreed in writing. If you\'re a customer and your invitation hasn\'t arrived, email <a class="link" href="mailto:%s">%s</a> from the address on your scope document.</p>'
                  '<p style="margin-top:18px">%s</p></div>' % (INBOX, INBOX, btn_book("btn ghost", "New here? Book a project review")), extra_cls="first")
     h += footer()
@@ -294,7 +294,7 @@ def page_login():
 def page_privacy():
     h = head("Privacy — BuildWithBNZ", "How BuildWithBNZ handles the information you share with us: the Project Review form, project files, and the workspace.", "/privacy/")
     h += nav()
-    h += section("dark", '''<div class="prose fx"><span class="eyebrow">Privacy</span><h2 style="margin-top:14px">Privacy policy.</h2>
+    h += section("dark", '''<div class="prose fx"><span class="eyebrow">Privacy</span><h1 class="h2" style="margin-top:14px">Privacy policy.</h1>
 <p class="lede">This covers the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: September 2026.</p>
 <h3>What we collect</h3>
 <p>When you book a Project Review we collect what you type into the form: your name, company, email, phone, contractor type, a description of the project, an optional bid date and an optional link to your files. The form is relayed to our inquiries inbox; we do not use third-party trackers on this site.</p>
@@ -313,7 +313,7 @@ def page_privacy():
 def page_terms():
     h = head("Terms — BuildWithBNZ", "Terms covering the BuildWithBNZ website, Project Review, scope documents and the workspace.", "/terms/")
     h += nav()
-    h += section("dark", '''<div class="prose fx"><span class="eyebrow">Terms</span><h2 style="margin-top:14px">Terms of service.</h2>
+    h += section("dark", '''<div class="prose fx"><span class="eyebrow">Terms</span><h1 class="h2" style="margin-top:14px">Terms of service.</h1>
 <p class="lede">These terms cover your use of the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: September 2026.</p>
 <h3>The service</h3>
 <p>BuildWithBNZ provides three AI agents — Sara, Taylor and Emma — that work inside a construction project workspace. The agents prepare drafts, estimates, sub lists and reports. Anything that leaves your company is sent only after you review and approve it. The agents do not sign, award, pay or commit on your behalf.</p>
@@ -342,7 +342,7 @@ def page_terms():
 def page_404():
     h = head("Page not found — BuildWithBNZ", "That page isn't here.", "/404.html", noindex=True)
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">404</span><h2 style="margin-top:14px">That page isn\'t here.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">404</span><h1 class="h2" style="margin-top:14px">That page isn\'t here.</h1>'
                  '<p class="lede">It may have moved. Try the crew, how it works, or head back home.</p>'
                  '<p style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn ghost" href="/">Home <span class="g">↗</span></a><a class="btn ghost" href="/crew/">The crew <span class="g">↗</span></a>%s</p></div>' % btn_book(), extra_cls="first")
     h += footer()
@@ -352,7 +352,7 @@ def page_contact():
     desc = "Contact BuildWithBNZ. The fastest route is a Project Review — bring one project and we'll show you what the crew would do with it."
     h = head("Contact | BuildWithBNZ", desc, "/contact/")
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">Contact</span><h2 style="margin-top:14px">Talk to a real person.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Contact</span><h1 class="h2" style="margin-top:14px">Talk to a real person.</h1>'
                  '<p class="lede">The fastest route is a Project Review — bring one project and we\'ll show you what the crew would do with it. Or reach us directly.</p>'
                  '<p style="margin-top:18px"><a class="link" href="mailto:%s">%s</a> · <a class="link" href="tel:%s">%s</a></p>'
                  '<p style="margin-top:22px">%s</p></div>' % (INBOX, INBOX, PHONE, PHONE_TXT, btn_book()), extra_cls="first")

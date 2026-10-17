@@ -63,7 +63,8 @@ def main():
         sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>' % (SITE, u, UPDATED, pri))
     sm.append('</urlset>\n')
     write("/sitemap.xml", '\n'.join(sm))
-    write("/robots.txt", "User-agent: *\nAllow: /\nDisallow: /thanks/\n\nSitemap: %s/sitemap.xml\n" % SITE)
+    ROBOTS = 'User-agent: *\nAllow: /\nDisallow: /thanks/\nDisallow: /ops.html\nDisallow: /ops/\nDisallow: /copy/\nDisallow: /docs/\nDisallow: /activate/\nDisallow: /app/\nDisallow: /app/index.html\nDisallow: /app/os.html\nDisallow: /app/vienna.html\nDisallow: /app/indian-trail.html\nDisallow: /app/actions.html\nDisallow: /app/data/\nDisallow: /app/_shot\nDisallow: /_build/\nDisallow: /_plumbing/'
+    write("/robots.txt", ROBOTS + "\n\nSitemap: %s/sitemap.xml\n" % SITE)
     print("wrote %d pages + sitemap.xml + robots.txt" % len(written))
 
 if __name__ == "__main__":
