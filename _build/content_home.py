@@ -14,15 +14,15 @@ WHO = [
 ]
 
 CREW = [
-    ("taylor", "t", "Taylor", "Estimating · drawings · specs",
+    ("taylor", "t", "Taylor", "Chief Estimator &amp; Preconstruction",
      "Takes the full bid package — drawings, specs, addenda, wage schedules, bid forms. Performs takeoffs, finds conflicts, builds labour, material and sub pricing. Produces an estimate with every assumption and source shown.",
      "Never invents a price. Says UNKNOWN when information is missing and always shows the logic."),
-    ("sara", "s", "Sara", "Construction COO · your main interface",
-     "Understands the whole company. Delegates estimating to Taylor and coordination to Emma, catches problems between them, and brings you only the decisions that need you.",
+    ("sara", "s", "Sara Cooper", "Chief Operations &amp; AI Team Leader",
+     "Runs the command center: projects, bids, deadlines, approvals and open issues. Assigns and supervises the work of the other six agents, and brings you only the decisions that need you.",
      "Never claims something was completed unless verified. Never makes the owner's decision."),
-    ("emma", "e", "Emma", "Subcontractor &amp; project coordination",
-     "Knows your niche, geography, job size and buyout target. Finds subs, sends invitations with the right files, follows up, collects quotes, COIs, W-9s and compliance docs, levels scope against Taylor's estimate. Remembers who performs.",
-     "Never lets a dependency go unnamed."),
+    ("emma", "e", "Emma", "Chief Finance &amp; Accounting",
+     "Covers job costing, reconciliation reviews, payroll verification, payables and receivables, invoice tracking and cash-flow reporting.",
+     "Reviews and recommends. Never posts transactions or changes accounting records without authorization."),
 ]
 
 STEPS = [
@@ -34,9 +34,9 @@ STEPS = [
      "a connected workspace, nothing moved.", "nothing is moved or replaced. Read access first."),
     ("Taylor reads the package", "Drawings, specs, addenda, wage schedules, bid forms. Takeoffs, conflicts, pricing — every assumption and source shown.",
      "an estimate with its logic attached.", "Taylor says UNKNOWN rather than guessing."),
-    ("Emma builds the sub list", "Bid invitations with the right files, follow-ups, quotes, COIs, W-9s — levelled against Taylor's estimate.",
+    ("Taylor lines up the subs", "Sub and vendor pricing requested with the right files, follow-ups, quotes — levelled against her estimate. Sara tracks the COIs and W-9s.",
      "a levelled bid table per trade.", "nothing goes to a sub without your approval."),
-    ("Sara runs it", "She watches both, catches what falls between them, and brings you a short queue of the decisions that need you.",
+    ("Sara runs it", "She supervises the team, catches what falls between them, and brings you a short queue of the decisions that need you.",
      "a Monday report and an approvals queue.", "she brings you only the decisions that need you. You sign. She doesn't."),
 ]
 
@@ -45,7 +45,7 @@ def crew_cards(light=False):
         '<div class="card crew-card %s"><div class="av-wrap">%s</div>'
         '<h3>%s</h3><div class="role">%s</div><p>%s</p><div class="rule">%s</div></div>' % (cls, av(k, 96, anim=True), n, r, p, rule)
         for cls, k, n, r, p, rule in CREW)
-    return '<div class="crew-grid stagger">%s</div><p class="footnote fx">Behind them, several models check each other\'s work. You only ever deal with three.</p>' % cards
+    return '<div class="crew-grid stagger">%s</div><p class="footnote fx">Three of the seven agents. <a class="link" href="/crew/">Meet the whole AI team →</a></p>' % cards
 
 def steps_grid(rows=False):
     out = []
@@ -63,7 +63,7 @@ def work_cards():
           '<div class="line"><b>What the crew would do with it</b> → walked through live</div></div>')
     c2 = ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Scope document · in writing</div>'
           '<div class="row"><div><b>What Taylor does</b><span>Takeoffs, estimate Rev 1, conflict log</span></div></div>'
-          '<div class="row"><div><b>What Emma does</b><span>Sub list, invitations, quote collection</span></div></div>'
+          '<div class="row"><div><b>What Emma checks</b><span>Job costs and invoices</span></div></div>'
           '<div class="row"><div><b>What stays with you</b><span>Every approval, every send, the signature</span></div></div>'
           '<div class="row needs"><div><b>One set price</b><span>Agreed before work starts</span></div></div></div>')
     c3 = ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Project page</div>'
@@ -87,7 +87,7 @@ def proof():
             '<div class="card"><h3>The rules, stated as guarantees</h3>'
             '<blockquote>"Sara never claims something was completed unless verified. Never makes the owner\'s decision."</blockquote>'
             '<blockquote>"Taylor never invents a price. Says UNKNOWN when information is missing and always shows the logic."</blockquote>'
-            '<blockquote>"Emma never lets a dependency go unnamed."</blockquote></div>'
+            '<blockquote>"Emma reviews and recommends. She never posts transactions or changes accounting records without authorization."</blockquote></div>'
             '<div class="card"><h3>How the crew catches its own mistakes</h3><p class="muted" style="margin-top:10px">Every estimate line, sub quote and claim is cross-checked before it reaches you. When two sources disagree — a spec section against a drawing sheet, a quote against a levelled scope — the item is flagged CONFLICT and held, not smoothed over. Anything the crew was told but hasn\'t confirmed stays marked REPORTED — NOT VERIFIED until it\'s checked against the document itself.</p></div>'
             '</div>')
 
@@ -98,7 +98,7 @@ def page_home():
     h = head("AI Operating System for Construction Companies | BuildWithBNZ", desc, "/", jsonld=ld)
     h += nav("/")
     h += hero("AI operating system for construction companies", "Run the company. Keep every decision.",
-              "Sara runs operations, Taylor reads the drawings and builds the estimate, Emma builds and manages your subcontractor network. They connect to the files and systems you already use — Drive, Gmail, Calendar, Notion, your project folders — and work together inside one construction workspace. Every project is scoped and priced in writing before we start. You approve anything that leaves the building.",
+              TEAM_LEDE,
               sample_project_mock())
     h += section("light strip", '<div class="cells stagger">%s</div>' % ''.join('<div><h3>%s</h3><p>%s</p></div>' % w for w in WHO))
     h += section("dark", sec_head("The crew", "Three agents. One team.") + crew_cards(), id_="crew")
