@@ -6,7 +6,7 @@
   'use strict';
   var d = document, w = window;
   var RM = w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (RM) d.documentElement.classList.add('no-motion');
+  if (RM) { d.documentElement.classList.add('no-motion'); d.querySelectorAll('use[data-static]').forEach(function (u) { u.setAttribute('href', u.getAttribute('data-static')); }); }
 
   /* ---------- Lead form endpoint — the one constant the plumbing changes ----------
      Today: FormSubmit relay to the inquiries inbox (no key in the browser).

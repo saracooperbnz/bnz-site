@@ -88,16 +88,24 @@ section{padding:clamp(64px,9vw,120px) 0}
 .light .chip.cross{border-color:rgba(0,0,0,.35);color:var(--ink-l)}
 .light .chip.verified{color:#2F7A44;background:rgba(76,154,94,.14)}
 
-/* agent faces — the approved FINAL images, resized only. Framing is CSS (REVIEW p1). Photos never animate. */
-.av{display:inline-block;flex:none;vertical-align:middle;width:var(--s,32px);height:var(--s,32px);border-radius:50%;overflow:hidden;background:var(--surface-2)}
-.av img{width:100%;height:100%;object-fit:cover;object-position:var(--fp,50% 30%);transform:scale(var(--z,1));transform-origin:var(--fp,50% 30%)}
+/* crew characters: one hidden SVG sprite per page (shared.py MARKS). Big ones float and glint; small ones stay still. */
+.av{display:inline-block;flex:none;vertical-align:middle}
 .av-wrap{display:inline-block}
-.portrait{position:relative;margin:0;aspect-ratio:4/5;border-radius:var(--r);overflow:hidden;background:var(--surface-2);border:1px solid var(--hair-2)}
+.portrait{position:relative;margin:0;aspect-ratio:1/1;display:grid;place-items:center;border-radius:var(--r);overflow:hidden;background:var(--surface-2);border:1px solid var(--hair-2)}
 .light .portrait{border-color:var(--hair-l)}
-.portrait img{width:100%;height:100%;object-fit:cover;object-position:var(--fp,50% 30%)}
-.ai-tag{position:absolute;left:10px;bottom:10px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;line-height:1;color:var(--ink);background:rgba(10,10,10,.8);border:1px solid var(--hair-2);border-radius:6px;padding:5px 8px}
-.thumb{display:block;width:var(--t,84px);height:var(--t,84px);border-radius:10px;overflow:hidden;border:1px solid var(--hair-2);background:var(--surface-2);margin:0 auto 10px}
-.thumb img{width:100%;height:100%;object-fit:cover;object-position:var(--fp,50% 30%)}
+.portrait .av{width:58%;height:auto}
+.thumb{display:grid;place-items:center;width:var(--t,84px);height:var(--t,84px);border-radius:10px;border:1px solid var(--hair-2);background:var(--surface-2);margin:0 auto 10px}
+.thumb .av{width:62%;height:auto}
+@keyframes plFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes plGlint{0%,55%{transform:translateX(-140px) skewX(-18deg)}90%,100%{transform:translateX(340px) skewX(-18deg)}}
+@keyframes plFacet{0%,100%{opacity:1}50%{opacity:.6}}
+@keyframes saraBar{0%{transform:translateX(-180px)}38%,68%{transform:translateX(0)}100%{transform:translateX(200px)}}
+@keyframes emmaDock{0%{transform:translateX(120px);opacity:0}18%{opacity:1}52%,74%{transform:translateX(0);opacity:1}92%,100%{transform:translateX(0);opacity:0}}
+@keyframes tayTrace{0%{stroke-dashoffset:0}100%{stroke-dashoffset:-258}}
+@keyframes amaPlay{0%,30%,100%{opacity:0}50%,72%{opacity:1}}
+@keyframes kyleLight{0%,20%,90%,100%{opacity:0}35%,70%{opacity:1}}
+@keyframes richWrite{0%,10%{transform:translateX(-150px)}40%,70%{transform:translateX(0);opacity:1}90%,100%{transform:translateX(0);opacity:0}}
+@keyframes adamBlink{0%{opacity:1}50%{opacity:0}}
 
 /* cards */
 .card{background:var(--surface);border:1px solid var(--hair);border-radius:var(--r);padding:clamp(20px,2.4vw,28px)}
@@ -416,7 +424,7 @@ footer .ai-note{margin-top:6px;color:var(--muted)}
 .agent-card.lead .ac-limits{grid-template-columns:1fr 1fr;column-gap:28px}
 @media (max-width:900px){.agent-card.lead{grid-template-columns:1fr}.agent-card.lead .portrait{max-width:240px}.agent-card.lead .ac-limits{grid-template-columns:1fr}}
 @media (max-width:620px){.ac-head{display:grid;grid-template-columns:112px minmax(0,1fr);gap:14px;align-items:center}.ac-head .portrait{margin:0}
-  .ac-head .ai-tag{left:5px;bottom:5px;font-size:8.5px;letter-spacing:.06em;padding:3px 4px}.agent-card h3{font-size:28px}}
+  .agent-card h3{font-size:28px}}
 .flow{list-style:none;counter-reset:f;display:grid;gap:12px}
 .flow>li{counter-increment:f;position:relative;padding:14px 16px 14px 56px;border:1px solid var(--hair-2);border-radius:var(--r-sm);background:var(--surface);font-size:16px;color:var(--muted)}
 .flow>li b{color:var(--ink)}
@@ -552,7 +560,6 @@ form.lead input,form.lead select,form.lead textarea{font-size:18px}
 
 /* review fixes (Oct 17): contrast, tap targets, phone first screens */
 .light .footnote{color:var(--muted-l)}
-@media (max-width:620px){.ac-head .ai-tag{font-size:10px;letter-spacing:.08em;padding:4px 6px}}
 .light .states .chip.working,.light .states .chip.showing{color:var(--ink-l)}
 .burger{width:44px;height:44px}
 a[href^="tel:"]{white-space:nowrap}

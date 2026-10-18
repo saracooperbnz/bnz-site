@@ -70,7 +70,7 @@ def sara_section():
              'signature, payment and send, and your crews and subs still build the job. Built from real contractor workflows inside BNZ Builders.</p>'
              '<div class="asks"><p>Ask her: <b>"What does my company need to handle today?"</b></p><ul class="pills">%s</ul></div>'
              '<div class="sara-cta">%s%s</div><p class="small muted sara-note">Bring one bid. We\'ll walk through what Sara would do with it.</p>'
-             '</div></div>') % (portrait("sara", sizes="(max-width:900px) 280px, 440px"), ''.join('<li>%s</li>' % x for x in SARA_ASKS),
+             '</div></div>') % (portrait("sara"), ''.join('<li>%s</li>' % x for x in SARA_ASKS),
                                 btn_book(label="Book a demo"), START_BTN)
     ex = ('<div class="sara-ex"><div class="fx"><span class="eyebrow">How she works</span><h3 class="ex-h">Four sample conversations</h3>'
           '<p class="small muted">Samples only. No real names, jobs or numbers.</p></div>%s</div>') % sara_examples()
