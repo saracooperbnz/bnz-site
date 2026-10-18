@@ -56,34 +56,71 @@ def tx(s):
     """Escape plain text from team.py for HTML text or attributes."""
     return _html.escape(s, quote=True)
 
-def av(who, size=32, note=False, anim=False):
-    """An agent's approved face in a circle. Old one-letter keys ('s', 't', 'e') still work.
-    anim is ignored: photos never float or glint. Framing is CSS only (object-position + a small zoom).
-    The alt text always says the face is an AI-generated character (REVIEW Face Lock box)."""
-    a = BY[who]; i = a["img"]
-    if size > 64:                                     # mid sizes: the 480w portrait, no zoom
-        f, fp, z = "sm", i["fp"], 1
-    else:                                             # small: the framing in team.py (approved tile, or a CSS crop of the portrait)
-        f, fp, z = i["av"]
-    return ('<span class="av av-%s" style="--s:%dpx;--fp:%s;--z:%s"><img src="/assets/team/%s-%s.webp" width="%d" height="%d" '
-            'alt="%s, AI-generated character" loading="lazy" decoding="async"></span>') % (a["slug"], size, fp, z, a["slug"], f, size, size, tx(a["short"]))
+# The crew characters: a sheet with a folded corner, two rivets and one cut-out for the agent's job.
+# Sara, Taylor and Emma are the original character sheet; the other four follow it.
+# slug: (shape, body, facet, motion behind the body, motion over it). Motions are lit in #F5F3EE.
+RIVETS = " M26 204a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M194 204a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z"
+SHEET = "M0 0H180L240 60V240H0Z"
+LIT = 'fill="#F5F3EE"'
+MARKS = {
+    "sara": (SHEET + " M48 96H192V120H48Z" + RIVETS, "#EA580C", "#9A3A08",          # status bar
+             '<g clip-path="url(#mw-sara)"><rect x="48" y="94" width="144" height="28" %s style="animation:saraBar 4.6s cubic-bezier(.2,.8,.2,1) infinite"/></g>' % LIT, ''),
+    "amanda": (SHEET + " M92 78L164 120L92 162Z" + RIVETS, "#C9718A", "#85485A",     # play button
+               '<path d="M92 78L164 120L92 162Z" %s style="animation:amaPlay 4.6s ease-in-out infinite"/>' % LIT, ''),
+    "kyle": ("M0 84L84 0H180L240 60V240H0Z M82 96H116V130H82Z M124 96H158V130H124Z M82 138H116V172H82Z M124 138H158V172H124Z" + RIVETS,
+             "#7385B8", "#4B577A",                                                   # roof and window
+             ''.join('<rect x="%d" y="%d" width="34" height="34" %s style="animation:kyleLight 4.6s ease-in-out %.1fs infinite"/>' % (x, y, LIT, n * .3)
+                     for n, (x, y) in enumerate([(82, 96), (124, 96), (124, 138), (82, 138)])), ''),
+    "taylor": ("M180 0L240 60V240H0Z M204 64V150H139.5Z M38 204a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z M194 204a10 10 0 1 0 20 0a10 10 0 1 0 -20 0Z",
+               "#C9A44F", "#8A6E33", '',                                             # set square
+               '<path d="M204 64V150H139.5Z" fill="none" stroke="#F5F3EE" stroke-width="4" stroke-dasharray="46 212" style="animation:tayTrace 4.6s linear infinite"/>'),
+    "emma": ("M0 0H180L240 60V92H132V102H118V138H132V148H240V240H0Z" + RIVETS, "#7F9C76", "#55684E", '',   # dock
+             '<g clip-path="url(#mw-emma)"><rect x="144" y="107" width="26" height="26" %s style="animation:emmaDock 4.6s cubic-bezier(.2,.8,.2,1) infinite"/></g>' % LIT),
+    "richard": (SHEET + " M48 80H192V96H48Z M48 112H192V128H48Z M48 144H140V160H48Z" + RIVETS, "#9A719E", "#654968",   # contract lines
+                '<g clip-path="url(#mw-richard)">%s</g>' % ''.join(
+                    '<rect x="48" y="%d" width="144" height="16" %s style="animation:richWrite 4.6s cubic-bezier(.2,.8,.2,1) %.1fs infinite"/>' % (y, LIT, n * .35)
+                    for n, y in enumerate([80, 112, 144])), ''),
+    "adam": (SHEET + " M52 84L112 122L52 160V137.2L76 122L52 106.8Z M126 136H190V158H126Z" + RIVETS, "#4E9CA6", "#31666D",   # terminal prompt
+             '<rect x="126" y="136" width="64" height="22" %s style="animation:adamBlink 1.1s steps(1) infinite"/>' % LIT, ''),
+}
+MARK_WINDOWS = {"sara": '<rect x="48" y="96" width="144" height="24"/>', "emma": '<rect x="118" y="92" width="122" height="56"/>',
+                "richard": '<rect x="48" y="80" width="144" height="16"/><rect x="48" y="112" width="144" height="16"/><rect x="48" y="144" width="92" height="16"/>'}
 
-def portrait(slug, cls="", eager=False, sizes="(max-width:620px) 40vw, (max-width:960px) 44vw, 360px", tag=True):
-    """A FINAL portrait, framed by CSS, with the visible AI-generated label."""
-    a = BY[slug]; i = a["img"]
-    lw, lh = i["lg"]; sw, _ = i["sm"]
-    alt = "%s, %s, AI-generated character" % (a["name"], a["title"])
-    load = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
-    return ('<figure class="portrait %s" style="--fp:%s"><img src="/assets/team/%s-lg.webp" '
-            'srcset="/assets/team/%s-sm.webp %dw, /assets/team/%s-lg.webp %dw" sizes="%s" width="%d" height="%d" alt="%s" %s>'
-            '%s</figure>') % (cls, i["fp"], slug, slug, sw, slug, lw, sizes, lw, lh, tx(alt), load,
-                              '<figcaption class="ai-tag">AI-generated</figcaption>' if tag else '')
+def crew_sprite():
+    """All seven characters as one hidden SVG sprite per page. #mc-<slug> is static; #ma-<slug> floats, glints
+    and runs its own motion (bnz.js swaps in the static one under prefers-reduced-motion)."""
+    d = ['<linearGradient id="mglint" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#F5F3EE" stop-opacity="0"/>'
+         '<stop offset=".5" stop-color="#F5F3EE" stop-opacity=".28"/><stop offset="1" stop-color="#F5F3EE" stop-opacity="0"/></linearGradient>']
+    d += ['<clipPath id="mw-%s">%s</clipPath>' % (k, r) for k, r in MARK_WINDOWS.items()]
+    for k, (shape, body, facet, behind, over) in MARKS.items():
+        d.append('<path id="mp-%s" fill-rule="evenodd" d="%s"/>' % (k, shape))
+        d.append('<clipPath id="mcl-%s"><use href="#mp-%s"/></clipPath>' % (k, k))
+        d.append('<g id="mc-%s"><use href="#mp-%s" fill="%s"/><path fill="%s" d="M180 0L240 60H180Z"/></g>' % (k, k, body, facet))
+        d.append('<g id="ma-%s" style="animation:plFloat 5.2s ease-in-out infinite">%s<use href="#mp-%s" fill="%s"/>'
+                 '<path d="M180 0L240 60H180Z" fill="%s" style="animation:plFacet 3.4s ease-in-out infinite"/>%s'
+                 '<g clip-path="url(#mcl-%s)"><rect x="-40" y="-20" width="70" height="300" fill="url(#mglint)" style="animation:plGlint 4.6s ease-in-out infinite"/></g></g>' % (
+                     k, behind, k, body, facet, over, k))
+    return '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>%s</defs></svg>\n' % ''.join(d)
+
+def av(who, size=32, note=False, anim=False, label=True):
+    """An agent's character. Old one-letter keys ('s', 't', 'e') still work.
+    anim=True uses the moving version (float, glint, its own motion)."""
+    a = BY[who]; k = a["slug"]
+    aria = 'role="img" aria-label="%s"' % tx(a["short"]) if label else 'aria-hidden="true"'
+    if anim:
+        return ('<svg class="av av-%s" width="%d" height="%d" viewBox="-20 -20 280 280" style="overflow:visible" %s>'
+                '<use href="#ma-%s" data-static="#mc-%s"/></svg>') % (k, size, size, aria, k, k)
+    return '<svg class="av av-%s" width="%d" height="%d" viewBox="0 0 240 240" %s><use href="#mc-%s"/></svg>' % (k, size, size, aria, k)
+
+def portrait(slug, cls=""):
+    """An agent's character, big and moving, on its own panel."""
+    a = BY[slug]
+    return ('<figure class="portrait %s" role="img" aria-label="%s, %s">%s</figure>') % (
+        cls, tx(a["name"]), tx(a["title"]), av(slug, 240, anim=True, label=False))
 
 def thumb(slug):
-    """Square framed crop of an approved image (org chart), CSS only. Decorative: the name sits beside it."""
-    a = BY[slug]
-    return '<span class="thumb" style="--fp:%s"><img src="/assets/team/%s-sm.webp" width="96" height="96" alt="" loading="lazy" decoding="async"></span>' % (
-        a["img"]["fp"], slug)
+    """An agent's character on a small square panel (org chart). Decorative: the name sits beside it."""
+    return '<span class="thumb">%s</span>' % av(slug, 96, label=False)
 
 def btn_book(cls="btn primary", label="Book a project review"):
     return '<a class="%s" href="/book/">%s <span class="g">↗</span></a>' % (cls, label)
@@ -130,7 +167,7 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
 %(ld)s</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-''' % dict(title=esc(title), desc=esc(desc), canon=canon, og=esc(og_title), site=SITE, fonts=FONTS, ld=ld, robots=robots)
+%(sprite)s''' % dict(sprite=crew_sprite(), title=esc(title), desc=esc(desc), canon=canon, og=esc(og_title), site=SITE, fonts=FONTS, ld=ld, robots=robots)
 
 def esc(s):
     return s.replace('&', '&amp;').replace('"', '&quot;').replace('&amp;amp;', '&amp;')
@@ -174,7 +211,7 @@ def footer():
     return '''</main>
 <footer>
 <div class="wrap">
-<div><a class="brand" href="/"><span class="mark">B</span>BuildWithBNZ</a><p class="addr" style="margin-top:10px">New York · <a href="mailto:%(inbox)s">%(inbox)s</a> · <a href="tel:%(phone)s">%(phone_txt)s</a></p><p class="addr ai-note">Agent portraits are AI-generated characters.</p></div>
+<div><a class="brand" href="/"><span class="mark">B</span>BuildWithBNZ</a><p class="addr" style="margin-top:10px">New York · <a href="mailto:%(inbox)s">%(inbox)s</a> · <a href="tel:%(phone)s">%(phone_txt)s</a></p><p class="addr ai-note">The crew are AI agents, not real people.</p></div>
 <nav aria-label="Footer"><a href="/solutions/">Solutions</a><a href="/what-we-connect-to/">What we connect to</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
 </div>
 </footer>

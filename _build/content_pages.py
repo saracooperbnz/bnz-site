@@ -126,10 +126,9 @@ def agent_card(a, lead=False):
     body = ('%s%s<p class="ac-h">Role</p><p class="ac-role">%s</p>%s<p class="ac-h">%s</p><ul class="ac-limits">%s</ul>%s') % (
         meta, badge, tx(a["role"]), note, a.get("limits_label", "Approval limits"), ''.join('<li>%s</li>' % tx(l) for l in a["limits"]),
         '<p class="ac-more"><a class="link" href="%s">Meet %s →</a></p>' % (a["page"], a["short"]) if a["page"] else '')
+    pic = portrait(a["slug"])
     if lead:
-        pic = portrait(a["slug"], sizes="(max-width:900px) 260px, 360px")
         return '<article class="card agent-card lead%s" id="%s"%s>%s<div class="ac-main">%s%s</div></article>' % (' acc' if acc else '', a["slug"], acc, pic, ident, body)
-    pic = portrait(a["slug"], sizes="(max-width:620px) 112px, (max-width:960px) 44vw, 360px")
     return '<article class="card agent-card%s" id="%s"%s><div class="ac-head">%s%s</div>%s</article>' % (' acc' if acc else '', a["slug"], acc, pic, ident, body)
 
 def team_flow():
@@ -227,7 +226,7 @@ def page_agent(slug):
     h += ('<section class="dark agent-hero" style="--acc:%s"><div class="wrap"><div class="fx"><span class="eyebrow">AI team · %s / 07</span><h1 style="margin:16px 0 20px;font-size:clamp(40px,6vw,80px)">%s</h1>'
           '<p class="ac-title">%s · %s</p><p class="lede">%s</p>%s<div class="cta" style="margin-top:26px">%s</div></div><div class="fx">%s</div></div></section>\n') % (
         a["accent"], a["n"], p["h1"], name, tx(a["title"]), tx(a["role"]), meta, btn_book(),
-        portrait(slug, "big", eager=True, sizes="(max-width:900px) 80vw, 420px"))
+        portrait(slug, "big"))
     h += section("light", ('<div class="split"><div class="fx"><h2 style="font-size:clamp(28px,3.4vw,40px);margin-bottom:18px">%s</h2><ul class="checks">%s</ul></div>'
                            '<div class="fx"><div class="pull">"%s"</div><div class="eyebrow mute" style="margin-top:24px">Her states</div><div class="states">%s</div><p class="muted small">%s</p></div></div>') % (
         p.get("checks_h", "On your project, she…"), ''.join('<li>%s</li>' % c for c in p["checks"]), p["rule"], ''.join(chip(k, t) for k, t in p["states"]), p["states_note"]))
