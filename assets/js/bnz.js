@@ -208,7 +208,7 @@
   }
 
   /* ---------- lead form ---------- */
-  var form = d.querySelector('form.lead');
+  var form = d.querySelector('form.lead:not(.report)');
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -234,6 +234,44 @@
           location.href = 'mailto:saracooper@bnzbuildersinc.com?subject=' + encodeURIComponent(data._subject) + '&body=' + encodeURIComponent(body);
           sub.disabled = false; sub.innerHTML = label;
         });
+    });
+  }
+
+  /* ---------- /workflow-report/ — the free report for an email ---------- */
+  // With the Klaviyo IDs on the form the request joins the report list; without them, or if Klaviyo fails, it reaches the inbox like /book/.
+  var rf = d.querySelector('form.report');
+  if (rf) {
+    rf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var hp = rf.querySelector('[name="_honey"]'); if (hp && hp.value) return;
+      rf.classList.remove('invalid');
+      var data = {};
+      new FormData(rf).forEach(function (v, k) { if (k[0] !== '_') data[k] = String(v).trim(); });
+      if (!data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '') || data.consent !== 'yes') { rf.classList.add('invalid'); return; }
+      var sub = rf.querySelector('button[type="submit"]'), label = sub.innerHTML; sub.disabled = true; sub.textContent = 'Sending…';
+      var subject = 'New request — Workflow report: ' + (data.company || data.name);
+      var done = function () { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'report' }); location.href = '/workflow-report/thanks/'; };
+      var ok = function (r) { if (!r.ok) throw new Error(r.status); done(); };
+      var inbox = function () {
+        var body = Object.assign({ _subject: subject, _template: 'table', source: location.pathname }, data);
+        return fetch(LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) }).then(ok);
+      };
+      var co = rf.getAttribute('data-klaviyo-company'), list = rf.getAttribute('data-klaviyo-list');
+      var profile = { email: data.email, first_name: data.name, organization: data.company || undefined,
+        properties: { contractor_type: data.contractor_type || '', time_sink: data.time_sink || '' },
+        subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } } };
+      var sent = !(co && list) ? inbox() : fetch('https://a.klaviyo.com/client/subscriptions?company_id=' + encodeURIComponent(co), {
+        method: 'POST', headers: { 'Content-Type': 'application/vnd.api+json', 'revision': '2026-10-15' },
+        body: JSON.stringify({ data: { type: 'subscription',
+          attributes: { custom_source: 'Workflow report (' + location.pathname + ')', profile: { data: { type: 'profile', attributes: profile } } },
+          relationships: { list: { data: { type: 'list', id: list } } } } })
+      }).then(ok).catch(inbox);
+      sent.catch(function () {
+        // neither reachable: the visitor's own mail client, so no request is lost
+        var lines = Object.keys(data).map(function (k) { return k + ': ' + data[k]; }).join('\n');
+        location.href = 'mailto:saracooper@bnzbuildersinc.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines);
+        sub.disabled = false; sub.innerHTML = label;
+      });
     });
   }
 })();

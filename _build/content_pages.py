@@ -390,6 +390,66 @@ def page_thanks():
     h += footer()
     return h
 
+# ------------------------------------------------------------------ /workflow-report/ — the content funnel (founders' plan, 19 Oct 2026)
+# The intro plays free; the report costs an email; the thanks page offers the call. Klaviyo's two IDs are public
+# (its client API is made for the browser). Until they're set, requests reach the inbox the way /book/ does.
+
+KLAVIYO_COMPANY = ""   # Klaviyo public API key (site ID)
+KLAVIYO_LIST = ""      # list ID of the report list; its flow sends the report and the follow-ups
+INTRO_VIDEO = ""       # embed URL of the short intro (YouTube, Vimeo or Loom); empty shows the sample project
+
+REPORT_PARTS = [
+    ("Where the hours go", "The work that eats your week — takeoffs, sub quotes, bid paperwork, the Monday report — laid out against how you work today."),
+    ("What to hand off first", "The one or two jobs the crew would take on first, and what they would look like on your next bid or job."),
+    ("What stays with you", "Every price, every send and every signature stays yours. The report shows where you would approve."),
+]
+
+def report_form():
+    types = ''.join('<option>%s</option>' % t for _, t in START_TYPES)
+    return ('<form class="lead report" method="post" action="https://formsubmit.co/%s" novalidate data-klaviyo-company="%s" data-klaviyo-list="%s">'
+            '<input type="hidden" name="_subject" value="New request — Workflow report">'
+            '<input type="hidden" name="_template" value="table">'
+            '<input type="hidden" name="_next" value="%s/workflow-report/thanks/">'
+            '<input type="hidden" name="_captcha" value="false">'
+            '<label class="hp" aria-hidden="true">Leave empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>'
+            '<div class="two"><label>Your name<input name="name" required autocomplete="name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="next"></label><label>Email<input name="email" type="email" required autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next"></label></div>'
+            '<div class="two"><label>Company<input name="company" autocomplete="organization" autocapitalize="words" enterkeyhint="next"></label><label>Contractor type<select name="contractor_type"><option value="">Choose one</option>%s</select></label></div>'
+            '<label>What eats the most time? (optional)<textarea name="time_sink" enterkeyhint="done" placeholder="e.g. Takeoffs on every bid, chasing sub quotes, the Friday paperwork."></textarea></label>'
+            '<label class="consent"><input type="checkbox" name="consent" value="yes" required>Email me the report and occasional follow-ups from BuildWithBNZ. Unsubscribe any time.</label>'
+            '<div class="err">Please add your name and email, and tick the box so we can email you the report.</div>'
+            '<button class="btn primary" type="submit">Send me the free report <span class="g">↗</span></button>'
+            '<p class="note">Free, and no call needed. Your email is used for the report and our follow-ups only. <a class="link" href="/privacy/">Privacy</a></p>'
+            '</form>') % (INBOX, esc(KLAVIYO_COMPANY), esc(KLAVIYO_LIST), SITE, types)
+
+def page_report():
+    desc = "Watch the short intro, then get a free workflow report for your company: where the hours go, what the crew would take on first, and what stays with you."
+    h = head("Free Contractor Workflow Report | BuildWithBNZ", desc, "/workflow-report/")
+    h += nav()
+    media = ('<div class="video"><iframe src="%s" title="BuildWithBNZ intro" loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe></div>' % esc(INTRO_VIDEO)
+             if INTRO_VIDEO else sample_project_mock())
+    h += ('<section class="dark hero"><div class="wrap"><div class="fx"><span class="eyebrow">Free for contractors</span><h1>Where does your week go?</h1>'
+          '<p class="lede">Watch the short intro. Then tell us how you bid and run jobs, and we\'ll email you a free workflow report for your company.</p>'
+          '<div class="cta"><a class="btn primary" href="#report">Get the free report <span class="g">↓</span></a><a class="link" href="/crew/">Meet the crew</a></div></div>'
+          '<div class="fx">%s</div></div></section>\n') % media
+    parts = ''.join('<div class="card"><h3>%s</h3><p>%s</p></div>' % p for p in REPORT_PARTS)
+    h += section("light", sec_head("The report", "What's in it.") + '<div class="grid g3 stagger pain">%s</div>' % parts)
+    h += section("dark", '<div class="split"><div class="fx"><span class="eyebrow">Free workflow report</span>'
+                 '<h2 style="margin:14px 0 12px">Get the free report.</h2>'
+                 '<p class="lede">A few details and it\'s on its way to your inbox.</p>'
+                 '<p class="small muted" style="margin-top:12px">Rather talk now? <a class="link" href="/book/">Book a project review</a> or <a class="link" href="tel:%s">call %s</a>.</p></div>'
+                 '<div class="fx"><div class="card">%s</div></div></div>' % (PHONE, PHONE_TXT, report_form()), id_="report")
+    h += footer()
+    return h
+
+def page_report_thanks():
+    h = head("Thanks — your report is on its way | BuildWithBNZ", "Your workflow report request is in.", "/workflow-report/thanks/", noindex=True)
+    h += nav()
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h2 style="margin-top:14px">Your report is on its way.</h2>'
+                 '<p class="lede">Watch your inbox for the workflow report. Want to walk through it on a real project? Book a project review and bring one bid or one job.</p>'
+                 '<p style="margin-top:18px">%s</p></div>' % btn_book(), extra_cls="first")
+    h += footer()
+    return h
+
 # ------------------------------------------------------------------ login, legal, 404, contact
 
 def page_login():
@@ -405,15 +465,16 @@ def page_privacy():
     h = head("Privacy — BuildWithBNZ", "How BuildWithBNZ handles the information you share with us: the Project Review form, project files, and the workspace.", "/privacy/")
     h += nav()
     h += section("dark", '''<div class="prose fx"><span class="eyebrow">Privacy</span><h2 style="margin-top:14px">Privacy policy.</h2>
-<p class="lede">This covers the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: September 2026.</p>
+<p class="lede">This covers the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: October 2026.</p>
 <h3>What we collect</h3>
 <p>When you book a Project Review we collect what you type into the form: your name, company, email, phone, contractor type, a description of the project, an optional bid date and an optional link to your files. The form is relayed to our inquiries inbox; we do not use third-party trackers on this site.</p>
+<p>When you ask for the free workflow report we collect your name, email, and, if you give them, your company, contractor type and what takes the most time. We use them to send the report and the follow-up emails you agreed to. Every email has an unsubscribe link.</p>
 <h3>Project files</h3>
 <p>During a Project Review you may share drawings, specs, addenda and bid documents. They are used to prepare the walkthrough and, if we go ahead, the scope document. They are not used to train models, are not shared outside the people working your project, and are deleted on request.</p>
 <h3>The workspace</h3>
 <p>Once a project is scoped, the crew connects to the systems named in your scope document — Google Drive, Gmail, Google Calendar, Google Workspace, Notion — with read access first. Access is scoped per project. Anything that leaves the workspace (an email to a subcontractor, a request to an architect) waits in your approvals queue until you approve it.</p>
 <h3>Who we share with</h3>
-<p>Nobody, beyond the service providers needed to run the site and the workspace (hosting, email relay, the model providers that process your project documents under our agreements with them). We do not sell or rent your information.</p>
+<p>Nobody, beyond the service providers needed to run the site and the workspace (hosting, email relay, our email platform for the report and its follow-ups, the model providers that process your project documents under our agreements with them). We do not sell or rent your information.</p>
 <h3>Your rights</h3>
 <p>Ask us what we hold about you, ask us to correct it, or ask us to delete it: <a class="link" href="mailto:%s">%s</a>.</p>
 </div>''' % (INBOX, INBOX), extra_cls="first")

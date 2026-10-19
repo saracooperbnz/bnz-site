@@ -33,6 +33,8 @@ PAGES = {
     "/book/index.html": content_pages.page_book,
     "/start/index.html": content_pages.page_start,
     "/thanks/index.html": content_pages.page_thanks,
+    "/workflow-report/index.html": content_pages.page_report,
+    "/workflow-report/thanks/index.html": content_pages.page_report_thanks,
     "/login/index.html": lambda: content_pages.page_redirect("/", "Moved — BuildWithBNZ"),
     "/privacy/index.html": content_pages.page_privacy,
     "/terms/index.html": content_pages.page_terms,
@@ -45,7 +47,7 @@ for L in content_landers.LANDERS:
 
 # URLs that go in the sitemap: generated public pages + the untouched legacy pages
 SITEMAP_EXTRA = ["/about/", "/services/", "/public-works/", "/credentials/", "/careers/", "/subcontract/", "/work/", "/capability-statement/"]
-NOINDEX = {"/thanks/index.html", "/login/index.html", "/404.html", "/architecture/index.html"}
+NOINDEX = {"/thanks/index.html", "/workflow-report/thanks/index.html", "/login/index.html", "/404.html", "/architecture/index.html"}
 
 def main():
     written = []
@@ -64,7 +66,7 @@ def main():
         sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>' % (SITE, u, LEGACY_UPDATED if u in SITEMAP_EXTRA else UPDATED, pri))
     sm.append('</urlset>\n')
     write("/sitemap.xml", '\n'.join(sm))
-    write("/robots.txt", "User-agent: *\nAllow: /\nDisallow: /thanks/\n\nSitemap: %s/sitemap.xml\n" % SITE)
+    write("/robots.txt", "User-agent: *\nAllow: /\nDisallow: /thanks/\nDisallow: /workflow-report/thanks/\n\nSitemap: %s/sitemap.xml\n" % SITE)
     print("wrote %d pages + sitemap.xml + robots.txt" % len(written))
 
 if __name__ == "__main__":

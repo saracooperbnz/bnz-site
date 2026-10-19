@@ -56,7 +56,7 @@ for p in pages():
 for p in pages():
     r = rel(p); top = r.strip("/").split("/")[0]
     url = r.replace("index.html", "")
-    if top in LEGACY or r in ("/404.html",) or url in ("/thanks/", "/architecture/"): continue
+    if top in LEGACY or r in ("/404.html",) or url in ("/thanks/", "/workflow-report/thanks/", "/architecture/"): continue
     if url != "/" and url not in linked and r not in linked: fail("orphan: %s" % r)
 
 # sitemap urls resolve
