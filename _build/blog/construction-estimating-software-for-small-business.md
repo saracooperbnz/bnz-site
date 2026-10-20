@@ -68,7 +68,7 @@ A checklist before any demo:
 ## Construction estimating software for small business: quick picks
 
 - **Residential builder or remodeler, 1–3 people:** Buildxact or Handoff Flex. Both are built for residential. For Buildxact's current plans, see [buildxact.com/us/pricing](https://www.buildxact.com/us/pricing/). Handoff Scale's AI takeoff covers residential plans up to 7,000 sq ft ([Handoff](https://www.handoff.ai/pricing)).
-- **Trade sub bidding a few jobs a month:** STACK Free to start, then STACK Pro or ConstructConnect Takeoff Starter.
+- **Trade sub bidding a few jobs a month:** STACK Free to start, then STACK Pro or ConstructConnect Takeoff Starter. Electrical sub? See [our checklist for electrical estimating tools](/blog/estimating-software-for-electrical-contractors/). Roofer? See [roofing estimating software compared](/blog/roofing-estimating-software/).
 - **Small commercial GC who prices in Excel:** Kreo Essential (takeoff with live-linked estimates, no AI) or a PDF tool like Bluebeam. See [PlanSwift vs Bluebeam](/blog/planswift-vs-bluebeam/).
 - **Want AI takeoff?** See our [best AI estimating software for general contractors](/blog/best-ai-estimating-software-for-general-contractors/) roundup.
 
