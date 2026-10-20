@@ -98,6 +98,8 @@ When you get a quote from a service, ask:
 - You're bidding a trade you don't usually measure.
 - You'd rather pay to get time back than learn new software.
 
+Run an electrical shop? See [how electrical contractors weigh software against estimating services](/blog/estimating-software-for-electrical-contractors/). Roofers often order aerial measurement reports instead; see [roofing estimating software and report pricing](/blog/roofing-estimating-software/).
+
 ## When AI takeoff software makes sense
 
 - You have an estimator with time to run it.
