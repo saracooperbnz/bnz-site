@@ -83,7 +83,7 @@ Whatever tool you use, the steps are about the same.
 2. **Count devices and fixtures.** Count each receptacle, switch and light fixture by type.
 3. **Measure runs.** Measure conduit and wire from panel to devices. Add a waste factor.
 4. **Apply labor units.** Multiply each count by its labor unit to get hours.
-5. **Price labor.** Multiply hours by your labor rate. On public work, use the prevailing wage (the set pay rate the government requires) from the job's wage schedule.
+5. **Price labor.** Multiply hours by your labor rate. On public work, use the prevailing wage (the set pay rate the government requires) from the job's wage schedule. Bidding in New York? See [how to look up NYS prevailing wage rates by county](/blog/nys-prevailing-wage-rates-by-county/).
 6. **Price material.** Use current quotes from your supplier, not last year's prices.
 7. **Add the rest.** Include equipment, permits, overhead and profit.
 8. **List what's missing.** Write down anything not in the set. Ask before bid day, or state it as an exclusion or assumption.

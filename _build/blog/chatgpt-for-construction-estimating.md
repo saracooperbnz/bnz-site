@@ -71,6 +71,8 @@ These are opinions from individual estimators in r/estimators threads, not tests
 
 The pattern in these threads: people say they get value when they feed it the facts and ask it to organize. They say they get burned when they ask it to come up with the facts.
 
+For the wider picture on AI estimating and takeoff tools, see [what estimators say about AI construction estimating on Reddit](/blog/ai-construction-estimating-reddit/).
+
 ## Where ChatGPT for construction estimating goes wrong
 
 - **Takeoff.** Reading scale, sheet notes and details on a full plan set is hard for a chat tool. Mistakes in quantities flow into every price.
