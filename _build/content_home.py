@@ -6,13 +6,6 @@ def hero(eyebrow, h1, para, mock, cta=True, second=None):
     return ('<section class="dark hero"><div class="wrap"><div class="fx"><span class="eyebrow">%s</span><h1>%s</h1>'
             '<p class="lede">%s</p>%s</div><div class="fx">%s</div></div></section>\n') % (eyebrow, h1, para, ctas, mock)
 
-WHO = [
-    ("General contractors", "Bid more work without adding estimating headcount."),
-    ("Remodelers &amp; custom builders", "Estimates and subs that keep pace with change orders."),
-    ("Specialty contractors", "Your niche, your units, your production rates — learned once."),
-    ("GCs bidding public work", "Prevailing wage, addenda and bid forms handled by the book."),
-]
-
 STEPS = [
     ("Project review", "A real call about one real project. You bring the drawings; we walk through exactly what the crew would do with them.",
      "a written walkthrough of your project.", "you pick the project; nothing is connected yet."),
@@ -28,122 +21,338 @@ STEPS = [
      "a Monday report and an approvals queue.", "she brings you only the decisions that need you. You sign. She doesn't."),
 ]
 
-# ------------------------------------------------------------------ Sara on the home page
-# What BuildWithBNZ is (Team Guide p3, Brand Kit p1), Sara's six (02 Sara), and four SAMPLE conversations, each tied to
-# a capability the sources state (EXEC p13, REVIEW p2, Bid Submission Desk pp1-2). No real names, jobs or figures.
 
-SARA_ASKS = ["Projects", "Deadlines", "Email + calendar", "Approvals", "Risks", "Priorities"]
+# ================================================================== the home page (build spec, 21 Oct 2026)
+# Layout and feel from beam.ai; the words and facts are ours. One main action everywhere on the page: Start here
+# (/get-started/, the onboarding form). The second: Book a call (/book/) or the phone.
+# Every agent line comes from team.py (its card, title and limits, never role). Mocks carry a Sample tag and no money
+# figures. No logos, testimonials, numbers-as-proof, badges or integrations that aren't live.
+# Colours are tokens in assets/css/home.css (colorway A, the current brand). Motion is assets/js/home.js.
 
-def _you(text):
-    return '<div class="row you"><div><b>You</b><span>%s</span></div></div>' % text
+HOME_START = "/get-started/"
 
-def _sara(text, state=None):
-    return '<div class="row"><div class="msg">%s<div><b>Sara</b><span>%s</span></div></div>%s</div>' % (av("sara", 28), text, chip(*state) if state else '')
+ICON = {
+    "eye": '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/>',
+    "folder": '<path d="M3.5 7A1.5 1.5 0 0 1 5 5.5h4l2 2.5h8a1.5 1.5 0 0 1 1.5 1.5v8.5A1.5 1.5 0 0 1 19 19.5H5A1.5 1.5 0 0 1 3.5 18z"/>',
+    "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    "lock": '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>',
+    "tag": '<path d="M3.5 12.5v-8a1 1 0 0 1 1-1h8l8 8a1.5 1.5 0 0 1 0 2.1l-6.9 6.9a1.5 1.5 0 0 1-2.1 0z"/><circle cx="8.5" cy="8.5" r="1.4"/>',
+    "person": '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.2-4 4.1-5.8 7.5-5.8s6.3 1.8 7.5 5.8"/>',
+    "phone": '<path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2z"/>',
+    "send": '<path d="M12 19V5M6 11l6-6 6 6"/>',
+}
 
-def _item(text, state):
-    return '<div class="row"><div><b>%s</b></div>%s</div>' % (text, chip(*state))
+def ico(name, size=24, cls="ico"):
+    return ('<svg class="%s" width="%d" height="%d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" '
+            'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>') % (cls, size, size, ICON[name])
 
-def sara_examples():
-    convos = [
-        ("Morning priorities", _you("What needs me today?") + _sara("Three things.")
-         + _item("Thursday's bid: 4 pages need your ink signature", ("needs", "Needs you"))
-         + _item("Electrical quote still out", ("waiting", "Waiting on sub"))
-         + _item("Insurance certificate names the wrong holder", ("needs", "Needs you"))),
-        ("Before the bid is sealed", _you("Is the bid ready to go?")
-         + _sara("Not yet. I checked the five things that get a bid thrown out: late, unsigned, incomplete, wrong certificates, bond short. Two are open.")
-         + _sara("It stays Not submitted until tracking shows it was delivered.", ("reported", "Not submitted"))),
-        ("Urgent alert", _sara("A new addendum was posted for Thursday's bid. Taylor is checking what changed.", ("working", "Checking"))
-         + _sara("Your price stays exactly as you approved it until the estimator says otherwise.")),
-        ("End of day", _you("What got done?")
-         + _item("Done: bid forms filled in the owner's order", ("verified", "Verified"))
-         + _item("Open: notary pages", ("waiting", "Open"))
-         + _item("Send the packet to your office", ("needs", "Needs your yes"))),
-    ]
-    return '<div class="grid g2 stagger convos">%s</div>' % ''.join(
-        '<div class="mock rows convo"><span class="sd">Sample</span><div class="eyebrow mute ct">%s</div>%s</div>' % (t, body) for t, body in convos)
+def bmark(size=32):
+    return '<span class="bm" style="--s:%dpx" aria-hidden="true">B</span>' % size
 
-def sara_section():
-    intro = ('<div class="split sara-intro"><div class="fx">%s</div><div class="fx">'
-             '<span class="eyebrow">Meet Sara · AI team leader</span><h2 class="sara-h">Sara runs the day.</h2>'
-             '<p class="lede">BuildWithBNZ gives your company a team of seven AI agents for the office side of construction: '
-             'bids, paperwork, deadlines and records. Sara leads them. They prepare the work. Your people approve every price, '
-             'signature, payment and send, and your crews and subs still build the job. Built from real contractor workflows inside BNZ Builders.</p>'
-             '<div class="asks"><p>Ask her: <b>"What does my company need to handle today?"</b></p><ul class="pills">%s</ul></div>'
-             '<div class="sara-cta">%s%s</div><p class="small muted sara-note">Bring one bid. We\'ll walk through what Sara would do with it.</p>'
-             '</div></div>') % (portrait("sara"), ''.join('<li>%s</li>' % x for x in SARA_ASKS),
-                                btn_book(label="Book a demo"), START_BTN)
-    ex = ('<div class="sara-ex"><div class="fx"><span class="eyebrow">How she works</span><h3 class="ex-h">Four sample conversations</h3>'
-          '<p class="small muted">Samples only. No real names, jobs or numbers.</p></div>%s</div>') % sara_examples()
-    team = ('<div class="team-strip fx"><span class="eyebrow mute">Her team · all six report to Sara · AI-generated characters</span><ul>%s</ul>'
-            '<p style="margin-top:20px"><a class="link" href="/crew/">Meet the AI crew →</a></p></div>') % ''.join(
-        '<li><a href="/crew/#%s">%s<b>%s</b><span>%s</span></a></li>' % (a["slug"], av(a["slug"], 56), tx(a["name"]), tx(a["title"])) for a in SIX)
-    return intro + ex + team
+SAMPLE = '<span class="sd">Sample</span>'
 
-def steps_grid(rows=False):
-    out = []
-    for i, (t, p, o, c) in enumerate(STEPS, 1):
-        out.append('<div class="card step"><div class="num"><span class="count" data-count="%d" data-dur="240" data-pad="0">00</span></div><h3>%s</h3><p>%s</p>'
-                   '<div class="oc"><div><b>Output:</b> %s</div><div><b>Control:</b> %s</div></div></div>' % (i, t, p, o, c))
-    return '<div class="steps stagger%s">%s</div>' % (' rows' if rows else '', ''.join(out))
+def lim(slug, text):
+    """A rule quoted word for word from team.py: the build stops if the source wording changes."""
+    assert text in BY[slug]["limits"], (slug, text)
+    return tx(text)
 
-def work_cards():
-    c1 = ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Intake summary</div>'
-          '<div class="row"><div><b>Rockland Mixed-Use · 38 Units</b><span>Public work, prevailing wage · bid due in 11 days</span></div></div>'
-          '<div class="row"><div><b>Package</b><span>Drawing set (142 sheets), specs, Addendum 01–02, wage schedule, bid form</span></div></div>'
-          '<div class="row"><div><b>On it today</b><span>Owner + one PM</span></div></div>'
-          '<div class="row"><div><b>Pain named on the call</b><span>Estimating bottleneck, sub follow-up</span></div></div>'
-          '<div class="line"><b>What the crew would do with it</b> → walked through live</div></div>')
-    c2 = ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Scope document · in writing</div>'
-          '<div class="row"><div><b>What Taylor does</b><span>Takeoffs, estimate Rev 1, conflict log</span></div></div>'
-          '<div class="row"><div><b>What Emma checks</b><span>Job costs and invoices</span></div></div>'
-          '<div class="row"><div><b>What stays with you</b><span>Every approval, every send, the signature</span></div></div>'
-          '<div class="row needs"><div><b>One set price</b><span>Agreed before work starts</span></div></div></div>')
-    c3 = ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Project page</div>'
-          '<div class="row"><div><b>Estimate Rev 2</b></div>%s</div>'
-          '<div class="row"><div><b>Sub quotes · electrical</b></div>%s</div>'
-          '<div class="row"><div><b>Bid form draft</b></div>%s</div>'
-          '<div class="row needs"><div><b>Approve invitation · 4 subs</b></div>%s</div></div>') % (
-        chip("working", "Working", True), chip("waiting", "Waiting on"), chip("verified", "Verified"), chip("needs", "Needs you"))
-    cards = [
-        ("The project review", c1, "A real call about one real project. No connection, no commitment — a walkthrough."),
-        ("Scoped and priced", c2, "Price moves only if scope moves. That sentence is in the document."),
-        ("Live in your workspace", c3, "The project page the crew and you share — files, estimate, subs, approvals."),
-    ]
-    return '<div class="grid g3 stagger work">%s</div>' % ''.join(
-        '<div class="card"><h3>%s</h3>%s<p>%s</p></div>' % (t, m, p) for t, m, p in cards)
+def fake_btns(cls="fbtns"):
+    return '<span class="%s" aria-hidden="true"><span class="fa">Approve</span><span class="fg">Send back</span></span>' % cls
 
-def proof():
-    # The "one real project" card with empty metric slots is gone until Bilal approves a real, sourced example
-    # (FINAL rule 4/5: no results in an agent's name, and BNZ Builders jobs are not BuildWithBNZ proof).
-    return ('<div class="grid g2 stagger proof">'
-            '<div class="card"><h3>The rules, stated as guarantees</h3>'
-            '<blockquote>"Sara never claims something was completed unless verified. Never makes the owner\'s decision."</blockquote>'
-            '<blockquote>"Taylor never invents a price. Says UNKNOWN when information is missing and always shows the logic."</blockquote>'
-            '<blockquote>"Emma reviews and recommends. She never posts transactions or changes accounting records without authorization."</blockquote></div>'
-            '<div class="card"><h3>How the crew catches its own mistakes</h3><p class="muted" style="margin-top:10px">Every estimate line, sub quote and claim is cross-checked before it reaches you. When two sources disagree — a spec section against a drawing sheet, a quote against a levelled scope — the item is flagged CONFLICT and held, not smoothed over. Anything the crew was told but hasn\'t confirmed stays marked REPORTED — NOT VERIFIED until it\'s checked against the document itself.</p></div>'
-            '</div>')
+# ------------------------------------------------------------------ nav + footer (home only)
+
+def nav_home():
+    """The drawer sits outside the header: the header's blur (once solid) would otherwise trap the fixed drawer inside it."""
+    prob = ''.join('<a href="%s">%s</a>' % (href, t) for _, t, _, _, href in MENU_PROBLEM)
+    contr = ''.join('<a href="%s">%s</a>' % (h, t) for t, h in MENU_CONTRACTOR)
+    return '''<header class="hnav">
+<div class="wrap">
+<a class="hbrand" href="/" aria-label="BuildWithBNZ home">%(bm)s<span>BuildWithBNZ</span></a>
+<nav class="hlinks" aria-label="Primary"><a href="#how">How it works</a><a href="#crew">The crew</a><a href="#faq">Questions</a></nav>
+<div class="hcta"><a class="btn-ghost sm" href="/book/">Book a call</a><a class="btn-primary sm" href="%(start)s">Start here</a></div>
+<button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
+</div>
+</header>
+<div class="drawer" id="drawer">
+<a class="btn-primary xl" href="%(start)s">Start here</a>
+<a class="btn-ghost xl" href="/book/">Book a call</a>
+<a href="tel:%(phone)s">Call %(phone_txt)s</a>
+<a href="#how">How it works</a>
+<a href="#crew">The crew</a>
+<a href="#faq">Questions</a>
+<details><summary>Solutions</summary><a href="/solutions/">All solutions</a>%(prob)s%(contr)s<a href="/what-we-connect-to/">What we connect to</a></details>
+</div>
+<main id="main">
+''' % dict(bm=bmark(32), start=HOME_START, phone=PHONE, phone_txt=PHONE_TXT, prob=prob, contr=contr)
+
+def footer_home():
+    cols = [("Product", [("/how-it-works/", "How it works"), ("/crew/", "The crew"), ("/solutions/", "Solutions"), ("/what-we-connect-to/", "What we connect to")]),
+            ("Start", [(HOME_START, "Start here"), ("/book/", "Book a call"), ("/workflow-report/", "Free workflow report")]),
+            ("Company", [("/faq/", "FAQ"), ("/contact/", "Contact"), ("/privacy/", "Privacy"), ("/terms/", "Terms")])]
+    nav_cols = ''.join('<div><p class="hf-h">%s</p><ul>%s</ul></div>' % (t, ''.join('<li><a href="%s">%s</a></li>' % l for l in links)) for t, links in cols)
+    return '''</main>
+<footer class="hfoot">
+<div class="wrap">
+<div class="hf-brand"><a class="hbrand" href="/">%(bm)s<span>BuildWithBNZ</span></a>
+<p class="hf-tag">The AI office crew for contractors.</p>
+<p class="hf-addr">New York · <a href="mailto:%(inbox)s">%(inbox)s</a> · <a href="tel:%(phone)s">%(phone_txt)s</a></p>
+<p class="hf-ai">The crew are AI agents, not real people.</p></div>
+<nav class="hf-cols" aria-label="Footer">%(cols)s</nav>
+<p class="hf-copy">© 2026 BuildWithBNZ</p>
+</div>
+</footer>
+<div class="actbar"><a class="btn-primary" href="%(start)s">Start here</a><a class="btn-ghost call" href="tel:%(phone)s" aria-label="Call %(phone_txt)s">%(icon)s</a></div>
+<script src="/assets/js/bnz.js" defer></script>
+<script src="/assets/js/home.js" defer></script>
+</body>
+</html>
+''' % dict(bm=bmark(32), inbox=INBOX, phone=PHONE, phone_txt=PHONE_TXT, cols=nav_cols, start=HOME_START, icon=ico("phone", 22))
+
+# ------------------------------------------------------------------ 1 hero
+
+def _ans(i, who, text, kind, label, hot=False):
+    return '<li%s style="--i:%d">%s<span class="at">%s</span>%s</li>' % (' class="hot"' if hot else '', i, av(who, 22), text, chip(kind, label))
+
+def home_hero():
+    w1 = ('<div class="win w1"><div class="whead"><span class="wd"><i></i><i></i><i></i></span><b>Ask Sara</b>'
+          '<span class="wcrew">%s%s%s</span>%s</div><div class="wbody">'
+          '<p class="qyou"><b>You</b><span class="q">Where does the Maple Street job stand? What have we spent, what\'s missing, and what\'s blocking us?</span></p>'
+          '<ul class="ans"><li class="say" style="--i:0">%s<span class="at"><b>Sara</b>I checked with Emma and Taylor. Here\'s where it stands.</span></li>'
+          '%s%s%s%s</ul></div></div>') % (
+        av("sara", 22), av("taylor", 22), av("emma", 22), SAMPLE, av("sara", 28, label=False),
+        _ans(1, "emma", "Spent so far: 68% of the budget, matched to the invoices.", "verified", "Verified"),
+        _ans(2, "taylor", "Windows: the supplier hasn't confirmed the order.", "waiting", "Waiting on supplier"),
+        _ans(3, "taylor", "Electrical sub says a new quote is coming. Nothing in writing yet.", "reported", "Reported, not verified"),
+        _ans(4, "sara", "Blocking: change order 3 isn't signed.", "needs", "Needs you", hot=True))
+    yes = ''.join('<div class="yes"><div><b>%s</b><span>%s</span></div>%s</div>' % (t, n, fake_btns()) for t, n in [
+        ("Change order 3", "Written by Richard, priced by Taylor"), ("Follow-up to the window supplier", "Drafted by Taylor")])
+    w2 = ('<div class="win w2"><div class="whead"><span class="wd"><i></i><i></i><i></i></span><b>Needs your yes · 2</b>%s</div>'
+          '<div class="wbody">%s<p class="wfoot">Nothing goes out until you approve it.</p></div></div>') % (SAMPLE, yes)
+    return ('<section class="hs h-hero"><div class="wrap">'
+            '<h1 class="blurin">An AI office crew<br class="dk"> for contractors.</h1>'
+            '<p class="lede">Sara and her AI specialists prepare your bids, estimates, invoices and contract paperwork. '
+            'You approve every price, signature, payment and send.</p>'
+            '<a class="btn-primary lg" id="hero-start" href="%s">Start here <span class="arr" aria-hidden="true">→</span></a>'
+            '<p class="h-alt">A few quick questions. Or <a href="/book/">book a call</a> · <a href="tel:%s">%s</a></p>'
+            '<figure class="h-vis" aria-label="Sample: Sara answers a question about a job">%s%s</figure>'
+            '</div></section>\n') % (HOME_START, PHONE, PHONE_TXT, w1, w2)
+
+# ------------------------------------------------------------------ 2 the rule (where beam has a customer quote: we have none)
+
+def home_rule():
+    return ('<section class="hs h-rule" aria-labelledby="rule-h"><div class="wrap">'
+            '<h2 id="rule-h" class="sr">The rule every agent follows</h2>'
+            '<figure class="rule fx"><blockquote><p>The crew prepares the work. Your people approve every price, signature, payment and send.</p></blockquote>'
+            '<figcaption>%s<i class="vr"></i><span><b>How every BuildWithBNZ agent works</b><span>%s</span></span></figcaption></figure>'
+            '<p class="rule-note fx">Built from real contractor workflows inside BNZ Builders, New York.</p>'
+            '</div></section>\n') % (bmark(28), PRINCIPLE)
+
+# ------------------------------------------------------------------ 3 how it works (pinned on desktop, stacked elsewhere)
+
+def _rows(rows):
+    return ''.join('<div class="row%s"><div><b>%s</b>%s</div>%s</div>' % (
+        ' hot' if hot else '', b, '<span>%s</span>' % s if s else '', end) for b, s, end, hot in rows)
+
+def _step_vis():
+    types = ''.join('<li%s>%s</li>' % (' class="on"' if i == 0 else '', t) for i, (_, t) in enumerate(START_TYPES))
+    v1 = ('<figure class="st-vis ph" aria-label="Sample: the first question of the Start here form">'
+          '<div class="phone">%s<p class="pn-s">Step 1 of 4</p><i class="pbar"><i></i></i>'
+          '<p class="pn-q">What kind of work do you do?</p><ul class="pn-o">%s</ul><span class="pn-b" aria-hidden="true">Continue</span></div></figure>') % (SAMPLE, types)
+    v2 = ('<figure class="st-vis" aria-label="Sample: what a Project Review covers"><div class="mock rows pcard">%s<p class="mt">Project Review</p>%s</div></figure>') % (SAMPLE, _rows([
+        ("Your project", "12-unit renovation · bid due in 11 days", "", False),
+        ("What you bring", "Drawings, specs, addenda, bid form", "", False),
+        ("On the call", "You and someone from our team", "", False),
+        ("What you see", "What the crew would do with it, live", "", False)]))
+    v3 = ('<figure class="st-vis" aria-label="Sample: a scope document"><div class="mock rows pcard">%s<p class="mt">Scope · in writing</p>%s</div></figure>') % (SAMPLE, _rows([
+        ("What Taylor does", "Takeoffs, the estimate, a conflict log", "", False),
+        ("What Emma checks", "Job costs and invoices", "", False),
+        ("What stays with you", "Every approval, every send, the signature", "", False),
+        ("One set price", "Agreed before work starts", "", True)]))
+    v4 = ('<figure class="st-vis" aria-label="Sample: the approvals queue"><div class="mock rows pcard">%s<p class="mt">Needs you · 3</p>%s</div></figure>') % (SAMPLE, _rows([
+        ("Bid invitation to 4 electrical subs", "Drafted by Taylor", fake_btns(), False),
+        ("Drywall sub's invoice matches the approved quote", "Checked by Emma", chip("verified", "Verified"), False),
+        ("Monday report", "Drafted by Sara", chip("reported", "Drafted"), False)]))
+    return [v1, v2, v3, v4]
+
+STEPS4 = [
+    ("Step 1 · Tell us", "Tell us how your company works.",
+     "A few quick questions on your phone: what kind of work you do, and what you'd like the crew to take off your plate first.", ("Start here", HOME_START)),
+    ("Step 2 · Project Review", "Walk us through one real job.",
+     "A real call about one real project. Bring the drawings or the bid. We show you what the crew would do with it. Nothing gets connected.", ("Book a call", "/book/")),
+    ("Step 3 · Scope and price", "Get the scope and one price, in writing.",
+     "For that project. Price moves only if scope moves, and that sentence is in the document.", None),
+    ("Step 4 · The crew works", "The crew works. You approve.",
+     "They work inside the email, files and calendar you already use. Sara brings you a short list of decisions. Nothing goes out without your yes.", None),
+]
+# The step-4 chips (Gmail, Google Drive, Google Calendar, Notion) stay off until Adam confirms each one works for a
+# customer today (STATUS.md: no OAuth yet).
+
+def home_how():
+    vis = _step_vis()
+    steps = []
+    for i, ((tag, h2, p, link), v) in enumerate(zip(STEPS4, vis)):
+        a = '<a class="pill-link" href="%s">%s <span aria-hidden="true">›</span></a>' % (link[1], link[0]) if link else ''
+        steps.append('<div class="st%s" data-i="%d"><div class="st-txt"><span class="tagp">%s</span><h2>%s</h2><p>%s</p>%s</div>%s</div>' % (
+            ' on' if i == 0 else '', i, tag, h2, p, a, v))
+    dots = ''.join('<button type="button"%s aria-label="Step %d"></button>' % (' class="on" aria-current="step"' if i == 0 else '', i + 1) for i in range(4))
+    return ('<section class="hs h-how" id="how" aria-label="How it works"><div class="pin"><div class="wrap">'
+            '<div class="steps4">%s<div class="dots" role="group" aria-label="Go to step">%s</div></div>'
+            '</div></div></section>\n') % (''.join(steps), dots)
+
+# ------------------------------------------------------------------ 4 + 5 the crew: line-up, then one card each
+
+def _lu(slug):
+    a = BY[slug]
+    return '<li>%s<b>%s</b><span>%s</span></li>' % (av(slug, 64, label=False), tx(a["short"]), tx(a["title"]))
+
+def _kyle_plan(concept):
+    """A simple floor plan: kitchen on the left, living room on the right. The concept opens the wall and adds an island."""
+    wall = '<path d="M100 14v16"/>' if concept else '<path d="M100 14v44M100 78v28"/>'
+    island = '<rect x="80" y="56" width="40" height="14" rx="2" opacity=".8"/>' if concept else ''
+    return ('<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">'
+            '<rect x="14" y="14" width="172" height="92" rx="2"/><path d="M24 24h52M24 24v40" opacity=".6"/>'
+            '<rect x="134" y="84" width="40" height="12" rx="2" opacity=".6"/>%s%s</svg>') % (wall, island)
+
+def _card(slug, side, rule, vis="", cls="", text=None, note=None):
+    a = BY[slug]
+    tag = ('<span class="tagp jobs">On your jobs</span>' if side == "jobs" else '<span class="tagp ours">On our side</span>')
+    notes = ''.join('<p class="bc-n">%s</p>' % tx(n) for n in [a["license"], note] if n)
+    return ('<article class="bc%s" id="c-%s"><header class="bc-h">%s<div><h3>%s</h3><p>%s</p></div>%s</header>'
+            '<div class="bc-x"><p class="bc-t">%s</p><p class="bc-l">%s<span>%s</span></p>%s</div>%s</article>') % (
+        ' ' + cls if cls else '', slug, av(slug, 40, label=False), tx(a["name"]), tx(a["title"]), tag,
+        tx(text or a["card"]), ico("check", 14), lim(slug, rule), notes, vis)
+
+def home_crew():
+    sara = BY["sara"]
+    lineup = ('<figure class="lineup" aria-label="Sara Cooper leads six AI agents. On your jobs: Taylor, Emma, Richard and Kyle. On our side: Amanda and Adam.">'
+              '<div class="lu-sara">%s<b>%s</b><span>%s</span></div>'
+              '<div class="lu-groups"><div class="lu-g jobs"><p class="lu-label">On your jobs</p><ul>%s</ul></div>'
+              '<div class="lu-g ours"><p class="lu-label">On our side</p><ul>%s</ul></div></div></figure>') % (
+        av("sara", 96, anim=True, label=False), tx(sara["name"]), tx(sara["title"]),
+        ''.join(_lu(s) for s in ("taylor", "emma", "richard", "kyle")), ''.join(_lu(s) for s in ("amanda", "adam")))
+
+    sara_v = ('<div class="bc-v sara-v"><figure class="mock rows" aria-label="Sample: Sara\'s morning priorities">%s<p class="mt">Morning priorities</p>'
+              '<div class="row you"><div><b>You</b><span>What needs me today?</span></div></div>'
+              '<div class="row"><div class="msg">%s<div><b>Sara</b><span>Three things.</span></div></div></div>%s</figure>'
+              '<div class="askwrap" aria-hidden="true"><div class="askbar"><span>Ask Sara: what does my company need to handle today?</span><i>%s</i></div></div></div>') % (
+        SAMPLE, av("sara", 24, label=False), _rows([
+            ("Thursday's bid: 4 pages need your ink signature", "", chip("needs", "Needs you"), False),
+            ("Electrical quote still out", "", chip("waiting", "Waiting on sub"), False),
+            ("Insurance certificate names the wrong holder", "", chip("needs", "Needs you"), False)]), ico("send", 18))
+    taylor_v = '<figure class="bc-v mock rows" aria-label="Sample: estimate lines, each with a label">%s<p class="mt">Estimate lines</p>%s</figure>' % (SAMPLE, _rows([
+        ("Slab on grade · 2,150 SF", "", chip("verified", "Verified"), False),
+        ("Doors and frames · from sub", "", chip("quote", "Quote"), False),
+        ("Site lighting", "", chip("estimate", "Estimate"), False),
+        ("Plumbing fixtures · schedule not in the set", "", chip("unknown", "Unknown"), False)]))
+    emma_v = ('<figure class="bc-v mock rows" aria-label="Sample: invoices checked against the job">%s<p class="mt">Invoices this week</p>%s'
+              '<div class="line jbar"><span>Job cost: 68%% of budget</span><i><i style="width:68%%"></i></i></div></figure>') % (SAMPLE, _rows([
+                  ("Drywall sub · invoice 14", "Matches the approved quote", chip("verified", "Verified"), False),
+                  ("Plumber · invoice 9", "2 lines not in the contract", chip("needs", "Needs you"), False)]))
+    richard_v = '<figure class="bc-v mock rows" aria-label="Sample: a change order">%s<p class="mt">Change order 3</p>%s</figure>' % (SAMPLE, _rows([
+        ("Added: 2 windows, 2nd floor", "", "", False), ("Priced by Taylor", "", "", False),
+        ("Signed before work starts", "", chip("needs", "Waiting for signature"), False)]))
+    kyle_v = ('<figure class="bc-v mock kyle-v" aria-label="Sample: a before plan and a design concept">%s<p class="mt">Kitchen and living room</p>'
+              '<div class="plans"><div class="pl before">%s<span>Before</span></div><div class="pl concept">%s<span>Concept</span></div></div>'
+              '<p class="kchip">%s</p></figure>') % (SAMPLE, _kyle_plan(False), _kyle_plan(True), chip("verified", "Cost checked by Taylor"))
+    you = ('<article class="bc you-c" id="c-you"><header class="bc-h"><span class="you-i">%s</span><div><h3>You</h3><p>Owner · the final say</p></div></header>'
+           '<div class="bc-x"><p class="bc-t">You approve every price, signature, payment and send. The crew never makes the owner\'s decision.</p></div>%s</article>') % (
+        ico("person", 22), fake_btns("you-b"))
+    cards = (_card("sara", "jobs", "Nothing is sent without a person's go.", sara_v, "wide",
+                   text=sara["card"].replace(" and reports to Bilal", ""))   # the reporting line belongs on /crew/
+             + _card("taylor", "jobs", "Every number carries a label, such as VERIFIED, ESTIMATE, QUOTE or UNKNOWN.", taylor_v, "tall")
+             + _card("emma", "jobs", "Nothing is posted until a person with authority approves it.", emma_v)
+             + _card("richard", "jobs", "Contract review support only. Not legal advice.", richard_v)
+             + _card("kyle", "jobs", "Concepts only. Never presented as signed or sealed drawings.", kyle_v)
+             + _card("amanda", "ours", "Never claims a software feature that isn't live, or a project BNZ didn't do.", cls="short")
+             + _card("adam", "ours", "Software releases need Bilal's explicit approval first.", cls="short", note=BY["adam"]["note"])
+             + you)
+    return ('<section class="hs h-crew" id="crew" aria-labelledby="crew-h"><div class="wrap">'
+            '<div class="crew-head"><div class="glow" aria-hidden="true"></div>'
+            '<h2 id="crew-h" class="blurin">Meet the crew: seven AI agents, one team leader, and you in charge.</h2>'
+            '<p class="lede">Sara leads six specialists. Four of them work on your jobs with her. Two work on BuildWithBNZ itself.</p></div>'
+            '%s<div class="bento">%s</div>'
+            '<p class="more"><a class="tlink" href="/crew/">See each agent\'s limits and human partner →</a></p>'
+            '</div></section>\n') % (lineup, cards)
+
+# ------------------------------------------------------------------ 6 how to read the answers (where beam has logos + a case study)
+
+RULES = [("sara", "Never touches a price. Any change goes back to the estimator."),
+         ("taylor", "A human estimator approves every price before it goes out."),
+         ("sara", "Never calls a bid submitted without proof it arrived."),
+         ("taylor", "Sara checks the bid, and nothing is submitted until you say send."),
+         ("emma", "Your accountant or CPA reviews payroll and the books."),
+         ("kyle", "Every design option goes to Taylor for quantities and cost before a client sees it."),
+         ("richard", "Legal interpretations and consequential decisions go to human legal review."),
+         ("sara", "Never fixes a problem silently. It comes to you.")]
+LABELS = [("verified", "Verified", "Checked against the document itself."),
+          ("reported", "Reported, not verified", "Someone said it. Nobody has checked it yet."),
+          ("unknown", "Unknown", "Information is missing. The crew won't guess."),
+          ("conflict", "Conflict", "Two documents disagree. Held for you, not smoothed over."),
+          ("needs", "Needs you", "Waiting for your decision.")]
+
+def home_read():
+    tiles = ''.join('<li><p>%s</p><span>%s%s</span></li>' % (lim(s, r), av(s, 20, label=False), tx(BY[s]["short"])) for s, r in RULES)
+    labels = ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % (chip(k, t), m) for k, t, m in LABELS)
+    return ('<section class="hs h-read" aria-labelledby="read-h"><div class="wrap">'
+            '<h2 id="read-h" class="stmt fx">No made-up numbers. <span>Every answer the crew gives you carries a label, so you can see what\'s been checked and what hasn\'t.</span></h2>'
+            '<p class="stmt-l fx"><a class="tlink" href="/how-it-works/">See how it works →</a></p>'
+            '<div class="read-grid"><ul class="rtiles stagger" aria-label="Rules the crew follows">%s</ul>'
+            '<div class="labels fx"><h3>The labels</h3><dl>%s</dl></div></div>'
+            '</div></section>\n') % (tiles, labels)
+
+# ------------------------------------------------------------------ 7 trust band (where beam has certification badges: we claim none)
+
+TRUST = [("eye", "Read access first", "Nothing is moved or replaced."),
+         ("folder", "One job at a time", "The crew sees the project you pick, not your whole drive."),
+         ("check", "You approve every send", "Emails, prices, signatures and payments wait for you."),
+         ("lock", "Your files stay yours", "They stay in your systems. Nothing is copied out to train AI."),   # Adam to confirm (same promise as the FAQ)
+         ("tag", "Every answer labeled", "Verified, reported or unknown. Never a guess."),
+         ("person", "A person behind every agent", "Each agent works with a named person on our team.")]
+
+def home_trust():
+    cells = ''.join('<li><span class="tc-i">%s</span><b>%s</b><span>%s</span></li>' % (ico(i), t, l) for i, t, l in TRUST)
+    return ('<section class="hs h-trust" aria-labelledby="trust-h"><div class="wrap">'
+            '<div class="center fx"><h2 id="trust-h">Your files, your numbers, your call.</h2>'
+            '<p class="lede">Plain rules for how the crew handles your files, your numbers and anything that goes out.</p></div>'
+            '<ul class="tcells stagger">%s</ul></div></section>\n') % cells
+
+# ------------------------------------------------------------------ 8 questions (not on beam; kept to four)
+
+HOME_FAQ = [
+    ("What does it cost?", "It starts with a Project Review: a real call about one real project. Then we send you the scope and one set price "
+     "for that project, in writing. Price moves only if scope moves."),
+    ("Do I have to change my software?", "No. The crew works inside the email, files and calendar you already use. Nothing is moved or "
+     "replaced, and it starts with read access."),
+    ("Does the AI send anything without me?", "No. Every email, price, signature and payment waits for your yes. The crew drafts. You decide."),
+    ("Is this for my company?", "It's built for general contractors, remodelers and custom builders, specialty contractors, and GCs bidding "
+     "public work. Not sure? Call <a href=\"tel:%s\">%s</a>." % (PHONE, PHONE_TXT)),
+]
+
+def home_faq():
+    items = ''.join('<details%s><summary><span>%s</span><i class="pm" aria-hidden="true"></i></summary><div class="a"><p>%s</p></div></details>' % (
+        ' open' if i == 0 else '', q, a) for i, (q, a) in enumerate(HOME_FAQ))
+    return ('<section class="hs h-faq" id="faq" aria-labelledby="faq-h"><div class="wrap">'
+            '<div class="fx"><h2 id="faq-h">Questions contractors ask first.</h2><p><a class="tlink" href="/faq/">All questions →</a></p></div>'
+            '<div class="hfaq fx">%s</div></div></section>\n') % items
+
+# ------------------------------------------------------------------ 9 final call to action
+
+def home_cta():
+    return ('<section class="h-cta" aria-labelledby="cta-h"><div class="wrap">'
+            '<h2 id="cta-h">Run the company. Keep every decision.</h2>'
+            '<p class="cta-sub">Answer a few questions about your company. A real person gets back to you the same business day.</p>'
+            '<div class="cta-b"><a class="btn-primary lg" href="%s">Start here</a><a class="btn-ghost lg" href="/book/">Book a call</a></div>'
+            '<p class="cta-call">Or call <a href="tel:%s">%s</a></p>'
+            '</div></section>\n') % (HOME_START, PHONE, PHONE_TXT)
 
 def page_home():
-    desc = "AI operating system for construction companies: Sara runs operations, Taylor builds estimates from drawings, Emma manages your subcontractors."
-    ld = ('{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"BuildWithBNZ","url":"%s","email":"%s","telephone":"%s","areaServed":"New York","description":"AI operating system for construction companies."},'
+    title = "AI Office Crew for Contractors | BuildWithBNZ"
+    desc = ("Sara and her AI crew prepare bids, estimates, invoices and contract paperwork for contractors. "
+            "You approve every price, signature, payment and send.")
+    ld = ('{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"BuildWithBNZ","url":"%s","email":"%s","telephone":"%s","areaServed":"New York","description":"AI office crew for construction companies."},'
           '{"@type":"WebSite","name":"BuildWithBNZ","url":"%s"}]}') % (SITE, INBOX, PHONE_LD, SITE)
-    h = head("AI Operating System for Construction Companies | BuildWithBNZ", desc, "/", jsonld=ld)
-    h += nav("/")
-    h += hero("AI operating system for construction companies", "Run the company. Keep every decision.",
-              TEAM_LEDE,
-              sample_project_mock(), second=START_BTN)
-    h += section("light strip", '<div class="cells stagger">%s</div>' % ''.join('<div><h3>%s</h3><p>%s</p></div>' % w for w in WHO))
-    h += section("dark", sara_section(), id_="crew")
-    h += section("light", sec_head("How it works", "Six steps to a project that runs itself.") + steps_grid(), id_="how-it-works")
-    h += section("dark", sec_head("The work", "What you actually get.") + work_cards())
-    h += section("light", '<div class="split"><div class="fx"><span class="eyebrow">Ongoing operations</span><h2 style="margin:14px 0 14px">Reported every Monday.</h2>'
-                 '<p class="lede">After the first project, the crew stays on under a separate monthly arrangement. We host it, monitor it, add your next projects, and stay responsible for it working.</p></div>'
-                 '<div class="fx">%s</div></div>' % monday_mock(), id_="ongoing")
-    h += section("dark", sec_head("Proof", "Proof, not logos.") + proof())
-    h += section("light", sec_head("What we connect to", "The systems the crew works inside.",
-                                   "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.") + integrations(rows=2)
-                 + '<p style="margin-top:18px"><a class="link" href="/what-we-connect-to/">Full list, and what each one does →</a></p>', id_="connect")
-    h += section("dark", '<div class="faq-grid"><div class="fx"><span class="eyebrow">FAQ</span><h2 style="margin-top:14px">Asked on every call.</h2></div><div class="fx">%s</div></div>' % faq_items(FAQ), id_="faq")
-    h += book_strip()
-    h += footer()
+    h = head(title, desc, "/", jsonld=ld, body_attrs='class="home" data-colorway="a"', extra_css="/assets/css/home.css")
+    h += nav_home()
+    h += home_hero() + home_rule() + home_how() + home_crew() + home_read() + home_trust() + home_faq() + home_cta()
+    h += footer_home()
     return h

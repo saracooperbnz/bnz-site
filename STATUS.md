@@ -6,6 +6,15 @@ at 1440 and 390; console clean).
 
 ## WORKING
 
+- **Home page rebuilt (Oct 2026, branch landing/beam-style):** beam.ai's layout with our words. One main
+  action, **Start here** (/get-started/, the onboarding form for Bilal's Instagram traffic); the second is
+  Book a call (/book/) or the phone. Colours are tokens in `assets/css/home.css` (colorway A, the current
+  brand, is live; B and C exist only as screenshots). Motion is `assets/js/home.js`. Every mock is labelled
+  Sample; no logos, testimonials, statistics, badges or integrations that aren't live.
+- **/get-started/** (four short steps, big answers) posts to the inquiries inbox: plain POST without
+  JavaScript, the LEAD_ENDPOINT relay with it, the mail client if the relay is down. Lands on
+  /get-started/thanks/ (noindex). Records ?src= / utm_source when it is a short plain code.
+
 - **Marketing site, 25 generated pages** on the project-based model: home,
   /solutions, /crew, /sara /taylor /emma, /how-it-works,
   /what-we-connect-to, /faq, /start (onboarding, Oct 2026), /book, /thanks, /privacy, /terms, /contact, 404, and seven problem-based SEO landers

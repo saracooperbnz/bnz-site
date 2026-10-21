@@ -32,6 +32,8 @@ PAGES = {
     "/faq/index.html": content_pages.page_faq,
     "/book/index.html": content_pages.page_book,
     "/start/index.html": content_pages.page_start,
+    "/get-started/index.html": content_pages.page_get_started,
+    "/get-started/thanks/index.html": content_pages.page_get_started_thanks,
     "/thanks/index.html": content_pages.page_thanks,
     "/workflow-report/index.html": content_pages.page_report,
     "/workflow-report/thanks/index.html": content_pages.page_report_thanks,
@@ -47,7 +49,7 @@ for L in content_landers.LANDERS:
 
 # URLs that go in the sitemap: generated public pages + the untouched legacy pages
 SITEMAP_EXTRA = ["/about/", "/services/", "/public-works/", "/credentials/", "/careers/", "/subcontract/", "/work/", "/capability-statement/"]
-NOINDEX = {"/thanks/index.html", "/workflow-report/thanks/index.html", "/login/index.html", "/404.html", "/architecture/index.html"}
+NOINDEX = {"/thanks/index.html", "/workflow-report/thanks/index.html", "/get-started/thanks/index.html", "/login/index.html", "/404.html", "/architecture/index.html"}
 
 def main():
     written = []
@@ -57,7 +59,7 @@ def main():
     for path in PAGES:
         if path in NOINDEX: continue
         url = path.replace("index.html", "")
-        pri = "1.0" if url == "/" else ("0.9" if url in ("/solutions/", "/book/", "/how-it-works/", "/crew/") else "0.7")
+        pri = "1.0" if url == "/" else ("0.9" if url in ("/solutions/", "/book/", "/get-started/", "/how-it-works/", "/crew/") else "0.7")
         urls.append((url, pri))
     for u in SITEMAP_EXTRA:
         urls.append((u, "0.4"))
@@ -66,7 +68,7 @@ def main():
         sm.append('  <url><loc>%s%s</loc><lastmod>%s</lastmod><priority>%s</priority></url>' % (SITE, u, LEGACY_UPDATED if u in SITEMAP_EXTRA else UPDATED, pri))
     sm.append('</urlset>\n')
     write("/sitemap.xml", '\n'.join(sm))
-    write("/robots.txt", "User-agent: *\nAllow: /\nDisallow: /thanks/\nDisallow: /workflow-report/thanks/\n\nSitemap: %s/sitemap.xml\n" % SITE)
+    write("/robots.txt", "User-agent: *\nAllow: /\nDisallow: /thanks/\nDisallow: /workflow-report/thanks/\nDisallow: /get-started/thanks/\n\nSitemap: %s/sitemap.xml\n" % SITE)
     print("wrote %d pages + sitemap.xml + robots.txt" % len(written))
 
 if __name__ == "__main__":

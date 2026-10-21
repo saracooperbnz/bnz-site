@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from shared import *
-from content_home import hero, steps_grid, STEPS
+from content_home import hero, STEPS
 
 # ------------------------------------------------------------------ A8 solutions
 
@@ -146,8 +146,8 @@ def team_flow():
         ''.join('<li>%s<span><b>%s</b> %s</span></li>' % (av(k, 32), BY[k]["short"], t) for k, t in par))
 
 def page_crew():
-    desc = "Meet the crew: Sara (construction COO), Taylor (estimating, drawings, specs) and Emma (subcontractor coordination). Three agents, one team."
-    h = head("The Crew — Sara, Taylor and Emma | BuildWithBNZ", desc, "/crew/")
+    desc = "Meet the crew: seven AI agents led by Sara Cooper. Taylor estimates and compares sub pricing, Emma checks job costs and invoices. People approve every send."
+    h = head("The Crew — Sara Cooper and Six AI Specialists | BuildWithBNZ", desc, "/crew/")
     h += nav("/crew/")
     intro = ('<div class="team-intro"><div class="fx"><span class="eyebrow">Official AI team</span><h2 class="team-h">Meet the AI team</h2>'
              '<p class="lede">Seven AI agents for the office side of construction: bids, paperwork, deadlines and records. Sara Cooper leads them. '
@@ -174,8 +174,9 @@ def page_crew():
 
 # ------------------------------------------------------------------ A5 agent pages
 
-# Page copy for the three agents that have their own page. Title, desc and h1 are the live SEO strings
-# (kept byte for byte); everything else follows FINAL / REVIEW (see team.py).
+# Page copy for the three agents that have their own page. Title, desc and h1 are the live SEO strings, except
+# Emma's title and desc, which described an older sub-coordination role (fixed Oct 2026 to match team.py).
+# Everything else follows FINAL / REVIEW (see team.py).
 AGENT_PAGES = {
     "sara": dict(title="Sara — Sara runs the company's day | BuildWithBNZ", h1="Sara runs the company's day.",
                  checks=["Runs the Today board — what needs you, what's in progress, what's done",
@@ -202,7 +203,7 @@ AGENT_PAGES = {
                    states_note="UNKNOWN is deliberate: it names what's missing and who has it. It is never a blank.",
                    mock_label="Her part of the workspace — estimate, division 26", mock=lambda: est_mock(False),
                    desc="Taylor is the BuildWithBNZ estimating agent: takeoffs, conflicts, labour/material/sub pricing, every assumption shown. Never invents a price."),
-    "emma": dict(title="Emma — Emma works the phones | BuildWithBNZ", h1="Emma checks the job costs.", checks_h="What she covers",
+    "emma": dict(title="Emma — Emma checks the job costs | BuildWithBNZ", h1="Emma checks the job costs.", checks_h="What she covers",
                  checks=["Keeps job costing for each project",
                          "Reviews reconciliations against the books",
                          "Verifies payroll",
@@ -213,7 +214,7 @@ AGENT_PAGES = {
                  states=[("working", "Reviewing"), ("needs", "Needs approval"), ("verified", "Verified")],
                  states_note="Nothing is posted until a person with authority approves it. Your accountant or CPA reviews payroll and the books. QuickBooks is not connected yet; it is on our Next list.",
                  mock_label="Her part of the workspace — reconciliation review", mock=lambda: finance_mock(False),
-                 desc="Emma is the BuildWithBNZ subcontractor coordination agent: sub list, bid invitations, follow-ups, COIs, W-9s and scope levelling."),
+                 desc="Emma is the BuildWithBNZ finance agent: job costing, invoices, payables and receivables, payroll checks and cash-flow reports. She reviews and recommends."),
 }
 
 def page_agent(slug):
@@ -256,7 +257,7 @@ def step_mocks():
     ]
 
 def page_how():
-    desc = "Six steps: Project Review, one set price in writing, connect your files, Taylor reads the package, Emma builds the sub list, Sara runs it."
+    desc = "Six steps: Project Review, one set price in writing, connect your files, Taylor reads the package and compares sub pricing, Sara runs it."
     h = head("How It Works — Six Steps to a Project That Runs Itself | BuildWithBNZ", desc, "/how-it-works/")
     h += nav("/how-it-works/")
     mocks = step_mocks()
@@ -344,8 +345,7 @@ def page_book():
 # Three short steps: two big-button questions here, then the existing /book/ form (step 3, the only conversion).
 # A real GET form, so it works without JavaScript. Only answer codes ever reach a URL (GA records page URLs).
 
-START_TYPES = [("gc", "General contractor"), ("remodel", "Remodeler / custom builder"), ("specialty", "Specialty contractor"),
-               ("public", "GC bidding public work"), ("other", "Other")]   # labels = the /book/ contractor_type options
+# START_TYPES (the contractor types) lives in shared.py: /start/, /get-started/, the report form and the home page use it.
 START_BRING = [("bid", "A bid we're pricing now"), ("job", "A job we're building now"), ("unsure", "Not sure yet")]
 
 def _choices(name, opts):
@@ -378,6 +378,103 @@ def page_start():
           '<li>If it\'s a fit, you get a written proposal. Nothing is connected until you say yes, one system at a time.</li>'
           '</ol></div>'
           '</div></section>\n') % (_choices("type", START_TYPES), _choices("bring", START_BRING), call)
+    h += footer()
+    return h
+
+# ------------------------------------------------------------------ /get-started/ — the onboarding form (founders, 21 Oct 2026)
+# For people coming from Bilal's Instagram ("the link's in my bio"). Four short steps with big answers on a phone.
+# Without JavaScript it is one plain POST to the inquiries inbox (like /book/); with it, bnz.js steps through it and sends
+# it through LEAD_ENDPOINT, with the same mail-client fallback. Required: contractor type, name, and a mobile or an email.
+
+GS_HANDOFF = ["Estimates and takeoffs", "Sub quotes", "Job costs and invoices", "Scheduling and project tracking",
+              "Contracts and change orders", "Design visuals"]
+GS_SIZE = ["Just me", "2 to 5 people", "6 to 20 people", "21 to 50 people", "More than 50"]
+GS_TIME = ["Morning", "Midday", "Afternoon", "Evening", "Any time"]
+GS_HEARD = ["Instagram @bilal.baxx", "Instagram @bnzbuilders", "Google", "A friend", "Other"]
+
+def _gs_choices(name, labels, kind="radio", cls="", required=False, labelled=None):
+    """Big answer buttons. The value is the label itself, so the email reads plainly."""
+    out = []
+    for i, t in enumerate(labels):
+        out.append('<input class="sr" type="%s" name="%s" id="gs-%s-%d" value="%s"%s><label for="gs-%s-%d">%s</label>' % (
+            kind, name, name, i, esc(t), ' required' if required and i == 0 else '', name, i, t))
+    group = ' role="%s" aria-labelledby="%s"' % ("radiogroup" if kind == "radio" else "group", labelled) if labelled else ''
+    return '<div class="choices%s"%s>%s</div>' % (' ' + cls if cls else '', group, ''.join(out))
+
+def onboard_form():
+    total = 4
+    def legend(n, q):
+        return '<legend><span class="st-n">Step %d of %d</span>%s</legend>' % (n, total, q)
+    back = '<button type="button" class="btn quiet" data-back>Back</button>'
+    nxt = '<button type="button" class="btn primary xl" data-next>Continue</button>'
+    return ('<form class="onboard" method="post" action="https://formsubmit.co/%(inbox)s">'
+            '<input type="hidden" name="_subject" value="New onboarding request — Start here">'
+            '<input type="hidden" name="_template" value="table">'
+            '<input type="hidden" name="_next" value="%(site)s/get-started/thanks/">'
+            '<input type="hidden" name="_captcha" value="false">'
+            '<label class="hp" aria-hidden="true">Leave empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>'
+            '<div class="st-progress" aria-hidden="true"><progress max="%(total)d" value="1"></progress></div>'
+            # 1 — contractor type (the same labels as /start/ and the /book/ form)
+            '<fieldset data-step="1">%(l1)s%(types)s'
+            '<p class="err" role="alert">Pick the kind of work you do.</p>'
+            '<div class="st-actions">%(nxt)s</div></fieldset>'
+            # 2 — what to hand off first (pick any)
+            '<fieldset data-step="2">%(l2)s<p class="hint">Pick any that fit. You can change this on the call.</p>%(handoff)s'
+            '<div class="st-actions">%(nxt)s%(back)s</div></fieldset>'
+            # 3 — the company
+            '<fieldset data-step="3">%(l3)s'
+            '<label class="fld">Company name<input name="company" autocomplete="organization" autocapitalize="words" enterkeyhint="next"></label>'
+            '<label class="fld">City and state<input name="city_state" autocomplete="address-level2" autocapitalize="words" enterkeyhint="next" placeholder="e.g. Yonkers, NY"></label>'
+            '<p class="fld-h" id="gs-size-h">How many people work at your company?</p>%(size)s'
+            '<label class="fld">The software and tools you use now <span class="opt">(optional)</span><input name="tools_now" enterkeyhint="next" placeholder="e.g. spreadsheets, email, a takeoff program"></label>'
+            '<div class="st-actions">%(nxt)s%(back)s</div></fieldset>'
+            # 4 — how to reach them
+            '<fieldset data-step="4">%(l4)s'
+            '<label class="fld">Your name<input name="name" required autocomplete="name" autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="next"></label>'
+            '<label class="fld">Mobile number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" enterkeyhint="next"></label>'
+            '<label class="fld">Email<input name="email" type="email" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="next"></label>'
+            '<p class="fld-n">A mobile number or an email is enough.</p>'
+            '<p class="fld-h" id="gs-time-h">Best time to call</p>%(time)s'
+            '<p class="fld-h" id="gs-heard-h">How did you hear about us?</p>%(heard)s'
+            '<p class="err" role="alert">Add your name, and a mobile number or an email, so we can reach you.</p>'
+            '<div class="st-actions"><button type="submit" class="btn primary xl">Send</button>%(back)s</div>'
+            '<p class="note">A real person from our team calls you back. Your answers go to our team only. <a class="link" href="/privacy/">Privacy</a></p>'
+            '</fieldset>'
+            '</form>') % dict(
+        inbox=INBOX, site=SITE, total=total, nxt=nxt, back=back,
+        l1=legend(1, "What kind of work do you do?"),
+        l2=legend(2, "What should the crew take off your plate first?"),
+        l3=legend(3, "About your company"),
+        l4=legend(4, "How do we reach you?"),
+        types=_gs_choices("contractor_type", [t for _, t in START_TYPES], required=True),
+        handoff=_gs_choices("hand_off_first", GS_HANDOFF, kind="checkbox", cls="multi"),
+        size=_gs_choices("team_size", GS_SIZE, cls="compact", labelled="gs-size-h"),
+        time=_gs_choices("best_time", GS_TIME, cls="compact", labelled="gs-time-h"),
+        heard=_gs_choices("how_heard", GS_HEARD, cls="compact", labelled="gs-heard-h"))
+
+def page_get_started():
+    desc = "Tell us about your company in four short steps on your phone. A real person from our team calls you back to set up your AI office crew."
+    h = head("Start Here — Tell Us About Your Company | BuildWithBNZ", desc, "/get-started/")
+    h += nav()
+    h += ('<section class="dark first start-page gs-page"><div class="wrap">'
+          '<span class="eyebrow">Start here · 4 short steps</span>'
+          '<h1>Tell us about your company.</h1>'
+          '<p class="lede">Four short steps. Then a real person from our team calls you back to set things up. Nothing is connected until you say yes.</p>'
+          '%s'
+          '<p class="st-call">Rather talk? <a href="tel:%s">Call %s</a> or <a href="/book/">book a call</a></p>'
+          '</div></section>\n') % (onboard_form(), PHONE, PHONE_TXT)
+    h += footer()
+    return h
+
+def page_get_started_thanks():
+    h = head("Thanks — we'll call you back | BuildWithBNZ", "Your answers are in. A real person from our team calls you back.", "/get-started/thanks/", noindex=True)
+    h += nav()
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h2 style="margin-top:14px">Thanks. A real person will call you back.</h2>'
+                 '<p class="lede">Someone from our team will call you to talk through your company and what the crew would take on first. '
+                 'Keep one bid or one job in mind. That is what we walk through.</p>'
+                 '<p style="margin-top:18px">Rather pick a time now?</p>'
+                 '<p class="gs-done" style="margin-top:12px">%s<a class="btn ghost" href="tel:%s">Call %s</a></p></div>' % (
+                     btn_book(label="Book a call"), PHONE, PHONE_TXT), extra_cls="first")
     h += footer()
     return h
 
@@ -468,6 +565,7 @@ def page_privacy():
 <p class="lede">This covers the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: October 2026.</p>
 <h3>What we collect</h3>
 <p>When you book a Project Review we collect what you type into the form: your name, company, email, phone, contractor type, a description of the project, an optional bid date and an optional link to your files. The form is relayed to our inquiries inbox; we do not use third-party trackers on this site.</p>
+<p>When you fill in the Start here form we collect what you choose to give us: your name, mobile number, email, company, contractor type, city and state, team size, the work you would like handed off first, the tools you use now, how you heard about us, the best time to call, and the page or post that sent you to us. We use them to call you back and set up your company. The form is relayed to our inquiries inbox.</p>
 <p>When you ask for the free workflow report we collect your name, email, and, if you give them, your company, contractor type and what takes the most time. We use them to send the report and the follow-up emails you agreed to. Every email has an unsubscribe link.</p>
 <h3>Project files</h3>
 <p>During a Project Review you may share drawings, specs, addenda and bid documents. They are used to prepare the walkthrough and, if we go ahead, the scope document. They are not used to train models, are not shared outside the people working your project, and are deleted on request.</p>

@@ -20,7 +20,7 @@ INBOX = "saracooper@bnzbuildersinc.com"
 PHONE = "+16462818368"        # tel: links
 PHONE_TXT = "646-281-8368"    # what people read
 PHONE_LD = "+1-646-281-8368"  # schema.org telephone
-UPDATED = "2026-10-17"          # sitemap lastmod for the generated pages (build.py keeps the legacy pages' date)
+UPDATED = "2026-10-22"          # sitemap lastmod for the generated pages (build.py keeps the legacy pages' date)
 LEGACY_UPDATED = "2026-09-17"
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
@@ -125,10 +125,15 @@ def thumb(slug):
 def btn_book(cls="btn primary", label="Book a project review"):
     return '<a class="%s" href="/book/">%s <span class="g">↗</span></a>' % (cls, label)
 
+START_TYPES = [("gc", "General contractor"), ("remodel", "Remodeler / custom builder"), ("specialty", "Specialty contractor"),
+               ("public", "GC bidding public work"), ("other", "Other")]   # labels = the /book/ contractor_type options
+
 # The onboarding path (/start/): brand-kit CTA wording (Brand Kit p6).
 START_BTN = '<a class="btn ghost" href="/start/">Show us how your company works <span class="g">↗</span></a>'
 
-def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
+def head(title, desc, path, og_title=None, jsonld=None, noindex=False, body_attrs="", extra_css=""):
+    """body_attrs: extra attributes for <body> (the home page passes its class and colorway).
+    extra_css: one more stylesheet URL, loaded after bnz.css (the home page's home.css)."""
     canon = SITE + path
     og_title = og_title or title
     ld = ''
@@ -163,11 +168,13 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False):
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 %(fonts)s
 <link rel="stylesheet" href="/assets/css/bnz.css">
-<noscript><style>.fx,.stagger>*,.mock.rows>.row,.mock.rows tbody>tr,.mock.rows .line,.mock.rows .kpi{opacity:1;transform:none}</style></noscript>
+%(extra_css)s<noscript><style>.fx,.stagger>*,.mock.rows>.row,.mock.rows tbody>tr,.mock.rows .line,.mock.rows .kpi{opacity:1;transform:none}</style></noscript>
 %(ld)s</head>
-<body>
+<body%(body_attrs)s>
 <a class="skip" href="#main">Skip to content</a>
-%(sprite)s''' % dict(sprite=crew_sprite(), title=esc(title), desc=esc(desc), canon=canon, og=esc(og_title), site=SITE, fonts=FONTS, ld=ld, robots=robots)
+%(sprite)s''' % dict(sprite=crew_sprite(), title=esc(title), desc=esc(desc), canon=canon, og=esc(og_title), site=SITE, fonts=FONTS, ld=ld, robots=robots,
+           body_attrs=(' ' + body_attrs) if body_attrs else '',
+           extra_css=('<link rel="stylesheet" href="%s">\n' % extra_css) if extra_css else '')
 
 def esc(s):
     return s.replace('&', '&amp;').replace('"', '&quot;').replace('&amp;amp;', '&amp;')
@@ -193,13 +200,14 @@ def nav(current=""):
 <div class="has-menu"><button type="button" aria-haspopup="true" aria-expanded="false">Solutions <span class="car">▼</span></button>%(mega)s</div>
 %(links)s
 </nav>
+<a class="btn ghost sm nav-start" href="/get-started/">Start here</a>
 <a class="btn primary sm nav-cta" href="/book/">Book a project review <span class="g">↗</span></a>
 <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
 </div>
 <div class="drawer" id="drawer">
 <details><summary>Solutions</summary><a href="/solutions/">All solutions</a>%(dprob)s%(dcontr)s<a href="/what-we-connect-to/">What we connect to</a></details>
 %(dlinks)s
-<a href="/start/">Show us how your company works</a>
+<a href="/get-started/">Start here</a>
 <a href="tel:%(phone)s">Call %(phone_txt)s</a>
 %(book)s
 </div>
@@ -212,7 +220,7 @@ def footer():
 <footer>
 <div class="wrap">
 <div><a class="brand" href="/"><span class="mark">B</span>BuildWithBNZ</a><p class="addr" style="margin-top:10px">New York · <a href="mailto:%(inbox)s">%(inbox)s</a> · <a href="tel:%(phone)s">%(phone_txt)s</a></p><p class="addr ai-note">The crew are AI agents, not real people.</p></div>
-<nav aria-label="Footer"><a href="/solutions/">Solutions</a><a href="/workflow-report/">Free workflow report</a><a href="/what-we-connect-to/">What we connect to</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
+<nav aria-label="Footer"><a href="/get-started/">Start here</a><a href="/solutions/">Solutions</a><a href="/workflow-report/">Free workflow report</a><a href="/what-we-connect-to/">What we connect to</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
 </div>
 </footer>
 <script src="/assets/js/bnz.js" defer></script>

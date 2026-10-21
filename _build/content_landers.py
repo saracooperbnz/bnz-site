@@ -49,7 +49,7 @@ LANDERS = [
          title="AI for General Contractors — An Operating System, Not Another App",
          eyebrow="General contractors", h1="Bid more work without adding estimating headcount.",
          lede=TEAM_LEDE,
-         desc="AI for general contractors: Sara runs operations, Taylor builds estimates from drawings, Emma manages subs. Scoped and priced in writing per project.",
+         desc="AI for general contractors: Sara leads six AI agents. Taylor builds estimates and compares sub pricing, Emma checks job costs and invoices.",
          mock=sample_project_mock,
          pains=[("You've been sold software before and it didn't stick", "The crew works inside the folders, inbox and calendar you already use. Nothing is migrated, and we stay responsible for it working."),
                 ("Estimating is the ceiling on how much you can bid", "Taylor reads the package the same week you approve. Rev 1 with a conflict log and an UNKNOWN list, then Rev 2 when the addendum lands."),
