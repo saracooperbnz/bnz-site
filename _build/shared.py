@@ -279,18 +279,7 @@ INTEGRATIONS_TODAY = [
     ("ws", "Google Workspace", "The estimate, scope document and Monday report land as files you own.", "s"),
     ("notion", "Notion", "Project notes and records read and updated in place.", "s"),
 ]
-INTEGRATIONS_NEXT = [
-    ("procore", "Procore", "Estimate lines will post to the job cost."),
-    ("bt", "Buildertrend", "Schedules and daily logs will sync both ways."),
-    ("qb", "QuickBooks", "Approved sub invoices will flow to the books."),
-    ("sage", "Sage", "Job cost codes will map to estimate divisions."),
-    ("bb", "Bluebeam", "Markups will read into Taylor's takeoff."),
-    ("ps", "PlanSwift / STACK", "Existing takeoff files will import as Taylor's starting point."),
-    ("ds", "DocuSign", "Approved contracts will route for signature."),
-    ("m365", "Microsoft 365", "Outlook and OneDrive will work the way Gmail and Drive do today."),
-    ("dbx", "Dropbox", "Project folders will read in place."),
-    ("xl", "Excel", "Estimates will export to your own sheets."),
-]
+# No "Next" list: the team agreed (21 Oct 2026) never to name an integration that isn't live (no Procore, QuickBooks …).
 
 # monochrome marks, one per system — generic glyphs, never the brand's own colour logo
 ICONS = {
@@ -299,40 +288,19 @@ ICONS = {
     "cal": '<svg viewBox="0 0 24 24"><path d="M4 5h16v15H4zm2 5v8h12v-8zm1-7h2v3H7zm8 0h2v3h-2z"/></svg>',
     "ws": '<svg viewBox="0 0 24 24"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z"/></svg>',
     "notion": '<svg viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5zm3 4v8h2v-5l4 5h2V8h-2v5L10 8z"/></svg>',
-    "procore": '<svg viewBox="0 0 24 24"><path d="M12 3l9 5v8l-9 5-9-5V8zm0 2.3L5.3 9v6L12 18.7 18.7 15V9zM9 10h6v4H9z"/></svg>',
-    "bt": '<svg viewBox="0 0 24 24"><path d="M3 20V10l9-7 9 7v10h-6v-6H9v6z"/></svg>',
-    "qb": '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 2a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm-1 3h2v2h1.5a2.5 2.5 0 0 1 0 5H13v1h3v2h-3v2h-2v-2H9.5a2.5 2.5 0 0 1 0-5H11v-1H8V9h3z"/></svg>',
-    "sage": '<svg viewBox="0 0 24 24"><path d="M4 6h16v3H4zm0 5h16v3H4zm0 5h10v3H4z"/></svg>',
-    "bb": '<svg viewBox="0 0 24 24"><path d="M4 4h12a4 4 0 0 1 2.6 7 4 4 0 0 1-2.6 7H4zm3 3v3h8a1.5 1.5 0 0 0 0-3zm0 6v3h9a1.5 1.5 0 0 0 0-3z"/></svg>',
-    "ps": '<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zm2 2v14h14V5zm2 2h4v4H7zm6 0h4v4h-4zM7 13h10v4H7z"/></svg>',
-    "ds": '<svg viewBox="0 0 24 24"><path d="M4 17c3-1 4-6 6-6s2 5 5 5 3-4 5-4v2c-1 0-2 4-5 4s-4-5-5-5-3 6-6 6zM4 20h16v1H4z"/></svg>',
-    "m365": '<svg viewBox="0 0 24 24"><path d="M4 4h7.5v7.5H4zm8.5 0H20v7.5h-7.5zM4 12.5h7.5V20H4zm8.5 0H20V20h-7.5z"/></svg>',
-    "dbx": '<svg viewBox="0 0 24 24"><path d="M7 3l5 3.2L7 9.4 2 6.2zm10 0 5 3.2-5 3.2-5-3.2zM2 12.6 7 9.4l5 3.2-5 3.2zm15-3.2 5 3.2-5 3.2-5-3.2zM7 17l5-3.2 5 3.2-5 3.2z"/></svg>',
-    "xl": '<svg viewBox="0 0 24 24"><path d="M3 3h18v18H3zm2 2v14h14V5zm3 3h2.2l1.8 2.8L13.8 8H16l-2.9 4 2.9 4h-2.2l-1.8-2.8L10.2 16H8l2.9-4z"/></svg>',
 }
 
-def tile(icon, name, line, who=None, next_=False):
-    return ('<div class="tile%s"><div class="ic" aria-hidden="true">%s</div><div class="tx"><b>%s%s</b><span>%s</span></div>%s</div>') % (
-        ' dim' if next_ else '', ICONS.get(icon, icon), name, ' ' + chip("next", "Next") if next_ else '', line, av(who, 22) if who else '')
+def tile(icon, name, line, who=None):
+    return ('<div class="tile"><div class="ic" aria-hidden="true">%s</div><div class="tx"><b>%s</b><span>%s</span></div>%s</div>') % (
+        ICONS.get(icon, icon), name, line, av(who, 22) if who else '')
 
-def integrations(rows=3):
-    """The waterfall (M7): brick rows of Beam-style tiles drifting down through a masked window.
-    rows = how many rows are visible in the window (2 on the home page, 3 on the full section)."""
-    tiles = [tile(i, n, l, w) for i, n, l, w in INTEGRATIONS_TODAY] + [tile(i, n, l, next_=True) for i, n, l in INTEGRATIONS_NEXT]
-    # brick pattern: 3, 2, 3, 2 … (15 tiles → 3+2+3+2+3+2 = 15)
-    pattern = [3, 2, 3, 2, 3, 2]
-    out, k = [], 0
-    for n in pattern:
-        row = tiles[k:k + n]; k += n
-        if not row: break
-        out.append('<div class="brick n%d">%s</div>' % (len(row), ''.join(row)))
-    track = ''.join(out)
-    legend = ('<div class="legend fx"><span>%s Connected today</span><span>%s Next — future tense only, nothing reads as live</span>'
-              '<span class="muted small">Icons are each system\'s own mark, monochrome. Hover to pause.</span></div>') % (
-        '<i class="sw on"></i>', chip("next", "Next"))
-    conv = '<div class="conveyor%s" aria-label="Systems the crew works inside"><div class="track">%s</div></div>' % (' two' if rows == 2 else '', track)
-    static = '<div class="conv-static">%s</div>' % track
-    return legend + conv + static + '<p class="small muted" style="margin-top:14px">Don\'t see yours? Bring it to the Project Review.</p>'
+def integrations():
+    """The systems the crew works inside, as brick rows of tiles (3 + 2). Only what the crew works in; nothing named as
+    coming next. (The old drifting waterfall needed the ten "Next" tiles to fill it.)"""
+    tiles = [tile(i, n, l, w) for i, n, l, w in INTEGRATIONS_TODAY]
+    rows = ['<div class="brick n%d">%s</div>' % (len(r), ''.join(r)) for r in (tiles[:3], tiles[3:]) if r]
+    return ('<div class="int-grid stagger" role="group" aria-label="Systems the crew works inside">%s</div>'
+            '<p class="small muted" style="margin-top:14px">Use something else? Bring it to the Project Review.</p>') % ''.join(rows)
 
 def sample_project_mock(strip=True):
     lines = ('[["ADDENDUM 02 RECEIVED · TAYLOR READING",["working","Working"]],'

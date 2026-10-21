@@ -121,11 +121,11 @@ def home_hero():
           '%s%s%s%s</ul></div></div>') % (
         av("sara", 22), av("taylor", 22), av("emma", 22), SAMPLE, av("sara", 28, label=False),
         _ans(1, "emma", "Spent so far: 68% of the budget, matched to the invoices.", "verified", "Verified"),
-        _ans(2, "taylor", "Windows: the supplier hasn't confirmed the order.", "waiting", "Waiting on supplier"),
+        _ans(2, "sara", "Windows: the supplier hasn't confirmed the order.", "waiting", "Waiting on supplier"),   # procurement is Sara's (team.py)
         _ans(3, "taylor", "Electrical sub says a new quote is coming. Nothing in writing yet.", "reported", "Reported, not verified"),
         _ans(4, "sara", "Blocking: change order 3 isn't signed.", "needs", "Needs you", hot=True))
     yes = ''.join('<div class="yes"><div><b>%s</b><span>%s</span></div>%s</div>' % (t, n, fake_btns()) for t, n in [
-        ("Change order 3", "Written by Richard, priced by Taylor"), ("Follow-up to the window supplier", "Drafted by Taylor")])
+        ("Change order 3", "Written by Richard, priced by Taylor"), ("Follow-up to the window supplier", "Drafted by Sara")])
     w2 = ('<div class="win w2"><div class="whead"><span class="wd"><i></i><i></i><i></i></span><b>Needs your yes · 2</b>%s</div>'
           '<div class="wbody">%s<p class="wfoot">Nothing goes out until you approve it.</p></div></div>') % (SAMPLE, yes)
     return ('<section class="hs h-hero"><div class="wrap">'
@@ -268,7 +268,7 @@ def home_crew():
              + you)
     return ('<section class="hs h-crew" id="crew" aria-labelledby="crew-h"><div class="wrap">'
             '<div class="crew-head"><div class="glow" aria-hidden="true"></div>'
-            '<h2 id="crew-h" class="blurin">Meet the crew: seven AI agents, one team leader, and you in charge.</h2>'
+            '<h2 id="crew-h" class="blurin">Meet the crew: seven AI agents, led by Sara. You stay in charge.</h2>'
             '<p class="lede">Sara leads six specialists. Four of them work on your jobs with her. Two work on BuildWithBNZ itself.</p></div>'
             '%s<div class="bento">%s</div>'
             '<p class="more"><a class="tlink" href="/crew/">See each agent\'s limits and human partner →</a></p>'

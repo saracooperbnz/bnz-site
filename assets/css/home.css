@@ -60,8 +60,9 @@ background:radial-gradient(55% 60% at 12% 0%,var(--glow-1),transparent 70%),radi
 .h-vis{position:relative;width:1100px;max-width:100%;height:520px;margin:56px auto 0;text-align:left}
 .win,.home .mock,.labels,.phone{--ink:var(--mock-ink);--muted:var(--mock-muted);--text:var(--mock-ink);color:var(--mock-ink)}
 .win{background:var(--mock-bg);border-radius:16px;overflow:hidden;box-shadow:var(--ring),var(--shadow-mock);font-size:13.5px;line-height:1.45}
-.w1{position:absolute;right:40px;top:0;width:760px;min-height:470px}
-.w2{position:absolute;left:0;top:250px;width:420px}
+/* w2 overlaps w1 by w1's padding only (20px), so it never hides the start of an answer, at any desktop width */
+.w1{position:absolute;right:0;top:0;width:calc(100% - 372px);max-width:728px;min-height:470px}
+.w2{position:absolute;left:0;top:250px;width:392px}
 .whead{display:flex;align-items:center;gap:12px;height:44px;padding:0 16px;border-bottom:1px solid var(--mock-line);font-size:13px}
 .whead b{flex:1;font-weight:600}
 .wd{display:flex;gap:6px}.wd i{width:7px;height:7px;border-radius:50%;background:#FFFFFF26}

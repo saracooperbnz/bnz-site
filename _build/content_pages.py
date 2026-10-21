@@ -95,7 +95,7 @@ def page_solutions():
     h += section("light", sec_head("One crew", "One crew. Whichever door you came in.",
                                    "Pick one solution and the other three come with it — same workspace, same rules, same approvals queue.") + diagram())
     h += section("dark", sec_head("What we connect to", "The systems the crew works inside.",
-                                   "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.") + integrations(rows=3), id_="connect")
+                                   "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.") + integrations(), id_="connect")
     h += section("light", '<div class="faq-grid"><div class="fx"><span class="eyebrow">FAQ</span><h2 style="margin-top:14px">Asked on every call.</h2></div><div class="fx">%s</div></div>' % faq_items([FAQ[0], FAQ[3], FAQ[2], FAQ[7]], 0))
     h += book_strip(dark=True)
     h += footer()
@@ -212,7 +212,7 @@ AGENT_PAGES = {
                          "Recommends — a person with authority approves and posts"],
                  rule="She reviews and recommends. She does not post transactions or change accounting records without authorization.",
                  states=[("working", "Reviewing"), ("needs", "Needs approval"), ("verified", "Verified")],
-                 states_note="Nothing is posted until a person with authority approves it. Your accountant or CPA reviews payroll and the books. QuickBooks is not connected yet; it is on our Next list.",
+                 states_note="Nothing is posted until a person with authority approves it. Your accountant or CPA reviews payroll and the books. QuickBooks is not connected.",
                  mock_label="Her part of the workspace — reconciliation review", mock=lambda: finance_mock(False),
                  desc="Emma is the BuildWithBNZ finance agent: job costing, invoices, payables and receivables, payroll checks and cash-flow reports. She reviews and recommends."),
 }
@@ -276,11 +276,11 @@ def page_how():
 # ------------------------------------------------------------------ what we connect to
 
 def page_connect():
-    desc = "The BuildWithBNZ crew works inside Google Drive, Gmail, Google Calendar and Notion today; Procore, QuickBooks and Bluebeam are next. Keep your tools."
+    desc = "The BuildWithBNZ crew works inside Google Drive, Gmail, Google Calendar and Notion, with read access first. Keep your tools: nothing is moved or replaced."
     h = head("What We Connect To — Google Drive, Gmail, Calendar, Workspace, Notion | BuildWithBNZ", desc, "/what-we-connect-to/")
     h += nav()
     h += section("dark", sec_head("What we connect to", "The systems the crew works inside.",
-                                  "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.") + integrations(rows=3), extra_cls="first")
+                                  "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.") + integrations(), extra_cls="first")
     h += section("light", sec_head("How access works", "Read first. Send only with you.") +
                  '<div class="grid g3 stagger">'
                  '<div class="card"><h3>Read access first</h3><p class="muted" style="margin-top:10px">The crew starts by reading the project folder, the inbox threads you point it at, and the calendar. Nothing is moved, renamed or copied out.</p></div>'
@@ -469,7 +469,7 @@ def page_get_started():
 def page_get_started_thanks():
     h = head("Thanks — we'll call you back | BuildWithBNZ", "Your answers are in. A real person from our team calls you back.", "/get-started/thanks/", noindex=True)
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h2 style="margin-top:14px">Thanks. A real person will call you back.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h1 class="gs-thanks-h">Thanks. A real person will call you back.</h1>'
                  '<p class="lede">Someone from our team will call you to talk through your company and what the crew would take on first. '
                  'Keep one bid or one job in mind. That is what we walk through.</p>'
                  '<p style="margin-top:18px">Rather pick a time now?</p>'
@@ -564,7 +564,8 @@ def page_privacy():
     h += section("dark", '''<div class="prose fx"><span class="eyebrow">Privacy</span><h2 style="margin-top:14px">Privacy policy.</h2>
 <p class="lede">This covers the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: October 2026.</p>
 <h3>What we collect</h3>
-<p>When you book a Project Review we collect what you type into the form: your name, company, email, phone, contractor type, a description of the project, an optional bid date and an optional link to your files. The form is relayed to our inquiries inbox; we do not use third-party trackers on this site.</p>
+<p>When you book a Project Review we collect what you type into the form: your name, company, email, phone, contractor type, a description of the project, an optional bid date and an optional link to your files. The form is relayed to our inquiries inbox.</p>
+<p>This site uses Google Analytics to count visits and form sends. It is not sent what you type into a form.</p>
 <p>When you fill in the Start here form we collect what you choose to give us: your name, mobile number, email, company, contractor type, city and state, team size, the work you would like handed off first, the tools you use now, how you heard about us, the best time to call, and the page or post that sent you to us. We use them to call you back and set up your company. The form is relayed to our inquiries inbox.</p>
 <p>When you ask for the free workflow report we collect your name, email, and, if you give them, your company, contractor type and what takes the most time. We use them to send the report and the follow-up emails you agreed to. Every email has an unsubscribe link.</p>
 <h3>Project files</h3>
