@@ -59,6 +59,8 @@ Compliance tracking means you know, for every sub, which papers you have, which 
 
 Check your insurance and contract requirements with your insurance agent or lawyer.
 
+Still building your sub list? See [how to find and vet subcontractors as a general contractor](/blog/how-to-find-subcontractors-as-a-general-contractor/).
+
 ## The spreadsheet tracker
 
 Most GCs start with a spreadsheet in Excel or Google Sheets. A good one has:

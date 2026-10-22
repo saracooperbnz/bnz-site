@@ -89,6 +89,8 @@ Answer each question before anyone starts the estimate.
 - If we win, do we have crews and a project manager free?
 - Can we get enough sub coverage in each trade?
 
+Short on subs in a trade? See [how to find subcontractors as a general contractor](/blog/how-to-find-subcontractors-as-a-general-contractor/).
+
 **6. Schedule**
 - Is the bid due date realistic?
 - Does the job schedule fit our backlog (work already signed)?
