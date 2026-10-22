@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from shared import *
-from content_home import hero, STEPS
+from content_home import hero, STEPS, nav_home, footer_home, ico
 
 # ------------------------------------------------------------------ A8 solutions
 
@@ -405,15 +405,15 @@ def onboard_form():
     total = 4
     def legend(n, q):
         return '<legend><span class="st-n">Step %d of %d</span>%s</legend>' % (n, total, q)
-    back = '<button type="button" class="btn quiet" data-back>Back</button>'
-    nxt = '<button type="button" class="btn primary xl" data-next>Continue</button>'
+    back = '<button type="button" class="btn-quiet" data-back>Back</button>'
+    nxt = '<button type="button" class="btn-primary xl" data-next>Continue <span class="arr" aria-hidden="true">→</span></button>'
     return ('<form class="onboard" method="post" action="https://formsubmit.co/%(inbox)s">'
             '<input type="hidden" name="_subject" value="New onboarding request — Start here">'
             '<input type="hidden" name="_template" value="table">'
             '<input type="hidden" name="_next" value="%(site)s/get-started/thanks/">'
             '<input type="hidden" name="_captcha" value="false">'
             '<label class="hp" aria-hidden="true">Leave empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>'
-            '<div class="st-progress" aria-hidden="true"><progress max="%(total)d" value="1"></progress></div>'
+            '<div class="st-progress" aria-hidden="true"><i><b></b></i><i><b></b></i><i><b></b></i><i><b></b></i></div>'
             # 1 — contractor type (the same labels as /start/ and the /book/ form)
             '<fieldset data-step="1">%(l1)s%(types)s'
             '<p class="err" role="alert">Pick the kind of work you do.</p>'
@@ -437,7 +437,7 @@ def onboard_form():
             '<p class="fld-h" id="gs-time-h">Best time to call</p>%(time)s'
             '<p class="fld-h" id="gs-heard-h">How did you hear about us?</p>%(heard)s'
             '<p class="err" role="alert">Add your name, and a mobile number or an email, so we can reach you.</p>'
-            '<div class="st-actions"><button type="submit" class="btn primary xl">Send</button>%(back)s</div>'
+            '<div class="st-actions"><button type="submit" class="btn-primary xl">Send <span class="arr" aria-hidden="true">→</span></button>%(back)s</div>'
             '<p class="note">A real person from our team calls you back. Your answers go to our team only. <a class="link" href="/privacy/">Privacy</a></p>'
             '</fieldset>'
             '</form>') % dict(
@@ -453,29 +453,34 @@ def onboard_form():
         heard=_gs_choices("how_heard", GS_HEARD, cls="compact", labelled="gs-heard-h"))
 
 def page_get_started():
+    """Same look as the home page (home.css, Geist, the focus nav): the brand, Book a call and the phone, no Start here."""
     desc = "Tell us about your company in four short steps on your phone. A real person from our team calls you back to set up your AI office crew."
-    h = head("Start Here — Tell Us About Your Company | BuildWithBNZ", desc, "/get-started/")
-    h += nav()
-    h += ('<section class="dark first start-page gs-page"><div class="wrap">'
-          '<span class="eyebrow">Start here · 4 short steps</span>'
+    h = head("Start Here — Tell Us About Your Company | BuildWithBNZ", desc, "/get-started/",
+             body_attrs='class="home gs" data-colorway="a"', extra_css="/assets/css/home.css")
+    h += nav_home(focus=True)
+    h += ('<section class="gs-page"><div class="lf" aria-hidden="true"><i></i></div><div class="wrap">'
           '<h1>Tell us about your company.</h1>'
           '<p class="lede">Four short steps. Then a real person from our team calls you back to set things up. Nothing is connected until you say yes.</p>'
-          '%s'
-          '<p class="st-call">Rather talk? <a href="tel:%s">Call %s</a> or <a href="/book/">book a call</a></p>'
-          '</div></section>\n') % (onboard_form(), PHONE, PHONE_TXT)
-    h += footer()
+          '<div class="gs-card">%s</div>'
+          '<div class="gs-talk"><p>Rather talk?</p><a class="btn-ghost lg" href="tel:%s">%s Call %s</a><a class="tlink" href="/book/">Book a call</a></div>'
+          '</div></section>\n') % (onboard_form(), PHONE, ico("phone", 20), PHONE_TXT)
+    h += footer_home(minimal=True)
     return h
 
 def page_get_started_thanks():
-    h = head("Thanks — we'll call you back | BuildWithBNZ", "Your answers are in. A real person from our team calls you back.", "/get-started/thanks/", noindex=True)
-    h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h1 class="gs-thanks-h">Thanks. A real person will call you back.</h1>'
-                 '<p class="lede">Someone from our team will call you to talk through your company and what the crew would take on first. '
-                 'Keep one bid or one job in mind. That is what we walk through.</p>'
-                 '<p style="margin-top:18px">Rather pick a time now?</p>'
-                 '<p class="gs-done" style="margin-top:12px">%s<a class="btn ghost" href="tel:%s">Call %s</a></p></div>' % (
-                     btn_book(label="Book a call"), PHONE, PHONE_TXT), extra_cls="first")
-    h += footer()
+    h = head("Thanks — we'll call you back | BuildWithBNZ", "Your answers are in. A real person from our team calls you back.", "/get-started/thanks/", noindex=True,
+             body_attrs='class="home gs" data-colorway="a"', extra_css="/assets/css/home.css")
+    h += nav_home(focus=True)
+    h += ('<section class="gs-page"><div class="lf" aria-hidden="true"><i></i></div><div class="wrap"><div class="gs-card gs-thanks">'
+          '<span class="gs-ok" aria-hidden="true">%s</span><span class="tagp">Received</span>'
+          '<h1 class="gs-thanks-h">Thanks. A real person will call you back.</h1>'
+          '<p class="lede">Someone from our team will call you to talk through your company and what the crew would take on first. '
+          'Keep one bid or one job in mind. That is what we walk through.</p>'
+          '<p>Rather pick a time now?</p>'
+          '<p class="gs-done"><a class="btn-primary lg" href="/book/">Book a call <span class="arr" aria-hidden="true">→</span></a>'
+          '<a class="btn-ghost lg" href="tel:%s">Call %s</a></p>'
+          '</div></div></section>\n') % (ico("check", 28), PHONE, PHONE_TXT)
+    h += footer_home(minimal=True)
     return h
 
 def page_thanks():

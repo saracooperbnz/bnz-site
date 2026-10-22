@@ -243,7 +243,7 @@
   var of = d.querySelector('form.onboard');
   if (of) {
     var osteps = Array.prototype.slice.call(of.querySelectorAll('fieldset[data-step]'));
-    var obar = of.querySelector('progress'), owent = 0, OEM = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var osegs = of.querySelectorAll('.st-progress i'), owent = 0, OEM = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     of.classList.add('js'); of.noValidate = true;
     // where the visitor came from (?src= or ?utm_source=), kept only when it is a short plain code
     var oq = {};
@@ -267,7 +267,7 @@
     var oshow = function (n, focus) {
       if (n > 1 && !ook(1, true)) { n = 1; try { w.history.replaceState(null, '', '#step-1'); } catch (e) {} }   // a link to a later step starts at the first question
       osteps.forEach(function (f, i) { f.classList.toggle('on', i === n - 1); });
-      if (obar) obar.value = n;
+      Array.prototype.forEach.call(osegs, function (s, i) { s.classList.toggle('done', i < n); });
       if (focus) {
         var lg = osteps[n - 1].querySelector('legend');
         of.scrollIntoView({ block: 'start' });

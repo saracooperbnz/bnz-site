@@ -64,8 +64,15 @@ def fake_btns(cls="fbtns"):
 
 # ------------------------------------------------------------------ nav + footer (home only)
 
-def nav_home():
-    """The drawer sits outside the header: the header's blur (once solid) would otherwise trap the fixed drawer inside it."""
+def nav_home(focus=False):
+    """The drawer sits outside the header: the header's blur (once solid) would otherwise trap the fixed drawer inside it.
+    focus=True (/get-started/ and its thanks page): the brand, Book a call and the phone. No links, no burger, no drawer."""
+    if focus:
+        return ('<header class="hnav solid">\n<div class="wrap">\n'
+                '<a class="hbrand" href="/" aria-label="BuildWithBNZ home">%s<span>BuildWithBNZ</span></a>\n'
+                '<div class="hcta f"><a class="btn-ghost sm" href="/book/">Book a call</a>'
+                '<a class="btn-ghost sm call" href="tel:%s">%s <span>Call %s</span></a></div>\n'
+                '</div>\n</header>\n<main id="main">\n') % (bmark(32), PHONE, ico("phone", 18), PHONE_TXT)
     prob = ''.join('<a href="%s">%s</a>' % (href, t) for _, t, _, _, href in MENU_PROBLEM)
     contr = ''.join('<a href="%s">%s</a>' % (h, t) for t, h in MENU_CONTRACTOR)
     return '''<header class="hnav">
@@ -88,7 +95,8 @@ def nav_home():
 <main id="main">
 ''' % dict(bm=bmark(32), start=HOME_START, phone=PHONE, phone_txt=PHONE_TXT, prob=prob, contr=contr)
 
-def footer_home():
+def footer_home(minimal=False):
+    """minimal=True (/get-started/ and its thanks page): no phone action bar and no home.js; bnz.js stays."""
     cols = [("Product", [("/how-it-works/", "How it works"), ("/crew/", "The crew"), ("/solutions/", "Solutions"), ("/what-we-connect-to/", "What we connect to")]),
             ("Start", [(HOME_START, "Start here"), ("/book/", "Book a call"), ("/workflow-report/", "Free workflow report")]),
             ("Company", [("/faq/", "FAQ"), ("/contact/", "Contact"), ("/privacy/", "Privacy"), ("/terms/", "Terms")])]
@@ -98,18 +106,19 @@ def footer_home():
 <div class="wrap">
 <div class="hf-brand"><a class="hbrand" href="/">%(bm)s<span>BuildWithBNZ</span></a>
 <p class="hf-tag">The AI office crew for contractors.</p>
-<p class="hf-addr">New York · <a href="mailto:%(inbox)s">%(inbox)s</a> · <a href="tel:%(phone)s">%(phone_txt)s</a></p>
+<p class="hf-addr">New York</p><p class="hf-contact"><a href="mailto:%(inbox)s">%(inbox)s</a><a href="tel:%(phone)s">%(phone_txt)s</a></p>
 <p class="hf-ai">The crew are AI agents, not real people.</p></div>
 <nav class="hf-cols" aria-label="Footer">%(cols)s</nav>
 <p class="hf-copy">© 2026 BuildWithBNZ</p>
 </div>
 </footer>
-<div class="actbar"><a class="btn-primary" href="%(start)s">Start here</a><a class="btn-ghost call" href="tel:%(phone)s" aria-label="Call %(phone_txt)s">%(icon)s</a></div>
-<script src="/assets/js/bnz.js" defer></script>
-<script src="/assets/js/home.js" defer></script>
-</body>
+%(bar)s<script src="/assets/js/bnz.js" defer></script>
+%(homejs)s</body>
 </html>
-''' % dict(bm=bmark(32), inbox=INBOX, phone=PHONE, phone_txt=PHONE_TXT, cols=nav_cols, start=HOME_START, icon=ico("phone", 22))
+''' % dict(bm=bmark(32), inbox=INBOX, phone=PHONE, phone_txt=PHONE_TXT, cols=nav_cols,
+       bar='' if minimal else ('<div class="actbar"><a class="btn-primary" href="%s">Start here</a><a class="btn-ghost call" href="tel:%s" aria-label="Call %s">%s</a></div>\n' % (
+           HOME_START, PHONE, PHONE_TXT, ico("phone", 22))),
+       homejs='' if minimal else '<script src="/assets/js/home.js" defer></script>\n')
 
 # ------------------------------------------------------------------ 1 hero
 
@@ -149,33 +158,33 @@ def home_hero():
 def home_rule():
     return ('<section class="hs h-rule" aria-labelledby="rule-h"><div class="wrap">'
             '<h2 id="rule-h" class="sr">The rule every agent follows</h2>'
-            '<figure class="rule fx"><blockquote><p>The crew prepares the work. Your people approve every price, signature, payment and send.</p></blockquote>'
+            '<figure class="rule rv"><blockquote><p>The crew prepares the work. Your people approve every price, signature, payment and send.</p></blockquote>'
             '<figcaption>%s<i class="vr"></i><span><b>How every BuildWithBNZ agent works</b><span>%s</span></span></figcaption></figure>'
-            '<p class="rule-note fx">Built from real contractor workflows inside BNZ Builders, New York.</p>'
+            '<p class="rule-note rv rv-b">Built from real contractor workflows inside BNZ Builders, New York.</p>'
             '</div></section>\n') % (bmark(28), PRINCIPLE)
 
 # ------------------------------------------------------------------ 3 how it works (pinned on desktop, stacked elsewhere)
 
 def _rows(rows):
-    return ''.join('<div class="row%s"><div><b>%s</b>%s</div>%s</div>' % (
-        ' hot' if hot else '', b, '<span>%s</span>' % s if s else '', end) for b, s, end, hot in rows)
+    return ''.join('<div class="row%s" style="--i:%d"><div><b>%s</b>%s</div>%s</div>' % (
+        ' hot' if hot else '', i, b, '<span>%s</span>' % s if s else '', end) for i, (b, s, end, hot) in enumerate(rows))
 
 def _step_vis():
     types = ''.join('<li%s>%s</li>' % (' class="on"' if i == 0 else '', t) for i, (_, t) in enumerate(START_TYPES))
-    v1 = ('<figure class="st-vis ph" aria-label="Sample: the first question of the Start here form">'
+    v1 = ('<figure class="st-vis ph rv" aria-label="Sample: the first question of the Start here form">'
           '<div class="phone">%s<p class="pn-s">Step 1 of 4</p><i class="pbar"><i></i></i>'
           '<p class="pn-q">What kind of work do you do?</p><ul class="pn-o">%s</ul><span class="pn-b" aria-hidden="true">Continue</span></div></figure>') % (SAMPLE, types)
-    v2 = ('<figure class="st-vis" aria-label="Sample: what a Project Review covers"><div class="mock rows pcard">%s<p class="mt">Project Review</p>%s</div></figure>') % (SAMPLE, _rows([
+    v2 = ('<figure class="st-vis rv" aria-label="Sample: what a Project Review covers"><div class="mock pcard">%s<p class="mt">Project Review</p>%s</div></figure>') % (SAMPLE, _rows([
         ("Your project", "12-unit renovation · bid due in 11 days", "", False),
         ("What you bring", "Drawings, specs, addenda, bid form", "", False),
         ("On the call", "You and someone from our team", "", False),
         ("What you see", "What the crew would do with it, live", "", False)]))
-    v3 = ('<figure class="st-vis" aria-label="Sample: a scope document"><div class="mock rows pcard">%s<p class="mt">Scope · in writing</p>%s</div></figure>') % (SAMPLE, _rows([
+    v3 = ('<figure class="st-vis rv" aria-label="Sample: a scope document"><div class="mock pcard">%s<p class="mt">Scope · in writing</p>%s</div></figure>') % (SAMPLE, _rows([
         ("What Taylor does", "Takeoffs, the estimate, a conflict log", "", False),
         ("What Emma checks", "Job costs and invoices", "", False),
         ("What stays with you", "Every approval, every send, the signature", "", False),
         ("One set price", "Agreed before work starts", "", True)]))
-    v4 = ('<figure class="st-vis" aria-label="Sample: the approvals queue"><div class="mock rows pcard">%s<p class="mt">Needs you · 3</p>%s</div></figure>') % (SAMPLE, _rows([
+    v4 = ('<figure class="st-vis rv" aria-label="Sample: the approvals queue"><div class="mock pcard">%s<p class="mt">Needs you · 3</p>%s</div></figure>') % (SAMPLE, _rows([
         ("Bid invitation to 4 electrical subs", "Drafted by Taylor", fake_btns(), False),
         ("Drywall sub's invoice matches the approved quote", "Checked by Emma", chip("verified", "Verified"), False),
         ("Monday report", "Drafted by Sara", chip("reported", "Drafted"), False)]))
@@ -199,9 +208,9 @@ def home_how():
     steps = []
     for i, ((tag, h2, p, link), v) in enumerate(zip(STEPS4, vis)):
         a = '<a class="pill-link" href="%s">%s <span aria-hidden="true">›</span></a>' % (link[1], link[0]) if link else ''
-        steps.append('<div class="st%s" data-i="%d"><div class="st-txt"><span class="tagp">%s</span><h2>%s</h2><p>%s</p>%s</div>%s</div>' % (
+        steps.append('<div class="st%s" data-i="%d"><div class="st-txt rv"><span class="tagp">%s</span><h2>%s</h2><p>%s</p>%s</div>%s</div>' % (
             ' on' if i == 0 else '', i, tag, h2, p, a, v))
-    dots = ''.join('<button type="button"%s aria-label="Step %d"></button>' % (' class="on" aria-current="step"' if i == 0 else '', i + 1) for i in range(4))
+    dots = ''.join('<button type="button" aria-label="Step %d"><i><b></b></i></button>' % (i + 1) for i in range(4))
     return ('<section class="hs h-how" id="how" aria-label="How it works"><div class="pin"><div class="wrap">'
             '<div class="steps4">%s<div class="dots" role="group" aria-label="Go to step">%s</div></div>'
             '</div></div></section>\n') % (''.join(steps), dots)
@@ -224,21 +233,21 @@ def _card(slug, side, rule, vis="", cls="", text=None, note=None):
     a = BY[slug]
     tag = ('<span class="tagp jobs">On your jobs</span>' if side == "jobs" else '<span class="tagp ours">On our side</span>')
     notes = ''.join('<p class="bc-n">%s</p>' % tx(n) for n in [a["license"], note] if n)
-    return ('<article class="bc%s" id="c-%s"><header class="bc-h">%s<div><h3>%s</h3><p>%s</p></div>%s</header>'
+    return ('<article class="bc%s rv" id="c-%s"><header class="bc-h">%s<div><div class="bc-nm"><h3>%s</h3>%s</div><p>%s</p></div></header>'
             '<div class="bc-x"><p class="bc-t">%s</p><p class="bc-l">%s<span>%s</span></p>%s</div>%s</article>') % (
-        ' ' + cls if cls else '', slug, av(slug, 40, label=False), tx(a["name"]), tx(a["title"]), tag,
+        ' ' + cls if cls else '', slug, av(slug, 40, label=False), tx(a["name"]), tag, tx(a["title"]),
         tx(text or a["card"]), ico("check", 14), lim(slug, rule), notes, vis)
 
 def home_crew():
     sara = BY["sara"]
-    lineup = ('<figure class="lineup" aria-label="Sara Cooper leads six AI agents. On your jobs: Taylor, Emma, Richard and Kyle. On our side: Amanda and Adam.">'
+    lineup = ('<div class="lu-stage"><figure class="lineup rv" aria-label="Sara Cooper leads six AI agents. On your jobs: Taylor, Emma, Richard and Kyle. On our side: Amanda and Adam.">'
               '<div class="lu-sara">%s<b>%s</b><span>%s</span></div>'
               '<div class="lu-groups"><div class="lu-g jobs"><p class="lu-label">On your jobs</p><ul>%s</ul></div>'
-              '<div class="lu-g ours"><p class="lu-label">On our side</p><ul>%s</ul></div></div></figure>') % (
+              '<div class="lu-g ours"><p class="lu-label">On our side</p><ul>%s</ul></div></div></figure></div>') % (
         av("sara", 96, anim=True, label=False), tx(sara["name"]), tx(sara["title"]),
         ''.join(_lu(s) for s in ("taylor", "emma", "richard", "kyle")), ''.join(_lu(s) for s in ("amanda", "adam")))
 
-    sara_v = ('<div class="bc-v sara-v"><figure class="mock rows" aria-label="Sample: Sara\'s morning priorities">%s<p class="mt">Morning priorities</p>'
+    sara_v = ('<div class="bc-v sara-v"><figure class="mock rv-s" aria-label="Sample: Sara\'s morning priorities">%s<p class="mt">Morning priorities</p>'
               '<div class="row you"><div><b>You</b><span>What needs me today?</span></div></div>'
               '<div class="row"><div class="msg">%s<div><b>Sara</b><span>Three things.</span></div></div></div>%s</figure>'
               '<div class="askwrap" aria-hidden="true"><div class="askbar"><span>Ask Sara: what does my company need to handle today?</span><i>%s</i></div></div></div>') % (
@@ -246,22 +255,22 @@ def home_crew():
             ("Thursday's bid: 4 pages need your ink signature", "", chip("needs", "Needs you"), False),
             ("Electrical quote still out", "", chip("waiting", "Waiting on sub"), False),
             ("Insurance certificate names the wrong holder", "", chip("needs", "Needs you"), False)]), ico("send", 18))
-    taylor_v = '<figure class="bc-v mock rows" aria-label="Sample: estimate lines, each with a label">%s<p class="mt">Estimate lines</p>%s</figure>' % (SAMPLE, _rows([
+    taylor_v = '<figure class="bc-v mock rv-s scan" aria-label="Sample: estimate lines, each with a label">%s<p class="mt">Estimate lines</p>%s</figure>' % (SAMPLE, _rows([
         ("Slab on grade · 2,150 SF", "", chip("verified", "Verified"), False),
         ("Doors and frames · from sub", "", chip("quote", "Quote"), False),
         ("Site lighting", "", chip("estimate", "Estimate"), False),
         ("Plumbing fixtures · schedule not in the set", "", chip("unknown", "Unknown"), False)]))
-    emma_v = ('<figure class="bc-v mock rows" aria-label="Sample: invoices checked against the job">%s<p class="mt">Invoices this week</p>%s'
+    emma_v = ('<figure class="bc-v mock rv-s" aria-label="Sample: invoices checked against the job">%s<p class="mt">Invoices this week</p>%s'
               '<div class="line jbar"><span>Job cost: 68%% of budget</span><i><i style="width:68%%"></i></i></div></figure>') % (SAMPLE, _rows([
                   ("Drywall sub · invoice 14", "Matches the approved quote", chip("verified", "Verified"), False),
                   ("Plumber · invoice 9", "2 lines not in the contract", chip("needs", "Needs you"), False)]))
-    richard_v = '<figure class="bc-v mock rows" aria-label="Sample: a change order">%s<p class="mt">Change order 3</p>%s</figure>' % (SAMPLE, _rows([
+    richard_v = '<figure class="bc-v mock rv-s" aria-label="Sample: a change order">%s<p class="mt">Change order 3</p>%s</figure>' % (SAMPLE, _rows([
         ("Added: 2 windows, 2nd floor", "", "", False), ("Priced by Taylor", "", "", False),
         ("Signed before work starts", "", chip("needs", "Waiting for signature"), False)]))
     kyle_v = ('<figure class="bc-v mock kyle-v" aria-label="Sample: a before plan and a design concept">%s<p class="mt">Kitchen and living room</p>'
               '<div class="plans"><div class="pl before">%s<span>Before</span></div><div class="pl concept">%s<span>Concept</span></div></div>'
               '<p class="kchip">%s</p></figure>') % (SAMPLE, _kyle_plan(False), _kyle_plan(True), chip("verified", "Cost checked by Taylor"))
-    you = ('<article class="bc you-c" id="c-you"><header class="bc-h"><span class="you-i">%s</span><div><h3>You</h3><p>Owner · the final say</p></div></header>'
+    you = ('<article class="bc you-c rv" id="c-you"><header class="bc-h"><span class="you-i">%s</span><div><div class="bc-nm"><h3>You</h3></div><p>Owner · the final say</p></div></header>'
            '<div class="bc-x"><p class="bc-t">You approve every price, signature, payment and send. The crew never makes the owner\'s decision.</p></div>%s</article>') % (
         ico("person", 22), fake_btns("you-b"))
     cards = (_card("sara", "jobs", "Nothing is sent without a person's go.", sara_v, "wide",
@@ -274,11 +283,11 @@ def home_crew():
              + _card("adam", "ours", "Software releases need Bilal's explicit approval first.", cls="short", note=BY["adam"]["note"])
              + you)
     return ('<section class="hs h-crew" id="crew" aria-labelledby="crew-h"><div class="wrap">'
-            '<div class="crew-head"><div class="glow" aria-hidden="true"></div>'
+            '<div class="crew-head">'
             '<h2 id="crew-h" class="blurin">Meet the crew: seven AI agents, led by Sara. You stay in charge.</h2>'
-            '<p class="lede">Sara leads six specialists. Four of them work on your jobs with her. Two work on BuildWithBNZ itself.</p></div>'
+            '<p class="lede rv">Sara leads six specialists. Four of them work on your jobs with her. Two work on BuildWithBNZ itself.</p></div>'
             '%s<div class="bento">%s</div>'
-            '<p class="more"><a class="tlink" href="/crew/">See each agent\'s limits and human partner →</a></p>'
+            '<p class="more rv rv-b"><a class="tlink" href="/crew/">See each agent\'s limits and human partner&nbsp;→</a></p>'
             '</div></section>\n') % (lineup, cards)
 
 # ------------------------------------------------------------------ 6 how to read the answers (where beam has logos + a case study)
@@ -298,13 +307,13 @@ LABELS = [("verified", "Verified", "Checked against the document itself."),
           ("needs", "Needs you", "Waiting for your decision.")]
 
 def home_read():
-    tiles = ''.join('<li><p>%s</p><span>%s%s</span></li>' % (lim(s, r), av(s, 20, label=False), tx(BY[s]["short"])) for s, r in RULES)
+    tiles = ''.join('<li class="rv"><span>%s%s</span><p>%s</p></li>' % (av(s, 20, label=False), tx(BY[s]["short"]), lim(s, r)) for s, r in RULES)   # the agent first: a lead-in on a phone
     labels = ''.join('<div><dt>%s</dt><dd>%s</dd></div>' % (chip(k, t), m) for k, t, m in LABELS)
     return ('<section class="hs h-read" aria-labelledby="read-h"><div class="wrap">'
-            '<h2 id="read-h" class="stmt fx">No made-up numbers. <span>Every answer the crew gives you carries a label, so you can see what\'s been checked and what hasn\'t.</span></h2>'
-            '<p class="stmt-l fx"><a class="tlink" href="/how-it-works/">See how it works →</a></p>'
-            '<div class="read-grid"><ul class="rtiles stagger" aria-label="Rules the crew follows">%s</ul>'
-            '<div class="labels fx"><h3>The labels</h3><dl>%s</dl></div></div>'
+            '<h2 id="read-h" class="stmt blurin">No made-up numbers. <span>Every answer the crew gives you carries a label, so you can see what\'s been checked and what hasn\'t.</span></h2>'
+            '<p class="stmt-l rv rv-b"><a class="tlink" href="/how-it-works/">See how it works&nbsp;→</a></p>'
+            '<div class="read-grid"><ul class="rtiles" aria-label="Rules the crew follows">%s</ul>'
+            '<div class="labels rv"><h3>The labels</h3><dl>%s</dl></div></div>'
             '</div></section>\n') % (tiles, labels)
 
 # ------------------------------------------------------------------ 7 trust band (where beam has certification badges: we claim none)
@@ -317,11 +326,11 @@ TRUST = [("eye", "Read access first", "Nothing is moved or replaced."),
          ("person", "A person behind every agent", "Each agent works with a named person on our team.")]
 
 def home_trust():
-    cells = ''.join('<li><span class="tc-i">%s</span><b>%s</b><span>%s</span></li>' % (ico(i), t, l) for i, t, l in TRUST)
+    cells = ''.join('<li class="rv"><span class="tc-i">%s</span><b>%s</b><span>%s</span></li>' % (ico(i), t, l) for i, t, l in TRUST)
     return ('<section class="hs h-trust" aria-labelledby="trust-h"><div class="wrap">'
-            '<div class="center fx"><h2 id="trust-h">Your files, your numbers, your call.</h2>'
+            '<div class="center rv"><h2 id="trust-h">Your files, your numbers, your call.</h2>'
             '<p class="lede">Plain rules for how the crew handles your files, your numbers and anything that goes out.</p></div>'
-            '<ul class="tcells stagger">%s</ul></div></section>\n') % cells
+            '<ul class="tcells">%s</ul></div></section>\n') % cells
 
 # ------------------------------------------------------------------ 8 questions (not on beam; kept to four)
 
@@ -339,14 +348,14 @@ def home_faq():
     items = ''.join('<details%s><summary><span>%s</span><i class="pm" aria-hidden="true"></i></summary><div class="a"><p>%s</p></div></details>' % (
         ' open' if i == 0 else '', q, a) for i, (q, a) in enumerate(HOME_FAQ))
     return ('<section class="hs h-faq" id="faq" aria-labelledby="faq-h"><div class="wrap">'
-            '<div class="fx"><h2 id="faq-h">Questions contractors ask first.</h2><p><a class="tlink" href="/faq/">All questions →</a></p></div>'
-            '<div class="hfaq fx">%s</div></div></section>\n') % items
+            '<div class="rv"><h2 id="faq-h">Questions contractors ask first.</h2><p><a class="tlink" href="/faq/">All questions&nbsp;→</a></p></div>'
+            '<div class="hfaq rv">%s</div></div></section>\n') % items
 
 # ------------------------------------------------------------------ 9 final call to action
 
 def home_cta():
     return ('<section class="h-cta" aria-labelledby="cta-h"><div class="wrap">'
-            '<h2 id="cta-h">Run the company. Keep every decision.</h2>'
+            '<h2 id="cta-h" class="blurin">Run the company. Keep every decision.</h2>'
             '<p class="cta-sub">Answer a few questions about your company. A real person gets back to you the same business day.</p>'
             '<div class="cta-b"><a class="btn-primary lg" href="%s">Start here</a><a class="btn-ghost lg" href="/book/">Book a call</a></div>'
             '<p class="cta-call">Or call <a href="tel:%s">%s</a></p>'
