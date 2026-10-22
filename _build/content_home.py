@@ -23,7 +23,7 @@ STEPS = [
     ("Taylor reads the package", "Drawings, specs, addenda, wage schedules, bid forms. Takeoffs, conflicts, pricing — every assumption and source shown.",
      "an estimate with its logic attached.", "Taylor says UNKNOWN rather than guessing."),
     ("Taylor compares sub pricing", "Taylor requests and compares sub and vendor pricing and levels each quote against her estimate, line by line.",
-     "a levelled bid table per trade.", "nothing goes to a sub without your approval."),
+     "a leveled bid table per trade.", "nothing goes to a sub without your approval."),
     ("Sara runs it", "She supervises the team, catches what falls between them, and brings you a short queue of the decisions that need you.",
      "a Monday report and an approvals queue.", "she brings you only the decisions that need you. You sign. She doesn't."),
 ]
@@ -120,14 +120,14 @@ def proof():
             '<blockquote>"Sara never claims something was completed unless verified. Never makes the owner\'s decision."</blockquote>'
             '<blockquote>"Taylor never invents a price. Says UNKNOWN when information is missing and always shows the logic."</blockquote>'
             '<blockquote>"Emma reviews and recommends. She never posts transactions or changes accounting records without authorization."</blockquote></div>'
-            '<div class="card"><h3>How the crew catches its own mistakes</h3><p class="muted" style="margin-top:10px">Every estimate line, sub quote and claim is cross-checked before it reaches you. When two sources disagree — a spec section against a drawing sheet, a quote against a levelled scope — the item is flagged CONFLICT and held, not smoothed over. Anything the crew was told but hasn\'t confirmed stays marked REPORTED — NOT VERIFIED until it\'s checked against the document itself.</p></div>'
+            '<div class="card"><h3>How the crew catches its own mistakes</h3><p class="muted" style="margin-top:10px">Every estimate line, sub quote and claim is cross-checked before it reaches you. When two sources disagree — a spec section against a drawing sheet, a quote against a leveled scope — the item is flagged CONFLICT and held, not smoothed over. Anything the crew was told but hasn\'t confirmed stays marked REPORTED — NOT VERIFIED until it\'s checked against the document itself.</p></div>'
             '</div>')
 
 def page_home():
-    desc = "AI operating system for construction companies: Sara runs operations, Taylor builds estimates from drawings, Emma manages your subcontractors."
+    desc = "AI operating system for construction companies: seven AI agents led by Sara handle estimating, bids, paperwork and job costs. You approve every send."
     ld = ('{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"BuildWithBNZ","url":"%s","email":"%s","telephone":"%s","areaServed":"New York","description":"AI operating system for construction companies."},'
           '{"@type":"WebSite","name":"BuildWithBNZ","url":"%s"}]}') % (SITE, INBOX, PHONE_LD, SITE)
-    h = head("AI Operating System for Construction Companies | BuildWithBNZ", desc, "/", jsonld=ld)
+    h = head("AI Operating System for Construction Companies | BNZ", desc, "/", jsonld=ld)
     h += nav("/")
     h += hero("AI operating system for construction companies", "Run the company. Keep every decision.",
               TEAM_LEDE,
