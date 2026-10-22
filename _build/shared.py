@@ -23,10 +23,9 @@ PHONE_LD = "+1-646-281-8368"  # schema.org telephone
 UPDATED = "2026-10-22"          # sitemap lastmod for the generated pages (build.py keeps the legacy pages' date)
 LEGACY_UPDATED = "2026-09-17"
 
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
-         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..900'
-         '&family=Space+Grotesk:wght@400;500;600;700&display=swap">')
+         '&family=Geist:wght@400..700&family=Space+Grotesk:wght@400;500;600;700&display=swap">')
 
 NAV_ITEMS = [("/crew/", "The crew"), ("/how-it-works/", "How it works"), ("/faq/", "FAQ")]
 
@@ -145,6 +144,7 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False, body_attr
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script>(function(h){try{if(window.matchMedia&&matchMedia('(prefers-reduced-motion: no-preference)').matches){h.className+=' js-motion';setTimeout(function(){if(!window.__rv)h.className+=' rv-all'},3000)}}catch(e){}})(document.documentElement)</script>
 <meta name="google-site-verification" content="uTyl7df14_U_o3kpXSZRk6JfZPx5DJSW35nNlX7l0Zs" />
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-883K8FQX0B"></script>

@@ -40,6 +40,9 @@ ICON = {
     "person": '<circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c1.2-4 4.1-5.8 7.5-5.8s6.3 1.8 7.5 5.8"/>',
     "phone": '<path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2z"/>',
     "send": '<path d="M12 19V5M6 11l6-6 6 6"/>',
+    "chat": '<path d="M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v8.5A1.5 1.5 0 0 1 19 17H10l-4.5 3.5V17H5a1.5 1.5 0 0 1-1.5-1.5V7A1.5 1.5 0 0 1 5 5.5z"/>',
+    "list": '<path d="M9 7h10.5M9 12h10.5M9 17h10.5"/><circle cx="5" cy="7" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="5" cy="17" r="1"/>',
+    "calendar": '<rect x="4" y="5.5" width="16" height="15" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4"/>',
 }
 
 def ico(name, size=24, cls="ico"):
@@ -111,25 +114,29 @@ def footer_home():
 # ------------------------------------------------------------------ 1 hero
 
 def _ans(i, who, text, kind, label, hot=False):
-    return '<li%s style="--i:%d">%s<span class="at">%s</span>%s</li>' % (' class="hot"' if hot else '', i, av(who, 22), text, chip(kind, label))
+    """One answer row. The chip sits inside .at, so on a phone it can follow the text inline."""
+    return '<li%s style="--i:%d">%s<span class="at"><span>%s</span>%s</span></li>' % (' class="hot"' if hot else '', i, av(who, 22), text, chip(kind, label))
 
 def home_hero():
-    w1 = ('<div class="win w1"><div class="whead"><span class="wd"><i></i><i></i><i></i></span><b>Ask Sara</b>'
-          '<span class="wcrew">%s%s%s</span>%s</div><div class="wbody">'
-          '<p class="qyou"><b>You</b><span class="q">Where does the Maple Street job stand? What have we spent, what\'s missing, and what\'s blocking us?</span></p>'
-          '<ul class="ans"><li class="say" style="--i:0">%s<span class="at"><b>Sara</b>I checked with Emma and Taylor. Here\'s where it stands.</span></li>'
-          '%s%s%s%s</ul></div></div>') % (
-        av("sara", 22), av("taylor", 22), av("emma", 22), SAMPLE, av("sara", 28, label=False),
+    rail = ''.join('<i%s>%s</i>' % (' class="on"' if k == "chat" else '', ico(k, 18)) for k in ("chat", "list", "folder", "calendar"))
+    body1 = ('<p class="qyou"><b>You</b><span class="q">Where does the Maple Street job stand? What have we spent, what\'s missing, and what\'s blocking us?</span></p>'
+             '<ul class="ans"><li class="say" style="--i:0">%s<span class="at"><b>Sara</b>I checked with Emma and Taylor. Here\'s where it stands.</span></li>'
+             '%s%s%s%s</ul>') % (
+        av("sara", 28, label=False),
         _ans(1, "emma", "Spent so far: 68% of the budget, matched to the invoices.", "verified", "Verified"),
         _ans(2, "sara", "Windows: the supplier hasn't confirmed the order.", "waiting", "Waiting on supplier"),   # procurement is Sara's (team.py)
         _ans(3, "taylor", "Electrical sub says a new quote is coming. Nothing in writing yet.", "reported", "Reported, not verified"),
         _ans(4, "sara", "Blocking: change order 3 isn't signed.", "needs", "Needs you", hot=True))
+    w1 = ('<div class="win w1"><div class="wrail" aria-hidden="true">%s%s</div><div class="wpane">'
+          '<div class="whead">%s<span class="crumb"><span class="c1">Maple Street<i aria-hidden="true">›</i></span><b>Ask Sara</b></span>'
+          '<span class="wcrew">%s%s%s</span>%s</div><div class="wbody">%s</div></div></div>') % (
+        bmark(24), rail, bmark(18), av("sara", 22), av("taylor", 22), av("emma", 22), SAMPLE, body1)
     yes = ''.join('<div class="yes"><div><b>%s</b><span>%s</span></div>%s</div>' % (t, n, fake_btns()) for t, n in [
         ("Change order 3", "Written by Richard, priced by Taylor"), ("Follow-up to the window supplier", "Drafted by Sara")])
-    w2 = ('<div class="win w2"><div class="whead"><span class="wd"><i></i><i></i><i></i></span><b>Needs your yes · 2</b>%s</div>'
-          '<div class="wbody">%s<p class="wfoot">Nothing goes out until you approve it.</p></div></div>') % (SAMPLE, yes)
-    return ('<section class="hs h-hero"><div class="wrap">'
-            '<h1 class="blurin">An AI office crew<br class="dk"> for contractors.</h1>'
+    w2 = ('<div class="win w2"><div class="wpane"><div class="whead"><i class="wdot" aria-hidden="true"></i><b>Needs your yes · 2</b>%s</div>'
+          '<div class="wbody">%s<p class="wfoot">%s Nothing goes out until you approve it.</p></div></div></div>') % (SAMPLE, yes, ico("lock", 14))
+    return ('<section class="hs h-hero"><div class="lf" aria-hidden="true"><i></i></div><div class="wrap">'
+            '<h1>An AI office crew<br class="dk"> for contractors.</h1>'
             '<p class="lede">Sara and her AI specialists prepare your bids, estimates, invoices and contract paperwork. '
             'You approve every price, signature, payment and send.</p>'
             '<a class="btn-primary lg" id="hero-start" href="%s">Start here <span class="arr" aria-hidden="true">→</span></a>'
