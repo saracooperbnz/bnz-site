@@ -149,7 +149,7 @@ def home_hero():
             '<p class="lede">Sara and her AI specialists prepare your bids, estimates, invoices and contract paperwork. '
             'You approve every price, signature, payment and send.</p>'
             '<a class="btn-primary lg" id="hero-start" href="%s">Start here <span class="arr" aria-hidden="true">→</span></a>'
-            '<p class="h-alt">A few quick questions. Or <a href="/book/">book a call</a> · <a href="tel:%s">%s</a></p>'
+            '<p class="h-alt"><span class="h-alt-t">A few quick questions.</span> <span class="h-or">Or</span> <a href="/book/">book a call</a><span class="h-sep" aria-hidden="true"> · </span><a href="tel:%s">%s</a></p>'
             '<figure class="h-vis" aria-label="Sample: Sara answers a question about a job">%s%s</figure>'
             '</div></section>\n') % (HOME_START, PHONE, PHONE_TXT, w1, w2)
 
@@ -222,12 +222,21 @@ def _lu(slug):
     return '<li>%s<b>%s</b><span>%s</span></li>' % (av(slug, 64, label=False), tx(a["short"]), tx(a["title"]))
 
 def _kyle_plan(concept):
-    """A simple floor plan: kitchen on the left, living room on the right. The concept opens the wall and adds an island."""
-    wall = '<path d="M100 14v16"/>' if concept else '<path d="M100 14v44M100 78v28"/>'
-    island = '<rect x="80" y="56" width="40" height="14" rx="2" opacity=".8"/>' if concept else ''
-    return ('<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">'
-            '<rect x="14" y="14" width="172" height="92" rx="2"/><path d="M24 24h52M24 24v40" opacity=".6"/>'
-            '<rect x="134" y="84" width="40" height="12" rx="2" opacity=".6"/>%s%s</svg>') % (wall, island)
+    """A blueprint of a kitchen (left) and a living room (right): double-line walls, a door swing, counters, a sofa,
+    a dimension line and a dotted grid. The concept opens the wall, adds an island and tints the open room."""
+    k = 1 if concept else 0
+    grid = ('<defs><pattern id="kg%d" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".6" fill="currentColor" stroke="none"/></pattern></defs>'
+            '<rect width="200" height="120" fill="url(#kg%d)" stroke="none" opacity=".22"/>') % (k, k)
+    room = '<rect class="rf" x="18" y="18" width="164" height="84"/>' if concept else ''
+    wall = ('<path d="M98 18v12M102 18v12M98 30h4"/>' if concept else
+            '<path d="M98 18v40M102 18v40M98 58h4M98 78v24M102 78v24M98 78h4"/><path class="thin" d="M102 78h20M102 58a20 20 0 0 1 20 20"/>')
+    island = '<rect class="isl" x="78" y="52" width="44" height="13" rx="1.5"/>' if concept else ''
+    return ('<svg viewBox="0 0 200 120" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+            '%s%s<rect x="14" y="14" width="172" height="92"/><rect x="18" y="18" width="164" height="84"/>%s'
+            '<path class="thin" d="M22 22h56v9H31v35h-9z"/>'
+            '<rect class="thin" x="136" y="84" width="40" height="12" rx="2"/><rect class="thin" x="146" y="64" width="20" height="10" rx="1.5"/>%s'
+            '<path class="thin" d="M14 6v6M186 6v6M14 9h172"/>'
+            '<text x="56" y="90" text-anchor="middle">Kitchen</text><text x="142" y="42" text-anchor="middle">Living</text></svg>') % (grid, room, wall, island)
 
 def _card(slug, side, rule, vis="", cls="", text=None, note=None):
     a = BY[slug]
@@ -272,7 +281,8 @@ def home_crew():
               '<p class="kchip">%s</p></figure>') % (SAMPLE, _kyle_plan(False), _kyle_plan(True), chip("verified", "Cost checked by Taylor"))
     you = ('<article class="bc you-c rv" id="c-you"><header class="bc-h"><span class="you-i">%s</span><div><div class="bc-nm"><h3>You</h3></div><p>Owner · the final say</p></div></header>'
            '<div class="bc-x"><p class="bc-t">You approve every price, signature, payment and send. The crew never makes the owner\'s decision.</p></div>%s</article>') % (
-        ico("person", 22), fake_btns("you-b"))
+        ico("person", 22), ('<figure class="bc-v mock you-v" aria-label="Sample: a decision waiting for you">%s<p class="mt">Needs your yes</p>'
+                            '<div class="row hot"><div><b>Change order 3</b><span>Written by Richard, priced by Taylor</span></div>%s</div></figure>') % (SAMPLE, fake_btns()))
     cards = (_card("sara", "jobs", "Nothing is sent without a person's go.", sara_v, "wide",
                    text=sara["card"].replace(" and reports to Bilal", ""))   # the reporting line belongs on /crew/
              + _card("taylor", "jobs", "Every number carries a label, such as VERIFIED, ESTIMATE, QUOTE or UNKNOWN.", taylor_v, "tall")

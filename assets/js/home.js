@@ -25,7 +25,8 @@
   var nav = $('.hnav'), hero = $('.h-hero'), vis = $('.h-vis'), how = $('#how'), lu = $('.lineup'), luStage = $('.lu-stage'),
       faq = $('.h-faq'), cta = $('.h-cta'), ctaH = $('#cta-h'), main = $('main');
 
-  /* words: each word rises out of a blur once the heading passes 82% of the screen (the <span> in a heading keeps its words) */
+  /* words: each word rises out of a blur once the heading is on screen; the whole heading lands in under a second
+     (the <span> in a heading keeps its words) */
   if (MO && IO) all('.blurin').forEach(function (el) {
     var n = 0;
     el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
@@ -38,23 +39,25 @@
           if (!part) return;
           if (/^\s+$/.test(part)) { f.appendChild(d.createTextNode(part)); return; }
           var s = d.createElement('span'); s.className = 'w'; s.setAttribute('aria-hidden', 'true');
-          s.style.setProperty('--i', Math.min(n++, 14)); s.textContent = part; f.appendChild(s);
+          s.style.setProperty('--i', Math.min(n++, 10)); s.textContent = part; f.appendChild(s);
         });
         p.replaceChild(f, node);
       });
     })(el);
     // the closing heading waits under the questions on desktop, so the curtain starts it (see ctaFrame)
-    once(el, function () { if (el !== ctaH || !curtain) el.classList.add('go'); else ctaWait = true; }, 0, '0px 0px -18% 0px');
+    once(el, function () { if (el !== ctaH || !curtain) el.classList.add('go'); else ctaWait = true; }, 0, '0px 0px -6% 0px');
   });
 
-  /* hero: the windows tilt up once the fonts are in (600 ms at most); 700 ms later the question types itself */
-  var q = vis && $('.q', vis), full, t, r;
+  /* hero: the windows tilt up once the fonts are in (600 ms at most); 150 ms later the question types itself in under
+     a third of a second and the answers land while it finishes, so the window is full about a second after load */
+  var q = vis && $('.q', vis), w2 = vis && $('.w2', vis), full, t, r;
   function typeIt() {
-    var gap = Math.min(40, 1600 / full.length), k = 0;
+    var gap = Math.min(8, 300 / full.length), k = 0, lead = Math.ceil(full.length * 0.5);
     (function tick() {
-      k++; t.textContent = full.slice(0, k); r.textContent = full.slice(k);
+      k = Math.min(full.length, k + (gap < 4 ? 2 : 1)); t.textContent = full.slice(0, k); r.textContent = full.slice(k);
+      if (k >= lead && vis.classList.contains('anim')) { vis.classList.remove('anim'); vis.classList.add('play'); }
       if (k < full.length) return setTimeout(tick, gap);
-      q.textContent = full; vis.classList.remove('anim'); vis.classList.add('play');
+      q.textContent = full;
     })();
   }
   if (vis && MO) {
@@ -65,7 +68,7 @@
       vis.classList.add('anim');
     }
     var went = false;
-    var go = function () { if (went) return; went = true; requestAnimationFrame(function () { vis.classList.add('up'); if (q) setTimeout(typeIt, 700); }); };
+    var go = function () { if (went) return; went = true; requestAnimationFrame(function () { vis.classList.add('up'); if (q) setTimeout(typeIt, 100); }); };
     if (d.fonts && d.fonts.ready) d.fonts.ready.then(go);
     setTimeout(go, 600);
   }
@@ -80,44 +83,40 @@
   }, { rootMargin: '0px 0px -10% 0px', threshold: 0 }) : null;
   function inNow(el) { el.classList.add('in'); if (rio) rio.unobserve(el); }
 
-  /* how it works: on desktop the four steps share one pinned stage and hand over continuously */
+  /* how it works: on desktop the four steps share one pinned stage. The scroll position picks the step (with a little
+     hysteresis), the crossfade is a timed CSS transition, so any resting position shows one whole, readable step.
+     The progress bars follow the scroll; they fade as the stage lets go. Step 4 needs less room, so the stage runs to NF. */
   var steps = how ? all('.st', how) : [], txt = steps.map(function (s) { return $('.st-txt', s); }),
-      svis = steps.map(function (s) { return $('.st-vis', s); }), dots = how ? all('.dots button', how) : [],
-      bars = dots.map(function (b) { return $('b', b); }), pinned = false, cur = -1, T = 0.22;
-  function ss(x) { x = clamp(x); return x * x * (3 - 2 * x); }
-  function wgt(f, i, n, fr) { var a = i === 0 ? 1 : ss((f - (i - T * fr)) / (T * fr)); var b = i === n - 1 ? 1 : 1 - ss((f - (i + 1 - T)) / (T * fr)); return a * b; }
-  function hide(el, h) {
-    if (el._h === h) return; el._h = h;
-    el.style.visibility = h ? 'hidden' : '';
-    if (h) el.setAttribute('aria-hidden', 'true'); else el.removeAttribute('aria-hidden');
+      svis = steps.map(function (s) { return $('.st-vis', s); }), dotsW = how && $('.dots', how), dots = how ? all('.dots button', how) : [],
+      bars = dots.map(function (b) { return $('b', b); }), pinned = false, cur = -1, NF = 3.6, HY = 0.06, dotsO = '';
+  function setCur(n) {
+    if (n === cur) return; cur = n;
+    steps.forEach(function (s, i) {
+      var on = i === n;
+      s.classList.toggle('act', on); s.classList.toggle('past', i < n);
+      [txt[i], svis[i]].forEach(function (el) { if (on) el.removeAttribute('aria-hidden'); else el.setAttribute('aria-hidden', 'true'); });
+      if (on) svis[i].classList.add('play'); else svis[i].classList.remove('play');
+    });
+    dots.forEach(function (b, j) { if (j === n) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); });
   }
   function stepFrame(y, vh) {
     var range = M.howH - (vh - M.navH); if (range <= 0) return;
-    var f = clamp((y + M.navH - M.howTop) / range) * 4, best = 0, bw = -1;
-    steps.forEach(function (s, i) {
-      var wc = wgt(f, i, 4, 0.45), wp = wgt(f, i, 4, 0.62), yy = (f < i ? 1 : -0.72) * (1 - wc) * 14, a = txt[i], v = svis[i];
-      a.style.opacity = wc.toFixed(3); a.style.transform = 'translate3d(0,' + yy.toFixed(1) + 'px,0)';
-      v.style.opacity = wp.toFixed(3); v.style.transform = 'scale(' + (1 - (1 - wp) * 0.028).toFixed(4) + ')';
-      a.style.pointerEvents = wc < 0.5 ? 'none' : ''; v.style.pointerEvents = wp < 0.5 ? 'none' : '';
-      hide(a, wc < 0.01); hide(v, wp < 0.01);
-      s.classList.toggle('on', wc >= 0.01 || wp >= 0.01);
-      if (wp > 0.6) v.classList.add('play'); else if (wp < 0.05) v.classList.remove('play');
-      if (bars[i]) bars[i].style.transform = 'scaleX(' + clamp(f - i).toFixed(3) + ')';
-      if (wc > bw) { bw = wc; best = i; }
-    });
-    if (best !== cur) { cur = best; dots.forEach(function (b, j) { if (j === cur) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current'); }); }
+    var F = clamp((y + M.navH - M.howTop) / range) * NF;
+    if (cur < 0 || F > cur + 1 + HY || F < cur - HY) setCur(Math.max(0, Math.min(steps.length - 1, Math.floor(F))));
+    bars.forEach(function (b, i) { b.style.transform = 'scaleX(' + clamp(i < 3 ? F - i : (F - 3) / (NF - 3)).toFixed(3) + ')'; });
+    if (dotsW) { var o = (1 - clamp((y - (M.howTop + M.howH - vh)) / (vh * 0.2))).toFixed(2); if (o !== dotsO) { dotsO = o; dotsW.style.opacity = o; } }
   }
   dots.forEach(function (b, i) {
     b.addEventListener('click', function () {
       measure();
-      w.scrollTo({ top: M.howTop - M.navH + (i + 0.5) / 4 * (M.howH - (w.innerHeight - M.navH)), behavior: 'smooth' });
+      w.scrollTo({ top: M.howTop - M.navH + (i < 3 ? i + 0.5 : 3.3) / NF * (M.howH - (w.innerHeight - M.navH)), behavior: 'smooth' });
     });
   });
   // below 1024px each step plays once, when its picture is 40% on screen
   if (MO) svis.forEach(function (v) { once(v, function () { if (!pinned) v.classList.add('play'); }, 0.4); });
 
   /* the crew line-up: tilted back and assembled in layers as it scrolls in, flat once its top passes 35% (desktop) */
-  var layers = [], ld = -1, luLast = -1, unveil = false;
+  var layers = [], ld = -1, luLast = -1, unveil = false, luT = 0;
   if (lu) {
     layers.push({ el: $('.lu-sara', lu), z: 260, th: 0.10 });
     all('.lu-label', lu).forEach(function (el) { layers.push({ el: el, z: 220, th: 0.16 }); });
@@ -125,8 +124,10 @@
   }
   function eo(k) { return 1 - Math.pow(1 - k, 3); }
   function luFrame(y, vh) {
-    var u = clamp((vh * 0.95 - (M.luTop - y)) / (vh * 0.6));
-    if (ld < 0) ld = u; else { ld += (u - ld) * 0.085; if (Math.abs(u - ld) < 0.0005) ld = u; }
+    var u = clamp((vh * 0.95 - (M.luTop - y)) / (vh * 0.6)), now = w.performance ? w.performance.now() : Date.now(),
+        dt = luT ? Math.min(50, now - luT) : 16.7;
+    if (ld < 0) ld = u; else { ld += (u - ld) * (1 - Math.pow(1 - 0.085, dt / 16.7)); if (Math.abs(u - ld) < 0.0005) ld = u; }
+    luT = ld === u ? 0 : now;
     if (ld === luLast) return false;
     luLast = ld;
     var D = clamp(ld / 0.92), O = D < 0.5 ? 4 * D * D * D : 1 - Math.pow(-2 * D + 2, 3) / 2;
@@ -136,7 +137,6 @@
       var n = eo(clamp((ld - L.th) / 0.22)), s = L.el.style;
       s.opacity = n.toFixed(3);
       s.transform = n > 0.999 ? '' : 'translate3d(0,' + ((1 - n) * -24).toFixed(1) + 'px,' + ((1 - n) * L.z).toFixed(0) + 'px)';
-      s.filter = n > 0.995 ? '' : 'blur(' + ((1 - n) * 14).toFixed(1) + 'px)';
     });
     return ld !== u;
   }
@@ -148,7 +148,7 @@
     if (fpS < 0) fpS = fp; else { fpS += (fp - fpS) * 0.12; if (Math.abs(fp - fpS) < 0.001) fpS = fp; }
     var v = fpS.toFixed(3); if (v !== fpL) { fpL = v; cta.style.setProperty('--fp', v); }
     cta.classList.toggle('off', fpS < 0.02);
-    if (ctaWait && fpS > 0.3) { ctaWait = false; ctaH.classList.add('go'); }
+    if (ctaWait && fpS > 0.15) { ctaWait = false; ctaH.classList.add('go'); }
     return fpS !== fp;
   }
 
@@ -158,8 +158,11 @@
     if (how && on !== pinned) {
       pinned = on; how.classList.toggle('pinned', on);
       if (!on) {
-        txt.concat(svis).forEach(function (el) { el.style.opacity = el.style.transform = el.style.pointerEvents = ''; hide(el, false); });
+        steps.forEach(function (st) { st.classList.remove('act', 'past'); });
+        txt.concat(svis).forEach(function (el) { el.removeAttribute('aria-hidden'); });
         bars.forEach(function (b) { b.style.transform = ''; });
+        if (dotsW) dotsW.style.opacity = '';
+        cur = -1; dotsO = '';
       }
       all('.rv', how).forEach(inNow);
     }
@@ -174,7 +177,7 @@
     var c = on && !!cta && !!faq;
     if (c !== curtain) {
       curtain = c; fpS = -1; fpL = '';
-      if (!c && cta) { cta.style.removeProperty('--fp'); cta.classList.toggle('off', !ctaVis); if (ctaWait) { ctaWait = false; ctaH.classList.add('go'); } }
+      if (!c && cta) { cta.style.removeProperty('--fp'); cta.style.removeProperty('--cth'); cta.classList.toggle('off', !ctaVis); if (ctaWait) { ctaWait = false; ctaH.classList.add('go'); } }
     }
   }
   modes();
@@ -189,13 +192,13 @@
     if (how) { M.howTop = top(how); M.howH = how.offsetHeight; }
     if (luStage) M.luTop = top(luStage);
     if (faq) M.faqBottom = top(faq) + faq.offsetHeight;
-    if (cta) M.ctaH = cta.offsetHeight;
+    if (cta) { M.ctaH = cta.offsetHeight; if (curtain) cta.style.setProperty('--cth', Math.min(M.ctaH, w.innerHeight) + 'px'); }
   }
   function frame() {
     busy = false;
     var y = w.pageYOffset, vh = w.innerHeight, more = false;
     if (nav) nav.classList.toggle('solid', y > 8);
-    if (MO && big.matches && vis && y < M.heroH + 200) vis.style.setProperty('--py', (-Math.min(y, M.heroH) * 0.08).toFixed(1) + 'px');
+    if (MO && big.matches && w2 && y < M.heroH + 200) w2.style.translate = '0 ' + (-Math.min(y, M.heroH) * 0.08).toFixed(1) + 'px';
     if (pinned) stepFrame(y, vh);
     if (unveil && luFrame(y, vh)) more = true;
     if (curtain && ctaFrame(y, vh)) more = true;
@@ -211,6 +214,14 @@
   if (big.addEventListener) big.addEventListener('change', refresh);
   if (w.ResizeObserver && main) new ResizeObserver(function () { measure(); onScroll(); }).observe(main);
   measure(); frame();
+
+  // keyboard: focus landing in the closing call while the curtain is part open scrolls it fully open
+  if (cta) cta.addEventListener('focusin', function () {
+    if (!curtain) return;
+    measure();
+    var open = M.faqBottom - w.innerHeight + Math.min(M.ctaH, w.innerHeight);
+    if (w.pageYOffset < open - 2) w.scrollTo({ top: open });
+  });
 
   /* bento: a soft light follows a fine pointer */
   var bento = $('.bento'), pe = null, pq = false;
