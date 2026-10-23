@@ -6,6 +6,22 @@ at 1440 and 390; console clean).
 
 ## WORKING
 
+- **Home page rebuilt (Oct 2026, branch landing/beam-style):** beam.ai's layout with our words. One main
+  action, **Start here** (/get-started/, the onboarding form for Bilal's Instagram traffic); the second is
+  Book a call (/book/) or the phone. Colours are tokens in `assets/css/home.css` (colorway A, the current
+  brand, is live; B and C exist only as screenshots). Motion is `assets/js/home.js`. Every mock is labelled
+  Sample; no logos, testimonials, statistics, badges or integrations that aren't live.
+- **/get-started/** (four short steps, big answers) posts to the inquiries inbox: plain POST without
+  JavaScript, the LEAD_ENDPOINT relay with it, the mail client if the relay is down. Lands on
+  /get-started/thanks/ (noindex). Records ?src= / utm_source when it is a short plain code.
+
+- **One look on every generated page (23 Oct 2026):** the inner pages use the home page's header, footer
+  and tokens (`body.home.inner`, `home.css`, then `assets/css/inner.css`, which maps bnz.css's tokens and
+  restyles its components: Geist in sentence case, no cream sections, the home's buttons, cards and form
+  fields at 18 px). Fonts are Geist only. #32's titles, H1s and US spelling are merged in; every
+  generated page has one H1. Both forms were walked in Chromium at 390 px with the send intercepted:
+  one FormSubmit email each, thanks page reached, `?src=` kept. The free report form has no Klaviyo IDs
+  yet, so each request reaches the inbox and the team sends the report by hand.
 - **Marketing site, 25 generated pages** on the project-based model: home,
   /solutions, /crew, /sara /taylor /emma, /how-it-works,
   /what-we-connect-to, /faq, /start (onboarding, Oct 2026), /book, /thanks, /privacy, /terms, /contact, 404, and seven problem-based SEO landers
@@ -16,8 +32,8 @@ at 1440 and 390; console clean).
 - **No prices, plans, tiers, monthly figures, checkout or Stripe anywhere** on
   the generated pages — enforced by `_build/check.py`, which fails the build
   on any of that language, on model names, or on "Get started".
-- **Only conversion is BOOK A PROJECT REVIEW.** Nav, hero, every section
-  end, footer. No login anywhere — the crew is installed into the
+- **Two ways in (Oct 2026):** **Start here** (/get-started/) is the main action on the home page
+  and sits in the nav, drawer and footer; **Book a project review** (/book/) is the second. No login anywhere — the crew is installed into the
   contractor's own systems, so there is no customer portal to log into
   (Jose, 17 Sep). /login redirects home.
 - **The AI team (Oct 2026):** seven agents from BNZ_AI_Team_Identity_FINAL
@@ -33,9 +49,10 @@ at 1440 and 390; console clean).
   last and forward; M3 six-step numerals count up; M4 every SAMPLE DATA mock
   reveals row by row; M5 Monday-report counters; M6 Solutions cards stack
   with a UI moment each (Basis types itself · quote arrives and re-levels ·
-  Reported → Verified · wage schedule verifies); M7 integrations waterfall —
-  Beam-style brick rows of tiles drifting down through a masked window,
-  hover pauses, loops seamlessly; M8 FAQ accordion. Every entrance
+  Reported → Verified · wage schedule verifies); M7 the systems the crew
+  works inside, as brick rows of tiles (the drifting waterfall and its ten
+  "Next" tiles were removed in Oct 2026: the team names no integration that
+  isn't live); M8 FAQ accordion. Every entrance
   fires once at 20 % in view. `prefers-reduced-motion` turns all of it into
   the final frame — checked.
 - **Lead form on /book** posts to FormSubmit → **saracooper@bnzbuildersinc.com**

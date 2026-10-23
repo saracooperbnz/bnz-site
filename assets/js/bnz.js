@@ -208,7 +208,7 @@
   }
 
   /* ---------- lead form ---------- */
-  var form = d.querySelector('form.lead');
+  var form = d.querySelector('form.lead:not(.report)');
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -234,6 +234,117 @@
           location.href = 'mailto:saracooper@bnzbuildersinc.com?subject=' + encodeURIComponent(data._subject) + '&body=' + encodeURIComponent(body);
           sub.disabled = false; sub.innerHTML = label;
         });
+    });
+  }
+
+  /* ---------- /get-started/ — the onboarding form (founders, 21 Oct 2026) ----------
+     Four short steps with big answers, then a real person calls back. Its own class (form.onboard), so the /book/
+     and /workflow-report/ handlers above and below never touch it. Without JavaScript it is a plain POST. */
+  var of = d.querySelector('form.onboard');
+  if (of) {
+    var osteps = Array.prototype.slice.call(of.querySelectorAll('fieldset[data-step]'));
+    var osegs = of.querySelectorAll('.st-progress i'), owent = 0, OEM = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    of.classList.add('js'); of.noValidate = true;
+    // where the visitor came from (?src= or ?utm_source=), kept only when it is a short plain code
+    var oq = {};
+    (w.location.search || '').replace(/^\?/, '').split('&').forEach(function (kv) {
+      var p = kv.split('='); try { if (p[0]) oq[decodeURIComponent(p[0])] = decodeURIComponent((p[1] || '').replace(/\+/g, ' ')); } catch (e) {}
+    });
+    var osrc = oq.src || oq.utm_source || '';
+    if (/^[a-z0-9_-]{1,32}$/i.test(osrc)) { var hsrc = d.createElement('input'); hsrc.type = 'hidden'; hsrc.name = 'src'; hsrc.value = osrc; of.appendChild(hsrc); }
+    var oval = function (n) { var f = of.elements[n]; return f && f.value ? String(f.value).trim() : ''; };
+    var ook = function (n, quiet) {   // is step n answered enough to go on? (1: the kind of work; last: a name and a way to reach them)
+      var good = true;
+      if (n === 1) good = !!oval('contractor_type');
+      if (n === osteps.length) {
+        var em = oval('email'), ph = oval('phone').replace(/\D/g, '');
+        good = !!oval('name') && (ph.length >= 7 || OEM.test(em)) && (!em || OEM.test(em));
+      }
+      if (!quiet) osteps[n - 1].classList.toggle('bad', !good);
+      return good;
+    };
+    var ocur = function () { var m = /^#step-(\d)$/.exec(w.location.hash); return m ? Math.max(1, Math.min(osteps.length, +m[1])) : 1; };
+    var oshow = function (n, focus) {
+      if (n > 1 && !ook(1, true)) { n = 1; try { w.history.replaceState(null, '', '#step-1'); } catch (e) {} }   // a link to a later step starts at the first question
+      osteps.forEach(function (f, i) { f.classList.toggle('on', i === n - 1); });
+      Array.prototype.forEach.call(osegs, function (s, i) { s.classList.toggle('done', i < n); });
+      if (focus) {
+        var lg = osteps[n - 1].querySelector('legend');
+        of.scrollIntoView({ block: 'start' });
+        if (lg) { lg.setAttribute('tabindex', '-1'); try { lg.focus({ preventScroll: true }); } catch (e) { lg.focus(); } }
+      }
+    };
+    var onext = function () { var n = ocur(); if (!ook(n)) return; owent++; w.location.hash = 'step-' + (n + 1); };
+    Array.prototype.forEach.call(of.querySelectorAll('[data-next]'), function (b) { b.addEventListener('click', onext); });
+    Array.prototype.forEach.call(of.querySelectorAll('[data-back]'), function (b) { b.addEventListener('click', function () {
+      if (owent > 0) { owent--; w.history.back(); } else { w.location.replace('#step-' + Math.max(1, ocur() - 1)); }
+    }); });
+    of.addEventListener('change', function (e) { var f = e.target.closest('fieldset'); if (f && f.classList.contains('bad')) ook(osteps.indexOf(f) + 1); });
+    w.addEventListener('hashchange', function () { oshow(ocur(), true); });
+    oshow(ocur(), false);
+    of.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (ocur() < osteps.length) { onext(); return; }   // Enter on an earlier step moves on one step
+      var hp = of.querySelector('[name="_honey"]'); if (hp && hp.value) return;
+      for (var i = 1; i <= osteps.length; i++) if (!ook(i)) { if (i !== ocur()) w.location.hash = 'step-' + i; return; }
+      var sub = of.querySelector('button[type="submit"]'), label = sub.innerHTML; sub.disabled = true; sub.textContent = 'Sending…';
+      var data = {}, picks = [];
+      new FormData(of).forEach(function (v, k) {
+        v = String(v).trim();
+        if (k === '_honey' || !v) return;
+        if (k === 'hand_off_first') picks.push(v); else data[k] = v;
+      });
+      if (picks.length) data.hand_off_first = picks.join(', ');
+      data._subject = 'New onboarding request — Start here: ' + (data.company || data.name);
+      data._template = 'table';
+      data.source = location.pathname;
+      fetch(LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(function () { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'get_started' }); location.href = '/get-started/thanks/'; })
+        .catch(function () {
+          // relay unreachable: the visitor's own mail client, so no request is lost
+          var body = Object.keys(data).filter(function (k) { return k[0] !== '_'; }).map(function (k) { return k + ': ' + data[k]; }).join('\n');
+          location.href = 'mailto:saracooper@bnzbuildersinc.com?subject=' + encodeURIComponent(data._subject) + '&body=' + encodeURIComponent(body);
+          sub.disabled = false; sub.innerHTML = label;
+        });
+    });
+  }
+
+  /* ---------- /workflow-report/ — the free report for an email ---------- */
+  // With the Klaviyo IDs on the form the request joins the report list; without them, or if Klaviyo fails, it reaches the inbox like /book/.
+  var rf = d.querySelector('form.report');
+  if (rf) {
+    rf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var hp = rf.querySelector('[name="_honey"]'); if (hp && hp.value) return;
+      rf.classList.remove('invalid');
+      var data = {};
+      new FormData(rf).forEach(function (v, k) { if (k[0] !== '_') data[k] = String(v).trim(); });
+      if (!data.name || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email || '') || data.consent !== 'yes') { rf.classList.add('invalid'); return; }
+      var sub = rf.querySelector('button[type="submit"]'), label = sub.innerHTML; sub.disabled = true; sub.textContent = 'Sending…';
+      var subject = 'New request — Workflow report: ' + (data.company || data.name);
+      var done = function () { if (typeof gtag === 'function') gtag('event', 'generate_lead', { form: 'report' }); location.href = '/workflow-report/thanks/'; };
+      var ok = function (r) { if (!r.ok) throw new Error(r.status); done(); };
+      var inbox = function () {
+        var body = Object.assign({ _subject: subject, _template: 'table', source: location.pathname }, data);
+        return fetch(LEAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(body) }).then(ok);
+      };
+      var co = rf.getAttribute('data-klaviyo-company'), list = rf.getAttribute('data-klaviyo-list');
+      var profile = { email: data.email, first_name: data.name, organization: data.company || undefined,
+        properties: { contractor_type: data.contractor_type || '', time_sink: data.time_sink || '' },
+        subscriptions: { email: { marketing: { consent: 'SUBSCRIBED' } } } };
+      var sent = !(co && list) ? inbox() : fetch('https://a.klaviyo.com/client/subscriptions?company_id=' + encodeURIComponent(co), {
+        method: 'POST', headers: { 'Content-Type': 'application/vnd.api+json', 'revision': '2026-10-15' },
+        body: JSON.stringify({ data: { type: 'subscription',
+          attributes: { custom_source: 'Workflow report (' + location.pathname + ')', profile: { data: { type: 'profile', attributes: profile } } },
+          relationships: { list: { data: { type: 'list', id: list } } } } })
+      }).then(ok).catch(inbox);
+      sent.catch(function () {
+        // neither reachable: the visitor's own mail client, so no request is lost
+        var lines = Object.keys(data).map(function (k) { return k + ': ' + data[k]; }).join('\n');
+        location.href = 'mailto:saracooper@bnzbuildersinc.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines);
+        sub.disabled = false; sub.innerHTML = label;
+      });
     });
   }
 })();

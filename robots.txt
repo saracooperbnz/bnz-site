@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /thanks/
+Disallow: /workflow-report/thanks/
+Disallow: /get-started/thanks/
 
 Sitemap: https://buildwithbnz.com/sitemap.xml
