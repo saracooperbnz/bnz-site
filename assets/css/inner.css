@@ -1,0 +1,81 @@
+/* BuildWithBNZ inner pages, Oct 2026: the home page's look on every page built from bnz.css components.
+   Loaded after bnz.css and home.css on body.home.inner (shared.head). The tokens come from home.css
+   (colorway A); this file maps bnz.css's tokens onto them and restyles the shared components:
+   sentence case in Geist, no cream sections, soft cards, the home's buttons, pills and form fields. */
+
+body.inner{
+--ground:var(--bg); --surface:var(--elev-2); --surface-2:var(--elev-3);
+--hair:var(--line); --hair-2:var(--line-strong);
+--light:var(--elev-1); --light-2:var(--elev-2); --ink-l:var(--ink); --muted-l:var(--muted);
+--hair-l:var(--line); --hair-l2:var(--line-strong); --ember:var(--accent); --ember-l:var(--accent-ink);
+--r:18px; --r-sm:12px;
+}
+
+/* type: bnz.css sets condensed capitals; the home sets Geist in sentence case */
+.inner h1{max-width:20ch}
+.inner :is(.hero,.agent-hero,.team-intro) h1{margin:14px 0 18px}
+.inner h2{max-width:24ch}
+.inner .sec-head h2,.inner .sec-head h1{max-width:none}
+.inner :is(.display,.btn,.chip,.brand,.mono,.cal-slot,.pull,form.lead label,.ac-meta dt,.ac-h,.org-lead b,.org-six b,
+  .diagram .owner,.diagram .arrow,.diagram .lead b,.diagram .lead span,.diagram .six span,.start legend,.onboard legend){
+  text-transform:none;letter-spacing:-.005em}
+.inner p.lede,.inner .sec-head p{color:var(--muted)}
+.inner .link{color:var(--accent-ink);font-weight:600;letter-spacing:0}
+.inner .link:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* the small label above a heading: the home's pill */
+.inner .eyebrow{display:inline-flex;align-self:flex-start;align-items:center;height:28px;padding:0 12px;border-radius:999px;
+  font:500 14px/1 var(--body);letter-spacing:0;text-transform:none;color:var(--text);
+  background:color-mix(in srgb,var(--ink) 6%,transparent);box-shadow:inset 0 0 0 1px var(--line-strong)}
+.inner .mega .eyebrow{height:auto;padding:0;background:none;box-shadow:none;color:var(--muted)}
+
+/* sample screens: home.css drops a mock's padding (its mocks have a title bar), so give these one too */
+.inner .mock{background:var(--mock-bg);border:0;box-shadow:var(--win-shadow);color:var(--mock-ink)}
+.inner .mock>.eyebrow,.inner .mock>.dots{display:flex;align-items:center;height:46px;margin:0 !important;padding:0 110px 0 16px;border-radius:0;
+  background:none;box-shadow:none;border-bottom:1px solid var(--pane-ring);font:600 14px/1 var(--body);color:var(--mock-ink)}
+.inner .mock>.dots{gap:6px}
+.inner .mock>:is(.title,.strip,.sub,.crew,.tabs,.cols,.kpis,table){margin-left:16px;margin-right:16px}
+.inner .mock>:is(.title,.strip){margin-top:12px}
+.inner .mock>table{width:calc(100% - 32px)}
+.inner .mock>.sd{top:11px;right:12px;height:24px;display:inline-flex;align-items:center;padding:0 9px;border-radius:999px;font-size:11px;letter-spacing:.04em;text-transform:none}
+
+/* sections: dark throughout; the old cream ones become the home's raised ground */
+.inner .light{background:var(--elev-1);color:var(--text);box-shadow:inset 0 1px 0 var(--line),inset 0 -1px 0 var(--line)}
+.inner .light :is(h1,h2,h3,b,strong){color:var(--ink)}
+
+/* buttons */
+.inner .btn{height:52px;padding:0 22px;border:0;border-radius:12px;font:600 16px/1 var(--body);color:var(--ink);
+  background:color-mix(in srgb,var(--ink) 4%,transparent);box-shadow:inset 0 0 0 1px var(--line-strong);
+  touch-action:manipulation;transition:transform .2s var(--out),background-color .2s,box-shadow .2s}
+.inner .btn:hover,.inner .light .btn.ghost:hover{background:color-mix(in srgb,var(--ink) 8%,transparent);border-color:transparent}
+.inner .light .btn.ghost{color:var(--ink);border:0}
+.inner .btn.primary{color:var(--on-accent);background:linear-gradient(180deg,var(--btn-top) 0%,var(--btn-bg) 55%);
+  box-shadow:inset 0 1px 0 #FFFFFF47,inset 0 0 0 1px #0000001A,0 10px 10px -3.75px #00000040,0 8px 24px -8px var(--btn-glow)}
+.inner .btn.primary:hover{background:linear-gradient(180deg,var(--accent-hover) 0%,var(--btn-bg) 60%);transform:translateY(-1px)}
+.inner .btn:active{transform:scale(.98)}
+.inner .btn.sm{height:44px;padding:0 16px;font-size:15px}
+
+/* cards and tiles */
+.inner :is(.card,.tile,.agent-card,.scard),.inner .light :is(.card,.tile,.agent-card){
+  background:var(--elev-2);border:0;border-radius:18px;box-shadow:inset 0 0 0 1px var(--line),var(--sh);color:var(--text)}
+.inner :is(.card,.tile,.agent-card,.scard) :is(h3,b,strong){color:var(--ink)}
+.inner .light .tile.dim .ic{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--ink)}
+
+/* status chips: the dark versions everywhere */
+.inner .light .chip.reported{border-color:rgba(255,255,255,.3);color:var(--muted)}
+.inner .light .chip.unknown{border-color:rgba(245,243,238,.6);color:var(--ink)}
+.inner .light .chip.cross{border-color:rgba(255,255,255,.35);color:var(--ink)}
+.inner .light .chip.verified{color:var(--green-ink);background:rgba(76,154,94,.18)}
+
+/* forms (book, workflow report, contact): big fields, 18px so iPhone Safari doesn't zoom */
+.inner form.lead{gap:16px}
+.inner form.lead label{gap:8px;font:500 15px/1.3 var(--body);letter-spacing:0;color:var(--text)}
+.inner form.lead :is(input:not([type=checkbox]):not([type=radio]),select,textarea){min-height:52px;padding:12px 14px;border:0;border-radius:12px;
+  font:400 18px/1.3 var(--body);color:var(--ink);background:var(--elev-1);box-shadow:inset 0 0 0 1px var(--line-strong)}
+.inner form.lead :is(input,select,textarea):focus{outline:3px solid var(--focus);outline-offset:2px;border-color:transparent}
+.inner form.lead textarea{min-height:120px}
+.inner form.lead input[type=checkbox]{width:22px;height:22px;accent-color:var(--accent)}
+.inner form.lead .note{font-size:14px;color:var(--muted)}
+
+/* focus, like the home */
+.inner a:focus-visible,.inner button:focus-visible,.inner summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}

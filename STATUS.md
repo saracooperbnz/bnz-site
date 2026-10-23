@@ -15,6 +15,13 @@ at 1440 and 390; console clean).
   JavaScript, the LEAD_ENDPOINT relay with it, the mail client if the relay is down. Lands on
   /get-started/thanks/ (noindex). Records ?src= / utm_source when it is a short plain code.
 
+- **One look on every generated page (23 Oct 2026):** the inner pages use the home page's header, footer
+  and tokens (`body.home.inner`, `home.css`, then `assets/css/inner.css`, which maps bnz.css's tokens and
+  restyles its components: Geist in sentence case, no cream sections, the home's buttons, cards and form
+  fields at 18 px). Fonts are Geist only. #32's titles, H1s and US spelling are merged in; every
+  generated page has one H1. Both forms were walked in Chromium at 390 px with the send intercepted:
+  one FormSubmit email each, thanks page reached, `?src=` kept. The free report form has no Klaviyo IDs
+  yet, so each request reaches the inbox and the team sends the report by hand.
 - **Marketing site, 25 generated pages** on the project-based model: home,
   /solutions, /crew, /sara /taylor /emma, /how-it-works,
   /what-we-connect-to, /faq, /start (onboarding, Oct 2026), /book, /thanks, /privacy, /terms, /contact, 404, and seven problem-based SEO landers

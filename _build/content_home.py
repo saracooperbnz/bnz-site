@@ -64,9 +64,10 @@ def fake_btns(cls="fbtns"):
 
 # ------------------------------------------------------------------ nav + footer (home only)
 
-def nav_home(focus=False):
+def nav_home(focus=False, current=None):
     """The drawer sits outside the header: the header's blur (once solid) would otherwise trap the fixed drawer inside it.
-    focus=True (/get-started/ and its thanks page): the brand, Book a call and the phone. No links, no burger, no drawer."""
+    focus=True (/get-started/ and its thanks page): the brand, Book a call and the phone. No links, no burger, no drawer.
+    current (every other page, via shared.nav): links go to the pages, and the header is glass from the start (no home.js)."""
     if focus:
         return ('<header class="hnav solid">\n<div class="wrap">\n'
                 '<a class="hbrand" href="/" aria-label="BuildWithBNZ home">%s<span>BuildWithBNZ</span></a>\n'
@@ -75,10 +76,14 @@ def nav_home(focus=False):
                 '</div>\n</header>\n<main id="main">\n') % (bmark(32), PHONE, ico("phone", 18), PHONE_TXT)
     prob = ''.join('<a href="%s">%s</a>' % (href, t) for _, t, _, _, href in MENU_PROBLEM)
     contr = ''.join('<a href="%s">%s</a>' % (h, t) for t, h in MENU_CONTRACTOR)
-    return '''<header class="hnav">
+    inner = current is not None
+    items = [("/how-it-works/", "How it works"), ("/crew/", "The crew"), ("/faq/", "Questions")] if inner else \
+            [("#how", "How it works"), ("#crew", "The crew"), ("#faq", "Questions")]
+    links = ''.join('<a href="%s"%s>%s</a>' % (h, ' aria-current="page"' if h == current else '', t) for h, t in items)
+    return '''<header class="hnav%(solid)s">
 <div class="wrap">
 <a class="hbrand" href="/" aria-label="BuildWithBNZ home">%(bm)s<span>BuildWithBNZ</span></a>
-<nav class="hlinks" aria-label="Primary"><a href="#how">How it works</a><a href="#crew">The crew</a><a href="#faq">Questions</a></nav>
+<nav class="hlinks" aria-label="Primary">%(links)s</nav>
 <div class="hcta"><a class="btn-ghost sm" href="/book/">Book a call</a><a class="btn-primary sm" href="%(start)s">Start here</a></div>
 <button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
 </div>
@@ -87,13 +92,12 @@ def nav_home(focus=False):
 <a class="btn-primary xl" href="%(start)s">Start here</a>
 <a class="btn-ghost xl" href="/book/">Book a call</a>
 <a href="tel:%(phone)s">Call %(phone_txt)s</a>
-<a href="#how">How it works</a>
-<a href="#crew">The crew</a>
-<a href="#faq">Questions</a>
+%(links)s
 <details><summary>Solutions</summary><a href="/solutions/">All solutions</a>%(prob)s%(contr)s<a href="/what-we-connect-to/">What we connect to</a></details>
 </div>
 <main id="main">
-''' % dict(bm=bmark(32), start=HOME_START, phone=PHONE, phone_txt=PHONE_TXT, prob=prob, contr=contr)
+''' % dict(bm=bmark(32), start=HOME_START, phone=PHONE, phone_txt=PHONE_TXT, prob=prob, contr=contr,
+                links=links, solid=' solid' if inner else '')
 
 def footer_home(minimal=False):
     """minimal=True (/get-started/ and its thanks page): no phone action bar and no home.js; bnz.js stays."""

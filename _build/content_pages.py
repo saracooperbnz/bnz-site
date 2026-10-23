@@ -485,7 +485,7 @@ def page_get_started_thanks():
 def page_thanks():
     h = head("Thanks — we'll be in touch | BuildWithBNZ", "Your Project Review request is in. A real person replies the same business day.", "/thanks/", noindex=True)
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h2 style="margin-top:14px">Your project review request is in.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h1 style="margin-top:14px;font-size:var(--fs-h2)">Your project review request is in.</h1>'
                  '<p class="lede">A real person replies the same business day to set a time. Have the drawings or the bid package handy — that\'s what we walk through on the call.</p>'
                  '<p style="margin-top:18px"><a class="btn ghost" href="/how-it-works/">See how it works <span class="g">↗</span></a></p></div>', extra_cls="first")
     h += footer()
@@ -545,7 +545,7 @@ def page_report():
 def page_report_thanks():
     h = head("Thanks — your report is on its way | BuildWithBNZ", "Your workflow report request is in.", "/workflow-report/thanks/", noindex=True)
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h2 style="margin-top:14px">Your report is on its way.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Received</span><h1 style="margin-top:14px;font-size:var(--fs-h2)">Your report is on its way.</h1>'
                  '<p class="lede">Watch your inbox for the workflow report. Want to walk through it on a real project? Book a project review and bring one bid or one job.</p>'
                  '<p style="margin-top:18px">%s</p></div>' % btn_book(), extra_cls="first")
     h += footer()
@@ -617,7 +617,7 @@ def page_terms():
 def page_404():
     h = head("Page not found — BuildWithBNZ", "That page isn't here.", "/404.html", noindex=True)
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">404</span><h2 style="margin-top:14px">That page isn\'t here.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">404</span><h1 style="margin-top:14px;font-size:var(--fs-h2)">That page isn\'t here.</h1>'
                  '<p class="lede">It may have moved. Try the crew, how it works, or head back home.</p>'
                  '<p style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap"><a class="btn ghost" href="/">Home <span class="g">↗</span></a><a class="btn ghost" href="/crew/">The crew <span class="g">↗</span></a>%s</p></div>' % btn_book(), extra_cls="first")
     h += footer()

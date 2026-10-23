@@ -24,8 +24,7 @@ UPDATED = "2026-10-22"          # sitemap lastmod for the generated pages (build
 LEGACY_UPDATED = "2026-09-17"
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..900'
-         '&family=Geist:wght@400..700&family=Space+Grotesk:wght@400;500;600;700&display=swap">')
+         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&display=swap">')
 
 NAV_ITEMS = [("/crew/", "The crew"), ("/how-it-works/", "How it works"), ("/faq/", "FAQ")]
 
@@ -132,7 +131,12 @@ START_BTN = '<a class="btn ghost" href="/start/">Show us how your company works 
 
 def head(title, desc, path, og_title=None, jsonld=None, noindex=False, body_attrs="", extra_css=""):
     """body_attrs: extra attributes for <body> (the home page passes its class and colorway).
-    extra_css: one more stylesheet URL, loaded after bnz.css (the home page's home.css)."""
+    extra_css: one more stylesheet URL, loaded after bnz.css (the home page's home.css).
+    Every other page gets the home page's look: body.home.inner, home.css, then inner.css."""
+    if not body_attrs:
+        body_attrs, extra_css = 'class="home inner" data-colorway="a"', ["/assets/css/home.css", "/assets/css/inner.css"]
+    if isinstance(extra_css, str):
+        extra_css = [extra_css] if extra_css else []
     canon = SITE + path
     og_title = og_title or title
     ld = ''
@@ -174,59 +178,20 @@ def head(title, desc, path, og_title=None, jsonld=None, noindex=False, body_attr
 <a class="skip" href="#main">Skip to content</a>
 %(sprite)s''' % dict(sprite=crew_sprite(), title=esc(title), desc=esc(desc), canon=canon, og=esc(og_title), site=SITE, fonts=FONTS, ld=ld, robots=robots,
            body_attrs=(' ' + body_attrs) if body_attrs else '',
-           extra_css=('<link rel="stylesheet" href="%s">\n' % extra_css) if extra_css else '')
+           extra_css=''.join('<link rel="stylesheet" href="%s">\n' % u for u in extra_css))
 
 def esc(s):
     return s.replace('&', '&amp;').replace('"', '&quot;').replace('&amp;amp;', '&amp;')
 
 def nav(current=""):
-    links = ''.join('<a href="%s"%s>%s</a>' % (h, ' aria-current="page"' if h == current else '', t) for h, t in NAV_ITEMS)
-    prob = ''.join(
-        '<a class="row" href="%s">%s<div><b>%s</b><span>%s</span></div>%s</a>' % (href, av(who, 24), t, s, chip(c[0], c[1]))
-        for who, t, s, c, href in MENU_PROBLEM)
-    contr = ''.join('<a href="%s">%s</a>' % (h, t) for t, h in MENU_CONTRACTOR)
-    mega = ('<div class="mega" role="menu">'
-            '<div class="col"><h4 class="eyebrow mute">By problem</h4>%s</div>'
-            '<div class="col list"><h4 class="eyebrow mute">By contractor</h4>%s</div>'
-            '<div class="foot"><a href="/what-we-connect-to/">What we connect to →</a><a class="link" href="/book/">Book a project review ↗</a></div>'
-            '</div>') % (prob, contr)
-    drawer_prob = ''.join('<a href="%s">%s</a>' % (href, t) for _, t, _, _, href in MENU_PROBLEM)
-    drawer_contr = ''.join('<a href="%s">%s</a>' % (h, t) for t, h in MENU_CONTRACTOR)
-    drawer_links = ''.join('<a href="%s">%s</a>' % (h, t) for h, t in NAV_ITEMS)
-    return '''<header class="nav">
-<div class="wrap">
-<a class="brand" href="/" aria-label="BuildWithBNZ home"><span class="mark">B</span>BuildWithBNZ</a>
-<nav class="nav-links" aria-label="Primary">
-<div class="has-menu"><button type="button" aria-haspopup="true" aria-expanded="false">Solutions <span class="car">▼</span></button>%(mega)s</div>
-%(links)s
-</nav>
-<a class="btn ghost sm nav-start" href="/get-started/">Start here</a>
-<a class="btn primary sm nav-cta" href="/book/">Book a project review <span class="g">↗</span></a>
-<button class="burger" type="button" aria-label="Menu" aria-expanded="false" aria-controls="drawer"><span></span><span></span><span></span></button>
-</div>
-<div class="drawer" id="drawer">
-<details><summary>Solutions</summary><a href="/solutions/">All solutions</a>%(dprob)s%(dcontr)s<a href="/what-we-connect-to/">What we connect to</a></details>
-%(dlinks)s
-<a href="/get-started/">Start here</a>
-<a href="tel:%(phone)s">Call %(phone_txt)s</a>
-%(book)s
-</div>
-</header>
-<main id="main">
-''' % dict(mega=mega, links=links, dprob=drawer_prob, dcontr=drawer_contr, dlinks=drawer_links, book=btn_book(), phone=PHONE, phone_txt=PHONE_TXT)
+    """The home page's header (content_home.nav_home), with links to the pages instead of the home's sections."""
+    from content_home import nav_home
+    return nav_home(current=current)
 
 def footer():
-    return '''</main>
-<footer>
-<div class="wrap">
-<div><a class="brand" href="/"><span class="mark">B</span>BuildWithBNZ</a><p class="addr" style="margin-top:10px">New York · <a href="mailto:%(inbox)s">%(inbox)s</a> · <a href="tel:%(phone)s">%(phone_txt)s</a></p><p class="addr ai-note">The crew are AI agents, not real people.</p></div>
-<nav aria-label="Footer"><a href="/get-started/">Start here</a><a href="/solutions/">Solutions</a><a href="/workflow-report/">Free workflow report</a><a href="/what-we-connect-to/">What we connect to</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
-</div>
-</footer>
-<script src="/assets/js/bnz.js" defer></script>
-</body>
-</html>
-''' % dict(inbox=INBOX, phone=PHONE, phone_txt=PHONE_TXT)
+    """The home page's footer, without its phone action bar and home.js."""
+    from content_home import footer_home
+    return footer_home(minimal=True)
 
 def section(cls, inner, id_=None, extra_cls=""):
     idattr = ' id="%s"' % id_ if id_ else ''
