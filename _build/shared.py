@@ -220,7 +220,7 @@ def footer():
 <footer>
 <div class="wrap">
 <div><a class="brand" href="/"><span class="mark">B</span>BuildWithBNZ</a><p class="addr" style="margin-top:10px">New York · <a href="mailto:%(inbox)s">%(inbox)s</a> · <a href="tel:%(phone)s">%(phone_txt)s</a></p><p class="addr ai-note">The crew are AI agents, not real people.</p></div>
-<nav aria-label="Footer"><a href="/get-started/">Start here</a><a href="/solutions/">Solutions</a><a href="/workflow-report/">Free workflow report</a><a href="/what-we-connect-to/">What we connect to</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
+<nav aria-label="Footer"><a href="/get-started/">Start here</a><a href="/solutions/">Solutions</a><a href="/workflow-report/">Free workflow report</a><a href="/what-we-connect-to/">What we connect to</a><a href="/contact/">Contact</a><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a></nav>
 </div>
 </footer>
 <script src="/assets/js/bnz.js" defer></script>
@@ -232,9 +232,11 @@ def section(cls, inner, id_=None, extra_cls=""):
     idattr = ' id="%s"' % id_ if id_ else ''
     return '<section class="%s %s"%s><div class="wrap">%s</div></section>\n' % (cls, extra_cls, idattr, inner)
 
-def sec_head(eyebrow, h2, p=None, dark=True):
-    return '<div class="sec-head fx"><span class="eyebrow%s">%s</span><h2>%s</h2>%s</div>' % (
-        '' if dark else '', eyebrow, h2, '<p>%s</p>' % p if p else '')
+def sec_head(eyebrow, h2, p=None, dark=True, tag="h2"):
+    # tag="h1" renders the page's main heading at h2 size (one H1 per page).
+    open_tag = '<h1 style="%s">' % "font-size:clamp(34px,4.6vw,58px)" if tag == "h1" else '<h2>'
+    return '<div class="sec-head fx"><span class="eyebrow%s">%s</span>%s%s</%s>%s</div>' % (
+        '' if dark else '', eyebrow, open_tag, h2, tag, '<p>%s</p>' % p if p else '')
 
 def book_strip(dark=False):
     inner = ('<div class="split"><div class="fx"><span class="eyebrow">Start here</span>'
@@ -242,8 +244,8 @@ def book_strip(dark=False):
              '<p class="lede">Bring one project. We\'ll show you what the crew would do with it.</p>'
              '<div class="strip-cta">%s%s</div>'
              '<p class="small muted" style="margin-top:12px">Not sure where to start? Two quick questions, then your details.</p></div>'
-             '<div class="fx"><div class="cal-slot">Calendar embed — placeholder · Cal.com / Calendly · 30 min · "Project Review"<br>'
-             '<span style="text-transform:none;letter-spacing:0;font-size:14px;display:block;margin-top:8px">Until the calendar is live, the form on the book page reaches a real person the same day.</span></div></div></div>') % (btn_book(), START_BTN)
+             '<div class="fx"><div class="cal-slot">30-minute Project Review with a real person.<br>'
+             '<span style="text-transform:none;letter-spacing:0;font-size:14px;display:block;margin-top:8px">Fill in the short form on the booking page and we reply the same business day to set a time. Prefer to talk? Call <a href="tel:%s">%s</a>.</span></div></div></div>') % (btn_book(), START_BTN, PHONE, PHONE_TXT)
     return section('light' if not dark else 'dark', inner, id_="book")
 
 def faq_items(items, first_open=2):
@@ -307,7 +309,7 @@ def sample_project_mock(strip=True):
              '["TAKEOFF MOVED 1,980 → 2,150 LF · VERIFIED AGAINST E-401",["verified","Verified"]],'
              '["TAYLOR · 2ND FOLLOW-UP SENT · HUDSON FEEDER CO.",["chasing","Chasing"]],'
              '["BID INVITATION DRAFTED · 4 SUBS · NEEDS YOU",["needs","Needs you"]],'
-             '["SUB QUOTES 3 OF 7 IN · 1 LEVELLED",["levelled","Levelled"]],'
+             '["SUB QUOTES 3 OF 7 IN · 1 LEVELED",["levelled","Leveled"]],'
              '["MONDAY REPORT DRAFTED · VERIFIED FIRST",["verified","Verified"]]]')
     s = ('<div class="strip" data-lines=\'%s\'><span class="txt">ADDENDUM 02 RECEIVED · TAYLOR READING</span>%s</div>' % (lines, chip("working", "Working"))) if strip else ''
     return ('<div class="mock rows"><span class="sd">Sample data</span><div class="dots"><i></i><i></i><i></i></div>%s'

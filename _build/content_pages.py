@@ -15,15 +15,15 @@ def est_mock(moment=False):
 
 def bids_mock(moment=False):
     q2 = '<span data-swap="Received">Not received</span>' if moment else 'Not received'
-    s2 = ('<span class="chip levelled" data-swap="Levelled|chip levelled">Gap — 2 items</span>'.replace('class="chip levelled"', 'class="chip conflict"') if moment else chip("conflict", "Gap — 2 items"))
+    s2 = ('<span class="chip levelled" data-swap="Leveled|chip levelled">Gap — 2 items</span>'.replace('class="chip levelled"', 'class="chip conflict"') if moment else chip("conflict", "Gap — 2 items"))
     a2 = '<span data-swap="None — ready for your review">Chasing — 2nd follow-up sent Tue</span>' if moment else 'Chasing — 2nd follow-up sent Tue'
     return ('<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">Electrical bids</div>'
             '<table><thead><tr><th>Sub</th><th>Quote</th><th>COI</th><th>W-9</th><th>Scope</th><th>Next action</th></tr></thead><tbody>'
             '<tr><td>Garnerville Line &amp; Load</td><td>Received</td><td>✓</td><td>✓</td><td>%s</td><td class="mute">None — ready for your review</td></tr>'
             '<tr><td>Hudson Feeder Co.</td><td>%s</td><td>✓</td><td>✓</td><td>%s</td><td class="mute">%s</td></tr>'
             '<tr><td>Spring Valley Power</td><td>Received</td><td class="mute">exp. Fri</td><td>✓</td><td>%s</td><td class="mute">COI renewal needed</td></tr>'
-            '</tbody></table><div class="line">Quote amounts are shown as received / not received. Figures live in the levelling sheet.</div></div>') % (
-        chip("levelled", "Levelled"), q2, s2, a2, chip("levelled", "Levelled"))
+            '</tbody></table><div class="line">Quote amounts are shown as received / not received. Figures live in the leveling sheet.</div></div>') % (
+        chip("levelled", "Leveled"), q2, s2, a2, chip("levelled", "Leveled"))
 
 def finance_mock(moment=False):
     return ('<div class="mock rows"><span class="sd">Sample layout</span><div class="eyebrow mute" style="margin-bottom:8px">Reconciliation review</div>'
@@ -56,11 +56,11 @@ def public_mock(moment=False):
 
 SOLUTIONS = [
     ("t", "Taylor · solution 1 of 4", "Estimating &amp; takeoff",
-     "Taylor takes the full bid package — drawings, specs, addenda, wage schedules, bid forms. She performs takeoffs, flags conflicts between sheets and specs, and prices labour, material and sub lines. Every line traces to a sheet or a spec section; missing information reads UNKNOWN, with the reason and who has it.",
+     "Taylor takes the full bid package — drawings, specs, addenda, wage schedules, bid forms. She performs takeoffs, flags conflicts between sheets and specs, and prices labor, material and sub lines. Every line traces to a sheet or a spec section; missing information reads UNKNOWN, with the reason and who has it.",
      "an estimate with its logic attached.", "Taylor says UNKNOWN rather than guessing.", est_mock, "/construction-estimating-ai/"),
     ("t", "Taylor · solution 2 of 4", "Subcontractor bidding &amp; buyout",
      "Taylor requests and compares sub and vendor pricing and levels each quote against her estimate, line by line. Requests for pricing go out only after you approve them. Sara tracks the deadlines and what is still open on each bid.",
-     "a levelled bid table per trade.", "nothing goes to a sub without your approval.", bids_mock, "/subcontractor-procurement/"),
+     "a leveled bid table per trade.", "nothing goes to a sub without your approval.", bids_mock, "/subcontractor-procurement/"),
     ("s", "Sara · solution 3 of 4", "Operations &amp; approvals",
      "Sara runs Today, the approvals queue and the Monday report. She supervises the other six agents, catches what falls between them, and marks every claim Verified or Reported — never blending the two. What reaches you is a short queue of real decisions.",
      "a Monday report and an approvals queue.", "she brings you only the decisions that need you. You sign. She doesn't.", today_mock, "/construction-project-management-ai/"),
@@ -79,7 +79,7 @@ def diagram():
 
 def page_solutions():
     desc = "Four solutions, one crew: estimating & takeoff, subcontractor bidding & buyout, operations & approvals, and public work & prevailing wage."
-    h = head("Solutions — AI for Construction Estimating, Subcontractor Bidding and Operations | BuildWithBNZ", desc, "/solutions/")
+    h = head("AI Construction Estimating, Bidding & Ops | BuildWithBNZ", desc, "/solutions/")
     h += nav()
     h += hero("Solutions", "The job, not the software.",
               "Every solution below is one part of one crew, working inside one project workspace. Pick the problem that hurts; the rest of the crew comes with it.",
@@ -146,10 +146,10 @@ def team_flow():
         ''.join('<li>%s<span><b>%s</b> %s</span></li>' % (av(k, 32), BY[k]["short"], t) for k, t in par))
 
 def page_crew():
-    desc = "Meet the crew: seven AI agents led by Sara Cooper. Taylor estimates and compares sub pricing, Emma checks job costs and invoices. People approve every send."
-    h = head("The Crew — Sara Cooper and Six AI Specialists | BuildWithBNZ", desc, "/crew/")
+    desc = "Seven AI agents for the office side of construction, led by Sara Cooper: bids, paperwork, deadlines and records. Every agent works with a human partner."
+    h = head("AI Team for Construction Companies: 7 Agents | BuildWithBNZ", desc, "/crew/")
     h += nav("/crew/")
-    intro = ('<div class="team-intro"><div class="fx"><span class="eyebrow">Official AI team</span><h2 class="team-h">Meet the AI team</h2>'
+    intro = ('<div class="team-intro"><div class="fx"><span class="eyebrow">Official AI team</span><h1 class="team-h">Meet the AI team</h1>'
              '<p class="lede">Seven AI agents for the office side of construction: bids, paperwork, deadlines and records. Sara Cooper leads them. '
              'Every agent works with a human partner. %s</p>'
              '<div class="report-box"><span class="eyebrow mute">Reporting line</span><p>All six agents report to Sara Cooper. Sara reports to Bilal Mohammed, '
@@ -161,7 +161,7 @@ def page_crew():
     h += section("light", sec_head("The team", "Seven agents. One team.", "Each card shows the agent's title, human partner, who they report to, their role and their approval limits. %s" % PRINCIPLE, dark=False) + cards
                  + '<p class="footnote">All seven are AI-generated characters, not real people. Every agent works with a human partner.</p>', id_="team")
     h += section("dark", '<div class="split flow-split"><div class="fx"><span class="eyebrow">How they work together</span>'
-                 '<h2 style="margin:14px 0 14px">Sara sits at the centre.</h2>'
+                 '<h2 style="margin:14px 0 14px">Sara sits at the center.</h2>'
                  '<p class="lede">The specialists talk to each other directly. Sara checks everyone\'s work and pulls it together. Nothing is sent, awarded, signed or paid without a person\'s yes.</p></div>'
                  '<div>%s</div></div>' % team_flow())
     h += section("light", sec_head("Each one, in depth", "Go deeper on one.", dark=False) +
@@ -195,15 +195,15 @@ AGENT_PAGES = {
                    checks=["Finds and qualifies bid opportunities",
                            "Reads the drawings, specs, addenda, wage schedule and bid form",
                            "Performs takeoffs and flags conflicts between sheets and specs",
-                           "Builds labour estimates with prevailing wage where it applies",
+                           "Builds labor estimates with prevailing wage where it applies",
                            "Requests and compares sub and vendor pricing",
                            "Prepares the bid package with assumptions, sources and revision history"],
                    rule="Never makes up a quantity, quote or price. Says UNKNOWN when information is missing and always shows the logic.",
                    states=[("unknown", "Unknown"), ("showing", "Showing the work"), ("working", "Revising")],
                    states_note="UNKNOWN is deliberate: it names what's missing and who has it. It is never a blank.",
                    mock_label="Her part of the workspace — estimate, division 26", mock=lambda: est_mock(False),
-                   desc="Taylor is the BuildWithBNZ estimating agent: takeoffs, conflicts, labour/material/sub pricing, every assumption shown. Never invents a price."),
-    "emma": dict(title="Emma — Emma checks the job costs | BuildWithBNZ", h1="Emma checks the job costs.", checks_h="What she covers",
+                   desc="Taylor is the BuildWithBNZ estimating agent: takeoffs, conflicts, labor/material/sub pricing, every assumption shown. Never invents a price."),
+    "emma": dict(title="Emma: AI Job Costing & Construction Accounting | BNZ", h1="Emma checks the job costs.", checks_h="What she covers",
                  checks=["Keeps job costing for each project",
                          "Reviews reconciliations against the books",
                          "Verifies payroll",
@@ -251,21 +251,21 @@ def step_mocks():
         '<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">What you see</div><div class="row"><div><b>Estimate Rev 1 · 31 lines · division 26</b></div>%s</div><div class="row"><div><b>Light fixtures — schedule missing</b></div>%s</div></div>' % (
             chip("showing", "Showing the work"), chip("unknown", "Unknown")),
         '<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">What you see</div><div class="row"><div><b>Electrical · 7 invited · 3 quotes in</b></div>%s</div><div class="row needs"><div><b>Bid invitation · 4 subs — drafted</b></div>%s</div></div>' % (
-            chip("levelled", "Levelled"), chip("needs", "Needs you")),
+            chip("levelled", "Leveled"), chip("needs", "Needs you")),
         '<div class="mock rows"><span class="sd">Sample data</span><div class="eyebrow mute" style="margin-bottom:8px">What you see</div><div class="row needs"><div><b>Today · 3 items need you</b></div>%s</div><div class="row"><div><b>Everything else · running</b></div>%s</div></div>' % (
             chip("needs", "Needs you"), chip("verified", "Verified")),
     ]
 
 def page_how():
-    desc = "Six steps: Project Review, one set price in writing, connect your files, Taylor reads the package and compares sub pricing, Sara runs it."
-    h = head("How It Works — Six Steps to a Project That Runs Itself | BuildWithBNZ", desc, "/how-it-works/")
+    desc = "Six steps: Project Review, one set price in writing, connect your files, Taylor reads the package and levels sub pricing, Sara runs the job."
+    h = head("How BuildWithBNZ Works: Six Steps for Contractors", desc, "/how-it-works/")
     h += nav("/how-it-works/")
     mocks = step_mocks()
     rows = []
     for i, (t, p, o, c) in enumerate(STEPS, 1):
         rows.append('<div class="card step"><div><div class="num"><span class="count" data-count="%d" data-dur="240" data-pad="0">00</span></div><h3 style="font-size:clamp(24px,3vw,34px)">%s</h3><p>%s</p>'
                     '<div class="oc"><div><b>Output:</b> %s</div><div><b>Control:</b> %s</div></div></div>%s</div>' % (i, t, p, o, c, mocks[i - 1]))
-    h += section("light", sec_head("How it works", "Six steps to a project that runs itself.") + '<div class="steps rows stagger">%s</div>' % ''.join(rows), extra_cls="first")
+    h += section("light", sec_head("How it works", "Six steps to a project that runs itself.", tag="h1") + '<div class="steps rows stagger">%s</div>' % ''.join(rows), extra_cls="first")
     h += section("dark", '<div class="split"><div class="fx"><span class="eyebrow">Then the crew stays on</span><h2 style="margin:14px 0 14px">Reported every Monday.</h2>'
                  '<p class="lede">Ongoing operations: a separate monthly arrangement — hosting, monitoring, new projects, and a report every Monday. We stay responsible for it working.</p>'
                  '<div style="margin-top:22px">%s</div></div><div class="fx">%s</div></div>' % (btn_book(), monday_mock()), id_="ongoing")
@@ -277,10 +277,10 @@ def page_how():
 
 def page_connect():
     desc = "The BuildWithBNZ crew works inside Google Drive, Gmail, Google Calendar and Notion, with read access first. Keep your tools: nothing is moved or replaced."
-    h = head("What We Connect To — Google Drive, Gmail, Calendar, Workspace, Notion | BuildWithBNZ", desc, "/what-we-connect-to/")
+    h = head("Construction AI for Google Drive, Gmail & Notion | BNZ", desc, "/what-we-connect-to/")
     h += nav()
     h += section("dark", sec_head("What we connect to", "The systems the crew works inside.",
-                                  "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.") + integrations(), extra_cls="first")
+                                  "Keep your tools. Nothing is moved or replaced — read access first, and you approve anything that leaves.", tag="h1") + integrations(), extra_cls="first")
     h += section("light", sec_head("How access works", "Read first. Send only with you.") +
                  '<div class="grid g3 stagger">'
                  '<div class="card"><h3>Read access first</h3><p class="muted" style="margin-top:10px">The crew starts by reading the project folder, the inbox threads you point it at, and the calendar. Nothing is moved, renamed or copied out.</p></div>'
@@ -300,7 +300,7 @@ def page_faq():
         '{"@type":"Question","name":"%s","acceptedAnswer":{"@type":"Answer","text":"%s"}}' % (q.replace('"', '\\"'), a.replace('"', '\\"')) for q, a in FAQ)
     h = head("FAQ — Asked on Every Call | BuildWithBNZ", desc, "/faq/", jsonld=ld)
     h += nav("/faq/")
-    h += section("dark", '<div class="faq-grid"><div class="fx"><span class="eyebrow">FAQ</span><h2 style="margin-top:14px">Asked on every call.</h2><p class="muted" style="margin-top:14px">Direct answers, the way a GC actually asks. If yours isn\'t here, bring it to the Project Review.</p></div><div class="fx">%s</div></div>' % faq_items(FAQ, 8), extra_cls="first")
+    h += section("dark", '<div class="faq-grid"><div class="fx"><span class="eyebrow">FAQ</span><h1 style="margin-top:14px;font-size:clamp(34px,4.6vw,58px)">Asked on every call.</h1><p class="muted" style="margin-top:14px">Direct answers, the way a GC actually asks. If yours isn\'t here, bring it to the Project Review.</p></div><div class="fx">%s</div></div>' % faq_items(FAQ, 8), extra_cls="first")
     h += book_strip()
     h += footer()
     return h
@@ -334,7 +334,6 @@ def page_book():
           '<div><i>1</i><div><b>One project</b><span>Live or recent — the one that hurts is the best one.</span></div></div>'
           '<div><i>2</i><div><b>Drawings or the bid package</b><span>Whatever you have — PDFs, a Drive folder, a link.</span></div></div>'
           '<div><i>3</i><div><b>Who\'s on it</b><span>Who estimates, who chases subs, who signs.</span></div></div></div>'
-          '<div class="cal-slot" style="margin-top:28px">Calendar embed — placeholder · Cal.com / Calendly · 30 min · "Project Review"</div>'
           '<p class="muted small" style="margin-top:12px">Prefer to talk? <a class="link" href="tel:%s">%s</a> · <a class="link" href="mailto:%s">%s</a></p></div>'
           '<div class="fx"><div class="card" id="lead">%s</div></div></div></section>\n') % (PHONE, PHONE_TXT, INBOX, INBOX, lead_form())
     h += ('<script>(function(){var f=document.querySelector(\'form.lead\');if(f){f.addEventListener(\'submit\',function(){if(typeof gtag===\'function\'){gtag(\'event\',\'generate_lead\',{form:\'book\'});}});}})();</script>\n')
@@ -566,7 +565,7 @@ def page_login():
 def page_privacy():
     h = head("Privacy — BuildWithBNZ", "How BuildWithBNZ handles the information you share with us: the Project Review form, project files, and the workspace.", "/privacy/")
     h += nav()
-    h += section("dark", '''<div class="prose fx"><span class="eyebrow">Privacy</span><h2 style="margin-top:14px">Privacy policy.</h2>
+    h += section("dark", '''<div class="prose fx"><span class="eyebrow">Privacy</span><h1 style="margin-top:14px;font-size:clamp(28px,3.5vw,40px);margin-bottom:12px">Privacy policy.</h1>
 <p class="lede">This covers the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: October 2026.</p>
 <h3>What we collect</h3>
 <p>When you book a Project Review we collect what you type into the form: your name, company, email, phone, contractor type, a description of the project, an optional bid date and an optional link to your files. The form is relayed to our inquiries inbox.</p>
@@ -588,7 +587,7 @@ def page_privacy():
 def page_terms():
     h = head("Terms — BuildWithBNZ", "Terms covering the BuildWithBNZ website, Project Review, scope documents and the workspace.", "/terms/")
     h += nav()
-    h += section("dark", '''<div class="prose fx"><span class="eyebrow">Terms</span><h2 style="margin-top:14px">Terms of service.</h2>
+    h += section("dark", '''<div class="prose fx"><span class="eyebrow">Terms</span><h1 style="margin-top:14px;font-size:clamp(28px,3.5vw,40px);margin-bottom:12px">Terms of service.</h1>
 <p class="lede">These terms cover your use of the BuildWithBNZ website and workspace, operated by BNZ Builders Inc. Last updated: October 2026.</p>
 <h3>The service</h3>
 <p>BuildWithBNZ provides a team of seven AI agents, led by Sara, that work inside a construction project workspace. The agents prepare drafts, estimates, reports and document reviews. Anything that leaves your company is sent only after you review and approve it. The agents do not sign, award, pay or commit on your behalf.</p>
@@ -628,7 +627,7 @@ def page_contact():
     desc = "Contact BuildWithBNZ. The fastest route is a Project Review — bring one project and we'll show you what the crew would do with it."
     h = head("Contact | BuildWithBNZ", desc, "/contact/")
     h += nav()
-    h += section("dark", '<div class="prose fx"><span class="eyebrow">Contact</span><h2 style="margin-top:14px">Talk to a real person.</h2>'
+    h += section("dark", '<div class="prose fx"><span class="eyebrow">Contact</span><h1 style="margin-top:14px;font-size:clamp(28px,3.5vw,40px);margin-bottom:12px">Talk to a real person.</h1>'
                  '<p class="lede">The fastest route is a Project Review — bring one project and we\'ll show you what the crew would do with it. Or reach us directly.</p>'
                  '<p style="margin-top:18px"><a class="link" href="mailto:%s">%s</a> · <a class="link" href="tel:%s">%s</a></p>'
                  '<p style="margin-top:22px">%s</p></div>' % (INBOX, INBOX, PHONE, PHONE_TXT, btn_book()), extra_cls="first")

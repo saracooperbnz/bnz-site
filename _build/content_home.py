@@ -16,7 +16,7 @@ STEPS = [
     ("Taylor reads the package", "Drawings, specs, addenda, wage schedules, bid forms. Takeoffs, conflicts, pricing — every assumption and source shown.",
      "an estimate with its logic attached.", "Taylor says UNKNOWN rather than guessing."),
     ("Taylor compares sub pricing", "Taylor requests and compares sub and vendor pricing and levels each quote against her estimate, line by line.",
-     "a levelled bid table per trade.", "nothing goes to a sub without your approval."),
+     "a leveled bid table per trade.", "nothing goes to a sub without your approval."),
     ("Sara runs it", "She supervises the team, catches what falls between them, and brings you a short queue of the decisions that need you.",
      "a Monday report and an approvals queue.", "she brings you only the decisions that need you. You sign. She doesn't."),
 ]
